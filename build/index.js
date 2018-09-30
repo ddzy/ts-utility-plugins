@@ -58,19 +58,19 @@ var Utils;
 var Line = /** @class */ (function () {
     function Line(options) {
         if (options === void 0) { options = {}; }
-        // public static createNew(): HTMLCanvasElement {
-        //   const oCanvas = document.createElement('canvas');
-        //   const { winWidth, winHeight } = Utils.getWinRange();
-        //   document.body.appendChild(oCanvas);
-        //   Utils.setAttr(oCanvas, {
-        //     width: winWidth,
-        //     height: winHeight,
-        //   });
-        // }
         this.el = null;
         this.pen = null;
         this._init(options);
     }
+    Line.createNew = function () {
+        var oCanvas = document.createElement('canvas');
+        var _a = Utils.getWinRange(), winWidth = _a.winWidth, winHeight = _a.winHeight;
+        document.body.appendChild(oCanvas);
+        Utils.setAttr(oCanvas, {
+            width: winWidth,
+            height: winHeight,
+        });
+    };
     /**
      * 初始化星空线
      * @param options 配置项

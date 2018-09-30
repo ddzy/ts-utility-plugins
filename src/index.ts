@@ -77,16 +77,16 @@ namespace Utils {
 
 class Line {
 
-  // public static createNew(): HTMLCanvasElement {
-  //   const oCanvas = document.createElement('canvas');
-  //   const { winWidth, winHeight } = Utils.getWinRange();
+  public static createNew(): HTMLCanvasElement {
+    const oCanvas = document.createElement('canvas');
+    const { winWidth, winHeight } = Utils.getWinRange();
 
-  //   document.body.appendChild(oCanvas);
-  //   Utils.setAttr(oCanvas, {
-  //     width: winWidth,
-  //     height: winHeight,
-  //   });
-  // }
+    document.body.appendChild(oCanvas);
+    Utils.setAttr(oCanvas, {
+      width: winWidth,
+      height: winHeight,
+    });
+  }
 
   private el: HTMLCanvasElement | null = null;
 
