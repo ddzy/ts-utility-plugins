@@ -73,6 +73,19 @@ namespace Utils {
     return ele;
   }
 
+
+  /**
+   * 取随机值
+   * @param min 最小值
+   * @param max 最大值
+   */
+  export function getRandom(
+    min: number,
+    max: number,
+  ): number {
+    return ~~(Math.random()*(max-min)+min);
+  }
+
 };
 
 
@@ -120,7 +133,7 @@ class Line {
     this.color = options.color || '#fff';
   }
   
-
+  
 };
 
 

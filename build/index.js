@@ -50,6 +50,15 @@ var Utils;
         return ele;
     }
     Utils.setCss = setCss;
+    /**
+     * 取随机值
+     * @param min 最小值
+     * @param max 最大值
+     */
+    function getRandom(min, max) {
+        return ~~(Math.random() * (max - min) + min);
+    }
+    Utils.getRandom = getRandom;
 })(Utils || (Utils = {}));
 ;
 var Line = /** @class */ (function () {
