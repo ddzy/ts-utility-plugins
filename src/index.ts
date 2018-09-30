@@ -4,12 +4,18 @@
  */
 
 interface ILineProps {
-  el?: string;
-  width?: number;
-  height?: number;
-  bgColor?: string;
-  lineColor?: string;
-};
+
+}
+interface IBallProps {
+  centerPoint: { x: number, y: number };
+  radius: number;
+  color: string;
+}
+
+
+
+const oCanvas: any = Utils.getEle('stars-line');
+const pen: any = oCanvas && oCanvas.getContext('2d'); 
 
 
 namespace Utils {
@@ -90,6 +96,41 @@ namespace Utils {
 };
 
 
+namespace StarsLine {
+  
+  /**
+   * 星空线
+   */
+  export class Line {
+    private startPoint: {
+      x: number,
+      y: number,
+    } = {
+      x: 0,
+      y: 0,
+    };
+ 
+  }
 
+  /**
+   * 星空点
+   */
+  export class Ball {
+    private readonly centerPoint: {
+      x: number,
+      y: number,
+    };
+    private radius: number;
+    private color: string;
+
+    public constructor(
+      props: IBallProps
+    ) {
+      this.centerPoint = props.centerPoint;
+      this.radius = props.radius;
+      this.color = props.color;
+    }
+  }
+}
 
 

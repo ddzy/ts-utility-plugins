@@ -3,7 +3,8 @@
  * create_time: 18-9-30
  * author: yyg
  */
-;
+var oCanvas = Utils.getEle('stars-line');
+var pen = oCanvas && oCanvas.getContext('2d');
 var Utils;
 (function (Utils) {
     /**
@@ -61,3 +62,31 @@ var Utils;
     Utils.getRandom = getRandom;
 })(Utils || (Utils = {}));
 ;
+var StarsLine;
+(function (StarsLine) {
+    /**
+     * 星空线
+     */
+    var Line = /** @class */ (function () {
+        function Line() {
+            this.startPoint = {
+                x: 0,
+                y: 0,
+            };
+        }
+        return Line;
+    }());
+    StarsLine.Line = Line;
+    /**
+     * 星空点
+     */
+    var Ball = /** @class */ (function () {
+        function Ball(props) {
+            this.centerPoint = props.centerPoint;
+            this.radius = props.radius;
+            this.color = props.color;
+        }
+        return Ball;
+    }());
+    StarsLine.Ball = Ball;
+})(StarsLine || (StarsLine = {}));
