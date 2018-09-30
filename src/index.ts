@@ -77,15 +77,26 @@ namespace Utils {
 
 class Line {
 
+  /**
+   * 创建canvas
+   */
   public static createNew(): HTMLCanvasElement {
-    const oCanvas = document.createElement('canvas');
+    const oCanvas: HTMLCanvasElement = document.createElement('canvas');
+    const oBody: HTMLElement = document.body;
     const { winWidth, winHeight } = Utils.getWinRange();
 
-    document.body.appendChild(oCanvas);
+    oBody.appendChild(oCanvas);
+
     Utils.setAttr(oCanvas, {
+      id: 'yyg-stars-line',
       width: winWidth,
       height: winHeight,
     });
+    Utils.setCss(oCanvas, {
+      'background-color': '#000',
+    });
+
+    return Utils.getEle('yyg-stars-line') as HTMLCanvasElement;
   }
 
   private el: HTMLCanvasElement | null = null;
@@ -105,7 +116,7 @@ class Line {
   public _init(
     options: ILineProps,
   ): void {
-    this.el = options.el || Line.createNew();
+    
   }
   
 

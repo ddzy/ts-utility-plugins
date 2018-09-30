@@ -61,21 +61,29 @@ var Line = /** @class */ (function () {
         this.pen = null;
         this._init(options);
     }
+    /**
+     * 创建canvas
+     */
     Line.createNew = function () {
         var oCanvas = document.createElement('canvas');
+        var oBody = document.body;
         var _a = Utils.getWinRange(), winWidth = _a.winWidth, winHeight = _a.winHeight;
-        document.body.appendChild(oCanvas);
+        oBody.appendChild(oCanvas);
         Utils.setAttr(oCanvas, {
+            id: 'yyg-stars-line',
             width: winWidth,
             height: winHeight,
         });
+        Utils.setCss(oCanvas, {
+            'background-color': '#000',
+        });
+        return Utils.getEle('yyg-stars-line');
     };
     /**
      * 初始化星空线
      * @param options 配置项
      */
     Line.prototype._init = function (options) {
-        this.el = options.el || Line.createNew();
     };
     return Line;
 }());
