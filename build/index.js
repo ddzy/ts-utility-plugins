@@ -38,21 +38,20 @@ var Utils;
         return ele;
     }
     Utils.setAttr = setAttr;
-    // /**
-    //  * 设置元素样式
-    //  * @param el 元素
-    //  * @param options 属性配置
-    //  */
-    // export function setCss(
-    //   ele: HTMLElement,
-    //   options: any,
-    // ): HTMLElement {
-    //   for(const item in options) {
-    //     if(options.hasOwnProperty(item)) {
-    //     }
-    //   }
-    //   return ele;
-    // }
+    /**
+     * 设置元素样式
+     * @param el 元素
+     * @param options 属性配置
+     */
+    function setCss(ele, options) {
+        for (var item in options) {
+            if (options.hasOwnProperty(item)) {
+                ele.style.cssText += item + ": " + options[item] + ";";
+            }
+        }
+        return ele;
+    }
+    Utils.setCss = setCss;
 })(Utils || (Utils = {}));
 ;
 var Line = /** @class */ (function () {
