@@ -64,7 +64,7 @@ var Utils;
 var Line = /** @class */ (function () {
     function Line(options) {
         if (options === void 0) { options = {}; }
-        this.el = Utils.getEle(options.el || '') || Line.createNew();
+        this.el = Utils.getEle(options.el || '') || Line._createNew();
         this.pen = this.el.getContext('2d');
         this.width = options.width || 2;
         this.height = options.height || 8;
@@ -73,7 +73,7 @@ var Line = /** @class */ (function () {
     /**
      * 创建canvas
      */
-    Line.createNew = function () {
+    Line._createNew = function () {
         var oCanvas = document.createElement('canvas');
         var oBody = document.body;
         var _a = Utils.getWinRange(), winWidth = _a.winWidth, winHeight = _a.winHeight;

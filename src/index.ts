@@ -94,7 +94,7 @@ class Line {
   /**
    * 创建canvas
    */
-  public static createNew(): HTMLCanvasElement {
+  public static _createNew(): HTMLCanvasElement {
     const oCanvas: HTMLCanvasElement = document.createElement('canvas');
     const oBody: HTMLElement = document.body;
     const { winWidth, winHeight } = Utils.getWinRange();
@@ -126,14 +126,13 @@ class Line {
   public constructor(
     options: ILineProps = {},
   ) {
-    this.el = Utils.getEle(options.el || '') || Line.createNew();
+    this.el = Utils.getEle(options.el || '') || Line._createNew();
     this.pen = this.el.getContext('2d');
     this.width = options.width || 2;
     this.height = options.height || 8;
     this.color = options.color || '#fff';
   }
-  
-  
+    
 };
 
 
