@@ -97,7 +97,7 @@ class Line {
     return Utils.getEle('yyg-stars-line') as HTMLCanvasElement;
   }
 
-  private el: HTMLCanvasElement | null = null;
+  private el: HTMLElement | null = null;
 
   private pen: any = null;
 
@@ -114,14 +114,11 @@ class Line {
   public _init(
     options: ILineProps,
   ): void {
-    console.log(Line.createNew());
+    this.el = Utils.getEle(options.el || '') || Line.createNew();
   }
   
 
 };
-
-
-const line = new Line();
 
 
 

@@ -82,9 +82,8 @@ var Line = /** @class */ (function () {
      * @param options 配置项
      */
     Line.prototype._init = function (options) {
-        console.log(Line.createNew());
+        this.el = Utils.getEle(options.el || '') || Line.createNew();
     };
     return Line;
 }());
 ;
-var line = new Line();
