@@ -63,12 +63,14 @@ var Utils;
 ;
 var Line = /** @class */ (function () {
     function Line(options) {
-        if (options === void 0) { options = {}; }
         this.el = Utils.getEle(options.el || '') || Line._createNew();
         this.pen = this.el.getContext('2d');
-        this.width = options.width || 2;
-        this.height = options.height || 8;
-        this.color = options.color || '#fff';
+        this.width = options.width || Utils.getWinRange().winWidth;
+        this.height = options.height || Utils.getWinRange().winHeight;
+        this.bgColor = options.bgColor || '#000';
+        this.lineColor = options.lineColor || '#fff';
+        this.initCanvas();
+        this.draw();
     }
     /**
      * 创建canvas
@@ -85,9 +87,41 @@ var Line = /** @class */ (function () {
         });
         Utils.setCss(oCanvas, {
             'background-color': '#000',
+            display: 'block',
         });
         return Utils.getEle('yyg-stars-line');
+    };
+    Line.prototype.initCanvas = function () {
+        Utils.setAttr(this.el, {
+            width: this.width,
+            height: this.height,
+        });
+        Utils.setCss(this.el, {
+            'background-color': this.bgColor,
+            display: 'block',
+        });
+    };
+    Line.prototype.draw = function () {
+        var pen = this.pen;
+        // 随机线起点
+        var startPoint = {
+            x: Utils.getRandom(0, this.width),
+            y: Utils.getRandom(0, this.height),
+        };
+        pen.save();
+        pen.beginPath();
+        pen.moveTo(startPoint.x, startPoint.y);
+        pen.lineTo(startPoint.x + Utils.getRandom(5, 10), startPoint.y + Utils.getRandom(5, 10));
+        pen.closePath();
+        pen.strokeStyle = this.lineColor;
+        pen.lineWidth = 2;
+        pen.stroke();
+        pen.restore();
     };
     return Line;
 }());
 ;
+var line = new Line({
+    el: 'stars-line',
+    bgColor: '#000',
+});

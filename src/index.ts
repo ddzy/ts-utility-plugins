@@ -7,7 +7,8 @@ interface ILineProps {
   el?: string;
   width?: number;
   height?: number;
-  color?: string;
+  bgColor?: string;
+  lineColor?: string;
 };
 
 
@@ -108,6 +109,7 @@ class Line {
     });
     Utils.setCss(oCanvas, {
       'background-color': '#000',
+      display: 'block',
     });
 
     return Utils.getEle('yyg-stars-line') as HTMLCanvasElement;
@@ -121,20 +123,71 @@ class Line {
 
   private height: number;
 
-  private color: string;
+  private bgColor: string;
+
+  private lineColor: string;
 
   public constructor(
-    options: ILineProps = {},
+    options: ILineProps,
   ) {
     this.el = Utils.getEle(options.el || '') || Line._createNew();
     this.pen = this.el.getContext('2d');
-    this.width = options.width || 2;
-    this.height = options.height || 8;
-    this.color = options.color || '#fff';
+    this.width = options.width || Utils.getWinRange().winWidth;
+    this.height = options.height || Utils.getWinRange().winHeight;
+    this.bgColor = options.bgColor || '#000';
+    this.lineColor = options.lineColor || '#fff';
+
+    this.initCanvas();
+    this.draw();
+  }
+
+  public initCanvas(): void {
+    Utils.setAttr(this.el, {
+      width: this.width,
+      height: this.height,
+    })
+    Utils.setCss(this.el, {
+      'background-color': this.bgColor,
+      display: 'block',
+    })
+  }
+
+  public draw(): void {
+    const pen: any = this.pen;
+    // 随机线起点
+    const startPoint: {
+      x: number,
+      y: number,
+    } = {
+      x: Utils.getRandom(0, this.width),
+      y: Utils.getRandom(0, this.height),
+    };
+
+    pen.save();
+    pen.beginPath();
+    pen.moveTo(
+      startPoint.x,
+      startPoint.y,
+    );
+    pen.lineTo(
+      startPoint.x + Utils.getRandom(5, 10),
+      startPoint.y + Utils.getRandom(5, 10),
+    );
+    pen.closePath();
+    pen.strokeStyle = this.lineColor;
+    pen.lineWidth = 2;
+    pen.stroke();
+    pen.restore();
   }
     
 };
 
+
+
+const line = new Line({
+  el: 'stars-line',
+  bgColor: '#000',
+});
 
 
 
