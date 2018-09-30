@@ -17,6 +17,21 @@ namespace Utils {
     return document.getElementById(id) || null;
   }
 
+
+  /**
+   * 获取窗口宽高
+   */
+  export function getWinRange(): {
+    winWidth: number,
+    winHeight: number,
+  } {
+    return {
+      winWidth: window.innerWidth,
+      winHeight: window.innerHeight,
+    };
+  }
+
 }
+
 
 
