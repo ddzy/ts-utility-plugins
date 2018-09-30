@@ -3,13 +3,15 @@
  * author: yyg
  */
 
-interface ILineProps {
+namespace IProps {
+  export interface ILineProps {
 
-}
-interface IBallProps {
-  centerPoint: { x: number, y: number };
-  radius: number;
-  color: string;
+  }
+  export interface IBallProps {
+    centerPoint: { x: number, y: number };
+    radius: number;
+    color: string;
+  }
 }
 
 
@@ -120,15 +122,23 @@ namespace StarsLine {
       x: number,
       y: number,
     };
-    private radius: number;
-    private color: string;
+    private readonly radius: number;
+    private readonly color: string;
 
     public constructor(
-      props: IBallProps
+      props: IProps.IBallProps
     ) {
       this.centerPoint = props.centerPoint;
       this.radius = props.radius;
       this.color = props.color;
+    }
+
+    public draw(): void {
+      pen.save();
+      pen.beginPath();
+
+      pen.closePath();
+      pen.restore();
     }
   }
 }

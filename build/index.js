@@ -86,6 +86,12 @@ var StarsLine;
             this.radius = props.radius;
             this.color = props.color;
         }
+        Ball.prototype.draw = function () {
+            pen.save();
+            pen.beginPath();
+            pen.closePath();
+            pen.restore();
+        };
         return Ball;
     }());
     StarsLine.Ball = Ball;
