@@ -31,9 +31,7 @@ var Utils;
      */
     function setAttr(ele, options) {
         for (var key in options) {
-            if (options.hasOwnProperty(key)) {
-                ele.setAttribute(key, options.key);
-            }
+            ele.setAttribute(key, options[key]);
         }
         return ele;
     }
@@ -84,7 +82,9 @@ var Line = /** @class */ (function () {
      * @param options 配置项
      */
     Line.prototype._init = function (options) {
+        console.log(Line.createNew());
     };
     return Line;
 }());
 ;
+var line = new Line();

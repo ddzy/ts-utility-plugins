@@ -45,9 +45,7 @@ namespace Utils {
     options: any,
   ): HTMLElement {
     for (const key in options) {
-      if (options.hasOwnProperty(key)) {
-        ele.setAttribute(key, options.key);
-      }
+      ele.setAttribute(key, options[key]); 
     }
 
     return ele;
@@ -116,11 +114,15 @@ class Line {
   public _init(
     options: ILineProps,
   ): void {
-    
+    console.log(Line.createNew());
   }
   
 
 };
+
+
+const line = new Line();
+
 
 
 
