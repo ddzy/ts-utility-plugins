@@ -55,9 +55,11 @@ var Utils;
 var Line = /** @class */ (function () {
     function Line(options) {
         if (options === void 0) { options = {}; }
-        this.el = null;
-        this.pen = null;
-        this._init(options);
+        this.el = Utils.getEle(options.el || '') || Line.createNew();
+        this.pen = this.el.getContext('2d');
+        this.width = options.width || 2;
+        this.height = options.height || 8;
+        this.color = options.color || '#fff';
     }
     /**
      * 创建canvas
@@ -76,13 +78,6 @@ var Line = /** @class */ (function () {
             'background-color': '#000',
         });
         return Utils.getEle('yyg-stars-line');
-    };
-    /**
-     * 初始化星空线
-     * @param options 配置项
-     */
-    Line.prototype._init = function (options) {
-        this.el = Utils.getEle(options.el || '') || Line.createNew();
     };
     return Line;
 }());

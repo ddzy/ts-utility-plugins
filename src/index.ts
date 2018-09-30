@@ -5,6 +5,9 @@
 
 interface ILineProps {
   el?: string;
+  width?: number;
+  height?: number;
+  color?: string;
 };
 
 
@@ -97,24 +100,24 @@ class Line {
     return Utils.getEle('yyg-stars-line') as HTMLCanvasElement;
   }
 
-  private el: HTMLElement | null = null;
+  private el: any;
 
-  private pen: any = null;
+  private pen: any;
+
+  private width: number;
+
+  private height: number;
+
+  private color: string;
 
   public constructor(
     options: ILineProps = {},
   ) {
-    this._init(options);
-  }
-
-  /**
-   * 初始化星空线
-   * @param options 配置项
-   */
-  public _init(
-    options: ILineProps,
-  ): void {
     this.el = Utils.getEle(options.el || '') || Line.createNew();
+    this.pen = this.el.getContext('2d');
+    this.width = options.width || 2;
+    this.height = options.height || 8;
+    this.color = options.color || '#fff';
   }
   
 
