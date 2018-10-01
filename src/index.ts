@@ -101,6 +101,19 @@ namespace Utils {
     return (Math.PI / 180) * angle;
   }
 
+
+  /**
+   * 获取元素属性值
+   * @param ele 元素
+   * @param key 属性名
+   */
+  export function getAttr(
+    ele: HTMLElement,
+    key: string,
+  ): string | null {
+    return ele.getAttribute(key); 
+  }
+
 };
 
 

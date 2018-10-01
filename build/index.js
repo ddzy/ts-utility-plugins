@@ -66,6 +66,15 @@ var Utils;
         return (Math.PI / 180) * angle;
     }
     Utils.getRadian = getRadian;
+    /**
+     * 获取元素属性值
+     * @param ele 元素
+     * @param key 属性名
+     */
+    function getAttr(ele, key) {
+        return ele.getAttribute(key);
+    }
+    Utils.getAttr = getAttr;
 })(Utils || (Utils = {}));
 ;
 var InitCanvas;
