@@ -31,9 +31,9 @@ namespace Utils {
 
 
   /**
-   * 鼠标相关量
+   * 标记鼠标是否移动
    */
-  export const MOUSE_VALUE = {};
+  export let flat: boolean = false;
 
 
   /**
@@ -133,14 +133,6 @@ namespace Utils {
     return ele.getAttribute(key);
   }
 
-
-  // export function setMouse(
-  //   key: string,
-  //   value: { x: number, y: number },
-  // ) {
-    
-  // }
-
 };
 
 
@@ -202,7 +194,7 @@ const {
 InitCanvas.resizeCanvas();
 const ballArr: any[] = [];
 let flag: boolean = false;
-const mouse = {centerPoint: { x: 0, y: 0 }}
+const MOUSE_POINT = {centerPoint: { x: 0, y: 0 }}
 
 
 /**
@@ -390,41 +382,29 @@ namespace Render {
   export function move(): void {
     pen.clearRect(0, 0, cvsWidth, cvsHeight);
 
-    InitCanvas.oCanvas.addEventListener('mousemove', (
-      e: MouseEvent,
-    ) => {
-      flag = true;
-      mouse.centerPoint.x = e.clientX;
-      mouse.centerPoint.y = e.clientY;
-    }, false);
+    InitCanvas
+      .oCanvas
+      .addEventListener('mousemove', (
+        e: MouseEvent,
+      ) => {
+        flag = true;
+        MOUSE_POINT.centerPoint.x = e.clientX;
+        MOUSE_POINT.centerPoint.y = e.clientY;
+      }, false);
     
     for (const item of ballArr) {
       item.move();
       item.draw();
       item.drawLine(
-        !flag ? item : mouse
+        !flag ? item : MOUSE_POINT
       );
     }
 
-    flag = !flag;
+    flag = false;
 
     window.requestAnimationFrame(move);
   }
 
-
-  export function moveWithMouse(): void {
-    InitCanvas.oCanvas.addEventListener('mousemove', (
-      e: MouseEvent
-    ) => {
-      flag = true;      
-      for (const item of ballArr) {
-        item.drawLineByMouse(item.centerPoint, {
-          x: e.clientX,
-          y: e.clientY,
-        });
-      }
-    }, false);
-  }
 }
 
 

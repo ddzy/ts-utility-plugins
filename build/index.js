@@ -13,9 +13,9 @@ var Utils;
      */
     Utils.LINE_MIN_DISTANCE = 90;
     /**
-     * 鼠标相关量
+     * 标记鼠标是否移动
      */
-    Utils.MOUSE_VALUE = {};
+    Utils.flat = false;
     /**
      * 获取元素
      * @param id 元素id
@@ -86,11 +86,6 @@ var Utils;
         return ele.getAttribute(key);
     }
     Utils.getAttr = getAttr;
-    // export function setMouse(
-    //   key: string,
-    //   value: { x: number, y: number },
-    // ) {
-    // }
 })(Utils || (Utils = {}));
 ;
 /**
@@ -138,7 +133,7 @@ var _a = InitCanvas.initCanvas(), pen = _a.pen, cvsWidth = _a.cvsWidth, cvsHeigh
 InitCanvas.resizeCanvas();
 var ballArr = [];
 var flag = false;
-var mouse = { centerPoint: { x: 0, y: 0 } };
+var MOUSE_POINT = { centerPoint: { x: 0, y: 0 } };
 /**
  * 实体类
  */
@@ -261,34 +256,23 @@ var Render;
      */
     function move() {
         pen.clearRect(0, 0, cvsWidth, cvsHeight);
-        InitCanvas.oCanvas.addEventListener('mousemove', function (e) {
+        InitCanvas
+            .oCanvas
+            .addEventListener('mousemove', function (e) {
             flag = true;
-            mouse.centerPoint.x = e.clientX;
-            mouse.centerPoint.y = e.clientY;
+            MOUSE_POINT.centerPoint.x = e.clientX;
+            MOUSE_POINT.centerPoint.y = e.clientY;
         }, false);
         for (var _i = 0, ballArr_2 = ballArr; _i < ballArr_2.length; _i++) {
             var item = ballArr_2[_i];
             item.move();
             item.draw();
-            item.drawLine(!flag ? item : mouse);
+            item.drawLine(!flag ? item : MOUSE_POINT);
         }
-        flag = !flag;
+        flag = false;
         window.requestAnimationFrame(move);
     }
     Render.move = move;
-    function moveWithMouse() {
-        InitCanvas.oCanvas.addEventListener('mousemove', function (e) {
-            flag = true;
-            for (var _i = 0, ballArr_3 = ballArr; _i < ballArr_3.length; _i++) {
-                var item = ballArr_3[_i];
-                item.drawLineByMouse(item.centerPoint, {
-                    x: e.clientX,
-                    y: e.clientY,
-                });
-            }
-        }, false);
-    }
-    Render.moveWithMouse = moveWithMouse;
 })(Render || (Render = {}));
 Render.create(100);
 Render.move();
