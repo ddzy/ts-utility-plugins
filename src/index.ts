@@ -104,7 +104,11 @@ namespace Utils {
 
 
 namespace InitCanvas {
-  export function initCanvas(): any {
+  export function initCanvas(): {
+    pen: any,
+    cvsWidth: any,
+    cvsHeight: any,
+  } {
     const oBody = Utils.getEle('body') as HTMLBodyElement;
     const oCanvas = Utils.getEle('#stars-line') as HTMLCanvasElement;
     const { winHeight, winWidth, } = Utils.getWinRange();
@@ -123,12 +127,20 @@ namespace InitCanvas {
       overflow: 'hidden',
     });
 
-    return pen;
+    return {
+      pen,
+      cvsWidth: Number(oCanvas.getAttribute('width')),
+      cvsHeight: Number(oCanvas.getAttribute('height')),
+    };
   }
 }
 
 
-const pen: any = InitCanvas.initCanvas();
+const {
+  pen,
+  cvsWidth,
+  cvsHeight,
+} = InitCanvas.initCanvas();
 
 
 namespace StarsLine {
@@ -169,11 +181,33 @@ namespace StarsLine {
     public draw(): void {
       pen.save();
       pen.beginPath();
-      pen.arc();
+      pen.fillStyle = this.color;
+      pen.arc(
+        this.centerPoint.x,
+        this.centerPoint.y,
+        this.radius,
+        0,
+        Utils.getRadian(360)
+      );
+      pen.fill();
       pen.closePath();
       pen.restore();
     }
   }
 }
+
+
+
+const ball = new StarsLine.Ball({
+  centerPoint: {
+    x: Utils.getRandom(0, cvsWidth),
+    y: Utils.getRandom(0, cvsHeight),
+  },
+  color: '#fff',
+  radius: Utils.getRandom(10, 20),
+});
+
+ball.draw();
+
 
 

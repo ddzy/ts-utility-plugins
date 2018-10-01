@@ -87,11 +87,15 @@ var InitCanvas;
             margin: 0,
             overflow: 'hidden',
         });
-        return pen;
+        return {
+            pen: pen,
+            cvsWidth: Number(oCanvas.getAttribute('width')),
+            cvsHeight: Number(oCanvas.getAttribute('height')),
+        };
     }
     InitCanvas.initCanvas = initCanvas;
 })(InitCanvas || (InitCanvas = {}));
-var pen = InitCanvas.initCanvas();
+var _a = InitCanvas.initCanvas(), pen = _a.pen, cvsWidth = _a.cvsWidth, cvsHeight = _a.cvsHeight;
 var StarsLine;
 (function (StarsLine) {
     /**
@@ -119,7 +123,9 @@ var StarsLine;
         Ball.prototype.draw = function () {
             pen.save();
             pen.beginPath();
-            pen.arc();
+            pen.fillStyle = this.color;
+            pen.arc(this.centerPoint.x, this.centerPoint.y, this.radius, 0, Utils.getRadian(360));
+            pen.fill();
             pen.closePath();
             pen.restore();
         };
@@ -127,3 +133,12 @@ var StarsLine;
     }());
     StarsLine.Ball = Ball;
 })(StarsLine || (StarsLine = {}));
+var ball = new StarsLine.Ball({
+    centerPoint: {
+        x: Utils.getRandom(0, cvsWidth),
+        y: Utils.getRandom(0, cvsHeight),
+    },
+    color: '#fff',
+    radius: Utils.getRandom(10, 20),
+});
+ball.draw();
