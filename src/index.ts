@@ -4,6 +4,7 @@
  * complete: 699e921 => 完成自动连线功能
  */
 
+
 namespace IProps {
   export interface ILineProps {
     startPoint: { x: number, y: number };
@@ -19,6 +20,9 @@ namespace IProps {
 }
 
 
+/**
+ * 工具
+ */
 namespace Utils {
 
   /**
@@ -183,9 +187,13 @@ const {
 } = InitCanvas.initCanvas();
 InitCanvas.resizeCanvas();
 const ballArr: any[] = [];
+let flag: boolean = false;
+const mouse = {centerPoint: { x: 0, y: 0 }}
 
 
-
+/**
+ * 实体类
+ */
 namespace StarsLine {
 
   /**
@@ -297,6 +305,7 @@ namespace StarsLine {
         : this.distance.y;
     }
 
+    // 自动连线
     public drawLine(
       outerItem: Ball,
     ): void {
@@ -324,6 +333,34 @@ namespace StarsLine {
         }
       }
     }
+
+    // 鼠标移动
+    // public drawLineByMouse(
+    //   centerPoint: { x: number, y: number },
+    //   mousePoint: { x: number, y: number },
+    // ): void {
+    //   if(
+    //     Math.sqrt(
+    //       Math.pow((
+    //         centerPoint.x - mousePoint.x),
+    //         2) + Math.pow((
+    //           centerPoint.y - mousePoint.y), 
+    //         2)
+    //     ) < 100
+    //   ) {
+    //     new Line({
+    //       color: '#d50',
+    //       startPoint: {
+    //         x: centerPoint.x,
+    //         y: centerPoint.y,
+    //       },
+    //       endPoint: {
+    //         x: mousePoint.x,
+    //         y: mousePoint.y,
+    //       },
+    //     });
+    //   }
+    // }
   }
 }
 
@@ -361,19 +398,57 @@ namespace Render {
    * 星空点移动
    */
   export function move(): void {
+    // pen.clearRect(0, 0, cvsWidth, cvsHeight);
+    // for (const item of ballArr) {
+    //   item.move();
+    //   item.draw();
+    //   item.drawLine(item);
+    // }
+
     pen.clearRect(0, 0, cvsWidth, cvsHeight);
 
-    for (const item of ballArr) {
-      item.move();
-      item.draw();
-      item.drawLine(item);
+    InitCanvas.oCanvas.addEventListener('mousemove', (
+      e: MouseEvent,
+    ) => {
+      flag = true;
+      mouse.centerPoint.x = e.clientX;
+      mouse.centerPoint.y = e.clientY;
+    }, false);
+
+    if(!flag) {
+      for (const item of ballArr) {
+        item.move();
+        item.draw();
+        item.drawLine(item);
+      }
+    }else {
+      for (const item of ballArr) {
+        item.move();
+        item.draw();
+        item.drawLine(mouse);
+      }
     }
 
     window.requestAnimationFrame(move);
   }
+
+
+  export function moveWithMouse(): void {
+    InitCanvas.oCanvas.addEventListener('mousemove', (
+      e: MouseEvent
+    ) => {
+      flag = true;      
+      for (const item of ballArr) {
+        item.drawLineByMouse(item.centerPoint, {
+          x: e.clientX,
+          y: e.clientY,
+        });
+      }
+    }, false);
+  }
 }
 
 
-Render.create(60);
+Render.create(50);
 Render.move();
 
