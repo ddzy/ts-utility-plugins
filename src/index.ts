@@ -328,40 +328,10 @@ namespace StarsLine {
 }
 
 
-
-
-
 /**
- * 测试
+ * 渲染
  */
-
-// function create(): void {
-  // const ball = new StarsLine.Ball({
-  //   color: '#fff',
-  //   radius: Utils.getRandom(1, 3),
-  // });
-  // ballArr.push(ball);
-  // ball.draw();
-// }
-
-
-// for (let i = 0; i < 100; i++) {
-//   create();
-// }
-
-
-// (function move() {
-//   pen.clearRect(0, 0, cvsWidth, cvsHeight);
-//   for (const item of ballArr) {
-//     item.move();
-//     item.draw();
-//     item.drawLine(item);
-//   }
-
-//   window.requestAnimationFrame(move);
-// })()
-
-namespace Test {
+namespace Render {
 
   /**
    * 创建点工厂
@@ -376,7 +346,7 @@ namespace Test {
   }
 
   /**
-   * 创建的点的数量
+   * 星空点
    * @param num 点数量
    */
   export function create(
@@ -386,5 +356,24 @@ namespace Test {
       createBallFactory();
     }
   }
+
+  /**
+   * 星空点移动
+   */
+  export function move(): void {
+    pen.clearRect(0, 0, cvsWidth, cvsHeight);
+
+    for (const item of ballArr) {
+      item.move();
+      item.draw();
+      item.drawLine(item);
+    }
+
+    window.requestAnimationFrame(move);
+  }
 }
+
+
+Render.create(60);
+Render.move();
 

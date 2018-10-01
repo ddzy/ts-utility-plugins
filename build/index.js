@@ -214,30 +214,10 @@ var StarsLine;
     StarsLine.Ball = Ball;
 })(StarsLine || (StarsLine = {}));
 /**
- * 测试
+ * 渲染
  */
-// function create(): void {
-// const ball = new StarsLine.Ball({
-//   color: '#fff',
-//   radius: Utils.getRandom(1, 3),
-// });
-// ballArr.push(ball);
-// ball.draw();
-// }
-// for (let i = 0; i < 100; i++) {
-//   create();
-// }
-// (function move() {
-//   pen.clearRect(0, 0, cvsWidth, cvsHeight);
-//   for (const item of ballArr) {
-//     item.move();
-//     item.draw();
-//     item.drawLine(item);
-//   }
-//   window.requestAnimationFrame(move);
-// })()
-var Test;
-(function (Test) {
+var Render;
+(function (Render) {
     /**
      * 创建点工厂
      */
@@ -250,7 +230,7 @@ var Test;
         ball.draw();
     }
     /**
-     * 创建的点的数量
+     * 星空点
      * @param num 点数量
      */
     function create(num) {
@@ -258,5 +238,21 @@ var Test;
             createBallFactory();
         }
     }
-    Test.create = create;
-})(Test || (Test = {}));
+    Render.create = create;
+    /**
+     * 星空点移动
+     */
+    function move() {
+        pen.clearRect(0, 0, cvsWidth, cvsHeight);
+        for (var _i = 0, ballArr_2 = ballArr; _i < ballArr_2.length; _i++) {
+            var item = ballArr_2[_i];
+            item.move();
+            item.draw();
+            item.drawLine(item);
+        }
+        window.requestAnimationFrame(move);
+    }
+    Render.move = move;
+})(Render || (Render = {}));
+Render.create(60);
+Render.move();
