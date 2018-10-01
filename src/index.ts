@@ -14,6 +14,7 @@ namespace IProps {
   }
 }
 
+
 namespace Utils {
 
   /**
@@ -198,16 +199,19 @@ namespace StarsLine {
 
 
 
-const ball = new StarsLine.Ball({
-  centerPoint: {
-    x: Utils.getRandom(0, cvsWidth),
-    y: Utils.getRandom(0, cvsHeight),
-  },
-  color: '#fff',
-  radius: Utils.getRandom(10, 20),
-});
+const ballCollection: StarsLine.Ball[] = [];
+for(let i = 0; i < 20; i++) {
+  ballCollection.push(new StarsLine.Ball({
+    color: '#fff',
+    radius: Utils.getRandom(5, 15),
+    centerPoint: {
+      x: Utils.getRandom(0, cvsWidth),
+      y: Utils.getRandom(0, cvsHeight),
+    },
+  }));
+}
 
-ball.draw();
 
+ballCollection.forEach((item) => item.draw());
 
 
