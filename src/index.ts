@@ -5,7 +5,9 @@
 
 namespace IProps {
   export interface ILineProps {
-
+    startPoint: { x: number, y: number };
+    endPoint: { x: number, y: number };
+    color: string;
   }
   export interface IBallProps {
     centerPoint?: { x: number, y: number };
@@ -164,13 +166,24 @@ namespace StarsLine {
    * 星空线
    */
   export class Line {
-    private startPoint: {
+    
+    private readonly startPoint: {
       x: number,
       y: number,
-    } = {
-      x: 0,
-      y: 0,
-    };
+    }
+    private readonly endPoint: {
+      x: number,
+      y: number,
+    }
+    private readonly color: string;
+
+    public constructor(
+      props: IProps.ILineProps,
+    ) {
+      this.startPoint = props.startPoint;
+      this.endPoint = props.endPoint;
+      this.color = props.color;
+    }
  
   }
 
@@ -178,6 +191,7 @@ namespace StarsLine {
    * 星空点
    */
   export class Ball {
+
     private readonly centerPoint: {
       x: number,
       y: number,
@@ -201,8 +215,8 @@ namespace StarsLine {
       this.color = props.color;
       this.speed = props.speed || 10;
       this.distance = {
-        x: Utils.getRandom(-1, 1),
-        y: Utils.getRandom(-1, 1),
+        x: Utils.getRandom(-.5, .5),
+        y: Utils.getRandom(-.5, .5),
       };
     }
 
@@ -226,25 +240,47 @@ namespace StarsLine {
       this.centerPoint.x += this.distance.x;
       this.centerPoint.y += this.distance.y;
 
-      console.log(this.distance);
+      // 碰撞检测
+      this.distance.x = (this.centerPoint.x > cvsWidth 
+        || this.centerPoint.x < 0)
+        ? -this.distance.x
+        : this.distance.x;
+      this.distance.y = (this.centerPoint.y > cvsHeight
+        || this.centerPoint.y < 0)
+        ? -this.distance.y
+        : this.distance.y;
+
+      // 连线
+      this.drawLine();
+    }
+
+    public drawLine(): void {
+      const centerPoint = this.centerPoint;
+
+
     }
   }
 }
 
 
 
+
+
+/**
+ * 测试
+ */
 const ballCollection: StarsLine.Ball[] = [];
 
-function create() {
+function create(): void {
   const ball = new StarsLine.Ball({
     color: '#fff',
-    radius: Utils.getRandom(5, 15),
+    radius: Utils.getRandom(2, 5),
   });
   ballCollection.push(ball);
   ball.draw();
 }
 
-for(let i = 0; i < 1; i++) {
+for(let i = 0; i < 200; i++) {
   create();
 }
 

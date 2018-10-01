@@ -111,11 +111,10 @@ var StarsLine;
      * 星空线
      */
     var Line = /** @class */ (function () {
-        function Line() {
-            this.startPoint = {
-                x: 0,
-                y: 0,
-            };
+        function Line(props) {
+            this.startPoint = props.startPoint;
+            this.endPoint = props.endPoint;
+            this.color = props.color;
         }
         return Line;
     }());
@@ -133,8 +132,8 @@ var StarsLine;
             this.color = props.color;
             this.speed = props.speed || 10;
             this.distance = {
-                x: Utils.getRandom(-1, 1),
-                y: Utils.getRandom(-1, 1),
+                x: Utils.getRandom(-.5, .5),
+                y: Utils.getRandom(-.5, .5),
             };
         }
         Ball.prototype.draw = function () {
@@ -149,22 +148,38 @@ var StarsLine;
         Ball.prototype.move = function () {
             this.centerPoint.x += this.distance.x;
             this.centerPoint.y += this.distance.y;
-            console.log(this.distance);
+            // 碰撞检测
+            this.distance.x = (this.centerPoint.x > cvsWidth
+                || this.centerPoint.x < 0)
+                ? -this.distance.x
+                : this.distance.x;
+            this.distance.y = (this.centerPoint.y > cvsHeight
+                || this.centerPoint.y < 0)
+                ? -this.distance.y
+                : this.distance.y;
+            // 连线
+            this.drawLine();
+        };
+        Ball.prototype.drawLine = function () {
+            var centerPoint = this.centerPoint;
         };
         return Ball;
     }());
     StarsLine.Ball = Ball;
 })(StarsLine || (StarsLine = {}));
+/**
+ * 测试
+ */
 var ballCollection = [];
 function create() {
     var ball = new StarsLine.Ball({
         color: '#fff',
-        radius: Utils.getRandom(5, 15),
+        radius: Utils.getRandom(2, 5),
     });
     ballCollection.push(ball);
     ball.draw();
 }
-for (var i = 0; i < 1; i++) {
+for (var i = 0; i < 200; i++) {
     create();
 }
 function move() {
