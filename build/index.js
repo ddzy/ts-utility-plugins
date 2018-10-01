@@ -109,6 +109,7 @@ var InitCanvas;
     InitCanvas.initCanvas = initCanvas;
 })(InitCanvas || (InitCanvas = {}));
 var _a = InitCanvas.initCanvas(), pen = _a.pen, cvsWidth = _a.cvsWidth, cvsHeight = _a.cvsHeight;
+var ballArr = [];
 var StarsLine;
 (function (StarsLine) {
     /**
@@ -173,10 +174,24 @@ var StarsLine;
                 || this.centerPoint.y < 0)
                 ? -this.distance.y
                 : this.distance.y;
-            // 连线
-            this.drawLine();
         };
-        Ball.prototype.drawLine = function () {
+        Ball.prototype.drawLine = function (outerItem) {
+            for (var _i = 0, ballArr_1 = ballArr; _i < ballArr_1.length; _i++) {
+                var innerItem = ballArr_1[_i];
+                if (outerItem !== innerItem && Math.sqrt(Math.pow((outerItem.centerPoint.x - innerItem.centerPoint.x), 2) + Math.pow((outerItem.centerPoint.y - innerItem.centerPoint.y), 2)) < Utils.LINE_MIN_DISTANCE) {
+                    new Line({
+                        color: '#d50',
+                        startPoint: {
+                            x: outerItem.centerPoint.x,
+                            y: outerItem.centerPoint.y,
+                        },
+                        endPoint: {
+                            x: innerItem.centerPoint.x,
+                            y: innerItem.centerPoint.y,
+                        },
+                    });
+                }
+            }
         };
         return Ball;
     }());
@@ -185,7 +200,6 @@ var StarsLine;
 /**
  * 测试
  */
-var ballArr = [];
 function create() {
     var ball = new StarsLine.Ball({
         color: '#fff',
@@ -194,16 +208,16 @@ function create() {
     ballArr.push(ball);
     ball.draw();
 }
-for (var i = 0; i < 4; i++) {
+for (var i = 0; i < 20; i++) {
     create();
 }
-function move() {
+(function move() {
     pen.clearRect(0, 0, cvsWidth, cvsHeight);
-    for (var _i = 0, ballArr_1 = ballArr; _i < ballArr_1.length; _i++) {
-        var item = ballArr_1[_i];
+    for (var _i = 0, ballArr_2 = ballArr; _i < ballArr_2.length; _i++) {
+        var item = ballArr_2[_i];
         item.move();
         item.draw();
+        item.drawLine(item);
     }
     window.requestAnimationFrame(move);
-}
-window.requestAnimationFrame(move);
+})();

@@ -60,13 +60,13 @@ namespace Utils {
     options: any,
   ): HTMLElement {
     for (const key in options) {
-      ele.setAttribute(key, options[key]); 
+      ele.setAttribute(key, options[key]);
     }
 
     return ele;
   }
 
-  
+
   /**
    * 设置元素样式
    * @param el 元素
@@ -76,8 +76,8 @@ namespace Utils {
     ele: HTMLElement,
     options: any,
   ): HTMLElement {
-    for(const item in options) {
-      if(options.hasOwnProperty(item)) {
+    for (const item in options) {
+      if (options.hasOwnProperty(item)) {
         ele.style.cssText += `${item}: ${options[item]};`;
       }
     }
@@ -95,7 +95,7 @@ namespace Utils {
     min: number,
     max: number,
   ): number {
-    return (Math.random()*(max-min)+min);
+    return (Math.random() * (max - min) + min);
   }
 
 
@@ -119,7 +119,7 @@ namespace Utils {
     ele: HTMLElement,
     key: string,
   ): string | null {
-    return ele.getAttribute(key); 
+    return ele.getAttribute(key);
   }
 
 };
@@ -163,15 +163,16 @@ const {
   cvsWidth,
   cvsHeight,
 } = InitCanvas.initCanvas();
+const ballArr: any[] = [];
 
 
 namespace StarsLine {
-  
+
   /**
    * 星空线
    */
   export class Line {
-    
+
     private readonly startPoint: {
       x: number,
       y: number,
@@ -208,8 +209,9 @@ namespace StarsLine {
       pen.closePath();
       pen.restore();
     }
- 
+
   }
+
 
   /**
    * 星空点
@@ -265,7 +267,7 @@ namespace StarsLine {
       this.centerPoint.y += this.distance.y;
 
       // 碰撞检测
-      this.distance.x = (this.centerPoint.x > cvsWidth 
+      this.distance.x = (this.centerPoint.x > cvsWidth
         || this.centerPoint.x < 0)
         ? -this.distance.x
         : this.distance.x;
@@ -273,13 +275,34 @@ namespace StarsLine {
         || this.centerPoint.y < 0)
         ? -this.distance.y
         : this.distance.y;
-
-      // 连线
-      this.drawLine();
     }
 
-    public drawLine(): void {
-      
+    public drawLine(
+      outerItem: Ball,
+    ): void {
+      for (const innerItem of ballArr) {
+        if(
+          outerItem !== innerItem && Math.sqrt(
+            Math.pow((
+              outerItem.centerPoint.x - innerItem.centerPoint.x),
+              2) + Math.pow((
+                outerItem.centerPoint.y - innerItem.centerPoint.y), 
+              2)
+          ) < Utils.LINE_MIN_DISTANCE
+        ) {
+          new Line({
+            color: '#d50',
+            startPoint: {
+              x: outerItem.centerPoint.x,
+              y: outerItem.centerPoint.y,
+            },
+            endPoint: {
+              x: innerItem.centerPoint.x,
+              y: innerItem.centerPoint.y,
+            },
+          });
+        }
+      }
     }
   }
 }
@@ -291,7 +314,6 @@ namespace StarsLine {
 /**
  * 测试
  */
-const ballArr: StarsLine.Ball[] = [];
 
 function create(): void {
   const ball = new StarsLine.Ball({
@@ -303,21 +325,19 @@ function create(): void {
 }
 
 
-for(let i = 0; i < 4; i++) {
+for (let i = 0; i < 20; i++) {
   create();
 }
 
 
-
-function move() {
+(function move() {
   pen.clearRect(0, 0, cvsWidth, cvsHeight);
   for (const item of ballArr) {
     item.move();
     item.draw();
+    item.drawLine(item);
   }
 
   window.requestAnimationFrame(move);
-}
-
-window.requestAnimationFrame(move);
+})()
 
