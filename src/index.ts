@@ -20,16 +20,15 @@
 
 namespace YYG {
 
-
-  export let yyg_cvsWidth: number;
-  export let yyg_cvsHeight: number;
-  export let yyg_cvsBgColor: string;
-  export let yyg_ballNum: number;
-  export let yyg_allowMouse: boolean;
-  export let yyg_lineColor: string;
-  export let yyg_lineWidth: number;
-  export let yyg_ballSpeed: number;
-  export let yyg_ballColor: string;
+  export let yyg_cvsWidth: number = 500;
+  export let yyg_cvsHeight: number = 500;
+  export let yyg_cvsBgColor: string = '#000';
+  export let yyg_ballNum: number = 50;
+  export let yyg_allowMouse: boolean = true;
+  export let yyg_lineColor: string = '#d50';
+  export let yyg_lineWidth: number = 1;
+  export let yyg_ballSpeed: number = 1;
+  export let yyg_ballColor: string = '#fff';
 
   
   export namespace IProps {
@@ -74,7 +73,8 @@ namespace YYG {
 
 
   export function render() {
-    console.log(Render);
+    Render.create(yyg_ballNum);
+    Render.move();
   }
   
 
@@ -453,10 +453,6 @@ namespace YYG {
     }
   
   }
-  
-  
-  // Render.create(100);
-  // Render.move();
   
 }
 

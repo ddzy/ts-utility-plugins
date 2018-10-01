@@ -18,6 +18,15 @@
  */
 var YYG;
 (function (YYG) {
+    YYG.yyg_cvsWidth = 500;
+    YYG.yyg_cvsHeight = 500;
+    YYG.yyg_cvsBgColor = '#000';
+    YYG.yyg_ballNum = 50;
+    YYG.yyg_allowMouse = true;
+    YYG.yyg_lineColor = '#d50';
+    YYG.yyg_lineWidth = 1;
+    YYG.yyg_ballSpeed = 1;
+    YYG.yyg_ballColor = '#fff';
     function config(options) {
         YYG.yyg_cvsWidth = options.cvsWidth || 500;
         YYG.yyg_cvsHeight = options.cvsHeight || 500;
@@ -31,7 +40,8 @@ var YYG;
     }
     YYG.config = config;
     function render() {
-        console.log(Render);
+        Render.create(YYG.yyg_ballNum);
+        Render.move();
     }
     YYG.render = render;
     var Utils;
@@ -293,7 +303,5 @@ var YYG;
         }
         Render.move = move;
     })(Render || (Render = {}));
-    // Render.create(100);
-    // Render.move();
 })(YYG || (YYG = {}));
 YYG.render();
