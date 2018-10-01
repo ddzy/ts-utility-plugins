@@ -2,7 +2,7 @@
 /**
  * create_time: 18-9-30
  * author: yyg
- * complete: f456caa => 完成自动连线功能
+ * complete: 699e921 => 完成自动连线功能
  */
 var Utils;
 (function (Utils) {
