@@ -1,7 +1,6 @@
 /**
  * create_time: 18-9-30
  * author: yyg
- * complete: 699e921 => 完成自动连线功能
  */
 
 
@@ -29,6 +28,13 @@ namespace Utils {
    * 连线安全距离
    */
   export const LINE_MIN_DISTANCE: number = 90;
+
+
+  /**
+   * 鼠标相关量
+   */
+  export const MOUSE_VALUE = {};
+
 
   /**
    * 获取元素
@@ -126,6 +132,14 @@ namespace Utils {
   ): string | null {
     return ele.getAttribute(key);
   }
+
+
+  // export function setMouse(
+  //   key: string,
+  //   value: { x: number, y: number },
+  // ) {
+    
+  // }
 
 };
 
@@ -274,6 +288,7 @@ namespace StarsLine {
       };
     }
 
+
     public draw(): void {
       pen.save();
       pen.beginPath();
@@ -290,6 +305,7 @@ namespace StarsLine {
       pen.restore();
     }
 
+
     public move(): void {
       this.centerPoint.x += this.distance.x;
       this.centerPoint.y += this.distance.y;
@@ -305,7 +321,8 @@ namespace StarsLine {
         : this.distance.y;
     }
 
-    // 自动连线
+
+    // 连线
     public drawLine(
       outerItem: Ball,
     ): void {
@@ -334,33 +351,6 @@ namespace StarsLine {
       }
     }
 
-    // 鼠标移动
-    // public drawLineByMouse(
-    //   centerPoint: { x: number, y: number },
-    //   mousePoint: { x: number, y: number },
-    // ): void {
-    //   if(
-    //     Math.sqrt(
-    //       Math.pow((
-    //         centerPoint.x - mousePoint.x),
-    //         2) + Math.pow((
-    //           centerPoint.y - mousePoint.y), 
-    //         2)
-    //     ) < 100
-    //   ) {
-    //     new Line({
-    //       color: '#d50',
-    //       startPoint: {
-    //         x: centerPoint.x,
-    //         y: centerPoint.y,
-    //       },
-    //       endPoint: {
-    //         x: mousePoint.x,
-    //         y: mousePoint.y,
-    //       },
-    //     });
-    //   }
-    // }
   }
 }
 
@@ -398,13 +388,6 @@ namespace Render {
    * 星空点移动
    */
   export function move(): void {
-    // pen.clearRect(0, 0, cvsWidth, cvsHeight);
-    // for (const item of ballArr) {
-    //   item.move();
-    //   item.draw();
-    //   item.drawLine(item);
-    // }
-
     pen.clearRect(0, 0, cvsWidth, cvsHeight);
 
     InitCanvas.oCanvas.addEventListener('mousemove', (
@@ -414,20 +397,16 @@ namespace Render {
       mouse.centerPoint.x = e.clientX;
       mouse.centerPoint.y = e.clientY;
     }, false);
-
-    if(!flag) {
-      for (const item of ballArr) {
-        item.move();
-        item.draw();
-        item.drawLine(item);
-      }
-    }else {
-      for (const item of ballArr) {
-        item.move();
-        item.draw();
-        item.drawLine(mouse);
-      }
+    
+    for (const item of ballArr) {
+      item.move();
+      item.draw();
+      item.drawLine(
+        !flag ? item : mouse
+      );
     }
+
+    flag = !flag;
 
     window.requestAnimationFrame(move);
   }
@@ -449,6 +428,6 @@ namespace Render {
 }
 
 
-Render.create(50);
+Render.create(100);
 Render.move();
 

@@ -2,7 +2,6 @@
 /**
  * create_time: 18-9-30
  * author: yyg
- * complete: 699e921 => 完成自动连线功能
  */
 /**
  * 工具
@@ -13,6 +12,10 @@ var Utils;
      * 连线安全距离
      */
     Utils.LINE_MIN_DISTANCE = 90;
+    /**
+     * 鼠标相关量
+     */
+    Utils.MOUSE_VALUE = {};
     /**
      * 获取元素
      * @param id 元素id
@@ -83,6 +86,11 @@ var Utils;
         return ele.getAttribute(key);
     }
     Utils.getAttr = getAttr;
+    // export function setMouse(
+    //   key: string,
+    //   value: { x: number, y: number },
+    // ) {
+    // }
 })(Utils || (Utils = {}));
 ;
 /**
@@ -199,7 +207,7 @@ var StarsLine;
                 ? -this.distance.y
                 : this.distance.y;
         };
-        // 自动连线
+        // 连线
         Ball.prototype.drawLine = function (outerItem) {
             for (var _i = 0, ballArr_1 = ballArr; _i < ballArr_1.length; _i++) {
                 var innerItem = ballArr_1[_i];
@@ -252,42 +260,27 @@ var Render;
      * 星空点移动
      */
     function move() {
-        // pen.clearRect(0, 0, cvsWidth, cvsHeight);
-        // for (const item of ballArr) {
-        //   item.move();
-        //   item.draw();
-        //   item.drawLine(item);
-        // }
         pen.clearRect(0, 0, cvsWidth, cvsHeight);
         InitCanvas.oCanvas.addEventListener('mousemove', function (e) {
             flag = true;
             mouse.centerPoint.x = e.clientX;
             mouse.centerPoint.y = e.clientY;
         }, false);
-        if (!flag) {
-            for (var _i = 0, ballArr_2 = ballArr; _i < ballArr_2.length; _i++) {
-                var item = ballArr_2[_i];
-                item.move();
-                item.draw();
-                item.drawLine(item);
-            }
+        for (var _i = 0, ballArr_2 = ballArr; _i < ballArr_2.length; _i++) {
+            var item = ballArr_2[_i];
+            item.move();
+            item.draw();
+            item.drawLine(!flag ? item : mouse);
         }
-        else {
-            for (var _a = 0, ballArr_3 = ballArr; _a < ballArr_3.length; _a++) {
-                var item = ballArr_3[_a];
-                item.move();
-                item.draw();
-                item.drawLine(mouse);
-            }
-        }
+        flag = !flag;
         window.requestAnimationFrame(move);
     }
     Render.move = move;
     function moveWithMouse() {
         InitCanvas.oCanvas.addEventListener('mousemove', function (e) {
             flag = true;
-            for (var _i = 0, ballArr_4 = ballArr; _i < ballArr_4.length; _i++) {
-                var item = ballArr_4[_i];
+            for (var _i = 0, ballArr_3 = ballArr; _i < ballArr_3.length; _i++) {
+                var item = ballArr_3[_i];
                 item.drawLineByMouse(item.centerPoint, {
                     x: e.clientX,
                     y: e.clientY,
@@ -297,5 +290,5 @@ var Render;
     }
     Render.moveWithMouse = moveWithMouse;
 })(Render || (Render = {}));
-Render.create(50);
+Render.create(100);
 Render.move();
