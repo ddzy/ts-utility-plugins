@@ -58,6 +58,14 @@ var Utils;
         return ~~(Math.random() * (max - min) + min);
     }
     Utils.getRandom = getRandom;
+    /**
+     * 转化弧度
+     * @param angle 角度
+     */
+    function getRadian(angle) {
+        return (Math.PI / 180) * angle;
+    }
+    Utils.getRadian = getRadian;
 })(Utils || (Utils = {}));
 ;
 var InitCanvas;

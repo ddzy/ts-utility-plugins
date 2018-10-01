@@ -89,6 +89,17 @@ namespace Utils {
     return ~~(Math.random()*(max-min)+min);
   }
 
+
+  /**
+   * 转化弧度
+   * @param angle 角度
+   */
+  export function getRadian(
+    angle: number
+  ): number {
+    return (Math.PI / 180) * angle;
+  }
+
 };
 
 
