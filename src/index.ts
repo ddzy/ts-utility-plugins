@@ -23,7 +23,7 @@ namespace Utils {
   /**
    * 连线最小距离
    */
-  export const LINE_MIN_DISTANCE: number = 20;
+  export const LINE_MIN_DISTANCE: number = 100;
 
   /**
    * 获取元素
@@ -163,8 +163,6 @@ const {
   cvsWidth,
   cvsHeight,
 } = InitCanvas.initCanvas();
-// 字典映射
-const ballMap = new Map();
 
 
 namespace StarsLine {
@@ -281,37 +279,7 @@ namespace StarsLine {
     }
 
     public drawLine(): void {
-      // 处理字典映射
-      ballMap.forEach((value: any, key: StarsLine.Ball) => {
-        for (const item of value) {
-          const keyX: number = key.centerPoint.x;
-          const keyY: number = key.centerPoint.y;
-          const itemX: number = item.centerPoint.x;
-          const itemY: number = item.centerPoint.y;
-          const distanceX: number = Math.abs(keyX - itemX);
-          const distanceY: number = Math.abs(keyY - itemY);
-          const doubleDX: number = Math.pow(2, distanceX);
-          const doubleDY: number = Math.pow(2, distanceY);
-          // 圆心距
-          const distance: number = ~~Math.pow(.5, doubleDX + doubleDY);
-          
-          if(
-            distance < Utils.LINE_MIN_DISTANCE
-          ) {
-            new Line({
-              color: '#d50',
-              startPoint: {
-                x: keyX,
-                y: keyY,
-              },
-              endPoint: {
-                x: itemX,
-                y: itemY,
-              },
-            })
-          }
-        }
-      })
+      
     }
   }
 }
@@ -331,18 +299,14 @@ function create(): void {
     radius: Utils.getRandom(2, 5),
   });
   ballArr.push(ball);
-  ballMap.set(ball, undefined);
   ball.draw();
 }
 
 
-for(let i = 0; i < 10; i++) {
+for(let i = 0; i < 4; i++) {
   create();
 }
 
-ballMap.forEach((_value: any, key: any, map: any) => {
-  map.set(key, ballArr);
-})
 
 
 function move() {

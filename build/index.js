@@ -8,7 +8,7 @@ var Utils;
     /**
      * 连线最小距离
      */
-    Utils.LINE_MIN_DISTANCE = 20;
+    Utils.LINE_MIN_DISTANCE = 100;
     /**
      * 获取元素
      * @param id 元素id
@@ -109,8 +109,6 @@ var InitCanvas;
     InitCanvas.initCanvas = initCanvas;
 })(InitCanvas || (InitCanvas = {}));
 var _a = InitCanvas.initCanvas(), pen = _a.pen, cvsWidth = _a.cvsWidth, cvsHeight = _a.cvsHeight;
-// 字典映射
-var ballMap = new Map();
 var StarsLine;
 (function (StarsLine) {
     /**
@@ -179,35 +177,6 @@ var StarsLine;
             this.drawLine();
         };
         Ball.prototype.drawLine = function () {
-            // 处理字典映射
-            ballMap.forEach(function (value, key) {
-                for (var _i = 0, value_1 = value; _i < value_1.length; _i++) {
-                    var item = value_1[_i];
-                    var keyX = key.centerPoint.x;
-                    var keyY = key.centerPoint.y;
-                    var itemX = item.centerPoint.x;
-                    var itemY = item.centerPoint.y;
-                    var distanceX = Math.abs(keyX - itemX);
-                    var distanceY = Math.abs(keyY - itemY);
-                    var doubleDX = Math.pow(2, distanceX);
-                    var doubleDY = Math.pow(2, distanceY);
-                    // 圆心距
-                    var distance = ~~Math.pow(.5, doubleDX + doubleDY);
-                    if (distance < Utils.LINE_MIN_DISTANCE) {
-                        new Line({
-                            color: '#d50',
-                            startPoint: {
-                                x: keyX,
-                                y: keyY,
-                            },
-                            endPoint: {
-                                x: itemX,
-                                y: itemY,
-                            },
-                        });
-                    }
-                }
-            });
         };
         return Ball;
     }());
@@ -223,15 +192,11 @@ function create() {
         radius: Utils.getRandom(2, 5),
     });
     ballArr.push(ball);
-    ballMap.set(ball, undefined);
     ball.draw();
 }
-for (var i = 0; i < 10; i++) {
+for (var i = 0; i < 4; i++) {
     create();
 }
-ballMap.forEach(function (_value, key, map) {
-    map.set(key, ballArr);
-});
 function move() {
     pen.clearRect(0, 0, cvsWidth, cvsHeight);
     for (var _i = 0, ballArr_1 = ballArr; _i < ballArr_1.length; _i++) {
