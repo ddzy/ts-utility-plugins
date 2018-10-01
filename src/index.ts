@@ -20,16 +20,26 @@
 
 namespace YYG {
 
-  export let yyg_el: HTMLElement | null = null;
-  export let yyg_cvsWidth: number = 500;
-  export let yyg_cvsHeight: number = 500;
-  export let yyg_cvsBgColor: string = '#000';
-  export let yyg_ballNum: number = 50;
-  export let yyg_allowMouse: boolean = true;
-  export let yyg_lineColor: string = '#d50';
-  export let yyg_lineWidth: number = 1;
-  export let yyg_ballSpeed: number = 1;
-  export let yyg_ballColor: string = '#fff';
+  export let yyg_el: any = null;
+
+  let yyg_cvsWidth: number = 500;
+  let yyg_cvsHeight: number = 500;
+  let yyg_cvsBgColor: string = '#000';
+  let yyg_ballNum: number = 50;
+  let yyg_allowMouse: boolean = true;
+  let yyg_lineColor: string = '#d50';
+  let yyg_lineWidth: number = 1;
+  let yyg_ballSpeed: number = 1;
+  let yyg_ballColor: string = '#fff';
+
+  let yyg_pen: any = null;
+  let yyg_ballArr: any[] = [];
+  let yyg_flag: boolean = false;
+  let yyg_MOUSE_POINT: {
+    centerPoint: { x: number, y: number }
+  } = {
+    centerPoint: { x: 0, y: 0 },
+  };
 
   
   export namespace IProps {
@@ -84,11 +94,53 @@ namespace YYG {
   export function render(
     el: string,
   ) {
-    yyg_el = Utils.getEle(el);
+    Init.initCanvas(el);
+    Init.reseizeCanvas();
 
     Render.create(yyg_ballNum);
     Render.move();
   }
+
+
+// 初始化函数
+  namespace Init {
+    
+    export function initCanvas(
+      el: string,
+    ): void {
+      yyg_el = Utils.getEle(el);
+      yyg_pen = yyg_el.getContext('2d');
+      
+      const oBody = Utils.getEle('body') as HTMLBodyElement;
+      const { winHeight, winWidth, } = Utils.getWinRange();
+  
+      Utils.setAttr(yyg_el, {
+        width: winWidth,
+        height: winHeight,
+      })
+      Utils.setCss(yyg_el, {
+        display: 'block',
+        'background-color': '#000',
+      });
+      Utils.setCss(oBody, {
+        margin: 0,
+        overflow: 'hidden',
+      });
+    }
+
+    export function reseizeCanvas() {
+      window.addEventListener('resize', () => {
+        const { winWidth, winHeight, } = Utils.getWinRange();
+        
+        Utils.setAttr(yyg_el, {
+          width: winWidth,
+          height: winHeight,
+        });
+      }, false);
+    }
+
+  }
+// ----
   
 
   namespace Utils {
@@ -133,6 +185,7 @@ namespace YYG {
       ele: HTMLElement,
       options: any,
     ): HTMLElement {
+
       for (const key in options) {
         ele.setAttribute(key, options[key]);
       }
@@ -202,13 +255,15 @@ namespace YYG {
   namespace InitCanvas {
   
     export const oCanvas = Utils
-      .getEle('#stars-line') as HTMLCanvasElement
-    
+      .getEle('#stars-line') as HTMLCanvasElement   
+      
+      
     export function initCanvas(): {
       pen: any,
       cvsWidth: any,
       cvsHeight: any,
     } {
+
       const oBody = Utils.getEle('body') as HTMLBodyElement;
       const { winHeight, winWidth, } = Utils.getWinRange();
       const pen: any = oCanvas && oCanvas.getContext('2d');
@@ -436,8 +491,7 @@ namespace YYG {
     export function move(): void {
       pen.clearRect(0, 0, cvsWidth, cvsHeight);
   
-      InitCanvas
-        .oCanvas
+      yyg_el
         .addEventListener('mousemove', (
           e: MouseEvent,
         ) => {
@@ -465,6 +519,7 @@ namespace YYG {
 
 
 YYG.render('#stars-line');
+
 console.log(YYG);
 
 

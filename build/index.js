@@ -19,29 +19,35 @@
 var YYG;
 (function (YYG) {
     YYG.yyg_el = null;
-    YYG.yyg_cvsWidth = 500;
-    YYG.yyg_cvsHeight = 500;
-    YYG.yyg_cvsBgColor = '#000';
-    YYG.yyg_ballNum = 50;
-    YYG.yyg_allowMouse = true;
-    YYG.yyg_lineColor = '#d50';
-    YYG.yyg_lineWidth = 1;
-    YYG.yyg_ballSpeed = 1;
-    YYG.yyg_ballColor = '#fff';
+    var yyg_cvsWidth = 500;
+    var yyg_cvsHeight = 500;
+    var yyg_cvsBgColor = '#000';
+    var yyg_ballNum = 50;
+    var yyg_allowMouse = true;
+    var yyg_lineColor = '#d50';
+    var yyg_lineWidth = 1;
+    var yyg_ballSpeed = 1;
+    var yyg_ballColor = '#fff';
+    var yyg_pen = null;
+    var yyg_ballArr = [];
+    var yyg_flag = false;
+    var yyg_MOUSE_POINT = {
+        centerPoint: { x: 0, y: 0 },
+    };
     /**
      * 自定义配置
      * @param options 配置项
      */
     function config(options) {
-        YYG.yyg_cvsWidth = options.cvsWidth || 500;
-        YYG.yyg_cvsHeight = options.cvsHeight || 500;
-        YYG.yyg_cvsBgColor = options.cvsBgColor || '#000';
-        YYG.yyg_ballNum = options.ballNum || 50;
-        YYG.yyg_allowMouse = options.allowMouse || true;
-        YYG.yyg_lineColor = options.lineColor || '#d50';
-        YYG.yyg_lineWidth = options.lineWidth || 1;
-        YYG.yyg_ballSpeed = options.ballSpeed || 1;
-        YYG.yyg_ballColor = options.ballColor || '#fff';
+        yyg_cvsWidth = options.cvsWidth || 500;
+        yyg_cvsHeight = options.cvsHeight || 500;
+        yyg_cvsBgColor = options.cvsBgColor || '#000';
+        yyg_ballNum = options.ballNum || 50;
+        yyg_allowMouse = options.allowMouse || true;
+        yyg_lineColor = options.lineColor || '#d50';
+        yyg_lineWidth = options.lineWidth || 1;
+        yyg_ballSpeed = options.ballSpeed || 1;
+        yyg_ballColor = options.ballColor || '#fff';
     }
     YYG.config = config;
     /**
@@ -49,11 +55,46 @@ var YYG;
      * @param el canvas元素
      */
     function render(el) {
-        YYG.yyg_el = Utils.getEle(el);
-        Render.create(YYG.yyg_ballNum);
+        Init.initCanvas(el);
+        Init.reseizeCanvas();
+        Render.create(yyg_ballNum);
         Render.move();
     }
     YYG.render = render;
+    // 初始化函数
+    var Init;
+    (function (Init) {
+        function initCanvas(el) {
+            YYG.yyg_el = Utils.getEle(el);
+            yyg_pen = YYG.yyg_el.getContext('2d');
+            var oBody = Utils.getEle('body');
+            var _a = Utils.getWinRange(), winHeight = _a.winHeight, winWidth = _a.winWidth;
+            Utils.setAttr(YYG.yyg_el, {
+                width: winWidth,
+                height: winHeight,
+            });
+            Utils.setCss(YYG.yyg_el, {
+                display: 'block',
+                'background-color': '#000',
+            });
+            Utils.setCss(oBody, {
+                margin: 0,
+                overflow: 'hidden',
+            });
+        }
+        Init.initCanvas = initCanvas;
+        function reseizeCanvas() {
+            window.addEventListener('resize', function () {
+                var _a = Utils.getWinRange(), winWidth = _a.winWidth, winHeight = _a.winHeight;
+                Utils.setAttr(YYG.yyg_el, {
+                    width: winWidth,
+                    height: winHeight,
+                });
+            }, false);
+        }
+        Init.reseizeCanvas = reseizeCanvas;
+    })(Init || (Init = {}));
+    // ----
     var Utils;
     (function (Utils) {
         /**
@@ -291,8 +332,7 @@ var YYG;
          */
         function move() {
             pen.clearRect(0, 0, cvsWidth, cvsHeight);
-            InitCanvas
-                .oCanvas
+            YYG.yyg_el
                 .addEventListener('mousemove', function (e) {
                 flag = true;
                 MOUSE_POINT.centerPoint.x = e.clientX;
