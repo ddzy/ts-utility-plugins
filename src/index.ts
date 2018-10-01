@@ -11,6 +11,7 @@ namespace IProps {
     centerPoint: { x: number, y: number };
     radius: number;
     color: string;
+    speed?: number;
   }
 }
 
@@ -183,6 +184,7 @@ namespace StarsLine {
     };
     private readonly radius: number;
     private readonly color: string;
+    private readonly speed: number;
 
     public constructor(
       props: IProps.IBallProps
@@ -190,6 +192,7 @@ namespace StarsLine {
       this.centerPoint = props.centerPoint;
       this.radius = props.radius;
       this.color = props.color;
+      this.speed = props.speed || 10;
     }
 
     public draw(): void {
@@ -206,6 +209,10 @@ namespace StarsLine {
       pen.fill();
       pen.closePath();
       pen.restore();
+    }
+
+    public move(): void {
+
     }
   }
 }

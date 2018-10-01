@@ -128,6 +128,7 @@ var StarsLine;
             this.centerPoint = props.centerPoint;
             this.radius = props.radius;
             this.color = props.color;
+            this.speed = props.speed || 10;
         }
         Ball.prototype.draw = function () {
             pen.save();
@@ -137,6 +138,8 @@ var StarsLine;
             pen.fill();
             pen.closePath();
             pen.restore();
+        };
+        Ball.prototype.move = function () {
         };
         return Ball;
     }());
