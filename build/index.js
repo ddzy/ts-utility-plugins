@@ -55,7 +55,7 @@ var Utils;
      * @param max 最大值
      */
     function getRandom(min, max) {
-        return ~~(Math.random() * (max - min) + min);
+        return (Math.random() * (max - min) + min);
     }
     Utils.getRandom = getRandom;
     /**
@@ -125,10 +125,17 @@ var StarsLine;
      */
     var Ball = /** @class */ (function () {
         function Ball(props) {
-            this.centerPoint = props.centerPoint;
+            this.centerPoint = props.centerPoint || {
+                x: Utils.getRandom(0, cvsWidth),
+                y: Utils.getRandom(0, cvsHeight),
+            };
             this.radius = props.radius;
             this.color = props.color;
             this.speed = props.speed || 10;
+            this.distance = {
+                x: Utils.getRandom(-1, 1),
+                y: Utils.getRandom(-1, 1),
+            };
         }
         Ball.prototype.draw = function () {
             pen.save();
@@ -140,20 +147,33 @@ var StarsLine;
             pen.restore();
         };
         Ball.prototype.move = function () {
+            this.centerPoint.x += this.distance.x;
+            this.centerPoint.y += this.distance.y;
+            console.log(this.distance);
         };
         return Ball;
     }());
     StarsLine.Ball = Ball;
 })(StarsLine || (StarsLine = {}));
 var ballCollection = [];
-for (var i = 0; i < 20; i++) {
-    ballCollection.push(new StarsLine.Ball({
+function create() {
+    var ball = new StarsLine.Ball({
         color: '#fff',
         radius: Utils.getRandom(5, 15),
-        centerPoint: {
-            x: Utils.getRandom(0, cvsWidth),
-            y: Utils.getRandom(0, cvsHeight),
-        },
-    }));
+    });
+    ballCollection.push(ball);
+    ball.draw();
 }
-ballCollection.forEach(function (item) { return item.draw(); });
+for (var i = 0; i < 1; i++) {
+    create();
+}
+function move() {
+    pen.clearRect(0, 0, cvsWidth, cvsHeight);
+    for (var _i = 0, ballCollection_1 = ballCollection; _i < ballCollection_1.length; _i++) {
+        var item = ballCollection_1[_i];
+        item.move();
+        item.draw();
+    }
+    window.requestAnimationFrame(move);
+}
+window.requestAnimationFrame(move);

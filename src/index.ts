@@ -8,7 +8,7 @@ namespace IProps {
 
   }
   export interface IBallProps {
-    centerPoint: { x: number, y: number };
+    centerPoint?: { x: number, y: number };
     radius: number;
     color: string;
     speed?: number;
@@ -88,7 +88,7 @@ namespace Utils {
     min: number,
     max: number,
   ): number {
-    return ~~(Math.random()*(max-min)+min);
+    return (Math.random()*(max-min)+min);
   }
 
 
@@ -185,14 +185,25 @@ namespace StarsLine {
     private readonly radius: number;
     private readonly color: string;
     private readonly speed: number;
+    private readonly distance: {
+      x: number,
+      y: number,
+    }
 
     public constructor(
       props: IProps.IBallProps
     ) {
-      this.centerPoint = props.centerPoint;
+      this.centerPoint = props.centerPoint || {
+        x: Utils.getRandom(0, cvsWidth),
+        y: Utils.getRandom(0, cvsHeight),
+      };
       this.radius = props.radius;
       this.color = props.color;
       this.speed = props.speed || 10;
+      this.distance = {
+        x: Utils.getRandom(-1, 1),
+        y: Utils.getRandom(-1, 1),
+      };
     }
 
     public draw(): void {
@@ -212,7 +223,10 @@ namespace StarsLine {
     }
 
     public move(): void {
+      this.centerPoint.x += this.distance.x;
+      this.centerPoint.y += this.distance.y;
 
+      console.log(this.distance);
     }
   }
 }
@@ -220,18 +234,29 @@ namespace StarsLine {
 
 
 const ballCollection: StarsLine.Ball[] = [];
-for(let i = 0; i < 20; i++) {
-  ballCollection.push(new StarsLine.Ball({
+
+function create() {
+  const ball = new StarsLine.Ball({
     color: '#fff',
     radius: Utils.getRandom(5, 15),
-    centerPoint: {
-      x: Utils.getRandom(0, cvsWidth),
-      y: Utils.getRandom(0, cvsHeight),
-    },
-  }));
+  });
+  ballCollection.push(ball);
+  ball.draw();
 }
 
+for(let i = 0; i < 1; i++) {
+  create();
+}
 
-ballCollection.forEach((item) => item.draw());
+function move() {
+  pen.clearRect(0, 0, cvsWidth, cvsHeight);
+  for (const item of ballCollection) {
+    item.move();
+    item.draw();
+  }
 
+  window.requestAnimationFrame(move);
+}
+
+window.requestAnimationFrame(move);
 
