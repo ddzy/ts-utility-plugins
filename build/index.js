@@ -98,8 +98,8 @@ var InitCanvas;
         });
         return {
             pen: pen,
-            cvsWidth: Number(oCanvas.getAttribute('width')),
-            cvsHeight: Number(oCanvas.getAttribute('height')),
+            cvsWidth: Number(Utils.getAttr(oCanvas, 'width')),
+            cvsHeight: Number(Utils.getAttr(oCanvas, 'height')),
         };
     }
     InitCanvas.initCanvas = initCanvas;
