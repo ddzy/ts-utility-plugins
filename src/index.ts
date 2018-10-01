@@ -14,12 +14,6 @@ namespace IProps {
   }
 }
 
-
-
-const oCanvas: any = Utils.getEle('stars-line');
-const pen: any = oCanvas && oCanvas.getContext('2d'); 
-
-
 namespace Utils {
 
   /**
@@ -27,9 +21,9 @@ namespace Utils {
    * @param id 元素id
    */
   export function getEle(
-    id: string,
+    sign: string,
   ): HTMLElement | null {
-    return document.getElementById(id) || null;
+    return document.querySelector(sign) || null;
   }
 
 
@@ -98,6 +92,34 @@ namespace Utils {
 };
 
 
+namespace InitCanvas {
+  export function initCanvas(): any {
+    const oBody = Utils.getEle('body') as HTMLBodyElement;
+    const oCanvas = Utils.getEle('#stars-line') as HTMLCanvasElement;
+    const { winHeight, winWidth, } = Utils.getWinRange();
+    const pen: any = oCanvas && oCanvas.getContext('2d');
+
+    Utils.setAttr(oCanvas, {
+      width: winWidth,
+      height: winHeight,
+    })
+    Utils.setCss(oCanvas, {
+      display: 'block',
+      'background-color': '#000',
+    });
+    Utils.setCss(oBody, {
+      margin: 0,
+      overflow: 'hidden',
+    });
+
+    return pen;
+  }
+}
+
+
+const pen: any = InitCanvas.initCanvas();
+
+
 namespace StarsLine {
   
   /**
@@ -136,7 +158,7 @@ namespace StarsLine {
     public draw(): void {
       pen.save();
       pen.beginPath();
-
+      pen.arc();
       pen.closePath();
       pen.restore();
     }

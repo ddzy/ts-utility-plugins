@@ -3,16 +3,14 @@
  * create_time: 18-9-30
  * author: yyg
  */
-var oCanvas = Utils.getEle('stars-line');
-var pen = oCanvas && oCanvas.getContext('2d');
 var Utils;
 (function (Utils) {
     /**
      * 获取元素
      * @param id 元素id
      */
-    function getEle(id) {
-        return document.getElementById(id) || null;
+    function getEle(sign) {
+        return document.querySelector(sign) || null;
     }
     Utils.getEle = getEle;
     /**
@@ -62,6 +60,30 @@ var Utils;
     Utils.getRandom = getRandom;
 })(Utils || (Utils = {}));
 ;
+var InitCanvas;
+(function (InitCanvas) {
+    function initCanvas() {
+        var oBody = Utils.getEle('body');
+        var oCanvas = Utils.getEle('#stars-line');
+        var _a = Utils.getWinRange(), winHeight = _a.winHeight, winWidth = _a.winWidth;
+        var pen = oCanvas && oCanvas.getContext('2d');
+        Utils.setAttr(oCanvas, {
+            width: winWidth,
+            height: winHeight,
+        });
+        Utils.setCss(oCanvas, {
+            display: 'block',
+            'background-color': '#000',
+        });
+        Utils.setCss(oBody, {
+            margin: 0,
+            overflow: 'hidden',
+        });
+        return pen;
+    }
+    InitCanvas.initCanvas = initCanvas;
+})(InitCanvas || (InitCanvas = {}));
+var pen = InitCanvas.initCanvas();
 var StarsLine;
 (function (StarsLine) {
     /**
@@ -89,6 +111,7 @@ var StarsLine;
         Ball.prototype.draw = function () {
             pen.save();
             pen.beginPath();
+            pen.arc();
             pen.closePath();
             pen.restore();
         };
