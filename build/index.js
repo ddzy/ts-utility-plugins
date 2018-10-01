@@ -6,6 +6,10 @@
 var Utils;
 (function (Utils) {
     /**
+     * 连线最小距离
+     */
+    Utils.LINE_MIN_DISTANCE = 20;
+    /**
      * 获取元素
      * @param id 元素id
      */
@@ -117,7 +121,19 @@ var StarsLine;
             this.startPoint = props.startPoint;
             this.endPoint = props.endPoint;
             this.color = props.color;
+            this.draw();
         }
+        Line.prototype.draw = function () {
+            pen.save();
+            pen.beginPath();
+            pen.moveTo(this.startPoint.x, this.startPoint.y);
+            pen.lineTo(this.endPoint.x, this.endPoint.y);
+            pen.lineCup = 'round';
+            pen.strokeStyle = this.color;
+            pen.stroke();
+            pen.closePath();
+            pen.restore();
+        };
         return Line;
     }());
     StarsLine.Line = Line;
@@ -163,7 +179,35 @@ var StarsLine;
             this.drawLine();
         };
         Ball.prototype.drawLine = function () {
-            var centerPoint = this.centerPoint;
+            // 处理字典映射
+            ballMap.forEach(function (value, key) {
+                for (var _i = 0, value_1 = value; _i < value_1.length; _i++) {
+                    var item = value_1[_i];
+                    var keyX = key.centerPoint.x;
+                    var keyY = key.centerPoint.y;
+                    var itemX = item.centerPoint.x;
+                    var itemY = item.centerPoint.y;
+                    var distanceX = Math.abs(keyX - itemX);
+                    var distanceY = Math.abs(keyY - itemY);
+                    var doubleDX = Math.pow(2, distanceX);
+                    var doubleDY = Math.pow(2, distanceY);
+                    // 圆心距
+                    var distance = ~~Math.pow(.5, doubleDX + doubleDY);
+                    if (distance < Utils.LINE_MIN_DISTANCE) {
+                        new Line({
+                            color: '#d50',
+                            startPoint: {
+                                x: keyX,
+                                y: keyY,
+                            },
+                            endPoint: {
+                                x: itemX,
+                                y: itemY,
+                            },
+                        });
+                    }
+                }
+            });
         };
         return Ball;
     }());

@@ -21,6 +21,11 @@ namespace IProps {
 namespace Utils {
 
   /**
+   * 连线最小距离
+   */
+  export const LINE_MIN_DISTANCE: number = 20;
+
+  /**
    * 获取元素
    * @param id 元素id
    */
@@ -185,6 +190,25 @@ namespace StarsLine {
       this.startPoint = props.startPoint;
       this.endPoint = props.endPoint;
       this.color = props.color;
+      this.draw();
+    }
+
+    public draw(): void {
+      pen.save();
+      pen.beginPath();
+      pen.moveTo(
+        this.startPoint.x,
+        this.startPoint.y,
+      );
+      pen.lineTo(
+        this.endPoint.x,
+        this.endPoint.y,
+      );
+      pen.lineCup = 'round';
+      pen.strokeStyle = this.color;
+      pen.stroke();
+      pen.closePath();
+      pen.restore();
     }
  
   }
@@ -194,7 +218,7 @@ namespace StarsLine {
    */
   export class Ball {
 
-    private readonly centerPoint: {
+    public readonly centerPoint: {
       x: number,
       y: number,
     };
@@ -257,9 +281,37 @@ namespace StarsLine {
     }
 
     public drawLine(): void {
-      const centerPoint = this.centerPoint;
-
-      
+      // 处理字典映射
+      ballMap.forEach((value: any, key: StarsLine.Ball) => {
+        for (const item of value) {
+          const keyX: number = key.centerPoint.x;
+          const keyY: number = key.centerPoint.y;
+          const itemX: number = item.centerPoint.x;
+          const itemY: number = item.centerPoint.y;
+          const distanceX: number = Math.abs(keyX - itemX);
+          const distanceY: number = Math.abs(keyY - itemY);
+          const doubleDX: number = Math.pow(2, distanceX);
+          const doubleDY: number = Math.pow(2, distanceY);
+          // 圆心距
+          const distance: number = ~~Math.pow(.5, doubleDX + doubleDY);
+          
+          if(
+            distance < Utils.LINE_MIN_DISTANCE
+          ) {
+            new Line({
+              color: '#d50',
+              startPoint: {
+                x: keyX,
+                y: keyY,
+              },
+              endPoint: {
+                x: itemX,
+                y: itemY,
+              },
+            })
+          }
+        }
+      })
     }
   }
 }
