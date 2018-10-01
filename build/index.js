@@ -18,6 +18,7 @@
  */
 var YYG;
 (function (YYG) {
+    YYG.yyg_el = null;
     YYG.yyg_cvsWidth = 500;
     YYG.yyg_cvsHeight = 500;
     YYG.yyg_cvsBgColor = '#000';
@@ -27,6 +28,10 @@ var YYG;
     YYG.yyg_lineWidth = 1;
     YYG.yyg_ballSpeed = 1;
     YYG.yyg_ballColor = '#fff';
+    /**
+     * 自定义配置
+     * @param options 配置项
+     */
     function config(options) {
         YYG.yyg_cvsWidth = options.cvsWidth || 500;
         YYG.yyg_cvsHeight = options.cvsHeight || 500;
@@ -39,7 +44,12 @@ var YYG;
         YYG.yyg_ballColor = options.ballColor || '#fff';
     }
     YYG.config = config;
-    function render() {
+    /**
+     * 主渲染函数
+     * @param el canvas元素
+     */
+    function render(el) {
+        YYG.yyg_el = Utils.getEle(el);
         Render.create(YYG.yyg_ballNum);
         Render.move();
     }
@@ -50,10 +60,6 @@ var YYG;
          * 连线安全距离
          */
         Utils.LINE_MIN_DISTANCE = 90;
-        /**
-         * 标记鼠标是否移动
-         */
-        Utils.flat = false;
         /**
          * 获取元素
          * @param id 元素id
@@ -304,4 +310,5 @@ var YYG;
         Render.move = move;
     })(Render || (Render = {}));
 })(YYG || (YYG = {}));
-YYG.render();
+YYG.render('#stars-line');
+console.log(YYG);

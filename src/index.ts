@@ -20,6 +20,7 @@
 
 namespace YYG {
 
+  export let yyg_el: HTMLElement | null = null;
   export let yyg_cvsWidth: number = 500;
   export let yyg_cvsHeight: number = 500;
   export let yyg_cvsBgColor: string = '#000';
@@ -57,6 +58,10 @@ namespace YYG {
   }
 
 
+  /**
+   * 自定义配置
+   * @param options 配置项
+   */
   export function config(
     options: IProps.IConfigProps,
   ) {
@@ -72,7 +77,15 @@ namespace YYG {
   }
 
 
-  export function render() {
+  /**
+   * 主渲染函数
+   * @param el canvas元素
+   */
+  export function render(
+    el: string,
+  ) {
+    yyg_el = Utils.getEle(el);
+
     Render.create(yyg_ballNum);
     Render.move();
   }
@@ -84,12 +97,6 @@ namespace YYG {
      * 连线安全距离
      */
     export const LINE_MIN_DISTANCE: number = 90;
-  
-  
-    /**
-     * 标记鼠标是否移动
-     */
-    export let flat: boolean = false;
   
   
     /**
@@ -457,6 +464,7 @@ namespace YYG {
 }
 
 
-YYG.render();
+YYG.render('#stars-line');
+console.log(YYG);
 
 
