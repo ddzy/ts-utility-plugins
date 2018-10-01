@@ -158,6 +158,8 @@ const {
   cvsWidth,
   cvsHeight,
 } = InitCanvas.initCanvas();
+// 字典映射
+const ballMap = new Map();
 
 
 namespace StarsLine {
@@ -257,7 +259,7 @@ namespace StarsLine {
     public drawLine(): void {
       const centerPoint = this.centerPoint;
 
-
+      
     }
   }
 }
@@ -269,30 +271,37 @@ namespace StarsLine {
 /**
  * 测试
  */
-// const ballCollection: StarsLine.Ball[] = [];
+const ballArr: StarsLine.Ball[] = [];
 
-// function create(): void {
-//   const ball = new StarsLine.Ball({
-//     color: '#fff',
-//     radius: Utils.getRandom(2, 5),
-//   });
-//   ballCollection.push(ball);
-//   ball.draw();
-// }
+function create(): void {
+  const ball = new StarsLine.Ball({
+    color: '#fff',
+    radius: Utils.getRandom(2, 5),
+  });
+  ballArr.push(ball);
+  ballMap.set(ball, undefined);
+  ball.draw();
+}
 
-// for(let i = 0; i < 200; i++) {
-//   create();
-// }
 
-// function move() {
-//   pen.clearRect(0, 0, cvsWidth, cvsHeight);
-//   for (const item of ballCollection) {
-//     item.move();
-//     item.draw();
-//   }
+for(let i = 0; i < 10; i++) {
+  create();
+}
 
-//   window.requestAnimationFrame(move);
-// }
+ballMap.forEach((_value: any, key: any, map: any) => {
+  map.set(key, ballArr);
+})
 
-// window.requestAnimationFrame(move);
+
+function move() {
+  pen.clearRect(0, 0, cvsWidth, cvsHeight);
+  for (const item of ballArr) {
+    item.move();
+    item.draw();
+  }
+
+  window.requestAnimationFrame(move);
+}
+
+window.requestAnimationFrame(move);
 

@@ -105,6 +105,8 @@ var InitCanvas;
     InitCanvas.initCanvas = initCanvas;
 })(InitCanvas || (InitCanvas = {}));
 var _a = InitCanvas.initCanvas(), pen = _a.pen, cvsWidth = _a.cvsWidth, cvsHeight = _a.cvsHeight;
+// 字典映射
+var ballMap = new Map();
 var StarsLine;
 (function (StarsLine) {
     /**
@@ -170,24 +172,29 @@ var StarsLine;
 /**
  * 测试
  */
-// const ballCollection: StarsLine.Ball[] = [];
-// function create(): void {
-//   const ball = new StarsLine.Ball({
-//     color: '#fff',
-//     radius: Utils.getRandom(2, 5),
-//   });
-//   ballCollection.push(ball);
-//   ball.draw();
-// }
-// for(let i = 0; i < 200; i++) {
-//   create();
-// }
-// function move() {
-//   pen.clearRect(0, 0, cvsWidth, cvsHeight);
-//   for (const item of ballCollection) {
-//     item.move();
-//     item.draw();
-//   }
-//   window.requestAnimationFrame(move);
-// }
-// window.requestAnimationFrame(move);
+var ballArr = [];
+function create() {
+    var ball = new StarsLine.Ball({
+        color: '#fff',
+        radius: Utils.getRandom(2, 5),
+    });
+    ballArr.push(ball);
+    ballMap.set(ball, undefined);
+    ball.draw();
+}
+for (var i = 0; i < 10; i++) {
+    create();
+}
+ballMap.forEach(function (_value, key, map) {
+    map.set(key, ballArr);
+});
+function move() {
+    pen.clearRect(0, 0, cvsWidth, cvsHeight);
+    for (var _i = 0, ballArr_1 = ballArr; _i < ballArr_1.length; _i++) {
+        var item = ballArr_1[_i];
+        item.move();
+        item.draw();
+    }
+    window.requestAnimationFrame(move);
+}
+window.requestAnimationFrame(move);
