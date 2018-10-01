@@ -2,13 +2,14 @@
 /**
  * create_time: 18-9-30
  * author: yyg
+ * complete: f456caa => 完成自动连线功能
  */
 var Utils;
 (function (Utils) {
     /**
-     * 连线最小距离
+     * 连线安全距离
      */
-    Utils.LINE_MIN_DISTANCE = 100;
+    Utils.LINE_MIN_DISTANCE = 90;
     /**
      * 获取元素
      * @param id 元素id
@@ -81,18 +82,22 @@ var Utils;
     Utils.getAttr = getAttr;
 })(Utils || (Utils = {}));
 ;
+/**
+ * 画布管理
+ */
 var InitCanvas;
 (function (InitCanvas) {
+    InitCanvas.oCanvas = Utils
+        .getEle('#start-line');
     function initCanvas() {
         var oBody = Utils.getEle('body');
-        var oCanvas = Utils.getEle('#stars-line');
         var _a = Utils.getWinRange(), winHeight = _a.winHeight, winWidth = _a.winWidth;
-        var pen = oCanvas && oCanvas.getContext('2d');
-        Utils.setAttr(oCanvas, {
+        var pen = InitCanvas.oCanvas && InitCanvas.oCanvas.getContext('2d');
+        Utils.setAttr(InitCanvas.oCanvas, {
             width: winWidth,
             height: winHeight,
         });
-        Utils.setCss(oCanvas, {
+        Utils.setCss(InitCanvas.oCanvas, {
             display: 'block',
             'background-color': '#000',
         });
@@ -102,11 +107,14 @@ var InitCanvas;
         });
         return {
             pen: pen,
-            cvsWidth: Number(Utils.getAttr(oCanvas, 'width')),
-            cvsHeight: Number(Utils.getAttr(oCanvas, 'height')),
+            cvsWidth: Number(Utils.getAttr(InitCanvas.oCanvas, 'width')),
+            cvsHeight: Number(Utils.getAttr(InitCanvas.oCanvas, 'height')),
         };
     }
     InitCanvas.initCanvas = initCanvas;
+    function resizeCanvas() {
+    }
+    InitCanvas.resizeCanvas = resizeCanvas;
 })(InitCanvas || (InitCanvas = {}));
 var _a = InitCanvas.initCanvas(), pen = _a.pen, cvsWidth = _a.cvsWidth, cvsHeight = _a.cvsHeight;
 var ballArr = [];
@@ -203,12 +211,12 @@ var StarsLine;
 function create() {
     var ball = new StarsLine.Ball({
         color: '#fff',
-        radius: Utils.getRandom(2, 5),
+        radius: Utils.getRandom(1, 3),
     });
     ballArr.push(ball);
     ball.draw();
 }
-for (var i = 0; i < 20; i++) {
+for (var i = 0; i < 100; i++) {
     create();
 }
 (function move() {

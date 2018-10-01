@@ -1,6 +1,7 @@
 /**
  * create_time: 18-9-30
  * author: yyg
+ * complete: f456caa => 完成自动连线功能
  */
 
 namespace IProps {
@@ -21,9 +22,9 @@ namespace IProps {
 namespace Utils {
 
   /**
-   * 连线最小距离
+   * 连线安全距离
    */
-  export const LINE_MIN_DISTANCE: number = 100;
+  export const LINE_MIN_DISTANCE: number = 90;
 
   /**
    * 获取元素
@@ -125,14 +126,20 @@ namespace Utils {
 };
 
 
+/**
+ * 画布管理
+ */
 namespace InitCanvas {
+
+  export const oCanvas = Utils
+    .getEle('#start-line') as HTMLCanvasElement
+  
   export function initCanvas(): {
     pen: any,
     cvsWidth: any,
     cvsHeight: any,
   } {
     const oBody = Utils.getEle('body') as HTMLBodyElement;
-    const oCanvas = Utils.getEle('#stars-line') as HTMLCanvasElement;
     const { winHeight, winWidth, } = Utils.getWinRange();
     const pen: any = oCanvas && oCanvas.getContext('2d');
 
@@ -154,6 +161,10 @@ namespace InitCanvas {
       cvsWidth: Number(Utils.getAttr(oCanvas, 'width')),
       cvsHeight: Number(Utils.getAttr(oCanvas, 'height')),
     };
+  }
+
+  export function resizeCanvas(): void {
+    
   }
 }
 
@@ -318,14 +329,14 @@ namespace StarsLine {
 function create(): void {
   const ball = new StarsLine.Ball({
     color: '#fff',
-    radius: Utils.getRandom(2, 5),
+    radius: Utils.getRandom(1, 3),
   });
   ballArr.push(ball);
   ball.draw();
 }
 
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 100; i++) {
   create();
 }
 
