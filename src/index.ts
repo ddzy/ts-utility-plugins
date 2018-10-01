@@ -269,30 +269,30 @@ namespace StarsLine {
 /**
  * 测试
  */
-const ballCollection: StarsLine.Ball[] = [];
+// const ballCollection: StarsLine.Ball[] = [];
 
-function create(): void {
-  const ball = new StarsLine.Ball({
-    color: '#fff',
-    radius: Utils.getRandom(2, 5),
-  });
-  ballCollection.push(ball);
-  ball.draw();
-}
+// function create(): void {
+//   const ball = new StarsLine.Ball({
+//     color: '#fff',
+//     radius: Utils.getRandom(2, 5),
+//   });
+//   ballCollection.push(ball);
+//   ball.draw();
+// }
 
-for(let i = 0; i < 200; i++) {
-  create();
-}
+// for(let i = 0; i < 200; i++) {
+//   create();
+// }
 
-function move() {
-  pen.clearRect(0, 0, cvsWidth, cvsHeight);
-  for (const item of ballCollection) {
-    item.move();
-    item.draw();
-  }
+// function move() {
+//   pen.clearRect(0, 0, cvsWidth, cvsHeight);
+//   for (const item of ballCollection) {
+//     item.move();
+//     item.draw();
+//   }
 
-  window.requestAnimationFrame(move);
-}
+//   window.requestAnimationFrame(move);
+// }
 
-window.requestAnimationFrame(move);
+// window.requestAnimationFrame(move);
 
