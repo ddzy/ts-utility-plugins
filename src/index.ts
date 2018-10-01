@@ -132,7 +132,7 @@ namespace Utils {
 namespace InitCanvas {
 
   export const oCanvas = Utils
-    .getEle('#start-line') as HTMLCanvasElement
+    .getEle('#stars-line') as HTMLCanvasElement
   
   export function initCanvas(): {
     pen: any,
@@ -164,7 +164,14 @@ namespace InitCanvas {
   }
 
   export function resizeCanvas(): void {
-    
+    window.addEventListener('resize', () => {
+      const { winWidth, winHeight, } = Utils.getWinRange();
+      
+      Utils.setAttr(oCanvas, {
+        width: winWidth,
+        height: winHeight,
+      });
+    }, false);
   }
 }
 
@@ -174,7 +181,9 @@ const {
   cvsWidth,
   cvsHeight,
 } = InitCanvas.initCanvas();
+InitCanvas.resizeCanvas();
 const ballArr: any[] = [];
+
 
 
 namespace StarsLine {
@@ -326,29 +335,56 @@ namespace StarsLine {
  * 测试
  */
 
-function create(): void {
-  const ball = new StarsLine.Ball({
-    color: '#fff',
-    radius: Utils.getRandom(1, 3),
-  });
-  ballArr.push(ball);
-  ball.draw();
-}
+// function create(): void {
+  // const ball = new StarsLine.Ball({
+  //   color: '#fff',
+  //   radius: Utils.getRandom(1, 3),
+  // });
+  // ballArr.push(ball);
+  // ball.draw();
+// }
 
 
-for (let i = 0; i < 100; i++) {
-  create();
-}
+// for (let i = 0; i < 100; i++) {
+//   create();
+// }
 
 
-(function move() {
-  pen.clearRect(0, 0, cvsWidth, cvsHeight);
-  for (const item of ballArr) {
-    item.move();
-    item.draw();
-    item.drawLine(item);
+// (function move() {
+//   pen.clearRect(0, 0, cvsWidth, cvsHeight);
+//   for (const item of ballArr) {
+//     item.move();
+//     item.draw();
+//     item.drawLine(item);
+//   }
+
+//   window.requestAnimationFrame(move);
+// })()
+
+namespace Test {
+
+  /**
+   * 创建点工厂
+   */
+  function createBallFactory(): void {
+    const ball = new StarsLine.Ball({
+      color: '#fff',
+      radius: Utils.getRandom(1, 3),
+    });
+    ballArr.push(ball);
+    ball.draw();
   }
 
-  window.requestAnimationFrame(move);
-})()
+  /**
+   * 创建的点的数量
+   * @param num 点数量
+   */
+  export function create(
+    num: number,
+  ) {
+    for(let i = 0; i < num; i++) {
+      createBallFactory();
+    }
+  }
+}
 

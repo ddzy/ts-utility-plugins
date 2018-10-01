@@ -88,7 +88,7 @@ var Utils;
 var InitCanvas;
 (function (InitCanvas) {
     InitCanvas.oCanvas = Utils
-        .getEle('#start-line');
+        .getEle('#stars-line');
     function initCanvas() {
         var oBody = Utils.getEle('body');
         var _a = Utils.getWinRange(), winHeight = _a.winHeight, winWidth = _a.winWidth;
@@ -113,10 +113,18 @@ var InitCanvas;
     }
     InitCanvas.initCanvas = initCanvas;
     function resizeCanvas() {
+        window.addEventListener('resize', function () {
+            var _a = Utils.getWinRange(), winWidth = _a.winWidth, winHeight = _a.winHeight;
+            Utils.setAttr(InitCanvas.oCanvas, {
+                width: winWidth,
+                height: winHeight,
+            });
+        }, false);
     }
     InitCanvas.resizeCanvas = resizeCanvas;
 })(InitCanvas || (InitCanvas = {}));
 var _a = InitCanvas.initCanvas(), pen = _a.pen, cvsWidth = _a.cvsWidth, cvsHeight = _a.cvsHeight;
+InitCanvas.resizeCanvas();
 var ballArr = [];
 var StarsLine;
 (function (StarsLine) {
@@ -208,24 +216,47 @@ var StarsLine;
 /**
  * 测试
  */
-function create() {
-    var ball = new StarsLine.Ball({
-        color: '#fff',
-        radius: Utils.getRandom(1, 3),
-    });
-    ballArr.push(ball);
-    ball.draw();
-}
-for (var i = 0; i < 100; i++) {
-    create();
-}
-(function move() {
-    pen.clearRect(0, 0, cvsWidth, cvsHeight);
-    for (var _i = 0, ballArr_2 = ballArr; _i < ballArr_2.length; _i++) {
-        var item = ballArr_2[_i];
-        item.move();
-        item.draw();
-        item.drawLine(item);
+// function create(): void {
+// const ball = new StarsLine.Ball({
+//   color: '#fff',
+//   radius: Utils.getRandom(1, 3),
+// });
+// ballArr.push(ball);
+// ball.draw();
+// }
+// for (let i = 0; i < 100; i++) {
+//   create();
+// }
+// (function move() {
+//   pen.clearRect(0, 0, cvsWidth, cvsHeight);
+//   for (const item of ballArr) {
+//     item.move();
+//     item.draw();
+//     item.drawLine(item);
+//   }
+//   window.requestAnimationFrame(move);
+// })()
+var Test;
+(function (Test) {
+    /**
+     * 创建点工厂
+     */
+    function createBallFactory() {
+        var ball = new StarsLine.Ball({
+            color: '#fff',
+            radius: Utils.getRandom(1, 3),
+        });
+        ballArr.push(ball);
+        ball.draw();
     }
-    window.requestAnimationFrame(move);
-})();
+    /**
+     * 创建的点的数量
+     * @param num 点数量
+     */
+    function create(num) {
+        for (var i = 0; i < num; i++) {
+            createBallFactory();
+        }
+    }
+    Test.create = create;
+})(Test || (Test = {}));
