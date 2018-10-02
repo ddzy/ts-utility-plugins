@@ -335,12 +335,6 @@ namespace YYG {
   
 
 
-  // const {
-  //   pen,
-  //   cvsWidth,
-  //   cvsHeight,
-  // } = InitCanvas.initCanvas();
-  // InitCanvas.resizeCanvas();
   const ballArr: any[] = [];
   let flag: boolean = false;
   const MOUSE_POINT = {centerPoint: { x: 0, y: 0 }}

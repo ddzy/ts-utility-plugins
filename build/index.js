@@ -224,12 +224,6 @@ var YYG;
         }
         InitCanvas.resizeCanvas = resizeCanvas;
     })(InitCanvas || (InitCanvas = {}));
-    // const {
-    //   pen,
-    //   cvsWidth,
-    //   cvsHeight,
-    // } = InitCanvas.initCanvas();
-    // InitCanvas.resizeCanvas();
     var ballArr = [];
     var flag = false;
     var MOUSE_POINT = { centerPoint: { x: 0, y: 0 } };
