@@ -39,9 +39,9 @@ var YYG;
     */
     function config(options) {
         yyg_cvsWidth = options
-            .cvsWidth || Utils.getWinRange().winWidth;
+            .cvsWidth || 500;
         yyg_cvsHeight = options
-            .cvsHeight || Utils.getWinRange().winHeight;
+            .cvsHeight || 500;
         yyg_cvsBgColor = options.cvsBgColor || '#000';
         yyg_ballNum = options.ballNum || 50;
         yyg_allowMouse = options.allowMouse || false;
@@ -188,6 +188,7 @@ var YYG;
                 this.endPoint = props.endPoint;
                 this.lineColor = props.lineColor || '#1890ff';
                 this.lineWidth = props.lineWidth || 1;
+                this.opacity = props.opacity || 1;
                 this.draw();
             }
             Line.prototype.draw = function () {
@@ -198,6 +199,7 @@ var YYG;
                 yyg_pen.lineCup = 'round';
                 yyg_pen.lineWidth = this.lineWidth;
                 yyg_pen.strokeStyle = this.lineColor;
+                yyg_pen.globalAlpha = Utils.getRandom(this.opacity, 1);
                 yyg_pen.stroke();
                 yyg_pen.closePath();
                 yyg_pen.restore();
@@ -260,6 +262,7 @@ var YYG;
                                 x: innerItem.centerPoint.x,
                                 y: innerItem.centerPoint.y,
                             },
+                            opacity: .5,
                         });
                     }
                 }

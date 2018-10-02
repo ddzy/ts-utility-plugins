@@ -39,6 +39,7 @@ namespace YYG {
       endPoint: { x: number, y: number };
       lineColor: string;
       lineWidth: number;
+      opacity: number;
     }
     export interface IBallProps {
       centerPoint?: { x: number, y: number };
@@ -81,9 +82,9 @@ namespace YYG {
     options: IProps.IConfigProps,
   ) {
     yyg_cvsWidth = options
-      .cvsWidth || Utils.getWinRange().winWidth;
+      .cvsWidth || 500;
     yyg_cvsHeight = options
-      .cvsHeight || Utils.getWinRange().winHeight;
+      .cvsHeight || 500;
     yyg_cvsBgColor = options.cvsBgColor || '#000';
     yyg_ballNum = options.ballNum || 50;
     yyg_allowMouse = options.allowMouse || false;
@@ -289,6 +290,7 @@ namespace YYG {
       }
       private readonly lineColor: string;
       private readonly lineWidth: number ;
+      private readonly opacity: number;
   
       public constructor(
         props: IProps.ILineProps,
@@ -297,6 +299,7 @@ namespace YYG {
         this.endPoint = props.endPoint;
         this.lineColor = props.lineColor || '#1890ff';
         this.lineWidth = props.lineWidth || 1;
+        this.opacity = props.opacity || 1;
         this.draw();
       }
   
@@ -314,6 +317,7 @@ namespace YYG {
         yyg_pen.lineCup = 'round';
         yyg_pen.lineWidth = this.lineWidth;
         yyg_pen.strokeStyle = this.lineColor;
+        yyg_pen.globalAlpha = Utils.getRandom(this.opacity, 1);
         yyg_pen.stroke();
         yyg_pen.closePath();
         yyg_pen.restore();
@@ -414,6 +418,7 @@ namespace YYG {
                 x: innerItem.centerPoint.x,
                 y: innerItem.centerPoint.y,
               },
+              opacity: .5,
             });
           }
         }
