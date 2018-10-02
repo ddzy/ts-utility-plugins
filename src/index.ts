@@ -27,10 +27,10 @@ namespace YYG {
   let yyg_cvsBgColor: string = '#000';
   let yyg_ballNum: number = 100;
   let yyg_allowMouse: boolean = true;
-  let yyg_lineColor: string = '#d50';
+  let yyg_lineColor: string = '#1890ff';
   let yyg_lineWidth: number = 1;
   let yyg_ballSpeed: number = 1;
-  let yyg_ballColor: string = '#fff';
+  let yyg_ballColor: string = 'rgba(255, 255, 255, .5)';
 
   let yyg_pen: any = null;
   let yyg_ballArr: any[] = [];
@@ -49,8 +49,8 @@ namespace YYG {
     export interface ILineProps {
       startPoint: { x: number, y: number };
       endPoint: { x: number, y: number };
-      lineColor?: string;
-      lineWidth?: number;
+      lineColor: string;
+      lineWidth: number;
     }
     export interface IBallProps {
       centerPoint?: { x: number, y: number };
@@ -309,7 +309,7 @@ namespace YYG {
       ) {
         this.startPoint = props.startPoint;
         this.endPoint = props.endPoint;
-        this.lineColor = props.lineColor || '#d50';
+        this.lineColor = props.lineColor || '#1890ff';
         this.lineWidth = props.lineWidth || 1;
         this.draw();
       }
@@ -512,8 +512,8 @@ YYG.config({
   cvsHeight: 500,
   ballNum: 100,
   ballColor: 'rgba(255, 255, 255, .5)',
-  lineWidth: 10,
-  lineColor: 'red',
+  lineWidth: .5,
+  lineColor: '#1890ff',
 }).render('#stars-line')
 
 

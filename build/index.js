@@ -24,10 +24,10 @@ var YYG;
     var yyg_cvsBgColor = '#000';
     var yyg_ballNum = 100;
     var yyg_allowMouse = true;
-    var yyg_lineColor = '#d50';
+    var yyg_lineColor = '#1890ff';
     var yyg_lineWidth = 1;
     var yyg_ballSpeed = 1;
-    var yyg_ballColor = '#fff';
+    var yyg_ballColor = 'rgba(255, 255, 255, .5)';
     var yyg_pen = null;
     var yyg_ballArr = [];
     var yyg_flag = false;
@@ -196,7 +196,7 @@ var YYG;
             function Line(props) {
                 this.startPoint = props.startPoint;
                 this.endPoint = props.endPoint;
-                this.lineColor = props.lineColor || '#d50';
+                this.lineColor = props.lineColor || '#1890ff';
                 this.lineWidth = props.lineWidth || 1;
                 this.draw();
             }
@@ -336,6 +336,6 @@ YYG.config({
     cvsHeight: 500,
     ballNum: 100,
     ballColor: 'rgba(255, 255, 255, .5)',
-    lineWidth: 10,
-    lineColor: 'red',
+    lineWidth: .5,
+    lineColor: '#1890ff',
 }).render('#stars-line');
