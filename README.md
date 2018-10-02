@@ -1,4 +1,4 @@
-# my-utility-plugins
+# ts-utility-plugins
 自己封装的插件库
 
 ## 说明
