@@ -1,26 +1,20 @@
-# canvas-stars-line
-非常漂浪的canvas星空连线, 哇哇哇
+# my-utility-plugins
+自己封装的插件库
 
 ## 说明
-ts构建的星空连线特效插件, 可自定义大多数配置
-
-## 安装
-1. 开启ts监听
-   ```
-   tsc -w
-   ```
-2. vscode启动liveServer or 右键index.html直接运行
-
+插件库包括 canvas, js等常用插件
 
 ## 用法
-> 全局暴露 ```YYG``` 构造器, ```console```其可查看实例方法
-1. 默认渲染
+1. canvas-starts-line
+> canvas星空连线特效插件
+> 全局暴露 StarsLine 构造器, console可查看实例方法
++ 默认渲染
 ```
-YYG.render(el: string): void;    // el canvas元素
+StarsLine.render(el: string): void;    // el canvas元素
 ```
-2. 自定义配置项
++ 自定义配置项
 ```
-YYG.config({
+StarsLine.config({
   cvsWidth?: number(d:500)     画布宽
   cvsHeight?: number(d:500)    画布高
   cvsBgColor?: string(d:#000)   画布背景颜色
@@ -33,9 +27,8 @@ YYG.config({
   isResize?: boolean(d: false)    // 是否跟随窗口大小
 });
 
-YYG.render(el: string): void;     // el canvas元素
+StarsLine.render(el: string): void;     // el canvas元素
 
 可链式调用
-YYG.config({...}).render(el: string)
+StarsLine.config({...}).render(el: string)
 ```
-3. 后续会抽离js, 并且发布npm包
