@@ -226,10 +226,10 @@ var YYG;
                 };
                 this.radius = props.radius;
                 this.color = props.color;
-                this.speed = props.speed || 10;
+                this.speed = props.speed || 1;
                 this.distance = {
-                    x: Utils.getRandom(-.5, .5),
-                    y: Utils.getRandom(-.5, .5),
+                    x: Utils.getRandom(-this.speed, this.speed),
+                    y: Utils.getRandom(-this.speed, this.speed),
                 };
             }
             Ball.prototype.draw = function () {
@@ -290,6 +290,7 @@ var YYG;
             var ball = new StarsLine.Ball({
                 color: yyg_ballColor,
                 radius: Utils.getRandom(1, 3),
+                speed: yyg_ballSpeed
             });
             yyg_ballArr.push(ball);
             ball.draw();
@@ -338,4 +339,5 @@ YYG.config({
     ballColor: 'rgba(255, 255, 255, .5)',
     lineWidth: .5,
     lineColor: '#1890ff',
+    ballSpeed: 1,
 }).render('#stars-line');
