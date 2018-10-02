@@ -88,13 +88,13 @@ namespace Carousel {
 }
 
 
-// Carousel
-//   .config({
-//     dataSource: [{
-//       text: 'Slide One',
-//       url: '',
-//     }],
-//     width: 600,
-//     height: 200,
-//   })
-//   .render(); 
+Carousel
+  .config({
+    dataSource: [{
+      text: 'Slide One',
+      url: '',
+    }],
+    width: 600,
+    height: 200,
+  })
+  .render(); 
