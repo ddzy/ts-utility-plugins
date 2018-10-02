@@ -6,7 +6,7 @@
  */
 
 
-namespace YYG {
+namespace StarsLine {
 
   export let yyg_el: any = null;
 
@@ -97,7 +97,7 @@ namespace YYG {
     yyg_ballColor = options.ballColor || '#fff';
     yyg_isResize = options.isResize || false;
 
-    return YYG;
+    return StarsLine;
   }
 
 
@@ -117,7 +117,7 @@ namespace YYG {
     Render.create(yyg_ballNum);
     Render.move();
 
-    return YYG;
+    return StarsLine;
   }
 
 
@@ -275,7 +275,7 @@ namespace YYG {
   
 
 
-  namespace StarsLine {
+  namespace Main {
   
     /**
      * 星空线
@@ -437,7 +437,7 @@ namespace YYG {
      * 创建点工厂
      */
     function createBallFactory(): void {
-      const ball = new StarsLine.Ball({
+      const ball = new Main.Ball({
         color: yyg_ballColor,
         radius: Utils.getRandom(1, 3),
         speed: yyg_ballSpeed

@@ -5,9 +5,9 @@
  * create_time: 18-10-1
  * finish_time: 18-10-2
  */
-var YYG;
-(function (YYG) {
-    YYG.yyg_el = null;
+var StarsLine;
+(function (StarsLine) {
+    StarsLine.yyg_el = null;
     var yyg_cvsWidth = 500;
     var yyg_cvsHeight = 500;
     var yyg_cvsBgColor = '#000';
@@ -52,9 +52,9 @@ var YYG;
         yyg_ballSpeed = options.ballSpeed || 1;
         yyg_ballColor = options.ballColor || '#fff';
         yyg_isResize = options.isResize || false;
-        return YYG;
+        return StarsLine;
     }
-    YYG.config = config;
+    StarsLine.config = config;
     /**
      * 主渲染函数
      * @param el canvas元素
@@ -64,20 +64,20 @@ var YYG;
         yyg_isResize && Init.reseizeCanvas();
         Render.create(yyg_ballNum);
         Render.move();
-        return YYG;
+        return StarsLine;
     }
-    YYG.render = render;
+    StarsLine.render = render;
     var Init;
     (function (Init) {
         function initCanvas(el) {
-            YYG.yyg_el = Utils.getEle(el);
-            yyg_pen = YYG.yyg_el.getContext('2d');
+            StarsLine.yyg_el = Utils.getEle(el);
+            yyg_pen = StarsLine.yyg_el.getContext('2d');
             var oBody = Utils.getEle('body');
-            Utils.setAttr(YYG.yyg_el, {
+            Utils.setAttr(StarsLine.yyg_el, {
                 width: yyg_cvsWidth,
                 height: yyg_cvsHeight,
             });
-            Utils.setCss(YYG.yyg_el, {
+            Utils.setCss(StarsLine.yyg_el, {
                 display: 'block',
                 overflow: 'hidden',
                 'background-color': yyg_cvsBgColor,
@@ -93,7 +93,7 @@ var YYG;
                 var _a = Utils.getWinRange(), winWidth = _a.winWidth, winHeight = _a.winHeight;
                 yyg_cvsWidth = winWidth;
                 yyg_cvsHeight = winHeight;
-                Utils.setAttr(YYG.yyg_el, {
+                Utils.setAttr(StarsLine.yyg_el, {
                     width: winWidth,
                     height: winHeight,
                 });
@@ -179,8 +179,8 @@ var YYG;
         Utils.getAttr = getAttr;
     })(Utils || (Utils = {}));
     ;
-    var StarsLine;
-    (function (StarsLine) {
+    var Main;
+    (function (Main) {
         /**
          * 星空线
          */
@@ -208,7 +208,7 @@ var YYG;
             };
             return Line;
         }());
-        StarsLine.Line = Line;
+        Main.Line = Line;
         /**
          * 星空点
          */
@@ -271,15 +271,15 @@ var YYG;
             };
             return Ball;
         }());
-        StarsLine.Ball = Ball;
-    })(StarsLine || (StarsLine = {}));
+        Main.Ball = Ball;
+    })(Main || (Main = {}));
     var Render;
     (function (Render) {
         /**
          * 创建点工厂
          */
         function createBallFactory() {
-            var ball = new StarsLine.Ball({
+            var ball = new Main.Ball({
                 color: yyg_ballColor,
                 radius: Utils.getRandom(1, 3),
                 speed: yyg_ballSpeed
@@ -303,7 +303,7 @@ var YYG;
         function move() {
             yyg_pen.clearRect(0, 0, yyg_cvsWidth, yyg_cvsHeight);
             // 是否鼠标交互
-            yyg_allowMouse && YYG.yyg_el
+            yyg_allowMouse && StarsLine.yyg_el
                 .addEventListener('mousemove', function (e) {
                 yyg_flag = true;
                 yyg_MOUSE_POINT.centerPoint.x = e.clientX;
@@ -320,4 +320,4 @@ var YYG;
         }
         Render.move = move;
     })(Render || (Render = {}));
-})(YYG || (YYG = {}));
+})(StarsLine || (StarsLine = {}));
