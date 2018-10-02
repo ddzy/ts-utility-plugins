@@ -224,9 +224,6 @@ var YYG;
         }
         InitCanvas.resizeCanvas = resizeCanvas;
     })(InitCanvas || (InitCanvas = {}));
-    var ballArr = [];
-    var flag = false;
-    var MOUSE_POINT = { centerPoint: { x: 0, y: 0 } };
     /**
      * 实体类
      */
@@ -297,8 +294,8 @@ var YYG;
             };
             // 连线
             Ball.prototype.drawLine = function (outerItem) {
-                for (var _i = 0, ballArr_1 = ballArr; _i < ballArr_1.length; _i++) {
-                    var innerItem = ballArr_1[_i];
+                for (var _i = 0, yyg_ballArr_1 = yyg_ballArr; _i < yyg_ballArr_1.length; _i++) {
+                    var innerItem = yyg_ballArr_1[_i];
                     if (outerItem !== innerItem && Math.sqrt(Math.pow((outerItem.centerPoint.x - innerItem.centerPoint.x), 2) + Math.pow((outerItem.centerPoint.y - innerItem.centerPoint.y), 2)) < Utils.LINE_MIN_DISTANCE) {
                         new Line({
                             color: '#d50',
@@ -331,7 +328,7 @@ var YYG;
                 color: '#fff',
                 radius: Utils.getRandom(1, 3),
             });
-            ballArr.push(ball);
+            yyg_ballArr.push(ball);
             ball.draw();
         }
         /**
@@ -351,20 +348,17 @@ var YYG;
             yyg_pen.clearRect(0, 0, yyg_cvsWidth, yyg_cvsHeight);
             YYG.yyg_el
                 .addEventListener('mousemove', function (e) {
-                flag = true;
-                MOUSE_POINT.centerPoint.x = e.clientX;
-                MOUSE_POINT.centerPoint.y = e.clientY;
-                //
+                yyg_flag = true;
                 yyg_MOUSE_POINT.centerPoint.x = e.clientX;
                 yyg_MOUSE_POINT.centerPoint.y = e.clientY;
             }, false);
-            for (var _i = 0, ballArr_2 = ballArr; _i < ballArr_2.length; _i++) {
-                var item = ballArr_2[_i];
+            for (var _i = 0, yyg_ballArr_2 = yyg_ballArr; _i < yyg_ballArr_2.length; _i++) {
+                var item = yyg_ballArr_2[_i];
                 item.move();
                 item.draw();
-                item.drawLine(!flag ? item : MOUSE_POINT);
+                item.drawLine(!yyg_flag ? item : yyg_MOUSE_POINT);
             }
-            flag = false;
+            yyg_flag = false;
             window.requestAnimationFrame(move);
         }
         Render.move = move;

@@ -335,12 +335,6 @@ namespace YYG {
   
 
 
-  const ballArr: any[] = [];
-  let flag: boolean = false;
-  const MOUSE_POINT = {centerPoint: { x: 0, y: 0 }}
-  
-
-
 
   /**
    * 实体类
@@ -463,7 +457,7 @@ namespace YYG {
       public drawLine(
         outerItem: Ball,
       ): void {
-        for (const innerItem of ballArr) {
+        for (const innerItem of yyg_ballArr) {
           if(
             outerItem !== innerItem && Math.sqrt(
               Math.pow((
@@ -507,7 +501,7 @@ namespace YYG {
         color: '#fff',
         radius: Utils.getRandom(1, 3),
       });
-      ballArr.push(ball);
+      yyg_ballArr.push(ball);
       ball.draw();
     }
   
@@ -533,24 +527,21 @@ namespace YYG {
         .addEventListener('mousemove', (
           e: MouseEvent,
         ) => {
-          flag = true;
-          MOUSE_POINT.centerPoint.x = e.clientX;
-          MOUSE_POINT.centerPoint.y = e.clientY;
-
-          //
+          
+          yyg_flag = true;
           yyg_MOUSE_POINT.centerPoint.x = e.clientX;
           yyg_MOUSE_POINT.centerPoint.y = e.clientY;
         }, false);
       
-      for (const item of ballArr) {
+      for (const item of yyg_ballArr) {
         item.move();
         item.draw();
         item.drawLine(
-          !flag ? item : MOUSE_POINT
+          !yyg_flag ? item : yyg_MOUSE_POINT
         );
       }
   
-      flag = false;
+      yyg_flag = false;
   
       window.requestAnimationFrame(move);
     }
