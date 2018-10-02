@@ -332,4 +332,6 @@ var YYG;
  */
 YYG.config({
     cvsBgColor: '#000',
+    cvsWidth: 500,
+    cvsHeight: 500,
 }).render('#stars-line');
