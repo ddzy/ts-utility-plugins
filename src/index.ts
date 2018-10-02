@@ -141,7 +141,7 @@ namespace YYG {
       })
       Utils.setCss(yyg_el, {
         display: 'block',
-        // 'background-color': '#000',
+        overflow: 'hidden',
         'background-color': yyg_cvsBgColor,
       });
       Utils.setCss(oBody, {
