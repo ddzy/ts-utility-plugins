@@ -4,15 +4,18 @@
 ## 说明
 插件库包括 canvas, js等常用插件
 
-## 用法
-1. canvas-starts-line
-> canvas星空连线特效插件
-> 全局暴露 StarsLine 构造器, console可查看实例方法
-+ 默认渲染
+## 导航
+1. Canvas 
+  + [canvas-stars-line](#canvas-stars-line)
+2. Business
+
+### canvas-stars-line
+> canvas非常nice的星空连线插件, 自定义大多数配置
+1. 默认渲染
 ```
 StarsLine.render(el: string): void;    // el canvas元素
 ```
-+ 自定义配置项
+2. 自定义配置项
 ```
 StarsLine.config({
   cvsWidth?: number(d:500)     画布宽
@@ -28,7 +31,10 @@ StarsLine.config({
 });
 
 StarsLine.render(el: string): void;     // el canvas元素
-
-可链式调用
-StarsLine.config({...}).render(el: string)
+```
+3. 支持链式调用
+```
+StarsLine
+  .config({...})
+  .render(el: string)
 ```
