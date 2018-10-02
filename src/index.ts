@@ -119,7 +119,9 @@ namespace YYG {
 
 
 
-// 初始化函数
+  /**
+   * 初始化函数
+   */
   namespace Init {
     
     export function initCanvas(
@@ -162,7 +164,6 @@ namespace YYG {
     }
 
   }
-// ----
   
 
 

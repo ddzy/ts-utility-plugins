@@ -65,7 +65,9 @@ var YYG;
         return YYG;
     }
     YYG.render = render;
-    // 初始化函数
+    /**
+     * 初始化函数
+     */
     var Init;
     (function (Init) {
         function initCanvas(el) {
@@ -101,7 +103,6 @@ var YYG;
         }
         Init.reseizeCanvas = reseizeCanvas;
     })(Init || (Init = {}));
-    // ----
     /**
      * 工具函数
      */
