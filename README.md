@@ -2,7 +2,7 @@
 自己封装的插件库
 
 ## 说明
-插件库包括 canvas, js等常用插件
+插件库包括 ```canvas特效```插件, ```业务```插件
 
 ## 导航
 1. Canvas 
@@ -10,7 +10,7 @@
 2. Business
 
 ### canvas-stars-line
-> canvas非常nice的星空连线插件, 自定义大多数配置
+> 非常nice的星空连线插件, 自定义大多数配置
 1. 默认渲染
 ```
 StarsLine.render(el: string): void;    // el canvas元素
