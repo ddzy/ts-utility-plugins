@@ -35,9 +35,19 @@ var YYG;
         centerPoint: { x: 0, y: 0 },
     };
     /**
-     * 自定义配置
-     * @param options 配置项
-     */
+      * 自定义配置
+      * @param  config  {
+      *   cvsWidth: 画布宽
+      *   cvsHeight: 画布高
+      *   cvsBgColor: 画布背景颜色
+      *   ballNum: 星空点数量
+      *   allowMouse: 是否允许鼠标交互
+      *   lineColor: 连线颜色
+      *   lineWidth: 连线宽度
+      *   ballSpeed: 星空点移动速度 default: 1
+      *   ballColor: 星空点颜色
+      * }
+    */
     function config(options) {
         yyg_cvsWidth = options
             .cvsWidth || Utils.getWinRange().winWidth;
@@ -65,9 +75,6 @@ var YYG;
         return YYG;
     }
     YYG.render = render;
-    /**
-     * 初始化函数
-     */
     var Init;
     (function (Init) {
         function initCanvas(el) {
@@ -103,9 +110,6 @@ var YYG;
         }
         Init.reseizeCanvas = reseizeCanvas;
     })(Init || (Init = {}));
-    /**
-     * 工具函数
-     */
     var Utils;
     (function (Utils) {
         /**
@@ -184,9 +188,6 @@ var YYG;
         Utils.getAttr = getAttr;
     })(Utils || (Utils = {}));
     ;
-    /**
-     * 实体类
-     */
     var StarsLine;
     (function (StarsLine) {
         /**
@@ -278,9 +279,6 @@ var YYG;
         }());
         StarsLine.Ball = Ball;
     })(StarsLine || (StarsLine = {}));
-    /**
-     * 内容渲染
-     */
     var Render;
     (function (Render) {
         /**
@@ -329,9 +327,6 @@ var YYG;
         Render.move = move;
     })(Render || (Render = {}));
 })(YYG || (YYG = {}));
-/**
- * 测试
- */
 YYG.config({
     cvsBgColor: '#000',
     cvsWidth: 500,

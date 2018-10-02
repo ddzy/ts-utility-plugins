@@ -76,9 +76,19 @@ namespace YYG {
 
 
   /**
-   * 自定义配置
-   * @param options 配置项
-   */
+    * 自定义配置
+    * @param  config  {
+    *   cvsWidth: 画布宽
+    *   cvsHeight: 画布高
+    *   cvsBgColor: 画布背景颜色
+    *   ballNum: 星空点数量
+    *   allowMouse: 是否允许鼠标交互
+    *   lineColor: 连线颜色
+    *   lineWidth: 连线宽度
+    *   ballSpeed: 星空点移动速度 default: 1
+    *   ballColor: 星空点颜色
+    * }
+  */
   export function config(
     options: IProps.IConfigProps,
   ) {
@@ -119,10 +129,6 @@ namespace YYG {
 
 
 
-
-  /**
-   * 初始化函数
-   */
   namespace Init {
     
     export function initCanvas(
@@ -168,10 +174,6 @@ namespace YYG {
   
 
 
-
-  /**
-   * 工具函数
-   */
   namespace Utils {
   
     /**
@@ -282,10 +284,6 @@ namespace YYG {
   
 
 
-
-  /**
-   * 实体类
-   */
   namespace StarsLine {
   
     /**
@@ -438,10 +436,6 @@ namespace YYG {
   
   
 
-
-  /**
-   * 内容渲染
-   */
   namespace Render {
   
     /**
@@ -504,10 +498,6 @@ namespace YYG {
 }
 
 
-
-/**
- * 测试
- */
 YYG.config({
   cvsBgColor: '#000',
   cvsWidth: 500,
