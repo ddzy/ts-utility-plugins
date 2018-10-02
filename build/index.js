@@ -321,13 +321,3 @@ var YYG;
         Render.move = move;
     })(Render || (Render = {}));
 })(YYG || (YYG = {}));
-YYG.config({
-    cvsBgColor: '#000',
-    cvsWidth: 500,
-    cvsHeight: 500,
-    ballNum: 100,
-    ballColor: 'rgba(255, 255, 255, .5)',
-    lineWidth: 1,
-    lineColor: '#1890ff',
-    ballSpeed: .5,
-}).render('#stars-line');
