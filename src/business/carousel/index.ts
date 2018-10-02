@@ -23,6 +23,9 @@
 namespace Carousel {
 
 
+  export let yyg_el: HTMLElement | null = null;
+
+
   const settings = {
     width: 0,
     height: 0,
@@ -65,7 +68,9 @@ namespace Carousel {
   }
 
 
-  export function render() {
+  export function render(el: string): any {
+    Init.initEl(el);
+
     return Carousel;
   }
 
@@ -82,6 +87,10 @@ namespace Carousel {
         }
       }
     }
+
+    export function initEl(el: string) {
+      yyg_el = document.querySelector(el);
+    }
   }
 
 }
@@ -96,4 +105,4 @@ Carousel
     width: 600,
     height: 200,
   })
-  .render(); 
+  .render();
