@@ -1,6 +1,6 @@
 /**
  * @name: business-carousel 业务轮播
- * @author: zhaoy_duan
+ * @author: yyg
  * @version 1.0.0
  */
 
