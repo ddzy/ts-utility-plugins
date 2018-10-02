@@ -449,7 +449,7 @@ namespace YYG {
      */
     function createBallFactory(): void {
       const ball = new StarsLine.Ball({
-        color: '#fff',
+        color: yyg_ballColor,
         radius: Utils.getRandom(1, 3),
       });
       yyg_ballArr.push(ball);
@@ -507,7 +507,7 @@ namespace YYG {
  * 测试
  */
 YYG.config({
-  cvsBgColor: '#000'
+  cvsBgColor: '#000',
 }).render('#stars-line')
 
 

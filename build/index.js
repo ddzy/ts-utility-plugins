@@ -288,7 +288,7 @@ var YYG;
          */
         function createBallFactory() {
             var ball = new StarsLine.Ball({
-                color: '#fff',
+                color: yyg_ballColor,
                 radius: Utils.getRandom(1, 3),
             });
             yyg_ballArr.push(ball);
@@ -331,5 +331,5 @@ var YYG;
  * 测试
  */
 YYG.config({
-    cvsBgColor: '#000'
+    cvsBgColor: '#000',
 }).render('#stars-line');
