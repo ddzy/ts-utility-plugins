@@ -19,6 +19,7 @@ namespace YYG {
   let yyg_lineWidth: number = 1;
   let yyg_ballSpeed: number = 1;
   let yyg_ballColor: string = 'rgba(255, 255, 255, .5)';
+  let yyg_isResize: boolean = false;
 
   let yyg_pen: any = null;
   let yyg_ballArr: any[] = [];
@@ -57,6 +58,7 @@ namespace YYG {
       lineWidth?: number;
       ballSpeed?: number;
       ballColor?: string;
+      isResize?: boolean;
     }
   }
 
@@ -76,6 +78,7 @@ namespace YYG {
     *   lineWidth: 连线宽度
     *   ballSpeed: 星空点移动速度 default: 1
     *   ballColor: 星空点颜色
+    *   isResize: 是否自适应
     * }
   */
   export function config(
@@ -92,6 +95,7 @@ namespace YYG {
     yyg_lineWidth = options.lineWidth || 1;
     yyg_ballSpeed = options.ballSpeed || 1;
     yyg_ballColor = options.ballColor || '#fff';
+    yyg_isResize = options.isResize || false;
 
     return YYG;
   }
@@ -108,7 +112,7 @@ namespace YYG {
     el: string,
   ) {
     Init.initCanvas(el);
-    Init.reseizeCanvas();
+    yyg_isResize && Init.reseizeCanvas();
 
     Render.create(yyg_ballNum);
     Render.move();
@@ -126,13 +130,11 @@ namespace YYG {
       yyg_el = Utils.getEle(el);
       yyg_pen = yyg_el.getContext('2d');
       
-      
       const oBody = Utils.getEle('body') as HTMLBodyElement;
-      const { winHeight, winWidth, } = Utils.getWinRange();
   
       Utils.setAttr(yyg_el, {
-        width: winWidth,
-        height: winHeight,
+        width: yyg_cvsWidth,
+        height: yyg_cvsHeight,
       })
       Utils.setCss(yyg_el, {
         display: 'block',
@@ -500,6 +502,7 @@ YYG.config({
   lineWidth: .5,
   lineColor: '#1890ff',
   ballSpeed: 1,
+
 }).render('#stars-line')
 
 
