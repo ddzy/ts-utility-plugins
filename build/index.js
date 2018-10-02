@@ -184,47 +184,6 @@ var YYG;
     })(Utils || (Utils = {}));
     ;
     /**
-     * 重构
-     */
-    var InitCanvas;
-    (function (InitCanvas) {
-        InitCanvas.oCanvas = Utils
-            .getEle('#stars-line');
-        function initCanvas() {
-            var oBody = Utils.getEle('body');
-            var _a = Utils.getWinRange(), winHeight = _a.winHeight, winWidth = _a.winWidth;
-            var pen = InitCanvas.oCanvas && InitCanvas.oCanvas.getContext('2d');
-            Utils.setAttr(InitCanvas.oCanvas, {
-                width: winWidth,
-                height: winHeight,
-            });
-            Utils.setCss(InitCanvas.oCanvas, {
-                display: 'block',
-                'background-color': '#000',
-            });
-            Utils.setCss(oBody, {
-                margin: 0,
-                overflow: 'hidden',
-            });
-            return {
-                pen: pen,
-                cvsWidth: Number(Utils.getAttr(InitCanvas.oCanvas, 'width')),
-                cvsHeight: Number(Utils.getAttr(InitCanvas.oCanvas, 'height')),
-            };
-        }
-        InitCanvas.initCanvas = initCanvas;
-        function resizeCanvas() {
-            window.addEventListener('resize', function () {
-                var _a = Utils.getWinRange(), winWidth = _a.winWidth, winHeight = _a.winHeight;
-                Utils.setAttr(InitCanvas.oCanvas, {
-                    width: winWidth,
-                    height: winHeight,
-                });
-            }, false);
-        }
-        InitCanvas.resizeCanvas = resizeCanvas;
-    })(InitCanvas || (InitCanvas = {}));
-    /**
      * 实体类
      */
     var StarsLine;

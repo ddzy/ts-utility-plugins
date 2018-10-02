@@ -278,61 +278,6 @@ namespace YYG {
   
   };
   
-  
-
-
-  /**
-   * 重构
-   */
-  namespace InitCanvas {
-  
-    export const oCanvas = Utils
-      .getEle('#stars-line') as HTMLCanvasElement   
-      
-      
-    export function initCanvas(): {
-      pen: any,
-      cvsWidth: any,
-      cvsHeight: any,
-    } {
-
-      const oBody = Utils.getEle('body') as HTMLBodyElement;
-      const { winHeight, winWidth, } = Utils.getWinRange();
-      const pen: any = oCanvas && oCanvas.getContext('2d');
-  
-      Utils.setAttr(oCanvas, {
-        width: winWidth,
-        height: winHeight,
-      })
-      Utils.setCss(oCanvas, {
-        display: 'block',
-        'background-color': '#000',
-      });
-      Utils.setCss(oBody, {
-        margin: 0,
-        overflow: 'hidden',
-      });
-  
-      return {
-        pen,
-        cvsWidth: Number(Utils.getAttr(oCanvas, 'width')),
-        cvsHeight: Number(Utils.getAttr(oCanvas, 'height')),
-      };
-    }
-  
-    export function resizeCanvas(): void {
-      window.addEventListener('resize', () => {
-        const { winWidth, winHeight, } = Utils.getWinRange();
-        
-        Utils.setAttr(oCanvas, {
-          width: winWidth,
-          height: winHeight,
-        });
-      }, false);
-    }
-  }
-  
-  
 
 
 
