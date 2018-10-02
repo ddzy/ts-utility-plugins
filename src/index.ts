@@ -512,6 +512,8 @@ YYG.config({
   cvsHeight: 500,
   ballNum: 100,
   ballColor: 'rgba(255, 255, 255, .5)',
+  lineWidth: 10,
+  lineColor: 'red',
 }).render('#stars-line')
 
 
