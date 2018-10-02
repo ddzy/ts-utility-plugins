@@ -23,7 +23,7 @@ var YYG;
     var yyg_cvsHeight = 500;
     var yyg_cvsBgColor = '#000';
     var yyg_ballNum = 100;
-    var yyg_allowMouse = true;
+    var yyg_allowMouse = false;
     var yyg_lineColor = '#1890ff';
     var yyg_lineWidth = 1;
     var yyg_ballSpeed = 1;
@@ -45,7 +45,7 @@ var YYG;
             .cvsHeight || Utils.getWinRange().winHeight;
         yyg_cvsBgColor = options.cvsBgColor || '#000';
         yyg_ballNum = options.ballNum || 50;
-        yyg_allowMouse = options.allowMouse || true;
+        yyg_allowMouse = options.allowMouse || false;
         yyg_lineColor = options.lineColor || '#d50';
         yyg_lineWidth = options.lineWidth || 1;
         yyg_ballSpeed = options.ballSpeed || 1;
@@ -310,7 +310,8 @@ var YYG;
          */
         function move() {
             yyg_pen.clearRect(0, 0, yyg_cvsWidth, yyg_cvsHeight);
-            YYG.yyg_el
+            // 是否鼠标交互
+            yyg_allowMouse && YYG.yyg_el
                 .addEventListener('mousemove', function (e) {
                 yyg_flag = true;
                 yyg_MOUSE_POINT.centerPoint.x = e.clientX;

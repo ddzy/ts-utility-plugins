@@ -26,7 +26,7 @@ namespace YYG {
   let yyg_cvsHeight: number = 500;
   let yyg_cvsBgColor: string = '#000';
   let yyg_ballNum: number = 100;
-  let yyg_allowMouse: boolean = true;
+  let yyg_allowMouse: boolean = false;
   let yyg_lineColor: string = '#1890ff';
   let yyg_lineWidth: number = 1;
   let yyg_ballSpeed: number = 1;
@@ -88,7 +88,7 @@ namespace YYG {
       .cvsHeight || Utils.getWinRange().winHeight;
     yyg_cvsBgColor = options.cvsBgColor || '#000';
     yyg_ballNum = options.ballNum || 50;
-    yyg_allowMouse = options.allowMouse || true;
+    yyg_allowMouse = options.allowMouse || false;
     yyg_lineColor = options.lineColor || '#d50';
     yyg_lineWidth = options.lineWidth || 1;
     yyg_ballSpeed = options.ballSpeed || 1;
@@ -475,16 +475,17 @@ namespace YYG {
     export function move(): void {
       yyg_pen.clearRect(0, 0, yyg_cvsWidth, yyg_cvsHeight);
   
-      yyg_el
+      // 是否鼠标交互
+      yyg_allowMouse && yyg_el
         .addEventListener('mousemove', (
           e: MouseEvent,
         ) => {
-          
+
           yyg_flag = true;
           yyg_MOUSE_POINT.centerPoint.x = e.clientX;
           yyg_MOUSE_POINT.centerPoint.y = e.clientY;
         }, false);
-      
+
       for (const item of yyg_ballArr) {
         item.move();
         item.draw();
@@ -492,7 +493,7 @@ namespace YYG {
           !yyg_flag ? item : yyg_MOUSE_POINT
         );
       }
-  
+
       yyg_flag = false;
   
       window.requestAnimationFrame(move);
