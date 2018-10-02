@@ -39,8 +39,10 @@ var YYG;
      * @param options 配置项
      */
     function config(options) {
-        yyg_cvsWidth = options.cvsWidth || 500;
-        yyg_cvsHeight = options.cvsHeight || 500;
+        yyg_cvsWidth = options
+            .cvsWidth || Utils.getWinRange().winWidth;
+        yyg_cvsHeight = options
+            .cvsHeight || Utils.getWinRange().winHeight;
         yyg_cvsBgColor = options.cvsBgColor || '#000';
         yyg_ballNum = options.ballNum || 50;
         yyg_allowMouse = options.allowMouse || true;
@@ -222,8 +224,12 @@ var YYG;
         }
         InitCanvas.resizeCanvas = resizeCanvas;
     })(InitCanvas || (InitCanvas = {}));
-    var _a = InitCanvas.initCanvas(), pen = _a.pen, cvsWidth = _a.cvsWidth, cvsHeight = _a.cvsHeight;
-    InitCanvas.resizeCanvas();
+    // const {
+    //   pen,
+    //   cvsWidth,
+    //   cvsHeight,
+    // } = InitCanvas.initCanvas();
+    // InitCanvas.resizeCanvas();
     var ballArr = [];
     var flag = false;
     var MOUSE_POINT = { centerPoint: { x: 0, y: 0 } };
@@ -243,15 +249,15 @@ var YYG;
                 this.draw();
             }
             Line.prototype.draw = function () {
-                pen.save();
-                pen.beginPath();
-                pen.moveTo(this.startPoint.x, this.startPoint.y);
-                pen.lineTo(this.endPoint.x, this.endPoint.y);
-                pen.lineCup = 'round';
-                pen.strokeStyle = this.color;
-                pen.stroke();
-                pen.closePath();
-                pen.restore();
+                yyg_pen.save();
+                yyg_pen.beginPath();
+                yyg_pen.moveTo(this.startPoint.x, this.startPoint.y);
+                yyg_pen.lineTo(this.endPoint.x, this.endPoint.y);
+                yyg_pen.lineCup = 'round';
+                yyg_pen.strokeStyle = this.color;
+                yyg_pen.stroke();
+                yyg_pen.closePath();
+                yyg_pen.restore();
             };
             return Line;
         }());
@@ -262,8 +268,8 @@ var YYG;
         var Ball = /** @class */ (function () {
             function Ball(props) {
                 this.centerPoint = props.centerPoint || {
-                    x: Utils.getRandom(0, cvsWidth),
-                    y: Utils.getRandom(0, cvsHeight),
+                    x: Utils.getRandom(0, yyg_cvsWidth),
+                    y: Utils.getRandom(0, yyg_cvsHeight),
                 };
                 this.radius = props.radius;
                 this.color = props.color;
@@ -274,23 +280,23 @@ var YYG;
                 };
             }
             Ball.prototype.draw = function () {
-                pen.save();
-                pen.beginPath();
-                pen.fillStyle = this.color;
-                pen.arc(this.centerPoint.x, this.centerPoint.y, this.radius, 0, Utils.getRadian(360));
-                pen.fill();
-                pen.closePath();
-                pen.restore();
+                yyg_pen.save();
+                yyg_pen.beginPath();
+                yyg_pen.fillStyle = this.color;
+                yyg_pen.arc(this.centerPoint.x, this.centerPoint.y, this.radius, 0, Utils.getRadian(360));
+                yyg_pen.fill();
+                yyg_pen.closePath();
+                yyg_pen.restore();
             };
             Ball.prototype.move = function () {
                 this.centerPoint.x += this.distance.x;
                 this.centerPoint.y += this.distance.y;
                 // 碰撞检测
-                this.distance.x = (this.centerPoint.x > cvsWidth
+                this.distance.x = (this.centerPoint.x > yyg_cvsWidth
                     || this.centerPoint.x < 0)
                     ? -this.distance.x
                     : this.distance.x;
-                this.distance.y = (this.centerPoint.y > cvsHeight
+                this.distance.y = (this.centerPoint.y > yyg_cvsHeight
                     || this.centerPoint.y < 0)
                     ? -this.distance.y
                     : this.distance.y;
@@ -348,7 +354,7 @@ var YYG;
          * 星空点移动
          */
         function move() {
-            pen.clearRect(0, 0, cvsWidth, cvsHeight);
+            yyg_pen.clearRect(0, 0, yyg_cvsWidth, yyg_cvsHeight);
             YYG.yyg_el
                 .addEventListener('mousemove', function (e) {
                 flag = true;
@@ -374,5 +380,5 @@ var YYG;
  * 测试
  */
 YYG.config({
-    cvsBgColor: '#1890ff'
+    cvsBgColor: '#000'
 }).render('#stars-line');
