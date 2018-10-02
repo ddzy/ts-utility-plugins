@@ -26,7 +26,7 @@ namespace Carousel {
   export let yyg_el: HTMLElement | null = null;
 
 
-  const settings = {
+  const yyg_settings = {
     width: 0,
     height: 0,
     dataSource: [],
@@ -83,7 +83,7 @@ namespace Carousel {
         if (options.hasOwnProperty(key)) {
           const element = options[key];
           
-          Reflect.set(settings, key, element);
+          Reflect.set(yyg_settings, key, element);
         }
       }
     }
