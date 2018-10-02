@@ -9,7 +9,7 @@
   + [canvas-stars-line](#canvas-stars-line)
 2. Business
 
-### canvas-stars-line
+## canvas-stars-line
 > 非常nice的星空连线插件, 自定义大多数配置
 1. 默认渲染
 ```
