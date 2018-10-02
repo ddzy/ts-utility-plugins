@@ -1,21 +1,9 @@
 /**
- * create_time: 18-9-30
- * author: yyg
+ * name: 星空特效插件
+ * author: zhaoy_duan
+ * create_time: 18-10-1
+ * finish_time: 18-10-2
  */
-
- /**
-  * config {
-  *   cvsWidth: 画布宽
-  *   cvsHeight: 画布高
-  *   cvsBgColor: 画布背景颜色
-  *   ballNum: 星空点数量
-  *   allowMouse: 是否允许鼠标交互
-  *   lineColor: 连线颜色
-  *   lineWidth: 连线宽度
-  *   ballSpeed: 星空点移动速度 default: 1
-  *   ballColor: 星空点颜色
-  * }
-  */
 
 
 namespace YYG {
