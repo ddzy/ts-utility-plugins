@@ -49,7 +49,8 @@ namespace YYG {
     export interface ILineProps {
       startPoint: { x: number, y: number };
       endPoint: { x: number, y: number };
-      color: string;
+      lineColor?: string;
+      lineWidth?: number;
     }
     export interface IBallProps {
       centerPoint?: { x: number, y: number };
@@ -300,14 +301,16 @@ namespace YYG {
         x: number,
         y: number,
       }
-      private readonly color: string;
+      private readonly lineColor: string;
+      private readonly lineWidth: number ;
   
       public constructor(
         props: IProps.ILineProps,
       ) {
         this.startPoint = props.startPoint;
         this.endPoint = props.endPoint;
-        this.color = props.color;
+        this.lineColor = props.lineColor || '#d50';
+        this.lineWidth = props.lineWidth || 1;
         this.draw();
       }
   
@@ -323,7 +326,8 @@ namespace YYG {
           this.endPoint.y,
         );
         yyg_pen.lineCup = 'round';
-        yyg_pen.strokeStyle = this.color;
+        yyg_pen.lineWidth = this.lineWidth;
+        yyg_pen.strokeStyle = this.lineColor;
         yyg_pen.stroke();
         yyg_pen.closePath();
         yyg_pen.restore();
@@ -414,7 +418,8 @@ namespace YYG {
             ) < Utils.LINE_MIN_DISTANCE
           ) {
             new Line({
-              color: '#d50',
+              lineColor: yyg_lineColor,
+              lineWidth: yyg_lineWidth,
               startPoint: {
                 x: outerItem.centerPoint.x,
                 y: outerItem.centerPoint.y,

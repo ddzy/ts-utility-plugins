@@ -196,7 +196,8 @@ var YYG;
             function Line(props) {
                 this.startPoint = props.startPoint;
                 this.endPoint = props.endPoint;
-                this.color = props.color;
+                this.lineColor = props.lineColor || '#d50';
+                this.lineWidth = props.lineWidth || 1;
                 this.draw();
             }
             Line.prototype.draw = function () {
@@ -205,7 +206,8 @@ var YYG;
                 yyg_pen.moveTo(this.startPoint.x, this.startPoint.y);
                 yyg_pen.lineTo(this.endPoint.x, this.endPoint.y);
                 yyg_pen.lineCup = 'round';
-                yyg_pen.strokeStyle = this.color;
+                yyg_pen.lineWidth = this.lineWidth;
+                yyg_pen.strokeStyle = this.lineColor;
                 yyg_pen.stroke();
                 yyg_pen.closePath();
                 yyg_pen.restore();
@@ -258,7 +260,8 @@ var YYG;
                     var innerItem = yyg_ballArr_1[_i];
                     if (outerItem !== innerItem && Math.sqrt(Math.pow((outerItem.centerPoint.x - innerItem.centerPoint.x), 2) + Math.pow((outerItem.centerPoint.y - innerItem.centerPoint.y), 2)) < Utils.LINE_MIN_DISTANCE) {
                         new Line({
-                            color: '#d50',
+                            lineColor: yyg_lineColor,
+                            lineWidth: yyg_lineWidth,
                             startPoint: {
                                 x: outerItem.centerPoint.x,
                                 y: outerItem.centerPoint.y,
