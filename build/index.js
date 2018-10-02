@@ -327,7 +327,7 @@ YYG.config({
     cvsHeight: 500,
     ballNum: 100,
     ballColor: 'rgba(255, 255, 255, .5)',
-    lineWidth: .5,
+    lineWidth: 1,
     lineColor: '#1890ff',
-    ballSpeed: 1,
+    ballSpeed: .5,
 }).render('#stars-line');
