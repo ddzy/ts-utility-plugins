@@ -1,9 +1,7 @@
 /**
- * name: canvas-stars-line 星空特效插件
- * author: zhaoy_duan
- * create_time: 18-10-1
- * last_modified_time: 18-10-2
- * finish_time: 18-10-2
+ * @name: canvas-stars-line 星空特效插件
+ * @author: yyg
+ * @version 1.0.0
  */
 
 namespace StarsLine {
