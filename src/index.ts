@@ -25,7 +25,7 @@ namespace YYG {
   let yyg_cvsWidth: number = 500;
   let yyg_cvsHeight: number = 500;
   let yyg_cvsBgColor: string = '#000';
-  let yyg_ballNum: number = 50;
+  let yyg_ballNum: number = 100;
   let yyg_allowMouse: boolean = true;
   let yyg_lineColor: string = '#d50';
   let yyg_lineWidth: number = 1;
@@ -35,11 +35,14 @@ namespace YYG {
   let yyg_pen: any = null;
   let yyg_ballArr: any[] = [];
   let yyg_flag: boolean = false;
-  let yyg_MOUSE_POINT: {
+  const yyg_MOUSE_POINT: {
     centerPoint: { x: number, y: number }
   } = {
     centerPoint: { x: 0, y: 0 },
   };
+
+
+
 
   
   export namespace IProps {
@@ -68,6 +71,9 @@ namespace YYG {
   }
 
 
+
+
+
   /**
    * 自定义配置
    * @param options 配置项
@@ -84,7 +90,12 @@ namespace YYG {
     yyg_lineWidth = options.lineWidth || 1;
     yyg_ballSpeed = options.ballSpeed || 1;
     yyg_ballColor = options.ballColor || '#fff';
+
+    return YYG;
   }
+
+
+
 
 
   /**
@@ -99,7 +110,11 @@ namespace YYG {
 
     Render.create(yyg_ballNum);
     Render.move();
+
+    return YYG;
   }
+
+
 
 
 // 初始化函数
@@ -111,6 +126,7 @@ namespace YYG {
       yyg_el = Utils.getEle(el);
       yyg_pen = yyg_el.getContext('2d');
       
+      
       const oBody = Utils.getEle('body') as HTMLBodyElement;
       const { winHeight, winWidth, } = Utils.getWinRange();
   
@@ -120,7 +136,8 @@ namespace YYG {
       })
       Utils.setCss(yyg_el, {
         display: 'block',
-        'background-color': '#000',
+        // 'background-color': '#000',
+        'background-color': yyg_cvsBgColor,
       });
       Utils.setCss(oBody, {
         margin: 0,
@@ -132,6 +149,9 @@ namespace YYG {
       window.addEventListener('resize', () => {
         const { winWidth, winHeight, } = Utils.getWinRange();
         
+        yyg_cvsWidth = winWidth;
+        yyg_cvsHeight = winHeight;
+
         Utils.setAttr(yyg_el, {
           width: winWidth,
           height: winHeight,
@@ -143,6 +163,11 @@ namespace YYG {
 // ----
   
 
+
+
+  /**
+   * 工具函数
+   */
   namespace Utils {
   
     /**
@@ -252,6 +277,11 @@ namespace YYG {
   };
   
   
+
+
+  /**
+   * 重构
+   */
   namespace InitCanvas {
   
     export const oCanvas = Utils
@@ -301,6 +331,8 @@ namespace YYG {
   }
   
   
+
+
   const {
     pen,
     cvsWidth,
@@ -312,6 +344,11 @@ namespace YYG {
   const MOUSE_POINT = {centerPoint: { x: 0, y: 0 }}
   
 
+
+
+  /**
+   * 实体类
+   */
   namespace StarsLine {
   
     /**
@@ -459,6 +496,11 @@ namespace YYG {
   }
   
   
+
+
+  /**
+   * 内容渲染
+   */
   namespace Render {
   
     /**
@@ -498,6 +540,10 @@ namespace YYG {
           flag = true;
           MOUSE_POINT.centerPoint.x = e.clientX;
           MOUSE_POINT.centerPoint.y = e.clientY;
+
+          //
+          yyg_MOUSE_POINT.centerPoint.x = e.clientX;
+          yyg_MOUSE_POINT.centerPoint.y = e.clientY;
         }, false);
       
       for (const item of ballArr) {
@@ -518,8 +564,12 @@ namespace YYG {
 }
 
 
-YYG.render('#stars-line');
 
-console.log(YYG);
+/**
+ * 测试
+ */
+YYG.config({
+  cvsBgColor: '#1890ff'
+}).render('#stars-line')
 
 

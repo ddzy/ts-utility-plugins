@@ -22,7 +22,7 @@ var YYG;
     var yyg_cvsWidth = 500;
     var yyg_cvsHeight = 500;
     var yyg_cvsBgColor = '#000';
-    var yyg_ballNum = 50;
+    var yyg_ballNum = 100;
     var yyg_allowMouse = true;
     var yyg_lineColor = '#d50';
     var yyg_lineWidth = 1;
@@ -48,6 +48,7 @@ var YYG;
         yyg_lineWidth = options.lineWidth || 1;
         yyg_ballSpeed = options.ballSpeed || 1;
         yyg_ballColor = options.ballColor || '#fff';
+        return YYG;
     }
     YYG.config = config;
     /**
@@ -59,6 +60,7 @@ var YYG;
         Init.reseizeCanvas();
         Render.create(yyg_ballNum);
         Render.move();
+        return YYG;
     }
     YYG.render = render;
     // 初始化函数
@@ -75,7 +77,8 @@ var YYG;
             });
             Utils.setCss(YYG.yyg_el, {
                 display: 'block',
-                'background-color': '#000',
+                // 'background-color': '#000',
+                'background-color': yyg_cvsBgColor,
             });
             Utils.setCss(oBody, {
                 margin: 0,
@@ -86,6 +89,8 @@ var YYG;
         function reseizeCanvas() {
             window.addEventListener('resize', function () {
                 var _a = Utils.getWinRange(), winWidth = _a.winWidth, winHeight = _a.winHeight;
+                yyg_cvsWidth = winWidth;
+                yyg_cvsHeight = winHeight;
                 Utils.setAttr(YYG.yyg_el, {
                     width: winWidth,
                     height: winHeight,
@@ -95,6 +100,9 @@ var YYG;
         Init.reseizeCanvas = reseizeCanvas;
     })(Init || (Init = {}));
     // ----
+    /**
+     * 工具函数
+     */
     var Utils;
     (function (Utils) {
         /**
@@ -173,6 +181,9 @@ var YYG;
         Utils.getAttr = getAttr;
     })(Utils || (Utils = {}));
     ;
+    /**
+     * 重构
+     */
     var InitCanvas;
     (function (InitCanvas) {
         InitCanvas.oCanvas = Utils
@@ -216,6 +227,9 @@ var YYG;
     var ballArr = [];
     var flag = false;
     var MOUSE_POINT = { centerPoint: { x: 0, y: 0 } };
+    /**
+     * 实体类
+     */
     var StarsLine;
     (function (StarsLine) {
         /**
@@ -304,6 +318,9 @@ var YYG;
         }());
         StarsLine.Ball = Ball;
     })(StarsLine || (StarsLine = {}));
+    /**
+     * 内容渲染
+     */
     var Render;
     (function (Render) {
         /**
@@ -337,6 +354,9 @@ var YYG;
                 flag = true;
                 MOUSE_POINT.centerPoint.x = e.clientX;
                 MOUSE_POINT.centerPoint.y = e.clientY;
+                //
+                yyg_MOUSE_POINT.centerPoint.x = e.clientX;
+                yyg_MOUSE_POINT.centerPoint.y = e.clientY;
             }, false);
             for (var _i = 0, ballArr_2 = ballArr; _i < ballArr_2.length; _i++) {
                 var item = ballArr_2[_i];
@@ -350,5 +370,9 @@ var YYG;
         Render.move = move;
     })(Render || (Render = {}));
 })(YYG || (YYG = {}));
-YYG.render('#stars-line');
-console.log(YYG);
+/**
+ * 测试
+ */
+YYG.config({
+    cvsBgColor: '#1890ff'
+}).render('#stars-line');
