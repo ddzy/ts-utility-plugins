@@ -248,7 +248,8 @@ namespace Carousel {
         const oItemLength: number = yyg_settings.dataSource.length;
 
         Utils.setCss(oList, {
-          transform: `translateX(-${oListWidth / (oItemLength + 1) * count}px)`,
+          transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}; `,
+          transform: `translateX(-${oListWidth / (oItemLength + 2) * count}px)`,
         }); 
       }
 
@@ -447,18 +448,36 @@ namespace Carousel {
         const oList = Utils
           .getEle('.yyg-content-list') as HTMLUListElement;
         const oListWidth: number = oList.offsetWidth;
-        const oItemLength: number = yyg_settings.dataSource.length + 1;
-        const oItemWidth: number = oListWidth / (oItemLength + 1);
+        const oItemLength: number = yyg_settings.dataSource.length + 2;
+        const oItemWidth: number = oListWidth / (oItemLength + 2);
 
         let count: number = 1;
 
-        this.timer = setInterval(
-          () => {
-            Scroll._aidedAutoScroll(count);
-            count ++;
-          }, 
-          yyg_settings.delayTime
-        );
+        this.timer = setInterval(() => {
+            Scroll._aidedAutoScroll(count ++);
+        }, yyg_settings.delayTime);
+
+
+        // 无缝检测
+        oList.addEventListener('transitionend', function() {
+
+          if(count === oItemLength - 1) {
+            count = 1;
+            Utils.setCss(this, {
+              transition: null,
+              transform: `translateX(${-(count - 1) * oItemWidth}px)`
+            });
+          }
+
+          else if(count === 0) {
+            count = oItemLength - 2;
+            Utils.setCss(this, {
+              transition: null,
+              transform: `translateX(${-(count - 1) * oItemWidth}px)`
+            });
+          }
+
+        }, false);  
       }
     }
 
