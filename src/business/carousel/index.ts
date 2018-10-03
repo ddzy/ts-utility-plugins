@@ -6,8 +6,6 @@
 
 
 /**
- * width: 宽
- * height: 高
  * dataSource: 数据
  * afterChange: 切换后的回调
  * beforeChange: 切换前的回调
