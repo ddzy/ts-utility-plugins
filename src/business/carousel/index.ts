@@ -248,7 +248,7 @@ namespace Carousel {
         const oItemLength: number = yyg_settings.dataSource.length;
 
         Utils.setCss(oList, {
-          transform: `translateX(-${oListWidth / oItemLength * count}px)`,
+          transform: `translateX(-${oListWidth / (oItemLength + 1) * count}px)`,
         }); 
       }
 
@@ -291,6 +291,21 @@ namespace Carousel {
             </li>
           `;
         });
+
+        // 无缝
+        contentLi += `
+          <li class="yyg-content-item" data-id=${0}>
+            ${
+              dataSource[0].img.url
+                ? `<a
+                    href=${dataSource[0].img.target}
+                    ><img src=${dataSource[0].img.url} alt="图片提示" /></a>`
+                : dataSource[0].text
+            }
+          </li>
+        `;
+
+        console.log(contentLi);
 
         const final: string = `
           <div class="yyg-carousel-container">
@@ -377,13 +392,13 @@ namespace Carousel {
             height: 100%;
           }
           .yyg-content-list {
-            width: ${dataSource.length * 100}%;
+            width: ${(dataSource.length + 1) * 100}%;
             height: 100%;
             transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing}; 
           }
           .yyg-content-item {
             float: left;
-            width: ${100 / dataSource.length}%;
+            width: ${100 / (dataSource.length + 1)}%;
             height: 100%;
             text-align: center;
           }
