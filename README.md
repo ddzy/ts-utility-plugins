@@ -65,7 +65,7 @@ Carousel
     autoPlay?: boolean               // 是否自动切换    d.true
     showDots?:                       // 是否显示导航点  d.true
     showArrows?:                     // 是否显示箭头   d.true
-    easing?:                         // 动画效果    d.linear
+    easing?:                         // 动画效果    d.ease-in-out
     effect?:                         // 切换效果 Fade | Scroll(default)
     vertical?:                       // 垂直显示  d.false    
     delayTime?:                      // 自动滚动延迟时间    d.3000
