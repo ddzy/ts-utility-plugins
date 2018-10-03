@@ -70,11 +70,9 @@ namespace Carousel {
   }
 
 
-  export function render(el: string): any {
+  export function render(el: string): void {
     Init.initEl(el);
     Init.initWhichEffect();
-
-    return Carousel;
   }
 
 
