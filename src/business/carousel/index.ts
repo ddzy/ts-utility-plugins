@@ -274,6 +274,8 @@ namespace Carousel {
             && this.handleAutoScroll();
           yyg_settings.isHoverPause
             && this.handleImgHover();
+          yyg_settings.showDots
+            && this.handleDotsHover();
         }
       }
 
@@ -446,6 +448,9 @@ namespace Carousel {
       }
 
 
+      /**
+       * 处理 自动轮播
+       */
       public handleAutoScroll(): void {
         const oList = Utils
           .getEle('.yyg-content-list') as HTMLUListElement;
@@ -459,6 +464,7 @@ namespace Carousel {
             && yyg_settings.beforeChange();
 
           Scroll._aidedAutoScroll(this.count ++);
+
         }, yyg_settings.delayTime);
 
 
@@ -489,6 +495,9 @@ namespace Carousel {
       }
 
 
+      /**
+       * 处理 图片 hover
+       */
       public handleImgHover(): void {
         // 鼠标放置图片, 停止轮播
         const oList = Utils
@@ -514,6 +523,17 @@ namespace Carousel {
             }, false);
           }
         }
+      }
+
+
+      /**
+       * 处理 圆点 hover
+       */
+      public handleDotsHover(): void {
+        const oDotsWrapper = Utils
+          .getEle('.yyg-dots-wrapper') as HTMLDivElement;
+
+        console.log(oDotsWrapper);
       }
     }
 
