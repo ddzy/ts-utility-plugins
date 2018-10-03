@@ -19,6 +19,7 @@
  * vertical: 垂直显示
  * delayTime: 自动滚动延迟时间
  * duringTime: 过渡时间
+ * isHoverPause: 鼠标放置是否停止轮播
  */
 
 namespace Carousel {
@@ -38,7 +39,8 @@ namespace Carousel {
     effect: 'scroll',
     vertical: false,
     duringTime: 1.5,
-    delayTime: 3000
+    delayTime: 3000,
+    isHoverPause: true,
   }
 
 
@@ -62,6 +64,7 @@ namespace Carousel {
       vertical?: boolean;
       duringTime?: number;
       delayTime?: number;
+      isHoverPause?: boolean;
       beforeChange?: () => void;
       afterChange?: () => void;
     }
@@ -253,7 +256,10 @@ namespace Carousel {
         }); 
       }
 
+
       private timer: any = 0;
+      private count: number = 1;
+
 
       public constructor(
         _props: IProps.IMainScrollProps,
@@ -261,14 +267,19 @@ namespace Carousel {
         this.initDOM();
       }
       
+
       public initDOM(): void {
         if(yyg_el) {
           yyg_el.innerHTML = this.createDOMTree();
           this.createStyle();
+
           yyg_settings.autoPlay 
-            && this.autoScroll();
+            && this.handleAutoScroll();
+          yyg_settings.isHoverPause
+            && this.handleImgHover();
         }
       }
+
 
       public createDOMTree(): string {
         const dataSource: any[] = yyg_settings.dataSource;
@@ -335,6 +346,7 @@ namespace Carousel {
 
         return final;
       }
+
 
       public createStyle(): void {
         let oStyle: HTMLElement | null = Utils
@@ -432,40 +444,64 @@ namespace Carousel {
         `;
       }
 
-      public autoScroll(): void {
+
+      public handleAutoScroll(): void {
         const oList = Utils
           .getEle('.yyg-content-list') as HTMLUListElement;
         const oListWidth: number = oList.offsetWidth;
         const oItemLength: number = yyg_settings.dataSource.length + 1;
         const oItemWidth: number = oListWidth / (oItemLength + 1);
 
-        let count: number = 1;
-
         this.timer = setInterval(() => {
-            Scroll._aidedAutoScroll(count ++);
+            Scroll._aidedAutoScroll(this.count ++);
         }, yyg_settings.delayTime);
 
 
         // 无缝检测
-        oList.addEventListener('transitionend', function() {
+        oList.addEventListener('transitionend', () => {
 
-          if(count === oItemLength) {
-            count = 1;
-            Utils.setCss(this, {
+          if(this.count === oItemLength) {
+            this.count = 1;
+            Utils.setCss(oList, {
               transition: null,
-              transform: `translateX(${-(count - 1) * oItemWidth}px)`
+              transform: `translateX(${-(this.count - 1) * oItemWidth}px)`
             });
           }
 
-          else if(count === 0) {
-            count = oItemLength - 1;
-            Utils.setCss(this, {
+          else if(this.count === 0) {
+            this.count = oItemLength - 1;
+            Utils.setCss(oList, {
               transition: null,
-              transform: `translateX(${-(count - 1) * oItemWidth}px)`
+              transform: `translateX(${-(this.count - 1) * oItemWidth}px)`
             });
           }
 
         }, false);  
+      }
+
+
+      public handleImgHover(): void {
+        // 鼠标放置图片, 停止轮播
+        const oList = Utils
+          .getEle('.yyg-content-list') as HTMLUListElement;
+        const oListItem: ArrayLike<HTMLElement> = oList
+          .querySelectorAll('.yyg-content-item');
+        
+        for (const key in oListItem) {
+          if (oListItem.hasOwnProperty(key)) {
+            const element = oListItem[key];
+            
+            element.addEventListener('mouseenter', () => {
+              clearInterval(this.timer);
+            }, false);
+
+            element.addEventListener('mouseleave', () => {
+              this.timer = setInterval(() => {
+                Scroll._aidedAutoScroll(this.count ++);
+              }, yyg_settings.delayTime)
+            }, false);
+          }
+        }
       }
     }
 
@@ -503,9 +539,9 @@ Carousel.config({
   showArrows: true,
   showDots: true,
   autoPlay: true,
-  // easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
-  easing: 'ease-in-out',
+  easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
   delayTime: 2000,
+  isHoverPause: true,
 }).render('#app');
 
   
