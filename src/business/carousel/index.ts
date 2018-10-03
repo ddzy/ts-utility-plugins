@@ -17,7 +17,8 @@
  * easing: 动画效果
  * effect: 切换效果 Scroll | scroll
  * vertical: 垂直显示
- * duringTime: 间隔时间
+ * delayTime: 自动滚动延迟时间
+ * duringTime: 过渡时间
  */
 
 namespace Carousel {
@@ -36,7 +37,8 @@ namespace Carousel {
     easing: 'linear',
     effect: 'scroll',
     vertical: false,
-    duringTime: 3,
+    duringTime: 1.5,
+    delayTime: 3
   }
 
 
@@ -59,6 +61,7 @@ namespace Carousel {
       effect?: string;
       vertical?: boolean;
       duringTime?: number;
+      delayTime?: number;
       beforeChange?: () => void;
       afterChange?: () => void;
     }
