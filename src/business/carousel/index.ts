@@ -15,7 +15,7 @@
  * showDots: 是否显示导航点
  * showArrows: 是否显示箭头
  * easing: 动画效果
- * effect: 切换效果 fade | scroll
+ * effect: 切换效果 Scroll | scroll
  * vertical: 垂直显示
  * duringTime: 间隔时间
  */
@@ -63,7 +63,7 @@ namespace Carousel {
       afterChange?: () => void;
     }
 
-    export interface IMainFadeProps {}
+    export interface IMainScrollProps {}
   }
 
 
@@ -105,7 +105,7 @@ namespace Carousel {
 
     // 调用轮播图
     export function initWhichEffect(): void {
-      new Main.Fade({});
+      new Main.Scroll({});
     }
   }
 
@@ -231,10 +231,10 @@ namespace Carousel {
 
   namespace Main {
 
-    export class Fade {
+    export class Scroll {
 
       public constructor(
-        _props: IProps.IMainFadeProps,
+        _props: IProps.IMainScrollProps,
       ) {
         this.initDOM();
       }
