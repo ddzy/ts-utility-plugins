@@ -236,6 +236,7 @@ namespace Carousel {
       public initDOM(): void {
         if(yyg_el) {
           yyg_el.innerHTML = this.createDOMTree();
+          this.createStyle();
         }
       }
 
@@ -284,6 +285,10 @@ namespace Carousel {
         return final;
       }
 
+      public createStyle(): void {
+
+      }
+
     }
 
   }
@@ -298,6 +303,8 @@ Carousel.config({
   }],
   width: 600,
   height: 200,
+  showArrows: true,
+  showDots: true,
 }).render('#app');
 
   
