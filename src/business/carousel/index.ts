@@ -38,7 +38,7 @@ namespace Carousel {
     effect: 'scroll',
     vertical: false,
     duringTime: 1.5,
-    delayTime: 3
+    delayTime: 3000
   }
 
 
@@ -236,6 +236,12 @@ namespace Carousel {
 
     export class Scroll {
 
+      public static _aidedScroll(): void {
+
+      }
+
+      private timer: any = 0;
+
       public constructor(
         _props: IProps.IMainScrollProps,
       ) {
@@ -394,6 +400,13 @@ namespace Carousel {
             margin-right: 5px;
           }
         `;
+      }
+
+      public autoScroll(): void {
+        this.timer = setInterval(
+          Scroll._aidedScroll, 
+          yyg_settings.delayTime
+        );
       }
     }
 
