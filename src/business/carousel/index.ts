@@ -501,6 +501,9 @@ namespace Carousel {
 
             element.addEventListener('mouseleave', () => {
               this.timer = setInterval(() => {
+                yyg_settings.beforeChange
+                  && yyg_settings.beforeChange();
+
                 Scroll._aidedAutoScroll(this.count ++);
               }, yyg_settings.delayTime)
             }, false);
