@@ -361,6 +361,12 @@ namespace Carousel {
             height: 100%;
             text-align: center;
           }
+          .yyg-content-item a img {
+            display: block;
+            max-width: 100%;
+            height: 100%;
+            border-radius: 6px;
+          }
           .yyg-dots-wrapper {
             position: absolute;
             left: 50%;
@@ -397,8 +403,8 @@ Carousel.config({
   dataSource: [{
     text: 'Slide One',
     img: {
-      url: '',
-      target: '',
+      url: 'https://img.alicdn.com/tps/i4/TB11ULPd3HqK1RjSZFPSuwwapXa.jpg_q90_.webp',
+      target: '#',
     },
   },{
     text: 'Slide Two',
