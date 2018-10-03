@@ -354,6 +354,7 @@ namespace Carousel {
           .yyg-content-list {
             width: ${dataSource.length * 100}%;
             height: 100%;
+            transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing}; 
           }
           .yyg-content-item {
             float: left;
