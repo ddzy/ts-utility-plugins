@@ -41,6 +41,7 @@ namespace Carousel {
 
 
   export namespace IProps {
+
     export interface IConfigProps {
       dataSource: [{ text: string, url: string }];
       width?: number;
@@ -55,6 +56,8 @@ namespace Carousel {
       beforeChange?: () => void;
       afterChange?: () => void;
     }
+
+    export interface IMainFadeProps {}
   }
 
 
@@ -185,6 +188,23 @@ namespace Carousel {
   
   };
   
+
+  namespace Main {
+
+    export class Fade {
+
+      public constructor(
+        _props: IProps.IMainFadeProps,
+      ) {}
+
+    }
+
+    
+    export class Scroll {
+
+    }
+
+  }
 
 }
 
