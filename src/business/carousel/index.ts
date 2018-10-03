@@ -55,7 +55,6 @@ namespace Carousel {
       beforeChange?: () => void;
       afterChange?: () => void;
     }
-    export interface IRenderProps {} 
   }
 
 
@@ -96,13 +95,13 @@ namespace Carousel {
 }
 
 
-Carousel
-  .config({
-    dataSource: [{
-      text: 'Slide One',
-      url: '',
-    }],
-    width: 600,
-    height: 200,
-  })
-  .render();
+Carousel.config({
+  dataSource: [{
+    text: 'Slide One',
+    url: '',
+  }],
+  width: 600,
+  height: 200,
+}).render('#app');
+
+  
