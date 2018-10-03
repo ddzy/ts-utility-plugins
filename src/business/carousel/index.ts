@@ -236,8 +236,11 @@ namespace Carousel {
 
     export class Scroll {
 
-      public static _aidedScroll(): void {
-
+      /**
+       * 自动轮播辅助函数
+       */
+      public static _aidedAutoScroll(): void {
+        
       }
 
       private timer: any = 0;
@@ -404,7 +407,7 @@ namespace Carousel {
 
       public autoScroll(): void {
         this.timer = setInterval(
-          Scroll._aidedScroll, 
+          Scroll._aidedAutoScroll, 
           yyg_settings.delayTime
         );
       }
