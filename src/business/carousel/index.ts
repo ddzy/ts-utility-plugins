@@ -88,7 +88,11 @@ namespace Carousel {
     }
 
     export function initEl(el: string) {
-      yyg_el = document.querySelector(el);
+      if(document.querySelector(el)) {
+        yyg_el = document.querySelector(el);
+      }else {
+        throw new Error('容器元素不存在!');
+      }
     }
   }
 
@@ -103,5 +107,7 @@ Carousel.config({
   width: 600,
   height: 200,
 }).render('#app');
+
+console.log(Carousel);
 
   
