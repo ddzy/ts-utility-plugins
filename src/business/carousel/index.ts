@@ -33,7 +33,7 @@ namespace Carousel {
     autoPlay: false,
     showDots: false,
     showArrows: false,
-    easing: 'linear',
+    easing: 'ease-in-out',
     effect: 'scroll',
     vertical: false,
     duringTime: 1.5,
