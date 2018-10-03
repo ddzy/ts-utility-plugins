@@ -266,6 +266,7 @@ namespace Carousel {
 
       public initDOM(): void {
         if(yyg_el) {
+          // 初始化DOM结构
           yyg_el.innerHTML = this.createDOMTree();
           this.createStyle();
 
@@ -433,9 +434,13 @@ namespace Carousel {
             height: 12px;
             background-color: #fff;
             border-radius: 50%;
+            transition: all .5s ease-in-out;
           }
           .yyg-dot-item:last-child {
             margin-right: 5px;
+          }
+          .yyg-dot-item-active {
+            background-color: #d50;
           }
         `;
       }
@@ -549,12 +554,6 @@ Carousel.config({
   easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
   delayTime: 3000,
   isHoverPause: true,
-  beforeChange: () => {
-    console.log('before_change');
-  },
-  afterChange: () => {
-    console.log('after_change');
-  },
 }).render('#app');
 
   
