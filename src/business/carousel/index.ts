@@ -257,8 +257,10 @@ namespace Carousel {
           contentLi += `
             <li class="yyg-content-item">
               ${
-                item.url
-                  ? `<img src=${item.url} alt="图片提示" />`
+                item.img.url
+                  ? `<a
+                      href=${item.img.target}
+                     ><img src=${item.img.url} alt="图片提示" /></a>`
                   : item.text
               }
             </li>
