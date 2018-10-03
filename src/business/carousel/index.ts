@@ -260,26 +260,28 @@ namespace Carousel {
         });
 
         const final: string = `
-          <div class="yyg-content-wrapper">
-            <ul class="yyg-content-list">${contentLi}</ul>
+          <div class="yyg-carousel-container">
+            <div class="yyg-content-wrapper">
+              <ul class="yyg-content-list">${contentLi}</ul>
+            </div>
+            ${
+              showArrows
+                ? `
+                  <div class="yyg-arrow-wrapper yyg-arrow-prev-wrapper">
+                    <i class="yyg-arrow yyg-arrow-prev">&lt;</i>
+                  </div>
+                  <div class="yyg-arrow-wrapper yyg-arrow-next-wrapper">
+                    <i class="yyg-arrow yyg-arrow-next">&gt;</i>
+                  </div>
+                `
+                : ''
+              }
+            ${
+              showDots
+                ? `<div class="yyg-dots-wrapper">${dotsSpan}</div>`
+                : ''
+            }
           </div>
-          ${
-          showArrows
-            ? `
-                <div class="yyg-arrow-wrapper yyg-arrow-prev-wrapper">
-                  <i class="yyg-arrow yyg-arrow-prev">&lt;</i>
-                </div>
-                <div class="yyg-arrow-wrapper yyg-arrow-next-wrapper">
-                  <i class="yyg-arrow yyg-arrow-next">&gt;</i>
-                </div>
-              `
-            : ''
-          }
-          ${
-          showDots
-              ? `<div class="yyg-dots-wrapper">${dotsSpan}</div>`
-              : ''
-          }
         `;
 
         return final;
