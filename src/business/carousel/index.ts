@@ -249,7 +249,7 @@ namespace Carousel {
 
         Utils.setCss(oList, {
           transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}; `,
-          transform: `translateX(-${oListWidth / (oItemLength + 2) * count}px)`,
+          transform: `translateX(-${oListWidth / (oItemLength + 1) *(count)}px)`,
         }); 
       }
 
@@ -275,18 +275,6 @@ namespace Carousel {
         const { showArrows, showDots } = yyg_settings;
         let dotsSpan: string = '';
         let contentLi: string = '';
-
-        contentLi += `
-          <li class="yyg-content-item" data-id=${dataSource.length - 1}>
-            ${
-              dataSource[dataSource.length - 1].img.url
-                ? `<a
-                    href=${dataSource[dataSource.length - 1].img.target}
-                    ><img src=${dataSource[dataSource.length - 1].img.url} alt="图片提示" /></a>`
-                : dataSource[dataSource.length - 1].text
-            }
-          </li>
-        `;
 
         dataSource.forEach((item: any, index: number) => {
           dotsSpan += `
@@ -403,13 +391,13 @@ namespace Carousel {
             height: 100%;
           }
           .yyg-content-list {
-            width: ${(dataSource.length + 2) * 100}%;
+            width: ${(dataSource.length + 1) * 100}%;
             height: 100%;
             transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing}; 
           }
           .yyg-content-item {
             float: left;
-            width: ${100 / (dataSource.length + 2)}%;
+            width: ${100 / (dataSource.length + 1)}%;
             height: 100%;
             text-align: center;
           }
@@ -448,8 +436,8 @@ namespace Carousel {
         const oList = Utils
           .getEle('.yyg-content-list') as HTMLUListElement;
         const oListWidth: number = oList.offsetWidth;
-        const oItemLength: number = yyg_settings.dataSource.length + 2;
-        const oItemWidth: number = oListWidth / (oItemLength + 2);
+        const oItemLength: number = yyg_settings.dataSource.length + 1;
+        const oItemWidth: number = oListWidth / (oItemLength + 1);
 
         let count: number = 1;
 
@@ -461,7 +449,7 @@ namespace Carousel {
         // 无缝检测
         oList.addEventListener('transitionend', function() {
 
-          if(count === oItemLength - 1) {
+          if(count === oItemLength) {
             count = 1;
             Utils.setCss(this, {
               transition: null,
@@ -470,7 +458,7 @@ namespace Carousel {
           }
 
           else if(count === 0) {
-            count = oItemLength - 2;
+            count = oItemLength - 1;
             Utils.setCss(this, {
               transition: null,
               transform: `translateX(${-(count - 1) * oItemWidth}px)`
