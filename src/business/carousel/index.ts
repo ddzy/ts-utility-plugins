@@ -234,7 +234,9 @@ namespace Carousel {
       }
       
       public initDOM(): void {
-        this.createDOMTree();
+        if(yyg_el) {
+          yyg_el.innerHTML = this.createDOMTree();
+        }
       }
 
       public createDOMTree(): string {
