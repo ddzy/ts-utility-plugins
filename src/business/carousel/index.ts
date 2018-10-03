@@ -96,6 +96,96 @@ namespace Carousel {
     }
   }
 
+
+  namespace Utils {
+  
+    /**
+     * 获取元素
+     * @param id 元素id
+     */
+    export function getEle(
+      sign: string,
+    ): HTMLElement | null {
+      return document.querySelector(sign) || null;
+    }
+  
+  
+    /**
+     * 设置元素属性
+     * @param ele 元素
+     * @param options 属性配置
+     */
+    export function setAttr(
+      ele: HTMLElement,
+      options: any,
+    ): any {
+
+      for (const key in options) {
+        ele.setAttribute(key, options[key]);
+      }
+  
+      return Utils;
+    }
+  
+  
+    /**
+     * 设置元素样式
+     * @param el 元素
+     * @param options 属性配置
+     */
+    export function setCss(
+      ele: HTMLElement,
+      options: any,
+    ): any {
+      for (const item in options) {
+        if (options.hasOwnProperty(item)) {
+          ele.style.cssText += `${item}: ${options[item]};`;
+        }
+      }
+  
+      return Utils;
+    }
+  
+  
+    /**
+     * 取随机值
+     * @param min 最小值
+     * @param max 最大值
+     */
+    export function getRandom(
+      min: number,
+      max: number,
+    ): number {
+      return (Math.random() * (max - min) + min);
+    }
+  
+  
+    /**
+     * 转化弧度
+     * @param angle 角度
+     */
+    export function getRadian(
+      angle: number
+    ): number {
+      return (Math.PI / 180) * angle;
+    }
+  
+  
+    /**
+     * 获取元素属性值
+     * @param ele 元素
+     * @param key 属性名
+     */
+    export function getAttr(
+      ele: HTMLElement,
+      key: string,
+    ): string | null {
+      return ele.getAttribute(key);
+    }
+  
+  };
+  
+
 }
 
 
