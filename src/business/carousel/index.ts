@@ -37,7 +37,7 @@ namespace Carousel {
     effect: 'scroll',
     vertical: false,
     duringTime: 3,
-  } as object
+  }
 
 
   export namespace IProps {
@@ -189,6 +189,36 @@ namespace Carousel {
     ): string | null {
       return ele.getAttribute(key);
     }
+
+
+    /**
+     * 添加类名
+     * @param el 元素
+     * @param className 类名
+     */
+    export function addClass(
+      el: HTMLElement,
+      className: string,
+    ): any {
+      el.classList.add(className);
+
+      return Utils;
+    }
+
+
+    /**
+     * 移除类名
+     * @param el 元素
+     * @param className 类名
+     */
+    export function removeClass(
+      el: HTMLElement,
+      className: string,
+    ): any {
+      el.classList.remove(className);
+
+      return Utils;
+    }
   
   };
   
@@ -208,7 +238,14 @@ namespace Carousel {
       }
 
       public createDOMTree(): string {
-        console.log(yyg_el);
+        const dataSource: any[] = yyg_settings.dataSource;
+        let result: string = '';
+
+        // 内容区域
+        const oContentWrapper: HTMLDivElement = document.createElement('div');
+        
+
+
         return '';
       }
 
