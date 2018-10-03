@@ -261,26 +261,28 @@ namespace Carousel {
 
         const final: string = `
           <div class="yyg-carousel-container">
-            <div class="yyg-content-wrapper">
-              <ul class="yyg-content-list">${contentLi}</ul>
-            </div>
-            ${
-              showArrows
-                ? `
-                  <div class="yyg-arrow-wrapper yyg-arrow-prev-wrapper">
-                    <i class="yyg-arrow yyg-arrow-prev">&lt;</i>
-                  </div>
-                  <div class="yyg-arrow-wrapper yyg-arrow-next-wrapper">
-                    <i class="yyg-arrow yyg-arrow-next">&gt;</i>
-                  </div>
-                `
-                : ''
+            <div class="yyg-carousel-main">
+              <div class="yyg-content-wrapper">
+                <ul class="yyg-content-list">${contentLi}</ul>
+              </div>
+              ${
+                showArrows
+                  ? `
+                    <div class="yyg-arrow-wrapper yyg-arrow-prev-wrapper">
+                      <i class="yyg-arrow yyg-arrow-prev">&lt;</i>
+                    </div>
+                    <div class="yyg-arrow-wrapper yyg-arrow-next-wrapper">
+                      <i class="yyg-arrow yyg-arrow-next">&gt;</i>
+                    </div>
+                  `
+                  : ''
+                }
+              ${
+                showDots
+                  ? `<div class="yyg-dots-wrapper">${dotsSpan}</div>`
+                  : ''
               }
-            ${
-              showDots
-                ? `<div class="yyg-dots-wrapper">${dotsSpan}</div>`
-                : ''
-            }
+            </div>
           </div>
         `;
 
@@ -288,7 +290,7 @@ namespace Carousel {
       }
 
       public createStyle(): void {
-
+        
       }
 
     }
@@ -303,8 +305,6 @@ Carousel.config({
     text: 'Slide One',
     url: '',
   }],
-  width: 600,
-  height: 200,
   showArrows: true,
   showDots: true,
 }).render('#app');
