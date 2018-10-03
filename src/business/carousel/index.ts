@@ -27,8 +27,6 @@ namespace Carousel {
 
 
   const yyg_settings = {
-    width: 0,
-    height: 0,
     dataSource: [],
     autoPlay: false,
     showDots: false,
@@ -39,6 +37,8 @@ namespace Carousel {
     duringTime: 1.5,
     delayTime: 3000,
     isHoverPause: true,
+    beforeChange: () => null,
+    afterChange: () => null,
   }
 
 
@@ -52,8 +52,6 @@ namespace Carousel {
           target: string,
         },
       }[];
-      width?: number;
-      height?: number;
       autoPlay?: boolean;
       showDots?: boolean;
       showArrows?: boolean;
@@ -251,7 +249,7 @@ namespace Carousel {
         Utils.setCss(oList, {
           transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}; `,
           transform: `translateX(-${oListWidth / (oItemLength + 1) *(count)}px)`,
-        }); 
+        });
       }
 
 
@@ -451,12 +449,20 @@ namespace Carousel {
         const oItemWidth: number = oListWidth / (oItemLength + 1);
 
         this.timer = setInterval(() => {
-            Scroll._aidedAutoScroll(this.count ++);
+          // 执行钩子函数
+          yyg_settings.beforeChange
+            && yyg_settings.beforeChange();
+
+          Scroll._aidedAutoScroll(this.count ++);
         }, yyg_settings.delayTime);
 
 
         // 无缝检测
         oList.addEventListener('transitionend', () => {
+
+          // 执行钩子函数
+          yyg_settings.afterChange
+          && yyg_settings.afterChange();
 
           if(this.count === oItemLength) {
             this.count = 1;
@@ -538,8 +544,14 @@ Carousel.config({
   showDots: true,
   autoPlay: true,
   easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
-  delayTime: 2000,
+  delayTime: 3000,
   isHoverPause: true,
+  beforeChange: () => {
+    console.log('before_change');
+  },
+  afterChange: () => {
+    console.log('after_change');
+  },
 }).render('#app');
 
   
