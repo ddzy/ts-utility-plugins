@@ -239,8 +239,17 @@ namespace Carousel {
       /**
        * 自动轮播辅助函数
        */
-      public static _aidedAutoScroll(): void {
-        
+      public static _aidedAutoScroll(
+        count: number,
+      ): void {
+        const oList = Utils
+          .getEle('.yyg-content-list') as HTMLUListElement;
+        const oListWidth: number = oList.offsetWidth;
+        const oItemLength: number = yyg_settings.dataSource.length;
+
+        Utils.setCss(oList, {
+          transform: `translateX(-${oListWidth / oItemLength * count}px)`,
+        }); 
       }
 
       private timer: any = 0;
@@ -255,6 +264,8 @@ namespace Carousel {
         if(yyg_el) {
           yyg_el.innerHTML = this.createDOMTree();
           this.createStyle();
+          yyg_settings.autoPlay 
+            && this.autoScroll();
         }
       }
 
@@ -264,10 +275,12 @@ namespace Carousel {
         let dotsSpan: string = '';
         let contentLi: string = '';
 
-        dataSource.forEach((item: any) => {
-          dotsSpan += `<span class="yyg-dot-item"></span>`;
+        dataSource.forEach((item: any, index: number) => {
+          dotsSpan += `
+            <span class="yyg-dot-item" data-id=${index}></span>
+          `;
           contentLi += `
-            <li class="yyg-content-item">
+            <li class="yyg-content-item" data-id=${index}>
               ${
                 item.img.url
                   ? `<a
@@ -406,8 +419,17 @@ namespace Carousel {
       }
 
       public autoScroll(): void {
+        const oList = Utils
+          .getEle('.yyg-content-list') as HTMLUListElement;
+        const oListWidth: number = oList.offsetWidth;
+        const oItemLength: number = yyg_settings.dataSource.length;
+
+        let count: number = 1;
+
         this.timer = setInterval(
-          Scroll._aidedAutoScroll, 
+          () => {
+            Scroll._aidedAutoScroll(count ++);
+          }, 
           yyg_settings.delayTime
         );
       }
@@ -446,6 +468,10 @@ Carousel.config({
   }],
   showArrows: true,
   showDots: true,
+  autoPlay: true,
+  // easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
+  easing: 'ease-in-out',
+  delayTime: 2000,
 }).render('#app');
 
   
