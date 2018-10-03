@@ -43,7 +43,13 @@ namespace Carousel {
   export namespace IProps {
 
     export interface IConfigProps {
-      dataSource: { text: string, url: string }[];
+      dataSource: { 
+        text: string, 
+        img: {
+          url: string,
+          target: string,
+        },
+      }[];
       width?: number;
       height?: number;
       autoPlay?: boolean;
@@ -388,16 +394,28 @@ namespace Carousel {
 Carousel.config({
   dataSource: [{
     text: 'Slide One',
-    url: '',
-  }, {
+    img: {
+      url: '',
+      target: '',
+    },
+  },{
     text: 'Slide Two',
-    url: '',
-  }, {
+    img: {
+      url: '',
+      target: '',
+    },
+  },{
     text: 'Slide Three',
-    url: '',
-  }, {
+    img: {
+      url: '',
+      target: '',
+    },
+  },{
     text: 'Slide Four',
-    url: '',
+    img: {
+      url: '',
+      target: '',
+    },
   }],
   showArrows: true,
   showDots: true,
