@@ -72,6 +72,7 @@ namespace Carousel {
 
   export function render(el: string): any {
     Init.initEl(el);
+    Init.initWhichEffect();
 
     return Carousel;
   }
@@ -96,6 +97,11 @@ namespace Carousel {
       }else {
         throw new Error('容器元素不存在!');
       }
+    }
+
+    // 调用轮播图
+    export function initWhichEffect(): void {
+      new Main.Fade({});
     }
   }
 
@@ -195,12 +201,18 @@ namespace Carousel {
 
       public constructor(
         _props: IProps.IMainFadeProps,
-      ) {}
+      ) {
+        this.initDOM();
+      }
+      
+      public initDOM(): void {
+        this.createDOMTree();
+      }
 
-    }
-
-    
-    export class Scroll {
+      public createDOMTree(): string {
+        console.log(yyg_el);
+        return '';
+      }
 
     }
 
@@ -217,7 +229,5 @@ Carousel.config({
   width: 600,
   height: 200,
 }).render('#app');
-
-console.log(Carousel);
 
   
