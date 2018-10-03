@@ -92,10 +92,10 @@ namespace Carousel {
     }
 
     export function initEl(el: string) {
-      if(document.querySelector(el)) {
-        yyg_el = document.querySelector(el);
+      if(Utils.getEle(el)) {
+        yyg_el = Utils.getEle(el);
       }else {
-        throw new Error('容器元素不存在!');
+        throw new Error('el不存在, 请输入其他的!');
       }
     }
 
