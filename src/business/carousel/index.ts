@@ -275,6 +275,18 @@ namespace Carousel {
         let dotsSpan: string = '';
         let contentLi: string = '';
 
+        contentLi += `
+          <li class="yyg-content-item" data-id=${dataSource.length - 1}>
+            ${
+              dataSource[dataSource.length - 1].img.url
+                ? `<a
+                    href=${dataSource[dataSource.length - 1].img.target}
+                    ><img src=${dataSource[dataSource.length - 1].img.url} alt="图片提示" /></a>`
+                : dataSource[dataSource.length - 1].text
+            }
+          </li>
+        `;
+
         dataSource.forEach((item: any, index: number) => {
           dotsSpan += `
             <span class="yyg-dot-item" data-id=${index}></span>
@@ -304,8 +316,6 @@ namespace Carousel {
             }
           </li>
         `;
-
-        console.log(contentLi);
 
         const final: string = `
           <div class="yyg-carousel-container">
@@ -392,13 +402,13 @@ namespace Carousel {
             height: 100%;
           }
           .yyg-content-list {
-            width: ${(dataSource.length + 1) * 100}%;
+            width: ${(dataSource.length + 2) * 100}%;
             height: 100%;
             transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing}; 
           }
           .yyg-content-item {
             float: left;
-            width: ${100 / (dataSource.length + 1)}%;
+            width: ${100 / (dataSource.length + 2)}%;
             height: 100%;
             text-align: center;
           }
@@ -437,13 +447,15 @@ namespace Carousel {
         const oList = Utils
           .getEle('.yyg-content-list') as HTMLUListElement;
         const oListWidth: number = oList.offsetWidth;
-        const oItemLength: number = yyg_settings.dataSource.length;
+        const oItemLength: number = yyg_settings.dataSource.length + 1;
+        const oItemWidth: number = oListWidth / (oItemLength + 1);
 
         let count: number = 1;
 
         this.timer = setInterval(
           () => {
-            Scroll._aidedAutoScroll(count ++);
+            Scroll._aidedAutoScroll(count);
+            count ++;
           }, 
           yyg_settings.delayTime
         );
