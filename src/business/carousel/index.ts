@@ -239,14 +239,47 @@ namespace Carousel {
 
       public createDOMTree(): string {
         const dataSource: any[] = yyg_settings.dataSource;
-        let result: string = '';
+        const { showArrows, showDots } = yyg_settings;
+        let dotsSpan: string = '';
+        let contentLi: string = '';
 
-        // 内容区域
-        const oContentWrapper: HTMLDivElement = document.createElement('div');
-        
+        dataSource.forEach((item: any) => {
+          dotsSpan += `<span class="yyg-dot-item"></span>`;
+          contentLi += `
+            <li class="yyg-content-item">
+              ${
+                item.url
+                  ? `<img src=${item.url} alt="图片提示" />`
+                  : item.text
+              }
+            </li>
+          `;
+        });
 
+        const final: string = `
+          <div class="yyg-content-wrapper">
+            <ul class="yyg-content-list">${contentLi}</ul>
+          </div>
+          ${
+          showArrows
+            ? `
+                <div class="yyg-arrow-wrapper yyg-arrow-prev-wrapper">
+                  <i class="yyg-arrow yyg-arrow-prev">&lt;</i>
+                </div>
+                <div class="yyg-arrow-wrapper yyg-arrow-next-wrapper">
+                  <i class="yyg-arrow yyg-arrow-next">&gt;</i>
+                </div>
+              `
+            : ''
+          }
+          ${
+          showDots
+              ? `<div class="yyg-dots-wrapper">${dotsSpan}</div>`
+              : ''
+          }
+        `;
 
-        return '';
+        return final;
       }
 
     }
