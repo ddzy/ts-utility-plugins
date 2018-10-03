@@ -530,10 +530,35 @@ namespace Carousel {
        * 处理 圆点 hover
        */
       public handleDotsHover(): void {
-        const oDotsWrapper = Utils
-          .getEle('.yyg-dots-wrapper') as HTMLDivElement;
+        const oList = Utils
+        .getEle('.yyg-content-list') as HTMLUListElement;
+        const oListWidth: number = oList.offsetWidth;
+        const oItemLength: number = yyg_settings.dataSource.length + 1;
+        const oItemWidth: number = oListWidth / (oItemLength);
+        const oDotsItem: ArrayLike<HTMLSpanElement> = document
+          .querySelectorAll('.yyg-dot-item');
+        
+        for(let i = 0, outer: any; outer = oDotsItem[i++];) {
+          outer.addEventListener('mouseenter', () => {
 
-        console.log(oDotsWrapper);
+            const signId = Utils
+              .getAttr(outer, 'data-id') as string;
+
+            // dot栏样式改变
+            for(let j = 0, inner; inner = oDotsItem[j++];) {
+              Utils.removeClass(inner, 'yyg-dot-item-active');
+            }
+            Utils.addClass(outer, 'yyg-dot-item-active');
+
+            // 清除定时器
+            clearInterval(this.timer);
+
+            // 同步轮播
+            Utils.setCss(oList, {
+              transform: `translateX(${-(signId) * oItemWidth}px)`,
+            });
+          });
+        }
       }
     }
 
