@@ -269,6 +269,14 @@ namespace Carousel {
       private count: number = 1;
 
 
+      private oList: any = null;
+      private oDotsItem: any = null;
+      private oListItem: any = null;
+      private oListWidth: number = 0;
+      private oItemLength: number = 0;
+      private oItemWidth: number = 0;
+
+
       public constructor(
         _props: IProps.IMainScrollProps,
       ) {
@@ -282,6 +290,9 @@ namespace Carousel {
           yyg_el.innerHTML = this.createDOMTree();
           this.createStyle();
 
+          // 初始化公共对象(优化)
+          this.initCommonEle();
+
           yyg_settings.autoPlay 
             && this.handleAutoScroll();
           yyg_settings.isHoverPause
@@ -289,6 +300,21 @@ namespace Carousel {
           yyg_settings.showDots
             && this.handleDotsHover();
         }
+      }
+
+
+      /**
+       * 初始化通用对象
+       */
+      public initCommonEle(): void {
+        this.oList = Utils
+          .getEle('.yyg-content-list') as HTMLUListElement;
+        this.oListWidth = this.oList.offsetWidth;
+        this.oDotsItem = document
+          .querySelectorAll('.yyg-dot-item');
+        this.oListItem = Utils.getAllEle('.yyg-content-item');
+        this.oItemLength = this.oListItem.length;
+        this.oItemWidth = this.oListWidth / this.oItemLength + 1;
       }
 
 
@@ -536,10 +562,8 @@ namespace Carousel {
        * 处理 图片 hover
        */
       public handleImgHover(): void {
-        // 鼠标放置图片, 停止轮播
-        const oList = Utils
-          .getEle('.yyg-content-list') as HTMLUListElement;
-        const oListItem: ArrayLike<HTMLElement> = oList
+
+        const oListItem: ArrayLike<HTMLElement> = this.oList
           .querySelectorAll('.yyg-content-item');
         
         for (const key in oListItem) {
