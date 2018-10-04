@@ -241,6 +241,7 @@ namespace Carousel {
       public static _aidedAutoScroll(
         count: number,
       ): void {
+
         const oList = Utils
           .getEle('.yyg-content-list') as HTMLUListElement;
         const oListWidth: number = oList.offsetWidth;
@@ -454,16 +455,20 @@ namespace Carousel {
       public handleAutoScroll(): void {
         const oList = Utils
           .getEle('.yyg-content-list') as HTMLUListElement;
-        const oListWidth: number = oList.offsetWidth;
-        const oItemLength: number = yyg_settings.dataSource.length + 1;
+        const oListWidth: number = oList
+          .offsetWidth;
+        const oItemLength: number = yyg_settings
+          .dataSource
+          .length + 1;
         const oItemWidth: number = oListWidth / (oItemLength + 1);
 
         this.timer = setInterval(() => {
+
           // 执行钩子函数
           yyg_settings.beforeChange
             && yyg_settings.beforeChange();
 
-          Scroll._aidedAutoScroll(this.count ++);
+          Scroll._aidedAutoScroll(this.count++);
 
         }, yyg_settings.delayTime);
 
@@ -530,19 +535,31 @@ namespace Carousel {
        * 处理 圆点 hover
        */
       public handleDotsHover(): void {
+
         const oList = Utils
-        .getEle('.yyg-content-list') as HTMLUListElement;
-        const oListWidth: number = oList.offsetWidth;
-        const oItemLength: number = yyg_settings.dataSource.length + 1;
+          .getEle('.yyg-content-list') as HTMLUListElement;
+        const oListWidth: number = oList
+          .offsetWidth;
+        const oItemLength: number = yyg_settings
+          .dataSource
+          .length + 1;
         const oItemWidth: number = oListWidth / (oItemLength);
         const oDotsItem: ArrayLike<HTMLSpanElement> = document
           .querySelectorAll('.yyg-dot-item');
         
+        
         for(let i = 0, outer: any; outer = oDotsItem[i++];) {
+          
           outer.addEventListener('mouseenter', () => {
 
             const signId = Utils
               .getAttr(outer, 'data-id') as string;
+
+            // 清除定时器
+            clearInterval(this.timer);
+
+            // 同步count
+            this.count = Number(signId);
 
             // dot栏样式改变
             for(let j = 0, inner; inner = oDotsItem[j++];) {
@@ -550,14 +567,18 @@ namespace Carousel {
             }
             Utils.addClass(outer, 'yyg-dot-item-active');
 
-            // 清除定时器
-            clearInterval(this.timer);
-
             // 同步轮播
             Utils.setCss(oList, {
               transform: `translateX(${-(signId) * oItemWidth}px)`,
             });
+
           });
+
+          // 移除dot栏重新滚动
+          outer.addEventListener('mouseleave', () => {
+            this.handleAutoScroll();
+          })
+
         }
       }
     }
