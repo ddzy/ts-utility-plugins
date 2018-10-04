@@ -123,6 +123,17 @@ namespace Carousel {
     ): HTMLElement | null {
       return document.querySelector(sign) || null;
     }
+
+
+    /**
+     * 获取元素集合
+     * @param sign 索引
+     */
+    export function getAllEle(
+      sign: string,
+    ): ArrayLike<HTMLElement> | null {
+      return document.querySelectorAll(sign);
+    }
   
   
     /**
