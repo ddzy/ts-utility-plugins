@@ -488,13 +488,13 @@ namespace Carousel {
             });
           }
 
-          else if(this.count === 0) {
-            this.count = oItemLength - 1;
-            Utils.setCss(oList, {
-              transition: null,
-              transform: `translateX(${-(this.count - 1) * oItemWidth}px)`
-            });
-          }
+          // else if(this.count === 0) {
+          //   this.count = oItemLength - 1;
+          //   Utils.setCss(oList, {
+          //     transition: null,
+          //     transform: `translateX(${-(this.count - 1) * oItemWidth}px)`
+          //   });
+          // }
 
         }, false);  
       }
