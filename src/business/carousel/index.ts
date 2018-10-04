@@ -584,16 +584,9 @@ namespace Carousel {
        */
       public handleDotsHover(): void {
 
-        const oList = Utils
-          .getEle('.yyg-content-list') as HTMLUListElement;
-        const oListWidth: number = oList
-          .offsetWidth;
-        const oItemLength: number = yyg_settings
-          .dataSource
-          .length + 1;
-        const oItemWidth: number = oListWidth / (oItemLength);
-        const oDotsItem: ArrayLike<HTMLSpanElement> = document
-          .querySelectorAll('.yyg-dot-item');
+        const oList = this.oList;
+        const oItemWidth = this.oItemWidth;
+        const oDotsItem = this.oDotsItem;
         
         
         for(let i = 0, outer: any; outer = oDotsItem[i++];) {
