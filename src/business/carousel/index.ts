@@ -556,9 +556,7 @@ namespace Carousel {
        * 处理 图片 hover
        */
       public handleImgHover(): void {
-
-        const oListItem: ArrayLike<HTMLElement> = this.oList
-          .querySelectorAll('.yyg-content-item');
+        const oListItem = this.oListItem;
         
         for (const key in oListItem) {
           if (oListItem.hasOwnProperty(key)) {
