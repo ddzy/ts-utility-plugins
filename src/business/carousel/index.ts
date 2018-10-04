@@ -348,7 +348,14 @@ namespace Carousel {
 
         dataSource.forEach((item: any, index: number) => {
           dotsSpan += `
-            <span class="yyg-dot-item" data-id=${index}></span>
+            <span
+              class="yyg-dot-item${
+                index === 0
+                ? ' yyg-dot-item-active'
+                : ''
+              }"
+              data-id=${index}
+            ></span>
           `;
           contentLi += `
             <li class="yyg-content-item" data-id=${index}>
