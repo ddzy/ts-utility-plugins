@@ -460,6 +460,8 @@ namespace Carousel {
         const oItemLength: number = yyg_settings
           .dataSource
           .length + 1;
+        const oDotsItem: ArrayLike<HTMLLIElement> = document
+          .querySelectorAll('.yyg-dot-item');
         const oItemWidth: number = oListWidth / (oItemLength + 1);
 
         this.timer = setInterval(() => {
@@ -468,14 +470,22 @@ namespace Carousel {
           yyg_settings.beforeChange
             && yyg_settings.beforeChange();
 
+          // 自动滚动
           Scroll._aidedAutoScroll(this.count++);
+
+          // dot栏改变
+          for (let i = 0, outer; outer = oDotsItem[i++];) {
+            Utils.removeClass(outer, 'yyg-dot-item-active');
+          }
+          Utils.addClass(
+            oDotsItem[this.count - 1],
+            'yyg-dot-item-active',
+          );
 
         }, yyg_settings.delayTime);
 
-
         // 无缝检测
         oList.addEventListener('transitionend', () => {
-
           // 执行钩子函数
           yyg_settings.afterChange
           && yyg_settings.afterChange();
@@ -495,7 +505,6 @@ namespace Carousel {
           //     transform: `translateX(${-(this.count - 1) * oItemWidth}px)`
           //   });
           // }
-
         }, false);  
       }
 
