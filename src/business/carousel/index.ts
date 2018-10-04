@@ -265,6 +265,17 @@ namespace Carousel {
       }
 
 
+      /**
+       * 辅助函数: 改变圆点样式
+       * @param oDotsItem 圆点数组
+       */
+      public static _aidedChangeDotsStyle(
+        oDotsItem: any,
+      ): void {
+
+      }
+
+
       private timer: any = 0;
       private count: number = 1;
 
@@ -588,7 +599,7 @@ namespace Carousel {
         const oItemWidth = this.oItemWidth;
         const oDotsItem = this.oDotsItem;
         
-        
+
         for(let i = 0, outer: any; outer = oDotsItem[i++];) {
           
           outer.addEventListener('mouseenter', () => {
