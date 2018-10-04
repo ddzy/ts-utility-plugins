@@ -569,6 +569,7 @@ namespace Carousel {
 
             // 同步轮播
             Utils.setCss(oList, {
+              transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}; `,
               transform: `translateX(${-(signId) * oItemWidth}px)`,
             });
 
