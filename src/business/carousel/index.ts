@@ -313,7 +313,7 @@ namespace Carousel {
         this.oDotsItem = Utils.getAllEle('.yyg-dot-item');
         this.oListItem = Utils.getAllEle('.yyg-content-item');
         this.oItemLength = this.oListItem.length;
-        this.oItemWidth = this.oListWidth / this.oItemLength + 1;
+        this.oItemWidth = this.oListWidth / this.oItemLength;
       }
 
 
@@ -489,16 +489,11 @@ namespace Carousel {
        * 处理 自动轮播
        */
       public handleAutoScroll(): void {
-        const oList = Utils
-          .getEle('.yyg-content-list') as HTMLUListElement;
-        const oListWidth: number = oList
-          .offsetWidth;
-        const oItemLength: number = yyg_settings
-          .dataSource
-          .length + 1;
-        const oDotsItem: ArrayLike<HTMLLIElement> = document
-          .querySelectorAll('.yyg-dot-item');
-        const oItemWidth: number = oListWidth / (oItemLength + 1);
+        
+        const oList = this.oList;
+        const oItemLength = this.oItemLength;
+        const oDotsItem = this.oDotsItem;
+        const oItemWidth = this.oItemWidth;
 
         // dot默认显示
         Utils.addClass(
