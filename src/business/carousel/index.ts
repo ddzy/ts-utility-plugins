@@ -251,28 +251,40 @@ namespace Carousel {
        */
       public static _aidedAutoScroll(
         count: number,
+        oList: any,
+        oListWidth: number,
+        oItemLength: number,
       ): void {
-
-        const oList = Utils
-          .getEle('.yyg-content-list') as HTMLUListElement;
-        const oListWidth: number = oList.offsetWidth;
-        const oItemLength: number = yyg_settings.dataSource.length;
 
         Utils.setCss(oList, {
           transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}; `,
-          transform: `translateX(-${oListWidth / (oItemLength + 1) *(count)}px)`,
+          transform: `translateX(-${oListWidth / (oItemLength) *(count)}px)`,
         });
       }
 
 
       /**
-       * 辅助函数: 改变圆点样式
+       * 辅助函数: dot栏改变
        * @param oDotsItem 圆点数组
        */
       public static _aidedChangeDotsStyle(
-        oDotsItem: any,
+        count: number,
+        oItemLength: number,
+        oDotsItem: ArrayLike<HTMLSpanElement>,
       ): void {
+        for (let i = 0, outer; outer = oDotsItem[i++];) {
+          Utils.removeClass(outer, 'yyg-dot-item-active');
+        }
 
+        count === oItemLength
+          ? Utils.addClass(
+              oDotsItem[0],
+              'yyg-dot-item-active',
+            )
+          : Utils.addClass(
+              oDotsItem[count - 1],
+              'yyg-dot-item-active',
+            );
       }
 
 
@@ -505,12 +517,7 @@ namespace Carousel {
         const oItemLength = this.oItemLength;
         const oDotsItem = this.oDotsItem;
         const oItemWidth = this.oItemWidth;
-
-        // dot默认显示
-        Utils.addClass(
-          oDotsItem[0],
-          'yyg-dot-item-active',
-        );
+        const oListWidth = this.oListWidth;
 
         this.timer = setInterval(() => {
 
@@ -519,22 +526,19 @@ namespace Carousel {
             && yyg_settings.beforeChange();
 
           // 自动滚动
-          Scroll._aidedAutoScroll(this.count++);
+          Scroll._aidedAutoScroll(
+            this.count ++,
+            oList,
+            oListWidth,
+            oItemLength,
+          );
 
           // dot栏改变
-          for (let i = 0, outer; outer = oDotsItem[i++];) {
-            Utils.removeClass(outer, 'yyg-dot-item-active');
-          }
-
-          this.count === oItemLength
-            ? Utils.addClass(
-                oDotsItem[0],
-                'yyg-dot-item-active',
-              )
-            : Utils.addClass(
-                oDotsItem[this.count - 1],
-                'yyg-dot-item-active',
-              );
+          Scroll._aidedChangeDotsStyle(
+            this.count,
+            oItemLength,
+            oDotsItem,
+          );
 
         }, yyg_settings.delayTime);
 
@@ -571,6 +575,7 @@ namespace Carousel {
         
         for (const key in oListItem) {
           if (oListItem.hasOwnProperty(key)) {
+
             const element = oListItem[key];
             
             element.addEventListener('mouseenter', () => {
@@ -578,12 +583,7 @@ namespace Carousel {
             }, false);
 
             element.addEventListener('mouseleave', () => {
-              this.timer = setInterval(() => {
-                yyg_settings.beforeChange
-                  && yyg_settings.beforeChange();
-
-                Scroll._aidedAutoScroll(this.count ++);
-              }, yyg_settings.delayTime)
+              this.handleAutoScroll();
             }, false);
           }
         }
@@ -630,7 +630,7 @@ namespace Carousel {
           // 移除dot栏重新滚动
           outer.addEventListener('mouseleave', () => {
             this.handleAutoScroll();
-          })
+          });
 
         }
       }
