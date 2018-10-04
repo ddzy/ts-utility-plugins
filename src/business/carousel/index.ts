@@ -310,8 +310,7 @@ namespace Carousel {
         this.oList = Utils
           .getEle('.yyg-content-list') as HTMLUListElement;
         this.oListWidth = this.oList.offsetWidth;
-        this.oDotsItem = document
-          .querySelectorAll('.yyg-dot-item');
+        this.oDotsItem = Utils.getAllEle('.yyg-dot-item');
         this.oListItem = Utils.getAllEle('.yyg-content-item');
         this.oItemLength = this.oListItem.length;
         this.oItemWidth = this.oListWidth / this.oItemLength + 1;
