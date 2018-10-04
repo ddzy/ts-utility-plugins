@@ -464,6 +464,12 @@ namespace Carousel {
           .querySelectorAll('.yyg-dot-item');
         const oItemWidth: number = oListWidth / (oItemLength + 1);
 
+        // dot默认显示
+        Utils.addClass(
+          oDotsItem[0],
+          'yyg-dot-item-active',
+        );
+
         this.timer = setInterval(() => {
 
           // 执行钩子函数
