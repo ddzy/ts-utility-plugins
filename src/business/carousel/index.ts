@@ -483,10 +483,16 @@ namespace Carousel {
           for (let i = 0, outer; outer = oDotsItem[i++];) {
             Utils.removeClass(outer, 'yyg-dot-item-active');
           }
-          Utils.addClass(
-            oDotsItem[this.count - 1],
-            'yyg-dot-item-active',
-          );
+
+          this.count === oItemLength
+            ? Utils.addClass(
+                oDotsItem[0],
+                'yyg-dot-item-active',
+              )
+            : Utils.addClass(
+                oDotsItem[this.count - 1],
+                'yyg-dot-item-active',
+              );
 
         }, yyg_settings.delayTime);
 
