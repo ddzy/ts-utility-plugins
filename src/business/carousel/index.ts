@@ -349,7 +349,7 @@ namespace Carousel {
         let contentLi: string = '';
 
         contentLi += `
-          <li class="yyg-content-item" data-id=${dataSource.length - 1}>
+          <li class="yyg-content-item" data-id=${dataSource.length}>
             ${
               dataSource[dataSource.length - 1].img.url
                 ? `<a
@@ -372,7 +372,7 @@ namespace Carousel {
             ></span>
           `;
           contentLi += `
-            <li class="yyg-content-item" data-id=${index}>
+            <li class="yyg-content-item" data-id=${index + 1}>
               ${
                 item.img.url
                   ? `<a
@@ -386,7 +386,7 @@ namespace Carousel {
 
         // 无缝
         contentLi += `
-          <li class="yyg-content-item" data-id=${0}>
+          <li class="yyg-content-item" data-id=${1}>
             ${
               dataSource[0].img.url
                 ? `<a
