@@ -322,6 +322,8 @@ namespace Carousel {
             && this.handleImgHover();
           yyg_settings.showDots
             && this.handleDotsHover();
+          yyg_settings.showArrows
+            && this.handleArrowClick();
         }
       }
 
@@ -641,6 +643,18 @@ namespace Carousel {
 
         }
       }
+
+
+      public handleArrowClick(): void {
+
+        const prevArrow = Utils
+          .getEle('.yyg-arrow-prev-wrapper') as HTMLDivElement;
+        const nextArrow = Utils
+          .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
+        
+        console.log({ prevArrow, nextArrow });
+
+      }
     }
 
   }
@@ -677,9 +691,11 @@ Carousel.config({
   showArrows: true,
   showDots: true,
   autoPlay: true,
-  easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
+  // easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
+  easing: 'ease-in-out',
   delayTime: 3000,
   isHoverPause: true,
+  duringTime: 1,
 }).render('#app');
 
   
