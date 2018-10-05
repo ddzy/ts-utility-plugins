@@ -282,7 +282,7 @@ namespace Carousel {
               'yyg-dot-item-active',
             )
           : Utils.addClass(
-              oDotsItem[count - 1],
+              oDotsItem[count - 2],
               'yyg-dot-item-active',
             );
       }
@@ -483,13 +483,16 @@ namespace Carousel {
             height: 100%;
           }
           .yyg-content-list {
-            width: ${(dataSource.length + 1) * 100}%;
+            width: ${(dataSource.length + 2) * 100}%;
             height: 100%;
-            transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing}; 
+            transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
+            transform: translateX(-${
+              100 / (dataSource.length + 2)
+            }%); 
           }
           .yyg-content-item {
             float: left;
-            width: ${100 / (dataSource.length + 1)}%;
+            width: ${100 / (dataSource.length + 2)}%;
             height: 100%;
             text-align: center;
           }
@@ -569,7 +572,7 @@ namespace Carousel {
           yyg_settings.afterChange
           && yyg_settings.afterChange();
 
-          if(this.count === oItemLength) {
+          if(this.count === oItemLength - 1) {
             this.count = 1;
             Utils.setCss(oList, {
               transition: null,
@@ -577,11 +580,14 @@ namespace Carousel {
             });
           }
 
-          // else if(this.count === 0) {
-          //   this.count = oItemLength - 1;
+          // else if (this.count === 0) {
+            
+          //   console.log(this.count);
+
+          //   this.count = oItemLength - 3;
           //   Utils.setCss(oList, {
           //     transition: null,
-          //     transform: `translateX(${-(this.count - 1) * oItemWidth}px)`
+          //     transform: `translateX(${-oItemWidth}px)`
           //   });
           // }
         }, false);  
@@ -643,7 +649,7 @@ namespace Carousel {
             // 同步轮播
             Utils.setCss(oList, {
               transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}; `,
-              transform: `translateX(${-(signId) * oItemWidth}px)`,
+              transform: `translateX(${-(this.count + 1) * oItemWidth}px)`,
             });
 
           });
