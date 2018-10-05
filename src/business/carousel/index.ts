@@ -574,27 +574,15 @@ namespace Carousel {
           yyg_settings.afterChange
           && yyg_settings.afterChange();
 
-          if (this.count >= oItemLength - 1) {
+          if (this.count > oItemLength - 1) {
             
-            this.count = 1;
+            this.count = 2;
 
-            console.log(this.count);
             Utils.setCss(oList, {
               transition: null,
               transform: `translateX(${-(this.count - 1) * oItemWidth}px)`
             });
           }
-
-          // else if (this.count === 0) {
-            
-          //   console.log(this.count);
-
-          //   this.count = oItemLength - 3;
-          //   Utils.setCss(oList, {
-          //     transition: null,
-          //     transform: `translateX(${-oItemWidth}px)`
-          //   });
-          // }
         }, false);  
       }
 
