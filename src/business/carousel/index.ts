@@ -461,10 +461,10 @@ namespace Carousel {
             transform: translateY(-50%);
           }
           .yyg-arrow-prev-wrapper {
-            left: 0;
+            left: 15px;
           }
           .yyg-arrow-next-wrapper {
-            right: 0;
+            right: 15px;
           }
           .yyg-content-wrapper {
             overflow: hidden;
@@ -652,7 +652,10 @@ namespace Carousel {
         const nextArrow = Utils
           .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
         
-        console.log({ prevArrow, nextArrow });
+        // 
+        prevArrow.addEventListener('click', (): void => {
+          clearInterval(this.timer);
+        });
 
       }
     }
