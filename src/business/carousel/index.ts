@@ -272,11 +272,10 @@ namespace Carousel {
         oItemLength: number,
         oDotsItem: ArrayLike<HTMLSpanElement>,
       ): void {
+        
         for (let i = 0, outer; outer = oDotsItem[i++];) {
           Utils.removeClass(outer, 'yyg-dot-item-active');
         }
-
-        // console.log(count);
 
         count === oItemLength
           ? Utils.addClass(
