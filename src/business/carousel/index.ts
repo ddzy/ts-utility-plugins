@@ -276,6 +276,8 @@ namespace Carousel {
           Utils.removeClass(outer, 'yyg-dot-item-active');
         }
 
+        // console.log(count);
+
         count === oItemLength
           ? Utils.addClass(
               oDotsItem[0],
@@ -368,7 +370,7 @@ namespace Carousel {
                 ? ' yyg-dot-item-active'
                 : ''
               }"
-              data-id=${index}
+              data-id=${index + 1}
             ></span>
           `;
           contentLi += `
@@ -572,8 +574,11 @@ namespace Carousel {
           yyg_settings.afterChange
           && yyg_settings.afterChange();
 
-          if(this.count === oItemLength - 1) {
+          if (this.count >= oItemLength - 1) {
+            
             this.count = 1;
+
+            console.log(this.count);
             Utils.setCss(oList, {
               transition: null,
               transform: `translateX(${-(this.count - 1) * oItemWidth}px)`
@@ -649,13 +654,13 @@ namespace Carousel {
             // 同步轮播
             Utils.setCss(oList, {
               transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}; `,
-              transform: `translateX(${-(this.count + 1) * oItemWidth}px)`,
+              transform: `translateX(${-(this.count) * oItemWidth}px)`,
             });
 
           });
 
           // 移除dot栏重新滚动
-          outer.addEventListener('mouseleave', () => {
+          outer.addEventListener('mouseleave', () => { 
             this.handleAutoScroll();
           });
 
