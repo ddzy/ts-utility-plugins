@@ -348,6 +348,18 @@ namespace Carousel {
         let dotsSpan: string = '';
         let contentLi: string = '';
 
+        contentLi += `
+          <li class="yyg-content-item" data-id=${dataSource.length - 1}>
+            ${
+              dataSource[dataSource.length - 1].img.url
+                ? `<a
+                    href=${dataSource[dataSource.length - 1].img.target}
+                    ><img src=${dataSource[dataSource.length - 1].img.url} alt="图片提示" /></a>`
+                : dataSource[dataSource.length - 1].text
+            }
+          </li>
+        `;
+        
         dataSource.forEach((item: any, index: number) => {
           dotsSpan += `
             <span
@@ -647,14 +659,29 @@ namespace Carousel {
 
       public handleArrowClick(): void {
 
+        const oList = this.oList;
+        const oItemWidth = this.oItemWidth;
+        const oItemLength = this.oItemLength;
         const prevArrow = Utils
           .getEle('.yyg-arrow-prev-wrapper') as HTMLDivElement;
         const nextArrow = Utils
           .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
         
-        // 
         prevArrow.addEventListener('click', (): void => {
           clearInterval(this.timer);
+
+          if (this.count -- <= 0) {
+            this.count = oItemLength - 2;
+          }
+
+          console.log(this.count);
+          
+          // 左移
+          Utils.setCss(oList, {
+            transform: `translateX(${
+              -this.count * oItemWidth
+            }px)`,
+          });
         });
 
       }
