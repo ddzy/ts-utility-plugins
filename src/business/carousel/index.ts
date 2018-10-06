@@ -688,6 +688,8 @@ namespace Carousel {
             }px)`,
           });
 
+          this.handleAutoScroll();
+
         }, false);
 
         // 右箭头
@@ -704,6 +706,9 @@ namespace Carousel {
               -(this.count) * oItemWidth
             }px)`,
           });
+
+          // 自动滚动
+          this.handleAutoScroll();
         }, false);
 
         oList.addEventListener('transitionend', () => { 
