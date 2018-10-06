@@ -699,7 +699,7 @@ namespace Carousel {
             oDotsItem
           );
 
-          // this.handleAutoScroll();
+          this.handleAutoScroll();
 
         }, false);
 
@@ -715,8 +715,14 @@ namespace Carousel {
             }s ${yyg_settings.easing}`,
             transform: `translateX(${
               -(this.count) * oItemWidth
-            }px)`,
+              }px)`,
           });
+
+          Scroll._aidedChangeDotsStyle(
+            this.count,
+            oItemLength,
+            oDotsItem
+          );
 
           // 自动滚动
           this.handleAutoScroll();
