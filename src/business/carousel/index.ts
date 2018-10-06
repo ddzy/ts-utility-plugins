@@ -247,10 +247,13 @@ namespace Carousel {
 
     export class Scroll {
 
+      // private static MIN_CLICK_DELAY_TIME: number = yyg_settings.duringTime || 1500;
+      // private static lastClickTime: number = 0;
+
       /**
        * 自动轮播辅助函数
        */
-      public static _aidedAutoScroll(
+      private static _aidedAutoScroll(
         count: number,
         oList: any,
         oListWidth: number,
@@ -268,7 +271,7 @@ namespace Carousel {
        * 辅助函数: dot栏改变
        * @param oDotsItem 圆点数组
        */
-      public static _aidedChangeDotsStyle(
+      private static _aidedChangeDotsStyle(
         count: number,
         oItemLength: number,
         oDotsItem: ArrayLike<HTMLSpanElement>,
@@ -669,6 +672,7 @@ namespace Carousel {
         const nextArrow = Utils
           .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
         
+        // 左箭头
         prevArrow.addEventListener('click', (): void => {
           clearInterval(this.timer);
 
@@ -684,19 +688,37 @@ namespace Carousel {
             }px)`,
           });
 
-        });
+        }, false);
+
+        // 右箭头
+        nextArrow.addEventListener('click', () => {
+          clearInterval(this.timer);
+
+          this.count++;
+
+          Utils.setCss(oList, {
+            transition: `all ${
+              yyg_settings.duringTime
+            }s ${yyg_settings.easing}`,
+            transform: `translateX(${
+              -(this.count) * oItemWidth
+            }px)`,
+          });
+        }, false);
 
         oList.addEventListener('transitionend', () => { 
           if (this.count === 0) {
             this.count = oItemLength - 2;
-
-            Utils.setCss(oList, {
-              transition: `null`,
-              transform: `translateX(${
-                -(this.count) * oItemWidth
-              }px)`,
-            });
+          } else if (this.count === oItemLength - 1) {
+            this.count = 1;
           }
+
+          Utils.setCss(oList, {
+            transition: `null`,
+            transform: `translateX(${
+              -(this.count) * oItemWidth
+            }px)`,
+          });
         }, false);
 
       }
