@@ -670,35 +670,34 @@ namespace Carousel {
           .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
         
         prevArrow.addEventListener('click', (): void => {
-
           clearInterval(this.timer);
 
           this.count--;
 
-          if (this.count === -1) {
-
-            this.count = oItemLength - 3;
-
-            Utils.setCss(oList, {
-              transition: `null !important`,
-              // transform: `translateX(
-              //   ${-(oItemLength + 3) * oItemWidth}
-              // px) !important`,
-            }); 
-
-            
-          } 
-
-
-          // 左移
+          //左移
           Utils.setCss(oList, {
-            transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}`,
+            transition: `all ${
+              yyg_settings.duringTime
+            }s ${yyg_settings.easing}`,
             transform: `translateX(${
               -(this.count) * oItemWidth
             }px)`,
           });
 
         });
+
+        oList.addEventListener('transitionend', () => { 
+          if (this.count === 0) {
+            this.count = oItemLength - 2;
+
+            Utils.setCss(oList, {
+              transition: `null`,
+              transform: `translateX(${
+                -(this.count) * oItemWidth
+              }px)`,
+            });
+          }
+        }, false);
 
       }
     }
