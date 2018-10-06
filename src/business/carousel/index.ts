@@ -259,10 +259,9 @@ namespace Carousel {
         oListWidth: number,
         oItemLength: number,
       ): void {
-
         Utils.setCss(oList, {
           transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}; `,
-          transform: `translateX(-${oListWidth / (oItemLength) *(count)}px)`,
+          transform: `translateX(-${oListWidth / (oItemLength) *(count + 1)}px)`,
         });
       }
 
@@ -281,7 +280,7 @@ namespace Carousel {
           Utils.removeClass(outer, 'yyg-dot-item-active');
         }
 
-        count === oItemLength
+        ++count === oItemLength
           ? Utils.addClass(
               oDotsItem[0],
               'yyg-dot-item-active',
@@ -575,15 +574,16 @@ namespace Carousel {
         oList.addEventListener('transitionend', () => {
           // 执行钩子函数
           yyg_settings.afterChange
-          && yyg_settings.afterChange();
-
-          if (this.count > oItemLength - 1) {
-            
+            && yyg_settings.afterChange();
+          
+          if (this.count > oItemLength) {
             this.count = 2;
 
             Utils.setCss(oList, {
               transition: null,
-              transform: `translateX(${-(this.count - 1) * oItemWidth}px)`
+              transform: `translateX(${
+                -(this.count) * oItemWidth
+              }px)`,
             });
           }
         }, false);  
@@ -760,7 +760,7 @@ Carousel.config({
   autoPlay: true,
   // easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
   easing: 'ease-in-out',
-  delayTime: 300000,
+  delayTime: 1500,
   isHoverPause: true,
   duringTime: 1,
 }).render('#app');
