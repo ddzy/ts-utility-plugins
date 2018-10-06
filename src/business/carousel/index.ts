@@ -1,7 +1,8 @@
 /**
- * @name: business-carousel 业务轮播
+ * @name: business-carousel
+ * @description 业务轮播插件
  * @author: yyg
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 
@@ -272,7 +273,7 @@ namespace Carousel {
         oItemLength: number,
         oDotsItem: ArrayLike<HTMLSpanElement>,
       ): void {
-        
+
         for (let i = 0, outer; outer = oDotsItem[i++];) {
           Utils.removeClass(outer, 'yyg-dot-item-active');
         }
@@ -486,7 +487,7 @@ namespace Carousel {
           .yyg-content-list {
             width: ${(dataSource.length + 2) * 100}%;
             height: 100%;
-            transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
+            // transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
             transform: translateX(-${
               100 / (dataSource.length + 2)
             }%); 
@@ -655,6 +656,9 @@ namespace Carousel {
       }
 
 
+      /**
+       * 处理 箭头 点击
+       */
       public handleArrowClick(): void {
 
         const oList = this.oList;
@@ -666,20 +670,34 @@ namespace Carousel {
           .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
         
         prevArrow.addEventListener('click', (): void => {
+
           clearInterval(this.timer);
 
-          if (this.count -- <= 0) {
-            this.count = oItemLength - 2;
-          }
+          this.count--;
 
-          console.log(this.count);
-          
+          if (this.count === -1) {
+
+            this.count = oItemLength - 3;
+
+            Utils.setCss(oList, {
+              transition: `null !important`,
+              // transform: `translateX(
+              //   ${-(oItemLength + 3) * oItemWidth}
+              // px) !important`,
+            }); 
+
+            
+          } 
+
+
           // 左移
           Utils.setCss(oList, {
+            transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}`,
             transform: `translateX(${
-              -this.count * oItemWidth
+              -(this.count) * oItemWidth
             }px)`,
           });
+
         });
 
       }
@@ -721,7 +739,7 @@ Carousel.config({
   autoPlay: true,
   // easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
   easing: 'ease-in-out',
-  delayTime: 3000,
+  delayTime: 300000,
   isHoverPause: true,
   duringTime: 1,
 }).render('#app');
