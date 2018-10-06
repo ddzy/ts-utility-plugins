@@ -280,15 +280,19 @@ namespace Carousel {
           Utils.removeClass(outer, 'yyg-dot-item-active');
         }
 
-        ++count === oItemLength
-          ? Utils.addClass(
-              oDotsItem[0],
-              'yyg-dot-item-active',
-            )
-          : Utils.addClass(
-              oDotsItem[count - 2],
-              'yyg-dot-item-active',
-            );
+        if (count === oItemLength - 1) {
+          Utils.addClass(oDotsItem[0], 'yyg-dot-item-active');
+        } else if (++count === 1) {
+          Utils.addClass(
+            oDotsItem[oItemLength - 3],
+            'yyg-dot-item-active',
+          );
+        } else {
+          Utils.addClass(
+            oDotsItem[count - 2],
+            'yyg-dot-item-active',
+          );
+        }
       }
 
 
@@ -665,6 +669,7 @@ namespace Carousel {
       public handleArrowClick(): void {
 
         const oList = this.oList;
+        const oDotsItem = this.oDotsItem;
         const oItemWidth = this.oItemWidth;
         const oItemLength = this.oItemLength;
         const prevArrow = Utils
@@ -688,7 +693,13 @@ namespace Carousel {
             }px)`,
           });
 
-          this.handleAutoScroll();
+          Scroll._aidedChangeDotsStyle(
+            this.count,
+            oItemLength,
+            oDotsItem
+          );
+
+          // this.handleAutoScroll();
 
         }, false);
 
