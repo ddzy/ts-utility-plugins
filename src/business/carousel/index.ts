@@ -325,6 +325,8 @@ namespace Carousel {
       private oList: any = null;
       private oDotsItem: any = null;
       private oListItem: any = null;
+      private oPrevArrow: any = null;
+      private oNextArrow: any = null;
       private oListWidth: number = 0;
       private oItemLength: number = 0;
       private oItemWidth: number = 0;
@@ -367,6 +369,8 @@ namespace Carousel {
         this.oListWidth = this.oList.offsetWidth;
         this.oDotsItem = Utils.getAllEle('.yyg-dot-item');
         this.oListItem = Utils.getAllEle('.yyg-content-item');
+        this.oPrevArrow = Utils.getEle('.yyg-arrow-prev-wrapper');
+        this.oNextArrow = Utils.getEle('.yyg-arrow-next-wrapper');
         this.oItemLength = this.oListItem.length;
         this.oItemWidth = this.oListWidth / this.oItemLength;
       }
