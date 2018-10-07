@@ -732,22 +732,24 @@ namespace Carousel {
         nextArrow.addEventListener('click', () => {
           clearInterval(this.timer);
 
-          this.count++;
+          Utils.throttle(Scroll.MIN_CLICK_DELAY_TIME, () => {
+            this.count++;
 
-          Utils.setCss(oList, {
-            transition: `all ${
-              yyg_settings.duringTime
-            }s ${yyg_settings.easing}`,
-            transform: `translateX(${
-              -(this.count) * oItemWidth
-              }px)`,
+            Utils.setCss(oList, {
+              transition: `all ${
+                yyg_settings.duringTime
+              }s ${yyg_settings.easing}`,
+              transform: `translateX(${
+                -(this.count) * oItemWidth
+                }px)`,
+            });
+
+            Scroll._aidedChangeDotsStyle(
+              this.count,
+              oItemLength,
+              oDotsItem
+            );
           });
-
-          Scroll._aidedChangeDotsStyle(
-            this.count,
-            oItemLength,
-            oDotsItem
-          );
 
           this.handleAutoScroll();
         }, false);
