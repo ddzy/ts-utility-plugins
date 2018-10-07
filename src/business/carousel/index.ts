@@ -635,10 +635,8 @@ namespace Carousel {
        */
       public handleImgHover(): void {
         const oListItem = this.oListItem;
-        const oLeftArrow = Utils
-          .getEle('.yyg-arrow-prev-wrapper') as HTMLDivElement;
-        const oRightArrow = Utils
-          .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
+        const oLeftArrow = this.oPrevArrow;
+        const oRightArrow = this.oNextArrow;
         
         for (const key in oListItem) {
           if (oListItem.hasOwnProperty(key)) {
@@ -729,10 +727,8 @@ namespace Carousel {
         const oList = this.oList;
         const oItemWidth = this.oItemWidth;
         const oItemLength = this.oItemLength;
-        const prevArrow = Utils
-          .getEle('.yyg-arrow-prev-wrapper') as HTMLDivElement;
-        const nextArrow = Utils
-          .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
+        const prevArrow = this.oPrevArrow;
+        const nextArrow = this.oNextArrow;
                  
         // 左箭头
         prevArrow.addEventListener('click', (): void => {
