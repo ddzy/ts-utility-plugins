@@ -754,7 +754,7 @@ namespace Carousel {
         oPrevArrow && oPrevArrow.addEventListener('mouseenter', () => {
           this.aidedHandleArrowVisible(true);
         }, false);
-        oNextArrow && oNextArrow.addEventListener('mouseleave', () => {
+        oNextArrow && oNextArrow.addEventListener('mouseenter', () => {
           this.aidedHandleArrowVisible(true);
         }, false)
 
