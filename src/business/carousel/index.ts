@@ -505,10 +505,10 @@ namespace Carousel {
             transition: all .5s ease-in-out;
           }
           .yyg-arrow-prev-wrapper {
-            left: -20px;
+            left: -10px;
           }
           .yyg-arrow-next-wrapper {
-            right: -20px;
+            right: -10px;
           }
           .yyg-content-wrapper {
             overflow: hidden;
