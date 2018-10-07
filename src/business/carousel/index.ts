@@ -691,7 +691,6 @@ namespace Carousel {
       public handleArrowClick(): void {
 
         const oList = this.oList;
-        const oDotsItem = this.oDotsItem;
         const oItemWidth = this.oItemWidth;
         const oItemLength = this.oItemLength;
         const prevArrow = Utils
