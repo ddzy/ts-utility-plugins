@@ -114,6 +114,8 @@ namespace Carousel {
 
 
   namespace Utils {
+
+    let lastClickTime: number = 0;
   
     /**
      * 获取元素
@@ -239,6 +241,27 @@ namespace Carousel {
 
       return Utils;
     }
+
+
+    /**
+     * 节流 
+     * @param time 过渡时间
+     * @param callback 回调函数
+     */
+    export function throttle(
+      time: number,
+      callback: () => void,
+    ) {
+      const currentClickTime: number = new Date().getTime();
+
+      if (
+        currentClickTime - lastClickTime >= time
+      ) {
+        callback();
+
+        lastClickTime = currentClickTime;
+      }
+    }
   
   };
   
@@ -247,8 +270,7 @@ namespace Carousel {
 
     export class Scroll {
 
-      // private static MIN_CLICK_DELAY_TIME: number = yyg_settings.duringTime || 1500;
-      // private static lastClickTime: number = 0;
+      private static MIN_CLICK_DELAY_TIME: number = yyg_settings.duringTime * 1000 || 1500;
 
       /**
        * 自动轮播辅助函数
@@ -676,28 +698,31 @@ namespace Carousel {
           .getEle('.yyg-arrow-prev-wrapper') as HTMLDivElement;
         const nextArrow = Utils
           .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
-        
+                        
         // 左箭头
         prevArrow.addEventListener('click', (): void => {
           clearInterval(this.timer);
 
-          this.count--;
+          // 节流处理
+          Utils.throttle(Scroll.MIN_CLICK_DELAY_TIME, () => {
+            this.count--;
 
-          //左移
-          Utils.setCss(oList, {
-            transition: `all ${
-              yyg_settings.duringTime
-            }s ${yyg_settings.easing}`,
-            transform: `translateX(${
-              -(this.count) * oItemWidth
-            }px)`,
+            Utils.setCss(oList, {
+              transition: `all ${
+                yyg_settings.duringTime
+                }s ${yyg_settings.easing}`,
+              transform: `translateX(${
+                -(this.count) * oItemWidth
+                }px)`,
+            });
+
+            Scroll._aidedChangeDotsStyle(
+              this.count,
+              oItemLength,
+              oDotsItem
+            );
           });
 
-          Scroll._aidedChangeDotsStyle(
-            this.count,
-            oItemLength,
-            oDotsItem
-          );
 
           this.handleAutoScroll();
 
@@ -776,6 +801,12 @@ Carousel.config({
       url: '',
       target: '',
     },
+    }, {
+      text: 'Slide Five',
+      img: {
+        url: '',
+        target: '',
+      },
   }],
   showArrows: true,
   showDots: true,
