@@ -646,27 +646,13 @@ namespace Carousel {
             element.addEventListener('mouseenter', () => {
               clearInterval(this.timer);
 
-              Utils.addClass(
-                oLeftArrow,
-                'yyg-prev-wrapper-active'
-              );
-              Utils.addClass(
-                oRightArrow,
-                'yyg-next-wrapper-active'
-              );
+              this.aidedHandleArrowVisible(yyg_settings.showArrows);
             }, false);
 
             element.addEventListener('mouseleave', () => {
               this.handleAutoScroll();
 
-              Utils.removeClass(
-                oLeftArrow,
-                'yyg-prev-wrapper-active'
-              );
-              Utils.removeClass(
-                oRightArrow,
-                'yyg-next-wrapper-active',
-              );
+              this.aidedHandleArrowVisible(false);
             }, false);
           }
         }
@@ -875,7 +861,7 @@ Carousel.config({
         target: '',
       },
   }],
-  showArrows: true,
+  showArrows: false,
   showDots: true,
   autoPlay: true,
   // easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
