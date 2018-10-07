@@ -728,7 +728,7 @@ namespace Carousel {
 
 
       /**
-       * 
+       * 箭头点击切换辅助函数
        * @param whichArrow 哪边箭头
        */
       public aidedHandleArrowClick(
