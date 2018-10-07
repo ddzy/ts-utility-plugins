@@ -749,7 +749,6 @@ namespace Carousel {
             oDotsItem
           );
 
-          // 自动滚动
           this.handleAutoScroll();
         }, false);
 
