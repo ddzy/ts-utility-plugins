@@ -701,57 +701,12 @@ namespace Carousel {
                         
         // 左箭头
         prevArrow.addEventListener('click', (): void => {
-          clearInterval(this.timer);
-
-          // 节流处理
-          Utils.throttle(Scroll.MIN_CLICK_DELAY_TIME, () => {
-            this.count--;
-
-            Utils.setCss(oList, {
-              transition: `all ${
-                yyg_settings.duringTime
-                }s ${yyg_settings.easing}`,
-              transform: `translateX(${
-                -(this.count) * oItemWidth
-                }px)`,
-            });
-
-            Scroll._aidedChangeDotsStyle(
-              this.count,
-              oItemLength,
-              oDotsItem
-            );
-          });
-
-
-          this.handleAutoScroll();
-
+          this.aidedHandleArrowClick('left');
         }, false);
 
         // 右箭头
         nextArrow.addEventListener('click', () => {
-          clearInterval(this.timer);
-
-          Utils.throttle(Scroll.MIN_CLICK_DELAY_TIME, () => {
-            this.count++;
-
-            Utils.setCss(oList, {
-              transition: `all ${
-                yyg_settings.duringTime
-              }s ${yyg_settings.easing}`,
-              transform: `translateX(${
-                -(this.count) * oItemWidth
-                }px)`,
-            });
-
-            Scroll._aidedChangeDotsStyle(
-              this.count,
-              oItemLength,
-              oDotsItem
-            );
-          });
-
-          this.handleAutoScroll();
+          this.aidedHandleArrowClick('right');
         }, false);
 
         oList.addEventListener('transitionend', () => { 
@@ -769,6 +724,54 @@ namespace Carousel {
           });
         }, false);
 
+      }
+
+
+      /**
+       * 
+       * @param whichArrow 哪边箭头
+       */
+      public aidedHandleArrowClick(
+        whichArrow: string,
+      ): void {
+        const oList = this.oList;
+        const oDotsItem = this.oDotsItem;
+        const oItemWidth = this.oItemWidth;
+        const oItemLength = this.oItemLength;
+
+        clearInterval(this.timer);
+
+        // 节流处理
+        Utils.throttle(Scroll.MIN_CLICK_DELAY_TIME, () => {
+          
+          switch (whichArrow) {
+            case 'left':
+              this.count--;
+              break;
+            case 'right':
+              this.count++;
+              break;
+            default:
+              break;
+          }
+
+          Utils.setCss(oList, {
+            transition: `all ${
+              yyg_settings.duringTime
+              }s ${yyg_settings.easing}`,
+            transform: `translateX(${
+              -(this.count) * oItemWidth
+              }px)`,
+          });
+
+          Scroll._aidedChangeDotsStyle(
+            this.count,
+            oItemLength,
+            oDotsItem
+          );
+        });
+
+        this.handleAutoScroll();
       }
     }
 
