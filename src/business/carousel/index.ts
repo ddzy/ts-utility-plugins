@@ -871,6 +871,7 @@ namespace Carousel {
       public init(): void {
         if (yyg_el) {
           yyg_el.innerHTML = this.createDOM();
+          this.createStyle();
         }
       }
 
@@ -937,7 +938,112 @@ namespace Carousel {
 
 
       public createStyle(): void {
+        let oStyle: HTMLElement | null = Utils
+        .getEle('style');
+      const { dataSource } = yyg_settings;
 
+      // style标签不存在
+      if(!oStyle) {
+        oStyle = document.createElement('style');
+        const oHead = Utils
+          .getEle('head') as HTMLHeadElement;
+          
+        oHead.appendChild(oStyle);
+      }
+
+      oStyle.innerText += `
+        .yyg-carousel-container {
+          box-sizing: border-box;
+          height: 100%;
+          padding: 10px;
+          border: 5px solid #1890ff;
+          border-radius: 20px;
+        }
+        .yyg-carousel-main {
+          position: relative;
+          height: 100%;
+        }
+        .yyg-arrow-wrapper {
+          position: absolute;
+          z-index: 999;
+          top: 50%;
+          width: 30px;
+          heigth: 45px;
+          border-top-right-radius: 15px;
+          border-bottom-right-radius: 15px;
+          background-clip: padding-box;
+          background-color: rgba(0,0,0,.5);
+          color: #fff;
+          line-height: 45px;
+          font-size: 24px;
+          text-align: center;
+          cursor: pointer;
+          user-select: none;
+          transform: translateY(-50%);
+          transition: all .5s ease-in-out;
+        }
+        .yyg-arrow-prev-wrapper {
+          left: 15px;
+        }
+        .yyg-arrow-next-wrapper {
+          right: 15px;
+        }
+        .yyg-content-wrapper {
+          overflow: hidden;
+          height: 100%;
+        }
+        .yyg-content-list {
+          width: ${(dataSource.length) * 100}%;
+          height: 100%;
+          // transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
+        }
+        .yyg-content-item {
+          float: left;
+          width: ${100 / (dataSource.length)}%;
+          height: 100%;
+          text-align: center;
+        }
+        .yyg-content-item a img {
+          display: block;
+          max-width: 100%;
+          height: 100%;
+          border-radius: 6px;
+        }
+        .yyg-dots-wrapper {
+          position: absolute;
+          left: 50%;
+          bottom: 10px;
+          padding: 2px 0;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          background-color: rgba(0,0,0,.5);
+          font-size: 0;
+          transform: translateX(-50%);
+        }
+        .yyg-dot-item {
+          display: inline-block;
+          margin-left: 5px;
+          width: 12px;
+          height: 12px;
+          background-color: #fff;
+          border-radius: 50%;
+          transition: all .5s ease-in-out;
+        }
+        .yyg-dot-item:last-child {
+          margin-right: 5px;
+        }
+        .yyg-dot-item-active {
+          background-color: #d50;
+        }
+        .yyg-prev-wrapper-active {
+          left: 15px;
+          opacity: 1;
+        }
+        .yyg-next-wrapper-active {
+          right: 15px;
+          opacity: 1;
+        }
+      `;
       }
 
     }
