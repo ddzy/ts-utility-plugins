@@ -485,7 +485,6 @@ namespace Carousel {
             height: 100%;
           }
           .yyg-arrow-wrapper {
-            display: none;
             position: absolute;
             z-index: 999;
             top: 50%;
@@ -496,19 +495,20 @@ namespace Carousel {
             background-clip: padding-box;
             background-color: rgba(0,0,0,.5);
             color: #fff;
+            opacity: 0;
             line-height: 45px;
             font-size: 24px;
             text-align: center;
             cursor: pointer;
             user-select: none;
-            transform: translate(-60px,-50%);
-            opacity: 0;
+            transform: translateY(-50%);
+            transition: all .5s ease-in-out;
           }
           .yyg-arrow-prev-wrapper {
-            left: 15px;
+            left: -20px;
           }
           .yyg-arrow-next-wrapper {
-            right: 15px;
+            right: -20px;
           }
           .yyg-content-wrapper {
             overflow: hidden;
@@ -559,6 +559,14 @@ namespace Carousel {
           }
           .yyg-dot-item-active {
             background-color: #d50;
+          }
+          .yyg-prev-wrapper-active {
+            left: 15px;
+            opacity: 1;
+          }
+          .yyg-next-wrapper-active {
+            right: 15px;
+            opacity: 1;
           }
         `;
       }
@@ -699,7 +707,7 @@ namespace Carousel {
           .getEle('.yyg-arrow-prev-wrapper') as HTMLDivElement;
         const nextArrow = Utils
           .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
-                        
+                 
         // 左箭头
         prevArrow.addEventListener('click', (): void => {
           this.aidedHandleArrowClick('left');
