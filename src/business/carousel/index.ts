@@ -485,6 +485,7 @@ namespace Carousel {
             height: 100%;
           }
           .yyg-arrow-wrapper {
+            display: none;
             position: absolute;
             z-index: 999;
             top: 50%;
@@ -500,7 +501,8 @@ namespace Carousel {
             text-align: center;
             cursor: pointer;
             user-select: none;
-            transform: translateY(-50%);
+            transform: translate(-60px,-50%);
+            opacity: 0;
           }
           .yyg-arrow-prev-wrapper {
             left: 15px;
