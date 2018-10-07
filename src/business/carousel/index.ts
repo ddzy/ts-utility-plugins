@@ -108,7 +108,16 @@ namespace Carousel {
 
     // 调用轮播图
     export function initWhichEffect(): void {
-      new Main.Scroll({});
+      switch (yyg_settings.effect) {
+        case 'scroll':
+          new Main.Scroll({});
+          break;
+        case 'fade':
+          new Main.Fade();
+          break;  
+        default:
+          break;
+      }
     }
   }
 
@@ -847,6 +856,11 @@ namespace Carousel {
       }
     }
 
+
+    export class Fade {
+
+    }
+
   }
 
 }
@@ -887,11 +901,17 @@ Carousel.config({
   showArrows: true,
   showDots: true,
   autoPlay: true,
-  // easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
   easing: 'ease-in-out',
-  delayTime: 1500,
+  delayTime: 2000,
   isHoverPause: true,
   duringTime: 1,
+  beforeChange: () => {
+    console.log('before__change');
+  },
+  afterChange: () => {
+    console.log('after__change');
+  },
+  effect: 'fade',
 }).render('#app');
 
   
