@@ -871,6 +871,10 @@ namespace Carousel {
       private oDotsItemLength: number = 0;
 
 
+      private timer: number = 0;
+      private count: number = 1;
+
+
       public constructor(
         _props: IProps.IMainFadeProps
       ) {
@@ -1083,7 +1087,7 @@ namespace Carousel {
 
 
       public handleAutoFade(): void {
-        
+
       }
 
     }
