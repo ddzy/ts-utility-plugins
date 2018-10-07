@@ -41,7 +41,7 @@ StarsLine
 ```
 
 ## business-carousel
-> 封装的```轮播```插件, 用法及其简单, 页面只需```一个div```元素, 不用撰写烦人的DOM解构, 往后全自动  
+> 封装的```轮播```插件, 用法及其简单, 页面只需```一个div```元素, 不用撰写烦人的DOM, 插件会自动生成DOMTree
 > 可自定义常用配置项
 1. 基本用法
 ```
@@ -53,7 +53,7 @@ Carousel
 ```
 Carousel
   .config({
-    dataSource: {           // 基本数据 
+    dataSource: {           // 基本数据, 必需 
       text: string,
       img: {
         url: string,
@@ -72,4 +72,9 @@ Carousel
     duringTime?:                     // 过渡时间      d.1500
     isHoverPause?:                   // 鼠标放置是否停止轮播  d.true
   })
+```
+3. effet
+```
+Carousel.config({ effect: 'fade' | 'scroll'  })
+目前只支持 Fade & Scroll 两种状态轮播图
 ```
