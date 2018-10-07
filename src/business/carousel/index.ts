@@ -66,7 +66,9 @@ namespace Carousel {
       afterChange?: () => void;
     }
 
-    export interface IMainScrollProps {}
+    export interface IMainScrollProps { }
+    
+    export interface IMainFadeProps { }
   }
 
 
@@ -113,7 +115,7 @@ namespace Carousel {
           new Main.Scroll({});
           break;
         case 'fade':
-          new Main.Fade();
+          new Main.Fade({});
           break;  
         default:
           break;
@@ -859,6 +861,85 @@ namespace Carousel {
 
     export class Fade {
 
+      public constructor(
+        _props: IProps.IMainFadeProps
+      ) {
+        this.init();
+      }
+
+
+      public init(): void {
+        if (yyg_el) {
+          yyg_el.innerHTML = this.createDOM();
+        }
+      }
+
+
+      public createDOM(): string {
+        const dataSource: any[] = yyg_settings.dataSource;
+        const { showArrows, showDots } = yyg_settings;
+        let dotsSpan: string = '';
+        let contentLi: string = '';
+        
+        dataSource.forEach((item: any, index: number) => {
+          dotsSpan += `
+            <span
+              class="yyg-dot-item${
+                index === 0
+                ? ' yyg-dot-item-active'
+                : ''
+              }"
+              data-id=${index + 1}
+            ></span>
+          `;
+          contentLi += `
+            <li class="yyg-content-item" data-id=${index + 1}>
+              ${
+                item.img.url
+                  ? `<a
+                      href=${item.img.target}
+                     ><img src=${item.img.url} alt="图片提示" /></a>`
+                  : item.text
+              }
+            </li>
+          `;
+        });
+
+        const final: string = `
+          <div class="yyg-carousel-container">
+            <div class="yyg-carousel-main">
+              <div class="yyg-content-wrapper">
+                <ul class="yyg-content-list">${contentLi}</ul>
+              </div>
+              ${
+                showArrows
+                  ? `
+                    <div class="yyg-arrow-wrapper yyg-arrow-prev-wrapper">
+                      <i class="yyg-arrow yyg-arrow-prev">&lt;</i>
+                    </div>
+                    <div class="yyg-arrow-wrapper yyg-arrow-next-wrapper">
+                      <i class="yyg-arrow yyg-arrow-next">&gt;</i>
+                    </div>
+                  `
+                  : ''
+                }
+              ${
+                showDots
+                  ? `<div class="yyg-dots-wrapper">${dotsSpan}</div>`
+                  : ''
+              }
+            </div>
+          </div>
+        `;
+
+        return final;
+      }
+
+
+      public createStyle(): void {
+
+      }
+
     }
 
   }
@@ -905,12 +986,6 @@ Carousel.config({
   delayTime: 2000,
   isHoverPause: true,
   duringTime: 1,
-  beforeChange: () => {
-    console.log('before__change');
-  },
-  afterChange: () => {
-    console.log('after__change');
-  },
   effect: 'fade',
 }).render('#app');
 
