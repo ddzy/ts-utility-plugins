@@ -1041,6 +1041,7 @@ namespace Carousel {
           position: absolute;
           left: 50%;
           bottom: 10px;
+          z-index: 888;
           padding: 2px 0;
           border: 1px solid #ccc;
           border-radius: 8px;
