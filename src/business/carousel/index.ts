@@ -872,7 +872,7 @@ namespace Carousel {
 
 
       private timer: number = 0;
-      private count: number = 1;
+      private count: number = 0;
 
 
       public constructor(
@@ -1086,8 +1086,29 @@ namespace Carousel {
       }
 
 
+      /**
+       * 处理 自动轮播
+       */
       public handleAutoFade(): void {
+        const oContentItem = this.oContentItem;
 
+        this.timer = setInterval(() => {
+          this.count++;
+
+          Utils.setCss(oContentItem[this.count], {
+            'z-index': `${this.count + 1}`,
+            'opacity': 1,
+          })
+        }, yyg_settings.delayTime);
+
+
+        oContentItem.forEach((item: any) => {
+          item && item.addEventListener('transitionend', () => {
+            Utils.setCss(item, {
+              opacity: 0,
+            });
+          }, false);
+        });
       }
 
     }
