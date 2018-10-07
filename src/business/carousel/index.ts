@@ -219,10 +219,10 @@ namespace Carousel {
      * @param className 类名
      */
     export function addClass(
-      el: HTMLElement,
+      el: HTMLElement | null,
       className: string,
     ): any {
-      el.classList.add(className);
+      el && el.classList.add(className);
 
       return Utils;
     }
@@ -234,10 +234,10 @@ namespace Carousel {
      * @param className 类名
      */
     export function removeClass(
-      el: HTMLElement,
+      el: HTMLElement | null,
       className: string,
     ): any {
-      el.classList.remove(className);
+      el && el.classList.remove(className);
 
       return Utils;
     }
@@ -717,12 +717,12 @@ namespace Carousel {
         const nextArrow = this.oNextArrow;
                  
         // 左箭头
-        prevArrow.addEventListener('click', (): void => {
+        prevArrow && prevArrow.addEventListener('click', (): void => {
           this.aidedHandleArrowClick('left');
         }, false);
 
         // 右箭头
-        nextArrow.addEventListener('click', () => {
+        nextArrow && nextArrow.addEventListener('click', () => {
           this.aidedHandleArrowClick('right');
         }, false);
 
