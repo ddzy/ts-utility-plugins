@@ -356,6 +356,8 @@ namespace Carousel {
             && this.handleDotsHover();
           yyg_settings.showArrows
             && this.handleArrowClick();
+          yyg_settings.showArrows
+            && this.handleArrowHover();
         }
       }
 
@@ -738,6 +740,23 @@ namespace Carousel {
             }px)`,
           });
         }, false);
+
+      }
+
+
+      /**
+       * 悬浮箭头, 箭头显隐(解决bug)
+       */
+      public handleArrowHover(): void {
+        const oPrevArrow = this.oPrevArrow;
+        const oNextArrow = this.oNextArrow;
+
+        oPrevArrow && oPrevArrow.addEventListener('mouseenter', () => {
+          this.aidedHandleArrowVisible(true);
+        }, false);
+        oNextArrow && oNextArrow.addEventListener('mouseleave', () => {
+          this.aidedHandleArrowVisible(true);
+        }, false)
 
       }
 
