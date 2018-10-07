@@ -861,6 +861,16 @@ namespace Carousel {
 
     export class Fade {
 
+
+      private oContentItem: any = null;
+      private oPrevWrapper: any = null;
+      private oNextWrapper: any = null;
+      private oDotsWrapper: any = null;
+      private oDotsItem: any = null;
+      private oContentItemLength: number = 0;
+      private oDotsItemLength: number = 0;
+
+
       public constructor(
         _props: IProps.IMainFadeProps
       ) {
@@ -872,6 +882,8 @@ namespace Carousel {
         if (yyg_el) {
           yyg_el.innerHTML = this.createDOM();
           this.createStyle();
+
+          this.initCommonEle();
         }
       }
 
@@ -940,7 +952,7 @@ namespace Carousel {
       public createStyle(): void {
         let oStyle: HTMLElement | null = Utils
         .getEle('style');
-      const { dataSource } = yyg_settings;
+        const { dataSource } = yyg_settings;
 
       // style标签不存在
       if(!oStyle) {
@@ -1048,6 +1060,17 @@ namespace Carousel {
           opacity: 1;
         }
       `;
+      }
+
+
+      public initCommonEle(): void {
+        this.oContentItem = Utils.getAllEle('.yyg-content-item');
+        this.oDotsItem = Utils.getAllEle('.yyg-dot-item');
+        this.oDotsWrapper = Utils.getEle('.yyg-dots-wrapper');
+        this.oPrevWrapper = Utils.getEle('.yyg-arrow-prev-wrapper');
+        this.oNextWrapper = Utils.getEle('.yyg-arrow-next-wrapper');
+        this.oContentItemLength = this.oContentItem.length;
+        this.oDotsItemLength = this.oDotsItem.length;
       }
 
     }
