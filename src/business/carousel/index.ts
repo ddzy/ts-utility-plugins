@@ -631,6 +631,10 @@ namespace Carousel {
        */
       public handleImgHover(): void {
         const oListItem = this.oListItem;
+        const oLeftArrow = Utils
+          .getEle('.yyg-arrow-prev-wrapper') as HTMLDivElement;
+        const oRightArrow = Utils
+          .getEle('.yyg-arrow-next-wrapper') as HTMLDivElement;
         
         for (const key in oListItem) {
           if (oListItem.hasOwnProperty(key)) {
@@ -639,10 +643,28 @@ namespace Carousel {
             
             element.addEventListener('mouseenter', () => {
               clearInterval(this.timer);
+
+              Utils.addClass(
+                oLeftArrow,
+                'yyg-prev-wrapper-active'
+              );
+              Utils.addClass(
+                oRightArrow,
+                'yyg-next-wrapper-active'
+              );
             }, false);
 
             element.addEventListener('mouseleave', () => {
               this.handleAutoScroll();
+
+              Utils.removeClass(
+                oLeftArrow,
+                'yyg-prev-wrapper-active'
+              );
+              Utils.removeClass(
+                oRightArrow,
+                'yyg-next-wrapper-active',
+              );
             }, false);
           }
         }
