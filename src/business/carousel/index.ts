@@ -993,15 +993,19 @@ namespace Carousel {
           height: 100%;
         }
         .yyg-content-list {
-          width: ${(dataSource.length) * 100}%;
+          position: relative;
           height: 100%;
-          // transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
         }
         .yyg-content-item {
-          float: left;
-          width: ${100 / (dataSource.length)}%;
+          position: absolute;
+          width: 100%;
           height: 100%;
           text-align: center;
+          opacity: 0;
+          transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
+        }
+        .yyg-content-item:first-child {
+          opacity: 1;
         }
         .yyg-content-item a img {
           display: block;
