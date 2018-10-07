@@ -804,6 +804,38 @@ namespace Carousel {
 
         this.handleAutoScroll();
       }
+
+      
+      /**
+       * 控制箭头显隐 辅助函数
+       * @param show 箭头显隐
+       */
+      public aidedHandleArrowVisible(
+        show: boolean,
+      ): void {
+        const oPrevArrow = this.oPrevArrow;
+        const oNextArrow = this.oNextArrow;
+
+        if (show) {
+          Utils.addClass(
+            oPrevArrow,
+            'yyg-prev-wrapper-active'
+          );
+          Utils.addClass(
+            oNextArrow,
+            'yyg-next-wrapper-active'
+          );
+        } else {
+          Utils.removeClass(
+            oPrevArrow,
+            'yyg-prev-wrapper-active'
+          );
+          Utils.removeClass(
+            oNextArrow,
+            'yyg-next-wrapper-active',
+          );
+        }
+      }
     }
 
   }
@@ -836,7 +868,7 @@ Carousel.config({
       url: '',
       target: '',
     },
-    }, {
+  },{
       text: 'Slide Five',
       img: {
         url: '',
