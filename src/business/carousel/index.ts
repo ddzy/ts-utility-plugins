@@ -635,8 +635,6 @@ namespace Carousel {
        */
       public handleImgHover(): void {
         const oListItem = this.oListItem;
-        const oLeftArrow = this.oPrevArrow;
-        const oRightArrow = this.oNextArrow;
         
         for (const key in oListItem) {
           if (oListItem.hasOwnProperty(key)) {
@@ -861,7 +859,7 @@ Carousel.config({
         target: '',
       },
   }],
-  showArrows: false,
+  showArrows: true,
   showDots: true,
   autoPlay: true,
   // easing: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
