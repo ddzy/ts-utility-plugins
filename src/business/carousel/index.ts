@@ -1091,6 +1091,7 @@ namespace Carousel {
        */
       public handleAutoFade(): void {
         const oContentItem = this.oContentItem;
+        const oContentItemLength = this.oContentItemLength;
 
         this.timer = setInterval(() => {
           this.count++;
@@ -1101,9 +1102,12 @@ namespace Carousel {
           })
         }, yyg_settings.delayTime);
 
-
         oContentItem.forEach((item: any) => {
           item && item.addEventListener('transitionend', () => {
+            this.count = this.count >= oContentItemLength - 1
+              ? -1
+              : this.count;
+
             Utils.setCss(item, {
               opacity: 0,
             });
