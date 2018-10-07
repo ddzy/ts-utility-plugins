@@ -541,6 +541,7 @@ namespace Carousel {
             border-radius: 6px;
           }
           .yyg-dots-wrapper {
+            display: none;
             position: absolute;
             left: 50%;
             bottom: 10px;
@@ -667,7 +668,12 @@ namespace Carousel {
         const oList = this.oList;
         const oItemWidth = this.oItemWidth;
         const oDotsItem = this.oDotsItem;
+        const oDotsWrapper = Utils
+          .getEle('.yyg-dots-wrapper') as HTMLDivElement;
         
+        Utils.setCss(oDotsWrapper, {
+          display: 'block',
+        });
 
         for(let i = 0, outer: any; outer = oDotsItem[i++];) {
           
