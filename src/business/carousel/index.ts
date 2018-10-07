@@ -1091,7 +1091,9 @@ namespace Carousel {
        */
       public handleAutoFade(): void {
         const oContentItem = this.oContentItem;
+        const oDotsItem = this.oDotsItem;
         const oContentItemLength = this.oContentItemLength;
+        const oDotsItemLength = this.oDotsItemLength;
 
         this.timer = setInterval(() => {
           this.count++;
@@ -1100,6 +1102,15 @@ namespace Carousel {
             'z-index': `${this.count + 1}`,
             'opacity': 1,
           })
+
+          // dot栏样式
+          oDotsItem.forEach((item: any) => {
+            Utils.removeClass(item, 'yyg-dot-item-active');
+          });
+          Utils.addClass(
+            oDotsItem[this.count],
+            'yyg-dot-item-active'
+          );
         }, yyg_settings.delayTime);
 
         oContentItem.forEach((item: any) => {
