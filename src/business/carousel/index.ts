@@ -1094,7 +1094,6 @@ namespace Carousel {
         const oContentItem = this.oContentItem;
         const oDotsItem = this.oDotsItem;
         const oContentItemLength = this.oContentItemLength;
-        const oDotsItemLength = this.oDotsItemLength;
 
         this.timer = setInterval(() => {
           this.count++;
