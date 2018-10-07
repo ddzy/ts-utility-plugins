@@ -880,10 +880,18 @@ namespace Carousel {
 
       public init(): void {
         if (yyg_el) {
+          const {
+            showArrows,
+            showDots,
+            autoPlay,
+          } = yyg_settings;
+
           yyg_el.innerHTML = this.createDOM();
           this.createStyle();
 
           this.initCommonEle();
+
+          autoPlay && this.handleAutoFade();
         }
       }
 
@@ -1071,6 +1079,11 @@ namespace Carousel {
         this.oNextWrapper = Utils.getEle('.yyg-arrow-next-wrapper');
         this.oContentItemLength = this.oContentItem.length;
         this.oDotsItemLength = this.oDotsItem.length;
+      }
+
+
+      public handleAutoFade(): void {
+        
       }
 
     }
