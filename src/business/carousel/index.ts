@@ -863,6 +863,7 @@ namespace Carousel {
 
 
       private oContentItem: any = null;
+      private oArrowWrapper: any = null;
       private oPrevWrapper: any = null;
       private oNextWrapper: any = null;
       private oDotsWrapper: any = null;
@@ -894,8 +895,6 @@ namespace Carousel {
           this.createStyle();
 
           this.initCommonEle();
-
-          autoPlay && this.handleAutoFade();
         }
       }
 
@@ -1026,10 +1025,11 @@ namespace Carousel {
           height: 100%;
           text-align: center;
           opacity: 0;
-          transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
+          // transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
         }
         .yyg-content-item:first-child {
           opacity: 1;
+          z-index: 0;
         }
         .yyg-content-item a img {
           display: block;
@@ -1080,50 +1080,11 @@ namespace Carousel {
         this.oContentItem = Utils.getAllEle('.yyg-content-item');
         this.oDotsItem = Utils.getAllEle('.yyg-dot-item');
         this.oDotsWrapper = Utils.getEle('.yyg-dots-wrapper');
+        this.oArrowWrapper = Utils.getAllEle('.yyg-arrow-wrapper');
         this.oPrevWrapper = Utils.getEle('.yyg-arrow-prev-wrapper');
         this.oNextWrapper = Utils.getEle('.yyg-arrow-next-wrapper');
         this.oContentItemLength = this.oContentItem.length;
         this.oDotsItemLength = this.oDotsItem.length;
-      }
-
-
-      /**
-       * 处理 自动轮播
-       */
-      public handleAutoFade(): void {
-        const oContentItem = this.oContentItem;
-        const oDotsItem = this.oDotsItem;
-        const oContentItemLength = this.oContentItemLength;
-
-        this.timer = setInterval(() => {
-          this.count++;
-
-          Utils.setCss(oContentItem[this.count], {
-            'z-index': `${this.count + 1}`,
-            'opacity': 1,
-          })
-
-          // dot栏样式
-          oDotsItem.forEach((item: any) => {
-            Utils.removeClass(item, 'yyg-dot-item-active');
-          });
-          Utils.addClass(
-            oDotsItem[this.count],
-            'yyg-dot-item-active'
-          );
-        }, yyg_settings.delayTime);
-
-        oContentItem.forEach((item: any) => {
-          item && item.addEventListener('transitionend', () => {
-            this.count = this.count >= oContentItemLength - 1
-              ? -1
-              : this.count;
-
-            Utils.setCss(item, {
-              opacity: 0,
-            });
-          }, false);
-        });
       }
 
     }
