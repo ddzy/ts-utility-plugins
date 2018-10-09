@@ -1130,9 +1130,15 @@ namespace Carousel {
 
           this.count++;
 
-          
-
         }, delayTime);
+
+        oContentItem.forEach((item: any) => {
+          item.addEventListener('transitionend', () => {
+            if (this.count > oContentItemLength - 1) {
+              this.count = 0;
+            }
+          }, false);
+        });
 
       }
 
