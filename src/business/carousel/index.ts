@@ -895,6 +895,8 @@ namespace Carousel {
           this.createStyle();
 
           this.initCommonEle();
+
+          autoPlay && this.handleAutoPlay();
         }
       }
 
@@ -1085,6 +1087,14 @@ namespace Carousel {
         this.oNextWrapper = Utils.getEle('.yyg-arrow-next-wrapper');
         this.oContentItemLength = this.oContentItem.length;
         this.oDotsItemLength = this.oDotsItem.length;
+      }
+
+
+      /**
+       * 处理 自动轮播
+       */
+      public handleAutoPlay(): void {
+
       }
 
     }
