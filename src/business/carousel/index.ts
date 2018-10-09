@@ -1117,11 +1117,7 @@ namespace Carousel {
                 opacity: 1,
               });
 
-              // 添加dot栏样式
-              // Utils.addClass(
-              //   oDotsItem[this.count],
-              //   'yyg-dot-item-active',
-              // );
+              // dot栏样式改变
               oDotsItem.forEach((item: any, inx: number) => {
                 if (inx === this.count) {
                   Utils.addClass(item, 'yyg-dot-item-active');
