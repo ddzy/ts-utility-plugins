@@ -1094,6 +1094,45 @@ namespace Carousel {
        * 处理 自动轮播
        */
       public handleAutoPlay(): void {
+        const {
+          delayTime,
+          easing,
+          duringTime,
+        } = yyg_settings;
+        const oContentItem = this.oContentItem;
+        const oContentItemLength = this.oContentItemLength;
+        
+        this.timer = setInterval(() => {
+
+          oContentItem.forEach((item: any, index: number) => {
+            if (index === this.count) {
+              Utils.setCss(item, {
+                transition: `all ${
+                  duringTime
+                  }s ${
+                  easing
+                  }`,
+                'z-index': this.count + 1,
+                opacity: 1,
+              });
+            } else {
+              Utils.setCss(item, {
+                transition: `all ${
+                  duringTime
+                  }s ${
+                  easing
+                  }`,
+                'z-index': 0,
+                opacity: 0,
+              });
+            }
+          });
+
+          this.count++;
+
+          
+
+        }, delayTime);
 
       }
 
