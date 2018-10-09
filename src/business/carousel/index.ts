@@ -1100,6 +1100,7 @@ namespace Carousel {
           duringTime,
         } = yyg_settings;
         const oContentItem = this.oContentItem;
+        const oDotsItem = this.oDotsItem;
         const oContentItemLength = this.oContentItemLength;
         
         this.timer = setInterval(() => {
@@ -1114,6 +1115,19 @@ namespace Carousel {
                   }`,
                 'z-index': this.count + 1,
                 opacity: 1,
+              });
+
+              // 添加dot栏样式
+              // Utils.addClass(
+              //   oDotsItem[this.count],
+              //   'yyg-dot-item-active',
+              // );
+              oDotsItem.forEach((item: any, inx: number) => {
+                if (inx === this.count) {
+                  Utils.addClass(item, 'yyg-dot-item-active');
+                } else {
+                  Utils.removeClass(item, 'yyg-dot-item-active');
+                }
               });
             } else {
               Utils.setCss(item, {
