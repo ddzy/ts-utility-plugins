@@ -1156,7 +1156,65 @@ namespace Carousel {
        * 处理 箭头 点击
        */
       public handleArrowClick(): void {
-        
+        const {
+          duringTime,
+          easing,
+          delayTime,
+        } = yyg_settings;
+        const oPrevArrow = this.oPrevWrapper;
+        const oNextArrow = this.oNextWrapper;
+        const oContentItem = this.oContentItem;
+        const oContentItemLength = this.oContentItemLength;
+        const oDotsItem = this.oDotsItem;
+
+        // Right arrow
+        oNextArrow.addEventListener('click', () => {
+
+          clearInterval(this.timer);
+    
+          this.count++;
+
+          oContentItem.forEach((item: any, index: number) => {
+            if (index === this.count) {
+              Utils.setCss(item, {
+                transition: `all ${
+                  duringTime
+                  }s ${
+                  easing
+                  }`,
+                'z-index': this.count + 1,
+                opacity: 1,
+              });
+
+              // dot栏样式改变
+              oDotsItem.forEach((item: any, inx: number) => {
+                inx === this.count
+                  ? Utils.addClass(item, 'yyg-dot-item-active')
+                  : Utils.removeClass(item, 'yyg-dot-item-active');
+              });
+            }else {
+              Utils.setCss(item, {
+                transition: `all ${
+                  duringTime
+                  }s ${
+                  easing
+                  }`,
+                'z-index': 0,
+                opacity: 0,
+              });
+            }
+          });
+
+        });
+
+        // 边界检测
+        oContentItem.forEach((item: any) => {
+          item.addEventListener('transitionend', () => {
+            if (this.count >= oContentItemLength - 1) {
+              this.count = -1;
+            }
+          }, false);
+        });
       }
 
     }
