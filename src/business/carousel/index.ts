@@ -897,6 +897,7 @@ namespace Carousel {
           this.initCommonEle();
 
           autoPlay && this.handleAutoPlay();
+          showArrows && this.handleArrowClick();
         }
       }
 
@@ -1148,6 +1149,14 @@ namespace Carousel {
           }, false);
         });
 
+      }
+
+
+      /**
+       * 处理 箭头 点击
+       */
+      public handleArrowClick(): void {
+        
       }
 
     }
