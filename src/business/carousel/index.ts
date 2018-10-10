@@ -1206,7 +1206,7 @@ namespace Carousel {
             }
           });
 
-        });
+        }, false);
 
         // 边界检测
         oContentItem.forEach((item: any) => {
@@ -1216,6 +1216,7 @@ namespace Carousel {
             }
           }, false);
         });
+
       }
 
     }
