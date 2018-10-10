@@ -2,7 +2,8 @@
  * @name: business-carousel
  * @description 业务轮播插件
  * @author: yyg
- * @version 1.0.1
+ * @version 1.0.2
+ * @constant 最近修改于 18/10/10
  */
 
 
