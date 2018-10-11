@@ -1169,7 +1169,7 @@ namespace Carousel {
         const oDotsItem = this.oDotsItem;
 
         // Right arrow
-        oNextArrow.addEventListener('click', () => {
+        oNextArrow && oNextArrow.addEventListener('click', () => {
 
           clearInterval(this.timer);
     
@@ -1209,7 +1209,7 @@ namespace Carousel {
         }, false);
 
         // Left arrow
-        oPrevArrow.addEventListener('click', () => {
+        oPrevArrow && oPrevArrow.addEventListener('click', () => {
           clearInterval(this.timer);
 
           this.count--;
