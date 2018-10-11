@@ -1249,18 +1249,10 @@ namespace Carousel {
         // 边界检测
         oContentItem.forEach((item: any) => {
           item.addEventListener('transitionend', () => {
-            if (this.count >= oContentItemLength - 1) {
+            if (this.count > oContentItemLength - 1) {
               this.count = -1;
             } else if (this.count < 0) {
               this.count = oContentItemLength - 1;
-
-              Utils.setCss(
-                oContentItem[oContentItemLength - 1],
-                {
-                  opacity: 1,
-                  'z-index': this.count + 1,
-                },
-              );
 
               // dot栏样式
               oDotsItem.forEach((item: any) => {
