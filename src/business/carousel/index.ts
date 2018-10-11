@@ -1256,7 +1256,19 @@ namespace Carousel {
                 opacity: 1,
                 'z-index': this.count + 1, 
               });
+
               this.count = oContentItemLength - 1;
+
+              oDotsItem.forEach((item: any) => {
+                Utils.removeClass(
+                  item, 
+                  'yyg-dot-item-active',
+                );
+              });
+              Utils.addClass(
+                oDotsItem[oContentItemLength - 1],
+                'yyg-dot-item-active',
+              );
             }
           }, false);
         });
