@@ -1171,9 +1171,7 @@ namespace Carousel {
         oNextArrow && oNextArrow.addEventListener('click', () => {
 
           clearInterval(this.timer);
-    
-          this.count++;
-
+              
           oContentItem.forEach((item: any, index: number) => {
             if (index === this.count) {
               Utils.setCss(item, {
@@ -1204,6 +1202,8 @@ namespace Carousel {
               });
             }
           });
+
+          this.count++;
 
         }, false);
 
@@ -1244,37 +1244,6 @@ namespace Carousel {
             }
           });
         }, false);
-
-        // 边界检测
-        oContentItem.forEach((item: any) => {
-          item.addEventListener('transitionend', () => {
-            if (this.count > oContentItemLength - 1) {
-              this.count = -1;
-
-              // dot栏样式
-              oDotsItem.forEach((ite: any) => {
-                Utils.removeClass(
-                  ite,
-                  'yyg-dot-item-active',
-                );
-              });
-            } else if (this.count < 0) {
-              this.count = oContentItemLength - 1;
-
-              // dot栏样式
-              oDotsItem.forEach((ite: any) => {
-                Utils.removeClass(
-                  ite, 
-                  'yyg-dot-item-active',
-                );
-              });
-              Utils.addClass(
-                oDotsItem[oContentItemLength - 1],
-                'yyg-dot-item-active',
-              );
-            }
-          }, false);
-        });
 
       }
 
