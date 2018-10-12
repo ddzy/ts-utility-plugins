@@ -1160,7 +1160,6 @@ namespace Carousel {
         const {
           duringTime,
           easing,
-          delayTime,
         } = yyg_settings;
         const oPrevArrow = this.oPrevWrapper;
         const oNextArrow = this.oNextWrapper;
