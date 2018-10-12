@@ -1204,6 +1204,8 @@ namespace Carousel {
 
           this.count++;
 
+          this.handleAutoPlay();
+
         }, false);
 
         // Left arrow
@@ -1242,8 +1244,9 @@ namespace Carousel {
               });
             }
           });
-        }, false);
 
+          this.handleAutoPlay();
+        }, false);
 
         oContentItem.forEach((item: any) => {
           item.addEventListener('transitionend', () => {
