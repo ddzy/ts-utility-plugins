@@ -1168,84 +1168,12 @@ namespace Carousel {
 
         // Right arrow
         oNextArrow && oNextArrow.addEventListener('click', () => {
-
-          clearInterval(this.timer);
-              
-          oContentItem.forEach((item: any, index: number) => {
-            if (index === this.count) {
-              Utils.setCss(item, {
-                transition: `all ${
-                  duringTime
-                  }s ${
-                  easing
-                  }`,
-                'z-index': this.count + 1,
-                opacity: 1,
-              });
-
-              // dot栏样式改变
-              oDotsItem.forEach((item: any, inx: number) => {
-                inx === this.count
-                  ? Utils.addClass(item, 'yyg-dot-item-active')
-                  : Utils.removeClass(item, 'yyg-dot-item-active');
-              });
-            }else {
-              Utils.setCss(item, {
-                transition: `all ${
-                  duringTime
-                  }s ${
-                  easing
-                  }`,
-                'z-index': 0,
-                opacity: 0,
-              });
-            }
-          });
-
-          this.count++;
-
-          this.handleAutoPlay();
-
+          this.aidedArrowClick('next');
         }, false);
 
         // Left arrow
         oPrevArrow && oPrevArrow.addEventListener('click', () => {
-          clearInterval(this.timer);
-
-          this.count = this.count - 1;
-
-          oContentItem.forEach((item: any, index: number) => {
-            if (index === this.count) {
-              Utils.setCss(item, {
-                transition: `all ${
-                  duringTime
-                  }s ${
-                  easing
-                  }`,
-                'z-index': this.count + 1,
-                opacity: 1,
-              });
-
-              // dot栏样式改变
-              oDotsItem.forEach((item: any, inx: number) => {
-                inx === this.count
-                  ? Utils.addClass(item, 'yyg-dot-item-active')
-                  : Utils.removeClass(item, 'yyg-dot-item-active');
-              });
-            }else {
-              Utils.setCss(item, {
-                transition: `all ${
-                  duringTime
-                  }s ${
-                  easing
-                  }`,
-                'z-index': 0,
-                opacity: 0,
-              });
-            }
-          });
-
-          this.handleAutoPlay();
+          this.aidedArrowClick('prev');
         }, false);
 
         oContentItem.forEach((item: any) => {
@@ -1277,6 +1205,97 @@ namespace Carousel {
           }, false);
         });
 
+      }
+
+      /**
+       * 辅助 点击函数
+       * @param direction 
+       */
+      public aidedArrowClick(
+        direction: string,
+      ): void {
+        const {
+          duringTime,
+          easing,
+        } = yyg_settings;
+        const oContentItem = this.oContentItem;
+        const oContentItemLength = this.oContentItemLength;
+        const oDotsItem = this.oDotsItem;
+
+        clearInterval(this.timer);
+
+        switch (direction) {
+          case 'prev':
+            this.count--;
+            break;
+          case 'next':
+            this.count++;
+            break;
+          default:
+            break;
+        }
+
+        oContentItem.forEach((item: any, index: number) => {
+          if (index === this.count) {
+            Utils.setCss(item, {
+              transition: `all ${
+                duringTime
+                }s ${
+                easing
+                }`,
+              'z-index': this.count + 1,
+              opacity: 1,
+            });
+
+            // dot栏样式改变
+            oDotsItem.forEach((item: any, inx: number) => {
+              inx === this.count
+                ? Utils.addClass(item, 'yyg-dot-item-active')
+                : Utils.removeClass(item, 'yyg-dot-item-active');
+            });
+          }else {
+            Utils.setCss(item, {
+              transition: `all ${
+                duringTime
+                }s ${
+                easing
+                }`,
+              'z-index': 0,
+              opacity: 0,
+            });
+          }
+        });
+
+        oContentItem.forEach((item: any) => {
+          item.addEventListener('transitionend', () => {
+            if (this.count < 0) {
+              this.count = oContentItemLength - 1;
+
+              Utils.setCss(
+                oContentItem[this.count],
+                {
+                  transition: `all ${duringTime}s ${easing}`,
+                  opacity: 1,
+                  'z-index': 4,
+                },
+              );
+
+              oDotsItem.forEach((item: any, idx: number) => {
+                idx === this.count
+                  ? Utils.addClass(
+                    item,
+                    'yyg-dot-item-active',
+                  )
+                  : Utils.removeClass(
+                      item,
+                      'yyg-dot-item-active',
+                    );
+              });
+            }
+          }, false);
+        });
+
+        this.handleAutoPlay();
       }
 
     }
