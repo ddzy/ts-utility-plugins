@@ -1029,7 +1029,6 @@ namespace Carousel {
           height: 100%;
           text-align: center;
           opacity: 0;
-          // transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
         }
         .yyg-content-item:first-child {
           opacity: 1;
@@ -1211,7 +1210,7 @@ namespace Carousel {
         oPrevArrow && oPrevArrow.addEventListener('click', () => {
           clearInterval(this.timer);
 
-          this.count--;
+          this.count = this.count - 1;
 
           oContentItem.forEach((item: any, index: number) => {
             if (index === this.count) {
@@ -1244,6 +1243,36 @@ namespace Carousel {
             }
           });
         }, false);
+
+
+        oContentItem.forEach((item: any) => {
+          item.addEventListener('transitionend', () => {
+            if (this.count < 0) {
+              this.count = oContentItemLength - 1;
+
+              Utils.setCss(
+                oContentItem[this.count],
+                {
+                  transition: `all ${duringTime}s ${easing}`,
+                  opacity: 1,
+                  'z-index': 4,
+                },
+              );
+
+              oDotsItem.forEach((item: any, idx: number) => {
+                idx === this.count
+                  ? Utils.addClass(
+                    item,
+                    'yyg-dot-item-active',
+                  )
+                  : Utils.removeClass(
+                      item,
+                      'yyg-dot-item-active',
+                    );
+              });
+            }
+          }, false);
+        });
 
       }
 
