@@ -1156,55 +1156,16 @@ namespace Carousel {
        * 处理 箭头 点击
        */
       public handleArrowClick(): void {
-        const {
-          duringTime,
-          easing,
-        } = yyg_settings;
         const oPrevArrow = this.oPrevWrapper;
         const oNextArrow = this.oNextWrapper;
-        const oContentItem = this.oContentItem;
-        const oContentItemLength = this.oContentItemLength;
-        const oDotsItem = this.oDotsItem;
 
-        // Right arrow
         oNextArrow && oNextArrow.addEventListener('click', () => {
           this.aidedArrowClick('next');
         }, false);
 
-        // Left arrow
         oPrevArrow && oPrevArrow.addEventListener('click', () => {
           this.aidedArrowClick('prev');
         }, false);
-
-        oContentItem.forEach((item: any) => {
-          item.addEventListener('transitionend', () => {
-            if (this.count < 0) {
-              this.count = oContentItemLength - 1;
-
-              Utils.setCss(
-                oContentItem[this.count],
-                {
-                  transition: `all ${duringTime}s ${easing}`,
-                  opacity: 1,
-                  'z-index': 4,
-                },
-              );
-
-              oDotsItem.forEach((item: any, idx: number) => {
-                idx === this.count
-                  ? Utils.addClass(
-                    item,
-                    'yyg-dot-item-active',
-                  )
-                  : Utils.removeClass(
-                      item,
-                      'yyg-dot-item-active',
-                    );
-              });
-            }
-          }, false);
-        });
-
       }
 
       /**
