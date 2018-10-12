@@ -2,8 +2,8 @@
  * @name: business-carousel
  * @description 业务轮播插件
  * @author: yyg
- * @version 1.0.2
- * @constant 最近修改于 18/10/10
+ * @version 1.0.3
+ * @constant 最近修改于 18/10/12
  */
 
 
@@ -1251,13 +1251,21 @@ namespace Carousel {
           item.addEventListener('transitionend', () => {
             if (this.count > oContentItemLength - 1) {
               this.count = -1;
+
+              // dot栏样式
+              oDotsItem.forEach((ite: any) => {
+                Utils.removeClass(
+                  ite,
+                  'yyg-dot-item-active',
+                );
+              });
             } else if (this.count < 0) {
               this.count = oContentItemLength - 1;
 
               // dot栏样式
-              oDotsItem.forEach((item: any) => {
+              oDotsItem.forEach((ite: any) => {
                 Utils.removeClass(
-                  item, 
+                  ite, 
                   'yyg-dot-item-active',
                 );
               });
