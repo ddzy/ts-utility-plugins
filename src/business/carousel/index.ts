@@ -897,6 +897,7 @@ namespace Carousel {
 
           autoPlay && this.handleAutoPlay();
           showArrows && this.handleArrowClick();
+          showArrows && this.handleImgHover();
           showDots && this.handleDotsHover();
         }
       }
@@ -990,6 +991,7 @@ namespace Carousel {
           height: 100%;
         }
         .yyg-arrow-wrapper {
+          display: none;
           position: absolute;
           z-index: 999;
           top: 50%;
@@ -1281,6 +1283,14 @@ namespace Carousel {
             this.handleAutoPlay();
           }, false);
         });
+      }
+
+
+      /**
+       * 处理 图片hover
+       */
+      public handleImgHover(): void {
+        
       }
       
     }
