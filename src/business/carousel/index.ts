@@ -1290,7 +1290,35 @@ namespace Carousel {
        * 处理 图片hover
        */
       public handleImgHover(): void {
-        
+        const oArrowWrapper = this.oArrowWrapper;
+        const oContentItem = this.oContentItem;
+        const oPrevArrow = this.oPrevWrapper;
+        const oNextArrow = this.oNextWrapper;
+
+        oArrowWrapper.forEach((item: any) => {
+          Utils.setCss(item, {
+            display: 'block',
+          });
+        });
+
+        oContentItem.forEach((item: any) => {
+          item.addEventListener('mouseenter', () => {
+            clearInterval(this.timer);
+            // 显示箭头
+            Utils
+              .addClass(oPrevArrow, 'yyg-prev-wrapper-active')
+              .addClass(oNextArrow, 'yyg-next-wrapper-active');
+          }, false);
+
+          item.addEventListener('mouseleave', () => {
+            // 箭头隐藏
+            Utils
+              .removeClass(oPrevArrow, 'yyg-prev-wrapper-active')
+              .removeClass(oNextArrow, 'yyg-next-wrapper-active');
+            // 自己动
+            this.handleAutoPlay();
+          }, false);
+        });
       }
       
     }
