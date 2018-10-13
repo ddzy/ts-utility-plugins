@@ -862,7 +862,6 @@ namespace Carousel {
 
     export class Fade {
 
-
       private oContentItem: any = null;
       private oArrowWrapper: any = null;
       private oPrevWrapper: any = null;
@@ -871,7 +870,6 @@ namespace Carousel {
       private oDotsItem: any = null;
       private oContentItemLength: number = 0;
       private oDotsItemLength: number = 0;
-
 
       private timer: number = 0;
       private count: number = 0;
@@ -1002,6 +1000,7 @@ namespace Carousel {
           background-clip: padding-box;
           background-color: rgba(0,0,0,.5);
           color: #fff;
+          opacity: 0;
           line-height: 45px;
           font-size: 24px;
           text-align: center;
@@ -1011,10 +1010,10 @@ namespace Carousel {
           transition: all .5s ease-in-out;
         }
         .yyg-arrow-prev-wrapper {
-          left: 15px;
+          left: 0;
         }
         .yyg-arrow-next-wrapper {
-          right: 15px;
+          right: 0;
         }
         .yyg-content-wrapper {
           overflow: hidden;
@@ -1254,27 +1253,27 @@ namespace Carousel {
             oContentItem.forEach((item: any, index: number) => {
               index === oSignId - 1
                 ? Utils
-                    .setCss(item, {
-                      transition: `all ${duringTime}s ${easing}`,
-                      opacity: 1,
-                      'z-index': this.count,
-                    })
-                    .addClass(
-                      oDotsItem[index],
-                      'yyg-dot-item-active'
-                    )
+                  .setCss(item, {
+                    transition: `all ${duringTime}s ${easing}`,
+                    opacity: 1,
+                    'z-index': this.count,
+                  })
+                  .addClass(
+                    oDotsItem[index],
+                    'yyg-dot-item-active'
+                  )
                 : Utils
-                    .setCss(item, {
-                      transition: `all ${duringTime}s ${easing}`,
-                      opacity: 0,
-                      'z-index': 0,
-                    })
-                    .removeClass(
-                      oDotsItem[index],
-                      'yyg-dot-item-active',
-                    )
+                  .setCss(item, {
+                    transition: `all ${duringTime}s ${easing}`,
+                    opacity: 0,
+                    'z-index': 0,
+                  })
+                  .removeClass(
+                    oDotsItem[index],
+                    'yyg-dot-item-active',
+                  )
             });
-          }, false)
+          }, false);
 
           item.addEventListener('mouseleave', () => {
             // 更新索引
