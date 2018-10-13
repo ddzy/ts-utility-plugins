@@ -897,7 +897,7 @@ namespace Carousel {
 
           this.initCommonEle();
 
-          autoPlay && this.handleAutoPlay();
+          // autoPlay && this.handleAutoPlay();
           showArrows && this.handleArrowClick();
         }
       }
@@ -1155,7 +1155,31 @@ namespace Carousel {
        * 处理 鼠标 点击切换
        */
       public handleArrowClick(): void {
+        const oNextArrow = this.oNextWrapper;
 
+        oNextArrow.addEventListener('click', () => {
+          this.aidedArrowClick('next');
+        }, false);
+      }
+
+      /**
+       * 箭头点击辅助函数
+       * @param direction 哪个箭头
+       */
+      public aidedArrowClick(
+        direction: 'prev' | 'next',
+      ): void {
+        switch (direction) {
+          case 'prev':
+            break;
+          case 'next':
+            this.count++;
+            break;
+          default:
+            break;
+        }
+
+        console.log(this.count);
       }
 
     }
