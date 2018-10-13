@@ -1244,12 +1244,12 @@ namespace Carousel {
         const oDotsItemLength = this.oDotsItemLength;
 
         showDots && oDotsItem.forEach((item: any) => {
-          item.addEventListener('mouseenter', () => {
-            const oSignId: number = Number(Utils.getAttr(
-              item,
-              'data-id',
-            ));
+          const oSignId: number = Number(Utils.getAttr(
+            item,
+            'data-id',
+          ));
 
+          item.addEventListener('mouseenter', () => {
             clearInterval(this.timer);
 
             oContentItem.forEach((item: any, index: number) => {
@@ -1276,6 +1276,12 @@ namespace Carousel {
                     )
             });
           }, false)
+
+          item.addEventListener('mouseleave', () => {
+            // 更新索引
+            this.count = oSignId - 1;
+            this.handleAutoPlay();
+          }, false);
         });
       }
       
