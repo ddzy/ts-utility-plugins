@@ -1241,7 +1241,6 @@ namespace Carousel {
         } = yyg_settings;
         const oContentItem = this.oContentItem;
         const oDotsItem = this.oDotsItem;
-        const oDotsItemLength = this.oDotsItemLength;
 
         showDots && oDotsItem.forEach((item: any) => {
           const oSignId: number = Number(Utils.getAttr(
