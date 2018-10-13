@@ -1253,19 +1253,27 @@ namespace Carousel {
             clearInterval(this.timer);
 
             oContentItem.forEach((item: any, index: number) => {
-              if (index === oSignId - 1) {
-                Utils.setCss(item, {
-                  transition: `all ${duringTime}s ${easing}`,
-                  opacity: 1,
-                  'z-index': this.count,
-                });
-              } else {
-                Utils.setCss(item, {
-                  transition: `all ${duringTime}s ${easing}`,
-                  opacity: 0,
-                  'z-index': 0,
-                });
-              }
+              index === oSignId - 1
+                ? Utils
+                    .setCss(item, {
+                      transition: `all ${duringTime}s ${easing}`,
+                      opacity: 1,
+                      'z-index': this.count,
+                    })
+                    .addClass(
+                      oDotsItem[index],
+                      'yyg-dot-item-active'
+                    )
+                : Utils
+                    .setCss(item, {
+                      transition: `all ${duringTime}s ${easing}`,
+                      opacity: 0,
+                      'z-index': 0,
+                    })
+                    .removeClass(
+                      oDotsItem[index],
+                      'yyg-dot-item-active',
+                    )
             });
           }, false)
         });
