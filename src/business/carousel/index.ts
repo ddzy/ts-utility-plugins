@@ -1160,6 +1160,7 @@ namespace Carousel {
         oNextArrow.addEventListener('click', () => {
           this.aidedArrowClick('next');
         }, false);
+        
       }
 
       /**
@@ -1176,6 +1177,8 @@ namespace Carousel {
 
         const oContentItem = this.oContentItem;
         const oContentItemLength = this.oContentItemLength;
+
+        clearInterval(this.timer);
 
         switch (direction) {
           case 'prev':
@@ -1203,6 +1206,9 @@ namespace Carousel {
                 'z-index': 0,
               })
         });
+
+
+        this.handleAutoPlay();
       }
 
     }
