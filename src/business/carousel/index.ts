@@ -1190,17 +1190,18 @@ namespace Carousel {
             break;
         }
         
-        oContentItem.forEach((item: any) => {
-          Utils.setCss(item, {
-            transition: `all ${duringTime}s ${easing}`,
-            opacity: 0,
-            'z-index': 0,
-          });
-        });
-        Utils.setCss(oContentItem[this.count], {
-          transition: `all ${duringTime}s ${easing}`,
-          opacity: 1,
-          'z-index': this.count,
+        oContentItem.forEach((item: any, index: number) => {
+          this.count === index
+            ? Utils.setCss(item, {
+                transition: `all ${duringTime}s ${easing}`,
+                opacity: 1,
+                'z-index': index,
+              })
+            : Utils.setCss(item, {
+                transition: `all ${duringTime}s ${easing}`,
+                opacity: 0,
+                'z-index': 0,
+              })
         });
       }
 
