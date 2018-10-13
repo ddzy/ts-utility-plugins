@@ -12,6 +12,7 @@
 ## 导航
 1. Canvas 
   + [canvas-stars-line](#canvas-stars-line)
+  + [canvas-colorful-bubble](#canvas-colorful-bubble)
 2. Business
   + [business-carousel](#business-carousel)
 
@@ -82,4 +83,29 @@ Carousel
 ```
 Carousel.config({ effect: 'fade' | 'scroll'  })
 目前只支持 Fade & Scroll 两种状态轮播图
+```
+
+## canvas-colorful-bubble
+> 构建的canvas气泡插件, 可自定义大多数配置  
+> 开启```鼠标```交互的情况下, 可用作```个人博客背景```
+1. 基本用法
+```
+ColorfulBubble
+  .config({})
+  .render(el: string)
+```
+2. 自定义配置项
+```
+ColorfulBubble
+  .config({
+    cvsWidth?:        number    画布宽
+    cvsHeight?:       number    画布高
+    cvsBgColor?:      string    画布背景
+    bubbleNum?:       number    气泡数量
+    bubbleOpacity?:   number    气泡透明度
+    bubbleSpeed?:     number    气泡移动速度
+    allowMouse?:      boolean   是否允许鼠标交互
+    bubbleColorArr?:  string[]  气泡颜色数组
+  })
+  .render(el: string)
 ```
