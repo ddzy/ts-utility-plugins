@@ -47,8 +47,8 @@ namespace Carousel {
   export namespace IProps {
 
     export interface IConfigProps {
-      dataSource: { 
-        text: string, 
+      dataSource: {
+        text: string,
         img: {
           url: string,
           target: string,
@@ -68,7 +68,7 @@ namespace Carousel {
     }
 
     export interface IMainScrollProps { }
-    
+
     export interface IMainFadeProps { }
   }
 
@@ -95,16 +95,16 @@ namespace Carousel {
       for (const key in options) {
         if (options.hasOwnProperty(key)) {
           const element = options[key];
-          
+
           Reflect.set(yyg_settings, key, element);
         }
       }
     }
 
     export function initEl(el: string) {
-      if(Utils.getEle(el)) {
+      if (Utils.getEle(el)) {
         yyg_el = Utils.getEle(el);
-      }else {
+      } else {
         throw new Error('el不存在, 请输入其他的!');
       }
     }
@@ -117,7 +117,7 @@ namespace Carousel {
           break;
         case 'fade':
           new Main.Fade({});
-          break;  
+          break;
         default:
           break;
       }
@@ -128,7 +128,7 @@ namespace Carousel {
   namespace Utils {
 
     let lastClickTime: number = 0;
-  
+
     /**
      * 获取元素
      * @param id 元素id
@@ -149,8 +149,8 @@ namespace Carousel {
     ): ArrayLike<HTMLElement> | null {
       return document.querySelectorAll(sign);
     }
-  
-  
+
+
     /**
      * 设置元素属性
      * @param ele 元素
@@ -164,11 +164,11 @@ namespace Carousel {
       for (const key in options) {
         ele.setAttribute(key, options[key]);
       }
-  
+
       return Utils;
     }
-  
-  
+
+
     /**
      * 设置元素样式
      * @param el 元素
@@ -183,11 +183,11 @@ namespace Carousel {
           ele.style.cssText += `${item}: ${options[item]};`;
         }
       }
-  
+
       return Utils;
     }
-  
-  
+
+
     /**
      * 取随机值
      * @param min 最小值
@@ -199,8 +199,8 @@ namespace Carousel {
     ): number {
       return (Math.random() * (max - min) + min);
     }
-  
-  
+
+
     /**
      * 转化弧度
      * @param angle 角度
@@ -210,8 +210,8 @@ namespace Carousel {
     ): number {
       return (Math.PI / 180) * angle;
     }
-  
-  
+
+
     /**
      * 获取元素属性值
      * @param ele 元素
@@ -274,9 +274,9 @@ namespace Carousel {
         lastClickTime = currentClickTime;
       }
     }
-  
+
   };
-  
+
 
   namespace Main {
 
@@ -295,7 +295,7 @@ namespace Carousel {
       ): void {
         Utils.setCss(oList, {
           transition: `all ${yyg_settings.duringTime}s ${yyg_settings.easing}; `,
-          transform: `translateX(-${oListWidth / (oItemLength) *(count + 1)}px)`,
+          transform: `translateX(-${oListWidth / (oItemLength) * (count + 1)}px)`,
         });
       }
 
@@ -349,10 +349,10 @@ namespace Carousel {
       ) {
         this.initDOM();
       }
-      
+
 
       public initDOM(): void {
-        if(yyg_el) {
+        if (yyg_el) {
           // 初始化DOM结构
           yyg_el.innerHTML = this.createDOMTree();
           this.createStyle();
@@ -360,7 +360,7 @@ namespace Carousel {
           // 初始化公共对象(优化)
           this.initCommonEle();
 
-          yyg_settings.autoPlay 
+          yyg_settings.autoPlay
             && this.handleAutoScroll();
           yyg_settings.isHoverPause
             && this.handleImgHover();
@@ -399,35 +399,35 @@ namespace Carousel {
         contentLi += `
           <li class="yyg-content-item" data-id=${dataSource.length}>
             ${
-              dataSource[dataSource.length - 1].img.url
-                ? `<a
+          dataSource[dataSource.length - 1].img.url
+            ? `<a
                     href=${dataSource[dataSource.length - 1].img.target}
                     ><img src=${dataSource[dataSource.length - 1].img.url} alt="图片提示" /></a>`
-                : dataSource[dataSource.length - 1].text
-            }
+            : dataSource[dataSource.length - 1].text
+          }
           </li>
         `;
-        
+
         dataSource.forEach((item: any, index: number) => {
           dotsSpan += `
             <span
               class="yyg-dot-item${
-                index === 0
-                ? ' yyg-dot-item-active'
-                : ''
-              }"
+            index === 0
+              ? ' yyg-dot-item-active'
+              : ''
+            }"
               data-id=${index + 1}
             ></span>
           `;
           contentLi += `
             <li class="yyg-content-item" data-id=${index + 1}>
               ${
-                item.img.url
-                  ? `<a
+            item.img.url
+              ? `<a
                       href=${item.img.target}
                      ><img src=${item.img.url} alt="图片提示" /></a>`
-                  : item.text
-              }
+              : item.text
+            }
             </li>
           `;
         });
@@ -436,12 +436,12 @@ namespace Carousel {
         contentLi += `
           <li class="yyg-content-item" data-id=${1}>
             ${
-              dataSource[0].img.url
-                ? `<a
+          dataSource[0].img.url
+            ? `<a
                     href=${dataSource[0].img.target}
                     ><img src=${dataSource[0].img.url} alt="图片提示" /></a>`
-                : dataSource[0].text
-            }
+            : dataSource[0].text
+          }
           </li>
         `;
 
@@ -452,8 +452,8 @@ namespace Carousel {
                 <ul class="yyg-content-list">${contentLi}</ul>
               </div>
               ${
-                showArrows
-                  ? `
+          showArrows
+            ? `
                     <div class="yyg-arrow-wrapper yyg-arrow-prev-wrapper">
                       <i class="yyg-arrow yyg-arrow-prev">&lt;</i>
                     </div>
@@ -461,13 +461,13 @@ namespace Carousel {
                       <i class="yyg-arrow yyg-arrow-next">&gt;</i>
                     </div>
                   `
-                  : ''
-                }
+            : ''
+          }
               ${
-                showDots
-                  ? `<div class="yyg-dots-wrapper">${dotsSpan}</div>`
-                  : ''
-              }
+          showDots
+            ? `<div class="yyg-dots-wrapper">${dotsSpan}</div>`
+            : ''
+          }
             </div>
           </div>
         `;
@@ -482,11 +482,11 @@ namespace Carousel {
         const { dataSource } = yyg_settings;
 
         // style标签不存在
-        if(!oStyle) {
+        if (!oStyle) {
           oStyle = document.createElement('style');
           const oHead = Utils
             .getEle('head') as HTMLHeadElement;
-            
+
           oHead.appendChild(oStyle);
         }
 
@@ -537,8 +537,8 @@ namespace Carousel {
             height: 100%;
             // transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
             transform: translateX(-${
-              100 / (dataSource.length + 2)
-            }%); 
+          100 / (dataSource.length + 2)
+          }%); 
           }
           .yyg-content-item {
             float: left;
@@ -595,7 +595,7 @@ namespace Carousel {
        * 处理 自动轮播
        */
       public handleAutoScroll(): void {
-        
+
         const oList = this.oList;
         const oItemLength = this.oItemLength;
         const oDotsItem = this.oDotsItem;
@@ -610,7 +610,7 @@ namespace Carousel {
 
           // 自动滚动
           Scroll._aidedAutoScroll(
-            this.count ++,
+            this.count++,
             oList,
             oListWidth,
             oItemLength,
@@ -630,7 +630,7 @@ namespace Carousel {
           // 执行钩子函数
           yyg_settings.afterChange
             && yyg_settings.afterChange();
-          
+
           if (this.count > oItemLength) {
             this.count = 2;
 
@@ -638,10 +638,10 @@ namespace Carousel {
               transition: null,
               transform: `translateX(${
                 -(this.count) * oItemWidth
-              }px)`,
+                }px)`,
             });
           }
-        }, false);  
+        }, false);
       }
 
 
@@ -650,12 +650,12 @@ namespace Carousel {
        */
       public handleImgHover(): void {
         const oListItem = this.oListItem;
-        
+
         for (const key in oListItem) {
           if (oListItem.hasOwnProperty(key)) {
 
             const element = oListItem[key];
-            
+
             element.addEventListener('mouseenter', () => {
               clearInterval(this.timer);
 
@@ -682,13 +682,13 @@ namespace Carousel {
         const oDotsItem = this.oDotsItem;
         const oDotsWrapper = Utils
           .getEle('.yyg-dots-wrapper') as HTMLDivElement;
-        
+
         Utils.setCss(oDotsWrapper, {
           display: 'block',
         });
 
-        for(let i = 0, outer: any; outer = oDotsItem[i++];) {
-          
+        for (let i = 0, outer: any; outer = oDotsItem[i++];) {
+
           outer.addEventListener('mouseenter', () => {
 
             const signId = Utils
@@ -701,7 +701,7 @@ namespace Carousel {
             this.count = Number(signId);
 
             // dot栏样式改变
-            for(let j = 0, inner; inner = oDotsItem[j++];) {
+            for (let j = 0, inner; inner = oDotsItem[j++];) {
               Utils.removeClass(inner, 'yyg-dot-item-active');
             }
             Utils.addClass(outer, 'yyg-dot-item-active');
@@ -715,7 +715,7 @@ namespace Carousel {
           });
 
           // 移除dot栏重新滚动
-          outer.addEventListener('mouseleave', () => { 
+          outer.addEventListener('mouseleave', () => {
             this.handleAutoScroll();
           });
 
@@ -733,7 +733,7 @@ namespace Carousel {
         const oItemLength = this.oItemLength;
         const prevArrow = this.oPrevArrow;
         const nextArrow = this.oNextArrow;
-                 
+
         // 左箭头
         prevArrow && prevArrow.addEventListener('click', (): void => {
           this.aidedHandleArrowClick('left');
@@ -744,7 +744,7 @@ namespace Carousel {
           this.aidedHandleArrowClick('right');
         }, false);
 
-        oList.addEventListener('transitionend', () => { 
+        oList.addEventListener('transitionend', () => {
           if (this.count === 0) {
             this.count = oItemLength - 2;
           } else if (this.count === oItemLength - 1) {
@@ -755,7 +755,7 @@ namespace Carousel {
             transition: `null`,
             transform: `translateX(${
               -(this.count) * oItemWidth
-            }px)`,
+              }px)`,
           });
         }, false);
 
@@ -795,7 +795,7 @@ namespace Carousel {
 
         // 节流处理
         Utils.throttle(Scroll.MIN_CLICK_DELAY_TIME, () => {
-          
+
           switch (whichArrow) {
             case 'left':
               this.count--;
@@ -826,7 +826,7 @@ namespace Carousel {
         this.handleAutoScroll();
       }
 
-      
+
       /**
        * 控制箭头显隐 辅助函数
        * @param show 箭头显隐
@@ -872,13 +872,11 @@ namespace Carousel {
       private timer: number = 0;
       private count: number = 0;
 
-
       public constructor(
         _props: IProps.IMainFadeProps
       ) {
         this.init();
       }
-
 
       public init(): void {
         if (yyg_el) {
@@ -900,33 +898,32 @@ namespace Carousel {
         }
       }
 
-
       public createDOM(): string {
         const dataSource: any[] = yyg_settings.dataSource;
         const { showArrows, showDots } = yyg_settings;
         let dotsSpan: string = '';
         let contentLi: string = '';
-        
+
         dataSource.forEach((item: any, index: number) => {
           dotsSpan += `
             <span
               class="yyg-dot-item${
-                index === 0
-                ? ' yyg-dot-item-active'
-                : ''
-              }"
+            index === 0
+              ? ' yyg-dot-item-active'
+              : ''
+            }"
               data-id=${index + 1}
             ></span>
           `;
           contentLi += `
             <li class="yyg-content-item" data-id=${index + 1}>
               ${
-                item.img.url
-                  ? `<a
+            item.img.url
+              ? `<a
                       href=${item.img.target}
                      ><img src=${item.img.url} alt="图片提示" /></a>`
-                  : item.text
-              }
+              : item.text
+            }
             </li>
           `;
         });
@@ -938,8 +935,8 @@ namespace Carousel {
                 <ul class="yyg-content-list">${contentLi}</ul>
               </div>
               ${
-                showArrows
-                  ? `
+          showArrows
+            ? `
                     <div class="yyg-arrow-wrapper yyg-arrow-prev-wrapper">
                       <i class="yyg-arrow yyg-arrow-prev">&lt;</i>
                     </div>
@@ -947,13 +944,13 @@ namespace Carousel {
                       <i class="yyg-arrow yyg-arrow-next">&gt;</i>
                     </div>
                   `
-                  : ''
-                }
+            : ''
+          }
               ${
-                showDots
-                  ? `<div class="yyg-dots-wrapper">${dotsSpan}</div>`
-                  : ''
-              }
+          showDots
+            ? `<div class="yyg-dots-wrapper">${dotsSpan}</div>`
+            : ''
+          }
             </div>
           </div>
         `;
@@ -961,22 +958,21 @@ namespace Carousel {
         return final;
       }
 
-
       public createStyle(): void {
         let oStyle: HTMLElement | null = Utils
-        .getEle('style');
+          .getEle('style');
         const { dataSource } = yyg_settings;
 
-      // style标签不存在
-      if(!oStyle) {
-        oStyle = document.createElement('style');
-        const oHead = Utils
-          .getEle('head') as HTMLHeadElement;
-          
-        oHead.appendChild(oStyle);
-      }
+        // style标签不存在
+        if (!oStyle) {
+          oStyle = document.createElement('style');
+          const oHead = Utils
+            .getEle('head') as HTMLHeadElement;
 
-      oStyle.innerText += `
+          oHead.appendChild(oStyle);
+        }
+
+        oStyle.innerText += `
         .yyg-carousel-container {
           box-sizing: border-box;
           height: 100%;
@@ -1078,7 +1074,6 @@ namespace Carousel {
       `;
       }
 
-
       public initCommonEle(): void {
         this.oContentItem = Utils.getAllEle('.yyg-content-item');
         this.oDotsItem = Utils.getAllEle('.yyg-dot-item');
@@ -1087,7 +1082,6 @@ namespace Carousel {
         this.oNextWrapper = Utils.getEle('.yyg-arrow-next-wrapper');
         this.oContentItemLength = this.oContentItem.length;
       }
-
 
       /**
        * 处理 自动轮播
@@ -1101,7 +1095,7 @@ namespace Carousel {
         const oContentItem = this.oContentItem;
         const oDotsItem = this.oDotsItem;
         const oContentItemLength = this.oContentItemLength;
-        
+
         this.timer = setInterval(() => {
 
           oContentItem.forEach((item: any, index: number) => {
@@ -1149,7 +1143,6 @@ namespace Carousel {
 
       }
 
-
       /**
        * 处理 鼠标 点击切换
        */
@@ -1160,46 +1153,11 @@ namespace Carousel {
         oNextArrow.addEventListener('click', () => {
           this.aidedArrowClick('next');
         }, false);
-        
+
         oPrevArrow.addEventListener('click', () => {
           this.aidedArrowClick('prev');
         }, false);
       }
-
-
-      /**
-       * 箭头点击辅助函数
-       * @param direction 哪个箭头
-       */
-      public aidedArrowClick(
-        direction: 'prev' | 'next',
-      ): void {
-        const oContentItemLength = this.oContentItemLength;
-
-        clearInterval(this.timer);
-
-        switch (direction) {
-          case 'prev':
-            this.count--;
-            this.count = this.count < 0
-              ? oContentItemLength - 1
-              : this.count;
-            break;
-          case 'next':
-            this.count++;
-            this.count = this.count > oContentItemLength - 1
-              ? 0
-              : this.count;
-            break;
-          default:
-            break;
-        }
-        
-        this.aidedSetDotAndImg(this.count);
-
-        this.handleAutoPlay();
-      }
-
 
       /**
        * 处理 dot栏hover
@@ -1229,7 +1187,6 @@ namespace Carousel {
           }, false);
         });
       }
-
 
       /**
        * 处理 图片hover
@@ -1266,12 +1223,44 @@ namespace Carousel {
             Utils
               .removeClass(oPrevArrow, 'yyg-prev-wrapper-active')
               .removeClass(oNextArrow, 'yyg-next-wrapper-active');
-            
+
             this.handleAutoPlay();
           }, false);
         });
       }
 
+      /**
+       * 箭头点击辅助函数
+       * @param direction 哪个箭头
+       */
+      public aidedArrowClick(
+        direction: 'prev' | 'next',
+      ): void {
+        const oContentItemLength = this.oContentItemLength;
+
+        clearInterval(this.timer);
+
+        switch (direction) {
+          case 'prev':
+            this.count--;
+            this.count = this.count < 0
+              ? oContentItemLength - 1
+              : this.count;
+            break;
+          case 'next':
+            this.count++;
+            this.count = this.count > oContentItemLength - 1
+              ? 0
+              : this.count;
+            break;
+          default:
+            break;
+        }
+
+        this.aidedSetDotAndImg(this.count);
+
+        this.handleAutoPlay();
+      }
 
       /**
        * 辅助 设置图片轮播,dot栏对应样式
@@ -1308,7 +1297,7 @@ namespace Carousel {
               )
         })
       }
-      
+
     }
 
   }
@@ -1323,19 +1312,19 @@ Carousel.config({
       url: 'https://img.alicdn.com/tps/i4/TB11ULPd3HqK1RjSZFPSuwwapXa.jpg_q90_.webp',
       target: '#',
     },
-  },{
+  }, {
     text: 'Slide Two',
     img: {
       url: 'https://img.alicdn.com/tfs/TB1Kc14ekvoK1RjSZFwXXciCFXa-520-280.png_q90_.webp',
       target: '',
     },
-  },{
+  }, {
     text: 'Slide Three',
     img: {
       url: 'https://aecpm.alicdn.com/simba/img/TB1JNHwKFXXXXafXVXXSutbFXXX.jpg',
       target: '',
     },
-  },{
+  }, {
     text: 'Slide Four',
     img: {
       url: 'https://img.alicdn.com/tfs/TB1twNrdgDqK1RjSZSyXXaxEVXa-520-280.jpg_q90_.webp',
@@ -1352,4 +1341,3 @@ Carousel.config({
   effect: 'fade',
 }).render('#app');
 
-  
