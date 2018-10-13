@@ -1174,13 +1174,6 @@ namespace Carousel {
       public aidedArrowClick(
         direction: 'prev' | 'next',
       ): void {
-        const {
-          duringTime,
-          easing,
-        } = yyg_settings;
-
-        const oContentItem = this.oContentItem;
-        const oDotsItem = this.oDotsItem;
         const oContentItemLength = this.oContentItemLength;
 
         clearInterval(this.timer);
@@ -1202,26 +1195,7 @@ namespace Carousel {
             break;
         }
         
-        oContentItem.forEach((item: any, index: number) => {
-          this.count === index
-            ? Utils
-                .setCss(item, {
-                    transition: `all ${duringTime}s ${easing}`,
-                    opacity: 1,
-                    'z-index': index,
-                })
-                .addClass(oDotsItem[index], 'yyg-dot-item-active')
-            : Utils
-                .setCss(item, {
-                  transition: `all ${duringTime}s ${easing}`,
-                  opacity: 0,
-                  'z-index': 0,
-                })
-                .removeClass(
-                  oDotsItem[index],
-                  'yyg-dot-item-active'
-                )
-        });
+        this.aidedSetDotAndImg(this.count);
 
         this.handleAutoPlay();
       }
@@ -1233,10 +1207,7 @@ namespace Carousel {
       public handleDotsHover(): void {
         const {
           showDots,
-          duringTime,
-          easing,
         } = yyg_settings;
-        const oContentItem = this.oContentItem;
         const oDotsItem = this.oDotsItem;
 
         showDots && oDotsItem.forEach((item: any) => {
@@ -1248,29 +1219,7 @@ namespace Carousel {
           item.addEventListener('mouseenter', () => {
             clearInterval(this.timer);
 
-            oContentItem.forEach((item: any, index: number) => {
-              index === oSignId - 1
-                ? Utils
-                  .setCss(item, {
-                    transition: `all ${duringTime}s ${easing}`,
-                    opacity: 1,
-                    'z-index': this.count,
-                  })
-                  .addClass(
-                    oDotsItem[index],
-                    'yyg-dot-item-active'
-                  )
-                : Utils
-                  .setCss(item, {
-                    transition: `all ${duringTime}s ${easing}`,
-                    opacity: 0,
-                    'z-index': 0,
-                  })
-                  .removeClass(
-                    oDotsItem[index],
-                    'yyg-dot-item-active',
-                  )
-            });
+            this.aidedSetDotAndImg(oSignId - 1);
           }, false);
 
           item.addEventListener('mouseleave', () => {
@@ -1291,6 +1240,7 @@ namespace Carousel {
         const oPrevArrow = this.oPrevWrapper;
         const oNextArrow = this.oNextWrapper;
 
+        // 箭头hover(处理bug)
         oArrowWrapper.forEach((item: any) => {
           Utils.setCss(item, {
             display: 'block',
@@ -1306,21 +1256,57 @@ namespace Carousel {
         oContentItem.forEach((item: any) => {
           item.addEventListener('mouseenter', () => {
             clearInterval(this.timer);
-            // 显示箭头
+
             Utils
               .addClass(oPrevArrow, 'yyg-prev-wrapper-active')
               .addClass(oNextArrow, 'yyg-next-wrapper-active');
           }, false);
 
           item.addEventListener('mouseleave', () => {
-            // 箭头隐藏
             Utils
               .removeClass(oPrevArrow, 'yyg-prev-wrapper-active')
               .removeClass(oNextArrow, 'yyg-next-wrapper-active');
-            // 自己动
+            
             this.handleAutoPlay();
           }, false);
         });
+      }
+
+
+      /**
+       * 辅助 设置图片轮播,dot栏对应样式
+       * @param sign 
+       */
+      public aidedSetDotAndImg(
+        sign: number,
+      ): void {
+        const {
+          duringTime,
+          easing,
+        } = yyg_settings;
+        const oContentItem = this.oContentItem;
+        const oDotsItem = this.oDotsItem;
+
+        oContentItem.forEach((item: any, index: number) => {
+          sign === index
+            ? Utils
+              .setCss(item, {
+                transition: `all ${duringTime}s ${easing}`,
+                opacity: 1,
+                'z-index': index,
+              })
+              .addClass(oDotsItem[index], 'yyg-dot-item-active')
+            : Utils
+              .setCss(item, {
+                transition: `all ${duringTime}s ${easing}`,
+                opacity: 0,
+                'z-index': 0,
+              })
+              .removeClass(
+                oDotsItem[index],
+                'yyg-dot-item-active'
+              )
+        })
       }
       
     }
