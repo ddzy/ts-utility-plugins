@@ -897,8 +897,9 @@ namespace Carousel {
 
           this.initCommonEle();
 
-          // autoPlay && this.handleAutoPlay();
+          autoPlay && this.handleAutoPlay();
           showArrows && this.handleArrowClick();
+          showDots && this.handleDotsHover();
         }
       }
 
@@ -1151,6 +1152,7 @@ namespace Carousel {
 
       }
 
+
       /**
        * 处理 鼠标 点击切换
        */
@@ -1166,6 +1168,7 @@ namespace Carousel {
           this.aidedArrowClick('prev');
         }, false);
       }
+
 
       /**
        * 箭头点击辅助函数
@@ -1226,6 +1229,14 @@ namespace Carousel {
         this.handleAutoPlay();
       }
 
+
+      /**
+       * 处理 dot栏hover
+       */
+      public handleDotsHover(): void {
+        
+      }
+      
     }
 
   }
