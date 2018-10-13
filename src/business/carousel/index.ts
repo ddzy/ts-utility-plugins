@@ -866,10 +866,8 @@ namespace Carousel {
       private oArrowWrapper: any = null;
       private oPrevWrapper: any = null;
       private oNextWrapper: any = null;
-      private oDotsWrapper: any = null;
       private oDotsItem: any = null;
       private oContentItemLength: number = 0;
-      private oDotsItemLength: number = 0;
 
       private timer: number = 0;
       private count: number = 0;
@@ -1084,12 +1082,10 @@ namespace Carousel {
       public initCommonEle(): void {
         this.oContentItem = Utils.getAllEle('.yyg-content-item');
         this.oDotsItem = Utils.getAllEle('.yyg-dot-item');
-        this.oDotsWrapper = Utils.getEle('.yyg-dots-wrapper');
         this.oArrowWrapper = Utils.getAllEle('.yyg-arrow-wrapper');
         this.oPrevWrapper = Utils.getEle('.yyg-arrow-prev-wrapper');
         this.oNextWrapper = Utils.getEle('.yyg-arrow-next-wrapper');
         this.oContentItemLength = this.oContentItem.length;
-        this.oDotsItemLength = this.oDotsItem.length;
       }
 
 
@@ -1301,7 +1297,6 @@ namespace Carousel {
           });
 
           item.addEventListener('mouseenter', () => {
-            // 显示箭头
             Utils
               .addClass(oPrevArrow, 'yyg-prev-wrapper-active')
               .addClass(oNextArrow, 'yyg-next-wrapper-active');
