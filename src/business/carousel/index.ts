@@ -1169,17 +1169,39 @@ namespace Carousel {
       public aidedArrowClick(
         direction: 'prev' | 'next',
       ): void {
+        const {
+          duringTime,
+          easing,
+        } = yyg_settings;
+
+        const oContentItem = this.oContentItem;
+        const oContentItemLength = this.oContentItemLength;
+
         switch (direction) {
           case 'prev':
             break;
           case 'next':
             this.count++;
+            this.count = this.count > oContentItemLength - 1
+              ? 0
+              : this.count;
             break;
           default:
             break;
         }
-
-        console.log(this.count);
+        
+        oContentItem.forEach((item: any) => {
+          Utils.setCss(item, {
+            transition: `all ${duringTime}s ${easing}`,
+            opacity: 0,
+            'z-index': 0,
+          });
+        });
+        Utils.setCss(oContentItem[this.count], {
+          transition: `all ${duringTime}s ${easing}`,
+          opacity: 1,
+          'z-index': this.count,
+        });
       }
 
     }
