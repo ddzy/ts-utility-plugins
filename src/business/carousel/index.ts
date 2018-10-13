@@ -1180,6 +1180,7 @@ namespace Carousel {
         } = yyg_settings;
 
         const oContentItem = this.oContentItem;
+        const oDotsItem = this.oDotsItem;
         const oContentItemLength = this.oContentItemLength;
 
         clearInterval(this.timer);
@@ -1203,18 +1204,24 @@ namespace Carousel {
         
         oContentItem.forEach((item: any, index: number) => {
           this.count === index
-            ? Utils.setCss(item, {
-                transition: `all ${duringTime}s ${easing}`,
-                opacity: 1,
-                'z-index': index,
-              })
-            : Utils.setCss(item, {
-                transition: `all ${duringTime}s ${easing}`,
-                opacity: 0,
-                'z-index': 0,
-              })
+            ? Utils
+                .setCss(item, {
+                    transition: `all ${duringTime}s ${easing}`,
+                    opacity: 1,
+                    'z-index': index,
+                })
+                .addClass(oDotsItem[index], 'yyg-dot-item-active')
+            : Utils
+                .setCss(item, {
+                  transition: `all ${duringTime}s ${easing}`,
+                  opacity: 0,
+                  'z-index': 0,
+                })
+                .removeClass(
+                  oDotsItem[index],
+                  'yyg-dot-item-active'
+                )
         });
-
 
         this.handleAutoPlay();
       }
