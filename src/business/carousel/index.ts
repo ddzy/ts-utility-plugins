@@ -1299,6 +1299,13 @@ namespace Carousel {
           Utils.setCss(item, {
             display: 'block',
           });
+
+          item.addEventListener('mouseenter', () => {
+            // 显示箭头
+            Utils
+              .addClass(oPrevArrow, 'yyg-prev-wrapper-active')
+              .addClass(oNextArrow, 'yyg-next-wrapper-active');
+          }, false);
         });
 
         oContentItem.forEach((item: any) => {
