@@ -1156,11 +1156,15 @@ namespace Carousel {
        */
       public handleArrowClick(): void {
         const oNextArrow = this.oNextWrapper;
+        const oPrevArrow = this.oPrevWrapper;
 
         oNextArrow.addEventListener('click', () => {
           this.aidedArrowClick('next');
         }, false);
         
+        oPrevArrow.addEventListener('click', () => {
+          this.aidedArrowClick('prev');
+        }, false);
       }
 
       /**
@@ -1182,6 +1186,10 @@ namespace Carousel {
 
         switch (direction) {
           case 'prev':
+            this.count--;
+            this.count = this.count < 0
+              ? oContentItemLength - 1
+              : this.count;
             break;
           case 'next':
             this.count++;
