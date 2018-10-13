@@ -1234,7 +1234,41 @@ namespace Carousel {
        * 处理 dot栏hover
        */
       public handleDotsHover(): void {
-        
+        const {
+          showDots,
+          duringTime,
+          easing,
+        } = yyg_settings;
+        const oContentItem = this.oContentItem;
+        const oDotsItem = this.oDotsItem;
+        const oDotsItemLength = this.oDotsItemLength;
+
+        showDots && oDotsItem.forEach((item: any) => {
+          item.addEventListener('mouseenter', () => {
+            const oSignId: number = Number(Utils.getAttr(
+              item,
+              'data-id',
+            ));
+
+            clearInterval(this.timer);
+
+            oContentItem.forEach((item: any, index: number) => {
+              if (index === oSignId - 1) {
+                Utils.setCss(item, {
+                  transition: `all ${duringTime}s ${easing}`,
+                  opacity: 1,
+                  'z-index': this.count,
+                });
+              } else {
+                Utils.setCss(item, {
+                  transition: `all ${duringTime}s ${easing}`,
+                  opacity: 0,
+                  'z-index': 0,
+                });
+              }
+            });
+          }, false)
+        });
       }
       
     }
