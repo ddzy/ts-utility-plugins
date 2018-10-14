@@ -49,6 +49,7 @@ namespace ColorfulBubble {
     el: string,
   ) {
     Init.initCvsEl(el);
+    Init.initBubble();
 
     return ColorfulBubble;
   }
@@ -98,6 +99,10 @@ namespace ColorfulBubble {
         throw new Error('元素不存在!');
       }
     }
+
+    export function initBubble() {
+      new Bubble();
+    }
   }
 
 
@@ -110,6 +115,18 @@ namespace ColorfulBubble {
     }
   }
 
+
+  class Bubble {
+    public constructor() {}
+
+    public draw(): void {
+      yyg_pen.save();
+      yyg_pen.beginPath();
+      
+      yyg_pen.closePath();
+      yyg_pen.restore();
+    }
+  }
 }
 
 
