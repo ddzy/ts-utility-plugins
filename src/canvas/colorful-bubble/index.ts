@@ -327,7 +327,7 @@ namespace ColorfulBubble {
       const distance = this.distance;
 
       centerPoint.x += distance.x;
-      centerPoint.y += distance.x;
+      centerPoint.y += distance.y;
     }
   }
 }
