@@ -96,9 +96,7 @@ namespace ColorfulBubble {
     export function initCvsEl(
       el: string
     ) {
-      if (
-        Utils.getEle(el)
-      ) {
+      if (Utils.getEle(el)) {
         const e = Utils.getEle(el) as any;
         
         if (e.localName === 'canvas') {
@@ -106,9 +104,12 @@ namespace ColorfulBubble {
           yyg_pen = e.getContext('2d');
           
           Utils.setCss(yyg_el, {
-            width: `${yyg_settings.cvsWidth} !important`,
-            height: `${yyg_settings.cvsHeight} !important`,
+            display: 'block',
             'background-color': yyg_settings.cvsBgColor,
+          });
+          Utils.setAttr(yyg_el, {
+            width: yyg_settings.cvsWidth,
+            height: yyg_settings.cvsHeight,
           });
         } else {
           throw new Error('请传入canvas元素!');
