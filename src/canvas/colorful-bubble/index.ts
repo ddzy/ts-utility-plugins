@@ -42,6 +42,7 @@ namespace ColorfulBubble {
   export let yyg_el: any = null;
   export let yyg_pen: any = null;
 
+  const bubbleArr: Bubble[] = [];
 
   export function config(
     _props: IProps.IConfigProps,
@@ -120,14 +121,40 @@ namespace ColorfulBubble {
     }
 
     export function initBubble() {
-      const a = new Bubble();
-      a.draw();
+      const { bubbleNum } = yyg_settings as any;
 
-      window.setInterval(() => {
-        yyg_pen.clearRect(0, 0, yyg_settings.cvsWidth, yyg_settings.cvsHeight);
-        a.move();
-        a.draw();
-      }, 1000/60);
+      for (let i = 0; i < bubbleNum; i++) {
+        createBubbleFactory();
+      }
+
+      moveBubble();
+    }
+
+    /**
+     * 气泡工厂
+     */
+    function createBubbleFactory() {
+      const bubble = new Bubble();
+      bubbleArr.push(bubble);
+      bubble.draw();
+    }
+
+    /**
+     * 气泡移动
+     */
+    function moveBubble() {
+      const {
+        cvsWidth,
+        cvsHeight,
+      } = yyg_settings as any;
+
+      yyg_pen.clearRect(0, 0, cvsWidth, cvsHeight);
+      bubbleArr.forEach((item: Bubble) => {
+        item.move();
+        item.draw();
+      });
+
+      window.requestAnimationFrame(moveBubble);
     }
   }
 
