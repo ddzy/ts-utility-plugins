@@ -1,7 +1,8 @@
 /**
- * @name canvas-colorful-bubble 五彩气泡特效插件
+ * @name canvas-colorful-bubble
+ * @description 五彩气泡背景插件
  * @author yyg
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 /**
