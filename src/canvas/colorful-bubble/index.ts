@@ -32,6 +32,7 @@ namespace ColorfulBubble {
     allowMouse: true,
   }
   export let yyg_el: any = null;
+  export let yyg_pen: any = null;
 
 
   export function config(
@@ -81,10 +82,19 @@ namespace ColorfulBubble {
     export function initCvsEl(
       el: string
     ) {
-      if (Utils.getEle(el)) {
-        yyg_el = Utils.getEle(el);
+      if (
+        Utils.getEle(el)
+      ) {
+        const e = Utils.getEle(el) as any;
+        
+        if (e.localName === 'canvas') {
+          yyg_el = e;
+          yyg_pen = e.getContext('2d');
+        } else {
+          throw new Error('请传入canvas元素!');
+        }
       } else {
-        throw new Error('请传入正确canvas元素!');
+        throw new Error('元素不存在!');
       }
     }
   }
