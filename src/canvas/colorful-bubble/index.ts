@@ -120,7 +120,14 @@ namespace ColorfulBubble {
     }
 
     export function initBubble() {
-      new Bubble().draw();
+      const a = new Bubble();
+      a.draw();
+
+      window.setInterval(() => {
+        yyg_pen.clearRect(0, 0, yyg_settings.cvsWidth, yyg_settings.cvsHeight);
+        a.move();
+        a.draw();
+      }, 1000/60);
     }
   }
 
@@ -218,10 +225,18 @@ namespace ColorfulBubble {
       x: number,
       y: number,
     }
+    // 移动距离
+    private readonly distance: {
+      x: number,
+      y: number,
+    }
 
     public constructor() {
       const cvsWidth = yyg_settings.cvsWidth as number;
       const cvsHeight = yyg_settings.cvsHeight as number;
+      const {
+        bubbleSpeed,
+      } = yyg_settings as any;
 
       this.centerPoint = {
         x: Utils.getAnyRandom(
@@ -232,6 +247,10 @@ namespace ColorfulBubble {
           0,
           cvsHeight,
         ),
+      };
+      this.distance = {
+        x: Utils.getAnyRandom(-bubbleSpeed, bubbleSpeed),
+        y: Utils.getAnyRandom(-bubbleSpeed, bubbleSpeed),
       };
     }
 
@@ -262,6 +281,14 @@ namespace ColorfulBubble {
       yyg_pen.fill();
       yyg_pen.closePath();
       yyg_pen.restore();
+    }
+
+    public move(): void {
+      const centerPoint = this.centerPoint;
+      const distance = this.distance;
+
+      centerPoint.x += distance.x;
+      centerPoint.y += distance.x;
     }
   }
 }
