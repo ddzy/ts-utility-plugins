@@ -230,12 +230,22 @@ namespace ColorfulBubble {
       x: number,
       y: number,
     }
+    // 气泡颜色
+    private readonly color: string
+    // 气泡半径
+    private readonly radius: number
+    // 气泡透明度
+    private readonly opacity: number
+
 
     public constructor() {
       const cvsWidth = yyg_settings.cvsWidth as number;
       const cvsHeight = yyg_settings.cvsHeight as number;
       const {
         bubbleSpeed,
+        bubbleColorArr,
+        bubbleScaleRange,
+        bubbleOpacity,
       } = yyg_settings as any;
 
       this.centerPoint = {
@@ -252,29 +262,31 @@ namespace ColorfulBubble {
         x: Utils.getAnyRandom(-bubbleSpeed, bubbleSpeed),
         y: Utils.getAnyRandom(-bubbleSpeed, bubbleSpeed),
       };
+      this.color = bubbleColorArr[
+        Utils.getFullRandom(0, bubbleColorArr.length)
+      ];
+      this.radius = Utils.getAnyRandom(
+        bubbleScaleRange && bubbleScaleRange.min,
+        bubbleScaleRange && bubbleScaleRange.max,
+      );
+      this.opacity = bubbleOpacity;
     }
 
+
     public draw(): void {
-      const {
-        bubbleScaleRange,
-        bubbleColorArr,
-        bubbleOpacity,
-      } = yyg_settings as any;
       const centerPoint = this.centerPoint;
+      const color = this.color;
+      const radius = this.radius;
+      const opacity = this.opacity;
 
       yyg_pen.save();
       yyg_pen.beginPath();
-      yyg_pen.globalAlpha = bubbleOpacity;
-      yyg_pen.fillStyle = bubbleColorArr[
-        Utils.getFullRandom(0, bubbleColorArr.length)
-      ];
+      yyg_pen.globalAlpha = opacity;
+      yyg_pen.fillStyle = color;
       yyg_pen.arc(
         centerPoint.x,
         centerPoint.y,
-        Utils.getAnyRandom(
-          bubbleScaleRange && bubbleScaleRange.min,
-          bubbleScaleRange && bubbleScaleRange.max,
-        ),
+        radius,
         0,
         Utils.getRadian(360),
       );
