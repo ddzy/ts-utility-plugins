@@ -104,6 +104,12 @@ namespace ColorfulBubble {
         if (e.localName === 'canvas') {
           yyg_el = e;
           yyg_pen = e.getContext('2d');
+          
+          Utils.setCss(yyg_el, {
+            width: `${yyg_settings.cvsWidth} !important`,
+            height: `${yyg_settings.cvsHeight} !important`,
+            'background-color': yyg_settings.cvsBgColor,
+          });
         } else {
           throw new Error('请传入canvas元素!');
         }
@@ -162,6 +168,45 @@ namespace ColorfulBubble {
       angle: number
     ): number {
       return (Math.PI / 180) * angle;
+    }
+
+    /**
+     * 设置元素样式
+     * @param el dom元素
+     * @param options 样式表
+     * @returns Utils
+     */
+    export function setCss(
+      el: HTMLElement,
+      options: any,
+    ) {
+      for (const key in options) {
+        if (options.hasOwnProperty(key)) {
+          const element = options[key];
+          el.style.cssText += `${key}: ${options[key]};`;
+        }
+      }
+
+      return Utils;
+    }
+
+    /**
+     * 设置元素属性 
+     * @param el dom元素
+     * @param options 属性配置项
+     */
+    export function setAttr(
+      el: HTMLElement,
+      options: any,
+    ) {
+      for (const key in options) {
+        if (options.hasOwnProperty(key)) {
+          const element = options[key];
+          el.setAttribute(key, element);
+        }
+      }
+
+      return Utils;
     }
   }
 
@@ -223,7 +268,7 @@ namespace ColorfulBubble {
 
 const cb = ColorfulBubble
   .config({
-    cvsWidth: 500,
-    cvsHeight: 600,
+    cvsWidth: 800,
+    cvsHeight: 700,
   })
   .render('#colorful-bubble');
