@@ -113,28 +113,107 @@ namespace ColorfulBubble {
     }
 
     export function initBubble() {
-      new Bubble();
+      new Bubble().draw();
     }
   }
 
 
   namespace Utils {
+    /**
+     * 获取单个dom元素
+     * @param el dom元素
+     */
     export function getEle(
       el: string,
     ): HTMLElement | null {
       return document
         .querySelector(el);
     }
+
+    /**
+     * 取随机整数
+     * @param min 最小值
+     * @param max 最大值
+     */
+    export function getFullRandom(
+      min: number,
+      max: number,
+    ): number {
+      return ~~(Math.random() * (max - min) + min);
+    }
+
+    /**
+     * 取随机任意数
+     * @param min 最小值
+     * @param max 最大值
+     */
+    export function getAnyRandom(
+      min: number,
+      max: number,
+    ): number {
+      return Math.random() * (max - min) + min;
+    }
+
+    /**
+     * 转化弧度
+     * @param angle 角度
+     */
+    export function getRadian(
+      angle: number
+    ): number {
+      return (Math.PI / 180) * angle;
+    }
   }
 
 
   class Bubble {
-    public constructor() {}
+    // 中心点坐标
+    private readonly centerPoint: {
+      x: number,
+      y: number,
+    }
+
+    public constructor() {
+      const cvsWidth = yyg_settings.cvsWidth as number;
+      const cvsHeight = yyg_settings.cvsHeight as number;
+
+      this.centerPoint = {
+        x: Utils.getAnyRandom(
+          0,
+          cvsWidth
+        ),
+        y: Utils.getAnyRandom(
+          0,
+          cvsHeight,
+        ),
+      };
+    }
 
     public draw(): void {
+      const {
+        bubbleScaleRange,
+        bubbleColorArr,
+        bubbleOpacity,
+      } = yyg_settings as any;
+      const centerPoint = this.centerPoint;
+
       yyg_pen.save();
       yyg_pen.beginPath();
-
+      yyg_pen.globalAlpha = bubbleOpacity;
+      yyg_pen.fillStyle = bubbleColorArr[
+        Utils.getFullRandom(0, bubbleColorArr.length)
+      ];
+      yyg_pen.arc(
+        centerPoint.x,
+        centerPoint.y,
+        Utils.getAnyRandom(
+          bubbleScaleRange && bubbleScaleRange.min,
+          bubbleScaleRange && bubbleScaleRange.max,
+        ),
+        0,
+        Utils.getRadian(360),
+      );
+      yyg_pen.fill();
       yyg_pen.closePath();
       yyg_pen.restore();
     }
