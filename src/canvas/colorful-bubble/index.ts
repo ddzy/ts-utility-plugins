@@ -336,11 +336,14 @@ namespace ColorfulBubble {
       centerPoint.y += distance.y;
 
       // 碰撞检测
-      if (centerPoint.x < halfRadius || centerPoint.x > cvsWidth - halfRadius ) {
-        this.distance.x = -this.distance.x;
-      } else if (centerPoint.y < halfRadius || centerPoint.y > cvsHeight - halfRadius) {
-        this.distance.y = -this.distance.y;
-      }
+      this.distance.x = centerPoint.x < halfRadius
+        || centerPoint.x > cvsWidth - halfRadius
+        ? -this.distance.x
+        : this.distance.x;
+      this.distance.y = centerPoint.y < halfRadius
+        || centerPoint.y > cvsHeight - halfRadius
+        ? -this.distance.y
+        : this.distance.y;
     }
   }
 }
