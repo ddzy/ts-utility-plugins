@@ -322,6 +322,7 @@ namespace ColorfulBubble {
       yyg_pen.restore();
     }
 
+    
     public move(): void {
       const {
         cvsWidth,
