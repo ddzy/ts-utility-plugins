@@ -2,7 +2,7 @@
  * @name canvas-colorful-bubble
  * @description 五彩气泡背景插件
  * @author yyg
- * @version 1.0.1
+ * @version 1.0.2
  */
 
 /**
@@ -322,7 +322,7 @@ namespace ColorfulBubble {
       yyg_pen.restore();
     }
 
-    
+
     public move(): void {
       const {
         cvsWidth,
