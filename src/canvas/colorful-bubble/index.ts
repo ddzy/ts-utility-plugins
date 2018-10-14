@@ -323,11 +323,24 @@ namespace ColorfulBubble {
     }
 
     public move(): void {
+      const {
+        cvsWidth,
+        cvsHeight,
+      } = yyg_settings as any;
       const centerPoint = this.centerPoint;
       const distance = this.distance;
+      const radius = this.radius;
+      const halfRadius = radius / 2;
 
       centerPoint.x += distance.x;
       centerPoint.y += distance.y;
+
+      // 碰撞检测
+      if (centerPoint.x < halfRadius || centerPoint.x > cvsWidth - halfRadius ) {
+        this.distance.x = -this.distance.x;
+      } else if (centerPoint.y < halfRadius || centerPoint.y > cvsHeight - halfRadius) {
+        this.distance.y = -this.distance.y;
+      }
     }
   }
 }
