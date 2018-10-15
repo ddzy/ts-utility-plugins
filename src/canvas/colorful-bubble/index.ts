@@ -47,9 +47,9 @@ namespace ColorfulBubble {
     x: number,
     y: number,
   } = {
-    x: 0,
-    y: 0,
-  };
+    x: yyg_settings.cvsWidth,
+    y: yyg_settings.cvsHeight,
+  } as any;
 
   export function config(
     _props: IProps.IConfigProps,
@@ -270,6 +270,9 @@ namespace ColorfulBubble {
 
 
   class Bubble {
+    // 最大缩放距离
+    private static MAX_SCALE_DISTANCE = 10;
+
     // 中心点坐标
     private readonly centerPoint: {
       x: number,
@@ -283,7 +286,7 @@ namespace ColorfulBubble {
     // 气泡颜色
     private readonly color: string
     // 气泡半径
-    private readonly radius: number
+    private radius: number
     // 气泡透明度
     private readonly opacity: number
 
@@ -350,11 +353,20 @@ namespace ColorfulBubble {
       const {
         cvsWidth,
         cvsHeight,
+        bubbleRadius,
       } = yyg_settings as any;
       const centerPoint = this.centerPoint;
       const distance = this.distance;
       const radius = this.radius;
       const halfRadius = radius / 2;
+
+      // 鼠标 - 球中心 距离
+      const mouseToBubbleDistanceX: number = Math
+        .pow(Math.abs(mousePoint.x - centerPoint.x), 2);
+      const mouseToBubbleDistanceY: number = Math
+        .pow(Math.abs(mousePoint.y - centerPoint.y), 2);
+      const mouseToBubbleDistance: number = Math
+        .pow(mouseToBubbleDistanceX + mouseToBubbleDistanceY, .5)
 
       centerPoint.x += distance.x;
       centerPoint.y += distance.y;
@@ -368,6 +380,11 @@ namespace ColorfulBubble {
         || centerPoint.y > cvsHeight - halfRadius
         ? -this.distance.y
         : this.distance.y;
+      
+      // 缩放检测
+      if (mouseToBubbleDistance < halfRadius) {
+        this.radius++;
+      }
     }
   }
 }
