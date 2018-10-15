@@ -124,16 +124,16 @@ namespace ColorfulBubble {
       const { bubbleNum } = yyg_settings as any;
 
       for (let i = 0; i < bubbleNum; i++) {
-        createBubbleFactory();
+        _createBubbleFactory();
       }
 
-      moveBubble();
+      _moveBubble();
     }
 
     /**
      * 气泡工厂
      */
-    function createBubbleFactory() {
+    function _createBubbleFactory() {
       const bubble = new Bubble();
       bubbleArr.push(bubble);
       bubble.draw();
@@ -142,7 +142,7 @@ namespace ColorfulBubble {
     /**
      * 气泡移动
      */
-    function moveBubble() {
+    function _moveBubble() {
       const {
         cvsWidth,
         cvsHeight,
@@ -154,7 +154,7 @@ namespace ColorfulBubble {
         item.draw();
       });
 
-      window.requestAnimationFrame(moveBubble);
+      window.requestAnimationFrame(_moveBubble);
     }
   }
 
@@ -354,5 +354,6 @@ const cb = ColorfulBubble
   .config({
     cvsWidth: 800,
     cvsHeight: 700,
+    cvsBgColor: '#000',
   })
   .render('#colorful-bubble');
