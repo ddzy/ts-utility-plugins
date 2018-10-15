@@ -121,13 +121,19 @@ namespace ColorfulBubble {
     }
 
     export function initBubble() {
-      const { bubbleNum } = yyg_settings as any;
+      const {
+        bubbleNum,
+        allowMouse,
+      } = yyg_settings as any;
 
       for (let i = 0; i < bubbleNum; i++) {
         _createBubbleFactory();
       }
 
       _moveBubble();
+
+      // 鼠标交互
+      _moveByMouse();
     }
 
     /**
@@ -155,6 +161,13 @@ namespace ColorfulBubble {
       });
 
       window.requestAnimationFrame(_moveBubble);
+    }
+
+    /**
+     * 鼠标控制
+     */
+    function _moveByMouse() {
+      
     }
   }
 
