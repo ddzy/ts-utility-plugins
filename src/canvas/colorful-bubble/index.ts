@@ -271,7 +271,7 @@ namespace ColorfulBubble {
 
   class Bubble {
     // 最大缩放距离
-    private static MAX_SCALE_DISTANCE = 10;
+    private static MAX_SCALE_DISTANCE = 0;
 
     // 中心点坐标
     private readonly centerPoint: {
@@ -323,6 +323,8 @@ namespace ColorfulBubble {
         bubbleScaleRange && bubbleScaleRange.max,
       );
       this.opacity = bubbleOpacity;
+
+      Bubble.MAX_SCALE_DISTANCE = this.radius;
     }
 
 
@@ -353,7 +355,6 @@ namespace ColorfulBubble {
       const {
         cvsWidth,
         cvsHeight,
-        bubbleRadius,
       } = yyg_settings as any;
       const centerPoint = this.centerPoint;
       const distance = this.distance;
@@ -384,6 +385,10 @@ namespace ColorfulBubble {
       // 缩放检测
       if (mouseToBubbleDistance < halfRadius) {
         this.radius++;
+      } else {
+        if (this.radius > Bubble.MAX_SCALE_DISTANCE) {
+          this.radius--;
+        }
       }
     }
   }
