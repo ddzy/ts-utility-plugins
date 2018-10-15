@@ -43,6 +43,13 @@ namespace ColorfulBubble {
   export let yyg_pen: any = null;
 
   const bubbleArr: Bubble[] = [];
+  const mousePoint: {
+    x: number,
+    y: number,
+  } = {
+    x: 0,
+    y: 0,
+  };
 
   export function config(
     _props: IProps.IConfigProps,
@@ -133,7 +140,7 @@ namespace ColorfulBubble {
       _moveBubble();
 
       // 鼠标交互
-      _moveByMouse();
+      allowMouse && _moveByMouse();
     }
 
     /**
@@ -167,7 +174,10 @@ namespace ColorfulBubble {
      * 鼠标控制
      */
     function _moveByMouse() {
-      
+      yyg_el.addEventListener('mousemove', (e: MouseEvent) => {
+        mousePoint.x = e.clientX;
+        mousePoint.y = e.clientY;
+      });
     }
   }
 
@@ -368,5 +378,6 @@ const cb = ColorfulBubble
     cvsWidth: 800,
     cvsHeight: 700,
     cvsBgColor: '#000',
+    allowMouse: true,
   })
   .render('#colorful-bubble');
