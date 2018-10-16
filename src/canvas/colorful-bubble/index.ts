@@ -382,11 +382,13 @@ namespace ColorfulBubble {
         : this.distance.y;
       
       // 缩放检测
-      if (mouseToBubbleDistance < radius) {
-        this.radius++;
-        if (this.radius > Bubble.MAX_SCALE_DISTANCE) {
-          this.radius--;
-        }
+      if (mouseToBubbleDistance <= Bubble.MAX_SCALE_DISTANCE) {
+        this.radius += 1;
+      } else if (
+        mouseToBubbleDistance > Bubble.MAX_SCALE_DISTANCE
+          && this.radius >= 5
+      ) {
+        this.radius -= 1;
       }
     }
   }
