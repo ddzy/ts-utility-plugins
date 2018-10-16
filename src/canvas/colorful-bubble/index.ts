@@ -271,7 +271,7 @@ namespace ColorfulBubble {
 
   class Bubble {
     // 最大缩放距离
-    private static MAX_SCALE_DISTANCE = 0;
+    private static MAX_SCALE_DISTANCE = 50;
 
     // 中心点坐标
     private readonly centerPoint: {
@@ -324,7 +324,7 @@ namespace ColorfulBubble {
       );
       this.opacity = bubbleOpacity;
 
-      Bubble.MAX_SCALE_DISTANCE = this.radius;
+      // Bubble.MAX_SCALE_DISTANCE = this.radius;
     }
 
 
@@ -359,7 +359,6 @@ namespace ColorfulBubble {
       const centerPoint = this.centerPoint;
       const distance = this.distance;
       const radius = this.radius;
-      const halfRadius = radius / 2;
 
       // 鼠标 - 球中心 距离
       const mouseToBubbleDistanceX: number = Math
@@ -373,19 +372,18 @@ namespace ColorfulBubble {
       centerPoint.y += distance.y;
 
       // 碰撞检测
-      this.distance.x = centerPoint.x < halfRadius
-        || centerPoint.x > cvsWidth - halfRadius
+      this.distance.x = centerPoint.x < radius
+        || centerPoint.x > cvsWidth - radius
         ? -this.distance.x
         : this.distance.x;
-      this.distance.y = centerPoint.y < halfRadius
-        || centerPoint.y > cvsHeight - halfRadius
+      this.distance.y = centerPoint.y < radius
+        || centerPoint.y > cvsHeight - radius
         ? -this.distance.y
         : this.distance.y;
       
       // 缩放检测
-      if (mouseToBubbleDistance < halfRadius) {
+      if (mouseToBubbleDistance < radius) {
         this.radius++;
-      } else {
         if (this.radius > Bubble.MAX_SCALE_DISTANCE) {
           this.radius--;
         }
@@ -401,5 +399,7 @@ const cb = ColorfulBubble
     cvsHeight: 700,
     cvsBgColor: '#000',
     allowMouse: true,
+    bubbleNum: 500,
+    bubbleOpacity: .5,
   })
   .render('#colorful-bubble');
