@@ -179,17 +179,15 @@ namespace ColorfulBubble {
         cvsHeight,
       } = yyg_settings as any;
 
-      yyg_el.addEventListener('mousemove', tick);
+      yyg_el.addEventListener('mousemove', (e: MouseEvent) => {
+        mousePoint.x = e.clientX;
+        mousePoint.y = e.clientY;
+      });
 
       yyg_el.addEventListener('mouseleave', () => {
         mousePoint.x = cvsWidth * 2;
         mousePoint.y = cvsHeight * 2;
       });
-    }
-
-    function tick(e: MouseEvent): void {
-      mousePoint.x = e.clientX;
-      mousePoint.y = e.clientY;
     }
   }
 
