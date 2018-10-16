@@ -29,7 +29,7 @@ namespace ColorfulBubble {
       min: 3,
       max: 5,
     },
-    bubbleExpandRange: 15,
+    bubbleExpandRange: 50,
     bubbleOpacity: 1,
     bubbleSpeed: 1,
     bubbleColorArr: [
@@ -335,7 +335,6 @@ namespace ColorfulBubble {
         bubbleScaleRange && bubbleScaleRange.max,
       );
       this.opacity = bubbleOpacity;
-
       Bubble.BUBBLE_INITIAL_RADIUS = this.radius;
     }
 
