@@ -6,7 +6,7 @@
 > 可根据需要, 引入lib下的对应js文件
 
 ## 更新
-> 最近更新于 18/10/14  
+> 最近更新于 18/10/16  
 
 ## 导航
 1. Canvas 
@@ -103,8 +103,13 @@ ColorfulBubble
     bubbleNum?:       number    气泡数量
     bubbleOpacity?:   number    气泡透明度
     bubbleSpeed?:     number    气泡移动速度
+    bubbleScaleRange?: {        气泡半径范围
+      min: number, 
+      max: number 
+    } 
     allowMouse?:      boolean   是否允许鼠标交互
     bubbleColorArr?:  string[]  气泡颜色数组
+    bubbleExpandRange?: number    气泡缩放极值
   })
   .render(el: string)
 ```
