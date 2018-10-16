@@ -47,8 +47,8 @@ namespace ColorfulBubble {
     x: number,
     y: number,
   } = {
-    x: yyg_settings.cvsWidth,
-    y: yyg_settings.cvsHeight,
+      x: yyg_settings.cvsWidth && yyg_settings.cvsWidth * 2,
+      y: yyg_settings.cvsHeight && yyg_settings.cvsHeight * 2,
   } as any;
 
   export function config(
@@ -174,10 +174,22 @@ namespace ColorfulBubble {
      * 鼠标控制
      */
     function _moveByMouse() {
-      yyg_el.addEventListener('mousemove', (e: MouseEvent) => {
-        mousePoint.x = e.clientX;
-        mousePoint.y = e.clientY;
+      const {
+        cvsWidth,
+        cvsHeight,
+      } = yyg_settings as any;
+
+      yyg_el.addEventListener('mousemove', tick);
+
+      yyg_el.addEventListener('mouseleave', () => {
+        mousePoint.x = cvsWidth * 2;
+        mousePoint.y = cvsHeight * 2;
       });
+    }
+
+    function tick(e: MouseEvent): void {
+      mousePoint.x = e.clientX;
+      mousePoint.y = e.clientY;
     }
   }
 
@@ -363,9 +375,9 @@ namespace ColorfulBubble {
 
       // 鼠标 - 球中心 距离
       const mouseToBubbleDistanceX: number = Math
-        .pow(Math.abs(mousePoint.x - centerPoint.x), 2);
+        .pow(centerPoint.x - mousePoint.x, 2);
       const mouseToBubbleDistanceY: number = Math
-        .pow(Math.abs(mousePoint.y - centerPoint.y), 2);
+        .pow(centerPoint.y - mousePoint.y, 2);
       const mouseToBubbleDistance: number = Math
         .pow(mouseToBubbleDistanceX + mouseToBubbleDistanceY, .5)
 
@@ -387,7 +399,7 @@ namespace ColorfulBubble {
         this.radius += 1;
       } else if (
         mouseToBubbleDistance > bubbleExpandRange
-        && this.radius >= Bubble.BUBBLE_INITIAL_RADIUS
+        && this.radius > Bubble.BUBBLE_INITIAL_RADIUS
       ) {
         this.radius -= 1;
       }
@@ -404,5 +416,6 @@ const cb = ColorfulBubble
     allowMouse: true,
     bubbleNum: 500,
     bubbleOpacity: .5,
+    bubbleExpandRange: 50,
   })
   .render('#colorful-bubble');
