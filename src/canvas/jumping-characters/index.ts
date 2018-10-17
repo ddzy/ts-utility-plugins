@@ -7,6 +7,7 @@
 
 
 /**
+ * @param ele 画布元素
  * @param cvsWidth 画布宽
  * @param cvsHeight 画布高
  * @param cvsBgColor 画布背景
@@ -21,6 +22,7 @@
 namespace JumpingCharacters {
 
   const yyg_settings: IProps.IRenderProps = {
+    ele: '',
     cvsWidth: 500,
     cvsHeight: 500,
     cvsBgColor: '#fff',
@@ -49,6 +51,7 @@ namespace JumpingCharacters {
 
   namespace IProps {
     export interface IRenderProps {
+      ele: string,
       cvsWidth?: number,
       cvsHeight?: number,
       cvsBgColor?: string,
