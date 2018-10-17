@@ -10,9 +10,9 @@
  * @param cvsWidth 画布宽
  * @param cvsHeight 画布高
  * @param cvsBgColor 画布背景
- * @param fonts   string | string[] 字体数组
- * @param fontColor 字体颜色
- * @param fontSize 字体大小
+ * @param text   string | string[] 字体数组
+ * @param textColor string | string[] 字体颜色
+ * @param textSize 字体大小
  * @param safeDistance 安全距离(移动多远消失)
  * @param initialOpacity 初始透明度
  */
@@ -24,13 +24,13 @@ namespace JumpingCharacters {
     cvsWidth: 500,
     cvsHeight: 500,
     cvsBgColor: '#fff',
-    fonts: [
+    text: [
       '富强', '民主', '文明', '和谐',
       '自由', '平等', '公正', '法治',
       '爱国', '敬业', '诚信', '友善',
     ],
-    fontColor: '#d50',
-    fontSize: 16,
+    textColor: '#d50',
+    textSize: 16,
     safeDistance: 20,
     initialOpacity: 1,
   }
@@ -48,9 +48,9 @@ namespace JumpingCharacters {
       cvsWidth?: number,
       cvsHeight?: number,
       cvsBgColor?: string,
-      fonts?: string[] | string,
-      fontColor?: string,
-      fontSize?: number,
+      text?: string[] | string,
+      textColor?: string,
+      textSize?: number,
       safeDistance?: number,
       initialOpacity?: number,
     }
