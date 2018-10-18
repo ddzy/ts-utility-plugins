@@ -11,9 +11,9 @@
  * @param cvsWidth 画布宽
  * @param cvsHeight 画布高
  * @param cvsBgColor 画布背景
- * @param text   string | string[] 字体数组
- * @param textColor string | string[] 字体颜色
- * @param textSize 字体大小
+ * @param text   string | string[] 文字
+ * @param textColor string | string[] 文字颜色
+ * @param textSize 文字大小
  * @param safeDistance 安全距离(移动多远消失)
  * @param initialOpacity 初始透明度
  */
