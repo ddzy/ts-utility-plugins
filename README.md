@@ -6,12 +6,13 @@
 > 可根据需要, 引入lib下的对应js文件
 
 ## 更新
-> 最近更新于 18/10/16  
+> 最近更新于 18/10/18 
 
 ## 导航
 1. Canvas 
   + [canvas-stars-line](#canvas-stars-line)
   + [canvas-colorful-bubble](#canvas-colorful-bubble)
+  + [canvas-jumping-characters](#canvas-jumping-characters)
 2. Business
   + [business-carousel](#business-carousel)
 
@@ -112,4 +113,27 @@ ColorfulBubble
     bubbleExpandRange?: number    气泡缩放极值
   })
   .render(el: string)
+```
+
+## canvas-jumping-characters
+> 字符跳跃插件, 可用作博客背景
+1. 采用默认配置项
+```
+JumpingCharacters.render({
+  ele: HTMLCanvasElement,
+});
+```
+2. 自定义配置项
+```
+JumpingCharacters.render({
+  ele: HTMLCanvasElement,
+  cvsWidth: number 画布宽
+  cvsHeight: number 画布高
+  cvsBgColor: string 画布背景
+  text: string | string[] 文字
+  textColor: string | string[] 字体颜色
+  textSize: number 字体大小
+  safeDistance: number 安全距离(文字移动多远后消失)
+  initialOpacity: number 初始透明度
+});
 ```
