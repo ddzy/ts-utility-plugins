@@ -21,7 +21,7 @@
 
 namespace JumpingCharacters {
 
-  const yyg_settings: IProps.IRenderProps = {
+  export const yyg_settings: IProps.IRenderProps = {
     ele: '',
     cvsWidth: 500,
     cvsHeight: 500,
@@ -45,7 +45,25 @@ namespace JumpingCharacters {
   export function render(
     _props: IProps.IRenderProps,
   ) {
-    
+    _aidedInitSettings(_props);
+
+    return JumpingCharacters;
+  }
+
+
+  /**
+   * 初始化自定义配置辅助函数
+   * @param options 配置项
+   */
+  function _aidedInitSettings(
+    options: any,
+  ) {
+    for (const key in options) {
+      if (options.hasOwnProperty(key)) {
+        const element = options[key];
+        Reflect.set(yyg_settings, key, element);
+      }
+    }
   }
 
 
@@ -64,3 +82,7 @@ namespace JumpingCharacters {
   }
 
 }
+
+JumpingCharacters.render({
+  ele: '#',
+});
