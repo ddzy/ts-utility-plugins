@@ -41,6 +41,8 @@ namespace JumpingCharacters {
     initialOpacity: 1,
   }
 
+  export let yyg_pen: any = null;
+
   
   export function render(
     _props: IProps.IRenderProps,
@@ -74,12 +76,17 @@ namespace JumpingCharacters {
    * 初始化canvas
    * @param ele canvas元素
    */
-  function _aidedInitCvs(ele: string): void {
+  function _aidedInitCvs(
+    ele: string
+  ): void {
     const el = Utils.getEle(ele);
 
     if (el) {
       if (el.localName === 'canvas') {
-        Reflect.set(yyg_settings, 'ele', el);
+        const e = el as HTMLCanvasElement;
+
+        Reflect.set(yyg_settings, 'ele', e);
+        yyg_pen = e.getContext('2d');
       } else {
         throw new Error('Please enter the HTMLCanvasElement!');
       }
