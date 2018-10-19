@@ -61,8 +61,30 @@ namespace JumpingCharacters {
     for (const key in options) {
       if (options.hasOwnProperty(key)) {
         const element = options[key];
-        Reflect.set(yyg_settings, key, element);
+        
+        key === 'ele'
+          ? _aidedInitCvs(element)
+          : Reflect.set(yyg_settings, key, element);
       }
+    }
+  }
+
+
+  /**
+   * 初始化canvas
+   * @param ele canvas元素
+   */
+  function _aidedInitCvs(ele: string): void {
+    const el = Utils.getEle(ele);
+
+    if (el) {
+      if (el.localName === 'canvas') {
+        Reflect.set(yyg_settings, 'ele', el);
+      } else {
+        throw new Error('Please enter the HTMLCanvasElement!');
+      }
+    } else {
+      throw new Error('Please enter an exist HTMLElement!');
     }
   }
 
@@ -81,8 +103,17 @@ namespace JumpingCharacters {
     }
   }
 
+
+  namespace Utils {
+    export function getEle(
+      el: string,
+    ): HTMLElement | null {
+      return document.querySelector(el);
+    }
+  }
+
 }
 
-JumpingCharacters.render({
-  ele: '#',
+const a = JumpingCharacters.render({
+  ele: '#jumping-characters',
 });
