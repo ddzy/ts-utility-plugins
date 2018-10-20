@@ -40,8 +40,16 @@ namespace JumpingCharacters {
     safeDistance: 20,
     initialOpacity: 1,
   }
+  export const mousePoint: {
+    x: number,
+    y: number,
+  } = {
+    x: 0,
+    y: 0,
+  }
 
   export let yyg_pen: any = null;
+
 
   
   export function render(
@@ -101,7 +109,12 @@ namespace JumpingCharacters {
    * 初始化 主类 辅助函数
    */
   function _aidedInitJC() {
-    
+    const { ele } = yyg_settings as any;
+
+    ele.addEventListener('click', (e: MouseEvent) => {
+      mousePoint.x = e.clientX;
+      mousePoint.y = e.clientY;
+    }, false);
   }
 
 
