@@ -48,6 +48,7 @@ namespace JumpingCharacters {
     _props: IProps.IRenderProps,
   ) {
     _aidedInitSettings(_props);
+    _aidedInitJC();
 
     return JumpingCharacters;
   }
@@ -93,6 +94,14 @@ namespace JumpingCharacters {
     } else {
       throw new Error('Please enter an exist HTMLElement!');
     }
+  }
+
+
+  /**
+   * 初始化 主类 辅助函数
+   */
+  function _aidedInitJC() {
+    
   }
 
 
