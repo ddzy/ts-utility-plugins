@@ -6,7 +6,7 @@
 > 可根据需要, 引入lib下的对应js文件
 
 ## 更新
-> 最近更新于 18/10/19 
+> 最近更新于 18/10/20
 
 ## 导航
 1. Canvas 
@@ -116,7 +116,7 @@ ColorfulBubble
 ```
 
 ## canvas-jumping-characters
-> 字符跳跃插件, 可用作博客背景
+> 点击产生文字,并逐渐消失, 可用作个人博客背景, 增强用户体验.
 1. 采用默认配置项
 ```
 JumpingCharacters.render({
