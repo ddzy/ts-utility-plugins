@@ -1,8 +1,8 @@
 /**
  * @name: canvas-jumping-characters 
- * @description 跳跃的字符
+ * @description 字节跳动, 可用作博客背景
  * @author: yyg
- * @version 1.0.2
+ * @version 1.0.3
  */
 
 
