@@ -119,8 +119,35 @@ namespace JumpingCharacters {
     }
   }
 
+
+  class JC {
+    private opacity: number;
+    private textSize: number;
+    private textColor: string | string[];
+    private text: string | string[];
+    private safeDistance: number;
+
+    public constructor() {
+      const {
+        initialOpacity,
+        textSize,
+        textColor,
+        safeDistance,
+        text,
+      } = yyg_settings as any;
+
+      this.opacity = initialOpacity;
+      this.textSize = textSize;
+      this.text = text;
+      this.textColor = textColor;
+      this.safeDistance = safeDistance;
+    }
+  }
+
 }
 
 const a = JumpingCharacters.render({
   ele: '#jumping-characters',
 });
+
+// console.log(a);
