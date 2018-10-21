@@ -200,6 +200,13 @@ namespace JumpingCharacters {
     ): boolean {
       return el && Array.isArray(el);
     }
+
+    export function getRandomWithPositive(
+      min: number,
+      max: number,
+    ): number {
+      return ~~(Math.random() * (max - min) + min);
+    }
   }
 
 
