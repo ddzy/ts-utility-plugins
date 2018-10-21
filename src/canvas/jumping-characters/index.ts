@@ -139,6 +139,8 @@ namespace JumpingCharacters {
     ele.addEventListener('click', (e: MouseEvent) => {
       mousePoint.x = e.clientX;
       mousePoint.y = e.clientY;
+
+      new JC();
     }, false);
   }
 
@@ -216,6 +218,28 @@ namespace JumpingCharacters {
       this.text = text;
       this.textColor = textColor;
       this.safeDistance = safeDistance;
+
+      this._init();
+    }
+
+    public _init(): void {
+      this.draw();
+    }
+
+    public draw(): void {
+      const {
+        text,
+        textColor,
+        textSize
+      } = yyg_settings as any;
+
+      yyg_pen.save();
+      yyg_pen.beginPath();
+      yyg_pen.fillStyle = '#d50';
+      yyg_pen.font = "20px 'Fira Code Regular'";
+      yyg_pen.fillText('hello', 200, 200);
+      yyg_pen.closePath();
+      yyg_pen.restore();
     }
   }
 
