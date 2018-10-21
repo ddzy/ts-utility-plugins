@@ -248,9 +248,32 @@ namespace JumpingCharacters {
 
       yyg_pen.save();
       yyg_pen.beginPath();
-      yyg_pen.fillStyle = '#d50';
-      yyg_pen.font = "20px 'Fira Code Regular'";
-      yyg_pen.fillText('hello', 200, 200);
+      // yyg_pen.fillStyle = '#d50';
+      // yyg_pen.font = "20px 'Fira Code Regular'";
+      // yyg_pen.fillText('hello', 200, 200);
+      if (Utils.isArray(textColor)) {
+        yyg_pen.fillStyle = textColor[Utils.getRandomWithPositive(
+          0,
+          textColor.length
+        )];
+      } else {
+        yyg_pen.fillStyle = textColor;
+      }
+      yyg_pen.font = `${textSize} 'Fira Code Regular'`;
+      if (Utils.isArray(text)) {
+        yyg_pen.fillText(
+          text[Utils.getRandomWithPositive(0, text.length)],
+          mousePoint.x,
+          mousePoint.y,
+        );
+      } else {
+        yyg_pen.fillText(
+          text,
+          mousePoint.x,
+          mousePoint.y,
+        );
+      }
+
       yyg_pen.closePath();
       yyg_pen.restore();
     }
