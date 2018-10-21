@@ -194,6 +194,12 @@ namespace JumpingCharacters {
 
       return Utils;
     }
+
+    export function isArray(
+      el: any,
+    ): boolean {
+      return el && Array.isArray(el);
+    }
   }
 
 
