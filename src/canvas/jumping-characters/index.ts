@@ -25,7 +25,7 @@ namespace JumpingCharacters {
     ele: '',
     cvsWidth: 500,
     cvsHeight: 500,
-    cvsBgColor: '#fff',
+    cvsBgColor: '#000',
     text: [
       '富强', '民主', '文明', '和谐',
       '自由', '平等', '公正', '法治',
@@ -223,9 +223,6 @@ namespace JumpingCharacters {
 
 const a = JumpingCharacters.render({
   ele: '#jumping-characters',
-  cvsWidth: 200,
-  cvsHeight: 200,
-  cvsBgColor: '#000',
 });
 
 // console.log(a);
