@@ -2,7 +2,7 @@
  * @name: canvas-jumping-characters 
  * @description 字节跳动, 博客背景插件
  * @author: yyg
- * @version 1.0.5
+ * @version 1.0.4
  */
 
 
