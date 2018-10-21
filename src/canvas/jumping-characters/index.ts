@@ -248,9 +248,7 @@ namespace JumpingCharacters {
 
       yyg_pen.save();
       yyg_pen.beginPath();
-      // yyg_pen.fillStyle = '#d50';
-      // yyg_pen.font = "20px 'Fira Code Regular'";
-      // yyg_pen.fillText('hello', 200, 200);
+
       if (Utils.isArray(textColor)) {
         yyg_pen.fillStyle = textColor[Utils.getRandomWithPositive(
           0,
