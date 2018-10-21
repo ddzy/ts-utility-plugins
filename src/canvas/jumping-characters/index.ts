@@ -76,6 +76,8 @@ namespace JumpingCharacters {
         key === 'ele'
           ? _aidedInitCvs(element)
           : Reflect.set(yyg_settings, key, element);
+        
+        _aidedInitCvsSelfConfiguration();
       }
     }
   }
@@ -94,6 +96,7 @@ namespace JumpingCharacters {
       if (el.localName === 'canvas') {
         const e = el as HTMLCanvasElement;
 
+        // set the initial canvas context
         Reflect.set(yyg_settings, 'ele', e);
         yyg_pen = e.getContext('2d');
       } else {
@@ -102,6 +105,28 @@ namespace JumpingCharacters {
     } else {
       throw new Error('Please enter an exist HTMLElement!');
     }
+  }
+
+
+  /**
+   * 初始化 canvas相关属性,样式配置
+   */
+  function _aidedInitCvsSelfConfiguration() {
+    const {
+      ele,
+      cvsWidth,
+      cvsHeight,
+      cvsBgColor,
+    } = yyg_settings as any;
+
+    Utils
+      .setCss(ele, {
+        'background-color': cvsBgColor,
+      })
+      .setAttr(ele, {
+        width: cvsWidth,
+        height: cvsHeight,
+      })
   }
 
 
@@ -139,6 +164,34 @@ namespace JumpingCharacters {
     ): HTMLElement | null {
       return document.querySelector(el);
     }
+
+    export function setCss(
+      el: HTMLElement,
+      options: any,
+    ) {
+      for (const key in options) {
+        if (options.hasOwnProperty(key)) {
+          const element = options[key];
+          el.style.cssText += `${key}: ${element};`;
+        }
+      }
+
+      return Utils;
+    }
+
+    export function setAttr(
+      el: HTMLElement,
+      options: any,
+    ) {
+      for (const key in options) {
+        if (options.hasOwnProperty(key)) {
+          const element = options[key];
+          el.setAttribute(key, element);
+        }
+      }
+
+      return Utils;
+    }
   }
 
 
@@ -170,6 +223,9 @@ namespace JumpingCharacters {
 
 const a = JumpingCharacters.render({
   ele: '#jumping-characters',
+  cvsWidth: 200,
+  cvsHeight: 200,
+  cvsBgColor: '#000',
 });
 
 // console.log(a);
