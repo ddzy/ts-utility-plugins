@@ -142,10 +142,8 @@ namespace JumpingCharacters {
       mousePoint.x = e.clientX;
       mousePoint.y = e.clientY;
 
-      // new JC();
       const jc = new JC();
-      saveCharactersArr.push(jc);
-
+      saveCharactersArr[0] = jc;
     }, false);
   }
 
