@@ -6,7 +6,7 @@
 > 可根据需要, 引入lib下的对应js文件
 
 ## 更新
-> 最近更新于 18/10/23
+> 最近更新于 18/10/24
 
 ## 导航
 1. Canvas 
@@ -136,5 +136,6 @@ JumpingCharacters.render({
   textSize: number 文字大小
   safeDistance: number 安全距离(文字移动多远后消失)
   initialOpacity: number 初始透明度
+  speed: number 移动速率
 });
 ```
