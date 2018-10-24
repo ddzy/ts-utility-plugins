@@ -285,17 +285,20 @@ namespace JumpingCharacters {
         text,
         textColor,
         textSize,
-        opacity,
         centerPoint,
       } = this;
 
+      this.opacity = this.opacity <= 0
+        ? 0
+        : this.opacity;
+      
       yyg_pen.save();
       yyg_pen.beginPath();
       yyg_pen.fillStyle = textColor;
-      yyg_pen.font = `${textSize} 'Fira Code Regular'`;
+      yyg_pen.font = `${textSize}px 'Fira Code Regular'`;
       yyg_pen.textAlign = 'center';
       yyg_pen.textBaseLine = 'middle';
-      yyg_pen.globalAlpha = opacity;
+      yyg_pen.globalAlpha = this.opacity;
       yyg_pen.fillText(
         text,
         centerPoint.x,
@@ -312,6 +315,7 @@ namespace JumpingCharacters {
       } = this;
 
       centerPoint.y -= this.speed;
+      this.opacity -= .03;
     }
   }
 
@@ -320,6 +324,8 @@ namespace JumpingCharacters {
 const a = JumpingCharacters.render({
   ele: '#jumping-characters',
   initialOpacity: 1,
+  textSize: 24,
+
 });
 
 // console.log(a);
