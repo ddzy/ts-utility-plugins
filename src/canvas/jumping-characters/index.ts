@@ -219,13 +219,14 @@ namespace JumpingCharacters {
   class JC {
     private opacity: number;
     private textSize: number;
-    private textColor: string | string[];
-    private text: string | string[];
-    private safeDistance: number;
-    private centerPoint: {
+    private readonly textColor: string | string[];
+    private readonly text: string | string[];
+    private readonly safeDistance: number;
+    private readonly centerPoint: {
       x: number,
       y: number,
     };
+    private readonly speed: number;
 
     public constructor() {
       const {
@@ -234,6 +235,7 @@ namespace JumpingCharacters {
         textColor,
         safeDistance,
         text,
+        speed,
       } = yyg_settings as any;
 
       this.opacity = initialOpacity;
@@ -242,6 +244,7 @@ namespace JumpingCharacters {
       this.textColor = textColor;
       this.safeDistance = safeDistance;
       this.centerPoint = mousePoint;
+      this.speed = speed;
 
       this._init();
     }
