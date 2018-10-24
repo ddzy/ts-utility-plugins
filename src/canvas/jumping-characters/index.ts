@@ -143,7 +143,7 @@ namespace JumpingCharacters {
       // new JC();
       const jc = new JC();
       saveCharactersArr.push(jc);
-      
+
     }, false);
   }
 
@@ -219,6 +219,10 @@ namespace JumpingCharacters {
     private textColor: string | string[];
     private text: string | string[];
     private safeDistance: number;
+    private centerPoint: {
+      x: number,
+      y: number,
+    };
 
     public constructor() {
       const {
@@ -234,6 +238,7 @@ namespace JumpingCharacters {
       this.text = text;
       this.textColor = textColor;
       this.safeDistance = safeDistance;
+      this.centerPoint = mousePoint;
 
       this._init();
     }
@@ -248,6 +253,7 @@ namespace JumpingCharacters {
         textColor,
         textSize,
         opacity,
+        centerPoint,
       } = this;
 
       yyg_pen.save();
@@ -266,12 +272,16 @@ namespace JumpingCharacters {
         Utils.isArray(text)
           ? text[Utils.getRandomWithPositive(0, text.length)]
           : text,
-        mousePoint.x,
-        mousePoint.y,
+        centerPoint.x,
+        centerPoint.y,
       );
 
       yyg_pen.closePath();
       yyg_pen.restore();
+    }
+
+    public move(): void {
+
     }
   }
 
