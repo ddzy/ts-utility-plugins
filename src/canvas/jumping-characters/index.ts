@@ -52,6 +52,7 @@ namespace JumpingCharacters {
   export const saveCharactersArr: JC[] = []
   export let yyg_pen: any = null;
 
+  let timer = 0;
 
   
   export function render(
@@ -144,7 +145,28 @@ namespace JumpingCharacters {
 
       const jc = new JC();
       saveCharactersArr[0] = jc;
+
+      _aidedTick();
     }, false);
+  }
+
+
+  function _aidedTick() {
+    const {
+      cvsWidth,
+      cvsHeight,
+    } = yyg_settings;
+
+    clearInterval(timer);
+
+    timer = setInterval(() => {
+      yyg_pen.clearRect(0, 0, cvsWidth, cvsHeight);
+
+      for (const jc of saveCharactersArr) {
+        jc.move();
+        jc.draw();
+      }
+    }, 1000/60);
   }
 
 
@@ -285,7 +307,11 @@ namespace JumpingCharacters {
     }
 
     public move(): void {
+      const {
+        centerPoint,
+      } = this;
 
+      centerPoint.y -= this.speed;
     }
   }
 
