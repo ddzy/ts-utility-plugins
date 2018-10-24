@@ -258,6 +258,8 @@ namespace JumpingCharacters {
         yyg_pen.fillStyle = textColor;
       }
       yyg_pen.font = `${textSize} 'Fira Code Regular'`;
+      yyg_pen.textAlign = 'center';
+      yyg_pen.textBaseLine = 'middle';
       if (Utils.isArray(text)) {
         yyg_pen.fillText(
           text[Utils.getRandomWithPositive(0, text.length)],
