@@ -47,7 +47,7 @@ namespace JumpingCharacters {
     x: 0,
     y: 0,
   }
-
+  export const saveCharactersArr: JC[] = []
   export let yyg_pen: any = null;
 
 
@@ -140,7 +140,10 @@ namespace JumpingCharacters {
       mousePoint.x = e.clientX;
       mousePoint.y = e.clientY;
 
-      new JC();
+      // new JC();
+      const jc = new JC();
+      saveCharactersArr.push(jc);
+      
     }, false);
   }
 
