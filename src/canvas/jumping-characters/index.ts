@@ -243,8 +243,9 @@ namespace JumpingCharacters {
       const {
         text,
         textColor,
-        textSize
-      } = yyg_settings as any;
+        textSize,
+        opacity,
+      } = this;
 
       yyg_pen.save();
       yyg_pen.beginPath();
@@ -257,6 +258,7 @@ namespace JumpingCharacters {
       yyg_pen.font = `${textSize} 'Fira Code Regular'`;
       yyg_pen.textAlign = 'center';
       yyg_pen.textBaseLine = 'middle';
+      yyg_pen.globalAlpha = opacity;
       yyg_pen.fillText(
         Utils.isArray(text)
           ? text[Utils.getRandomWithPositive(0, text.length)]
@@ -274,6 +276,7 @@ namespace JumpingCharacters {
 
 const a = JumpingCharacters.render({
   ele: '#jumping-characters',
+  initialOpacity: 1,
 });
 
 // console.log(a);
