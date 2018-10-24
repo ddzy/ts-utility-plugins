@@ -239,8 +239,8 @@ namespace JumpingCharacters {
   class JC {
     private opacity: number;
     private textSize: number;
-    private readonly textColor: string | string[];
-    private readonly text: string | string[];
+    private readonly textColor: string;
+    private readonly text: string;
     private readonly safeDistance: number;
     private readonly centerPoint: {
       x: number,
@@ -260,8 +260,15 @@ namespace JumpingCharacters {
 
       this.opacity = initialOpacity;
       this.textSize = textSize;
-      this.text = text;
-      this.textColor = textColor;
+      this.text = Utils.isArray(text)
+        ? text[Utils.getRandomWithPositive(0, text.length)]
+        : text;
+      this.textColor = Utils.isArray(textColor)
+        ? textColor[Utils.getRandomWithPositive(
+            0,
+            textColor.length,
+          )]
+        : textColor;
       this.safeDistance = safeDistance;
       this.centerPoint = mousePoint;
       this.speed = speed;
@@ -284,20 +291,13 @@ namespace JumpingCharacters {
 
       yyg_pen.save();
       yyg_pen.beginPath();
-      yyg_pen.fillStyle = Utils.isArray(textColor)
-        ? textColor[Utils.getRandomWithPositive(
-          0,
-          textColor.length,
-        )]
-        : textColor;
+      yyg_pen.fillStyle = textColor;
       yyg_pen.font = `${textSize} 'Fira Code Regular'`;
       yyg_pen.textAlign = 'center';
       yyg_pen.textBaseLine = 'middle';
       yyg_pen.globalAlpha = opacity;
       yyg_pen.fillText(
-        Utils.isArray(text)
-          ? text[Utils.getRandomWithPositive(0, text.length)]
-          : text,
+        text,
         centerPoint.x,
         centerPoint.y,
       );
