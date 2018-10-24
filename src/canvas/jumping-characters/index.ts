@@ -16,6 +16,7 @@
  * @param textSize 文字大小
  * @param safeDistance 安全距离(移动多远消失)
  * @param initialOpacity 初始透明度
+ * @param speed 移动速度
  */
 
 
@@ -39,6 +40,7 @@ namespace JumpingCharacters {
     textSize: 16,
     safeDistance: 20,
     initialOpacity: 1,
+    speed: 1,
   }
   export const mousePoint: {
     x: number,
@@ -159,6 +161,7 @@ namespace JumpingCharacters {
       textSize?: number,
       safeDistance?: number,
       initialOpacity?: number,
+      speed?: number,
     }
   }
 
