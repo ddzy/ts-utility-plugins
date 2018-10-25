@@ -331,7 +331,8 @@ const a = JumpingCharacters.render({
   initialOpacity: 1,
   textSize: 16,
   text: 'zhaoyang_duan',
-  speed: 1
+  speed: .5,
+  safeDistance: 20,
 });
 
 // console.log(a);
