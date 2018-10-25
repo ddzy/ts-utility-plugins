@@ -42,16 +42,16 @@ namespace JumpingCharacters {
     initialOpacity: 1,
     speed: 1,
   }
-  export const mousePoint: {
+  
+  const mousePoint: {
     x: number,
     y: number,
   } = {
     x: 0,
     y: 0,
   }
-  export const saveCharactersArr: JC[] = []
-  export let yyg_pen: any = null;
-
+  const saveCharactersArr: JC[] = []
+  let yyg_pen: any = null;
   let timer = 0;
 
   
@@ -335,4 +335,4 @@ const a = JumpingCharacters.render({
   safeDistance: 20,
 });
 
-// console.log(a);
+console.log(a);
