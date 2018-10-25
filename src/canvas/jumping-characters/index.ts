@@ -42,7 +42,7 @@ namespace JumpingCharacters {
     initialOpacity: 1,
     speed: 1,
   }
-  
+
   const mousePoint: {
     x: number,
     y: number,
@@ -325,14 +325,3 @@ namespace JumpingCharacters {
   }
 
 }
-
-const a = JumpingCharacters.render({
-  ele: '#jumping-characters',
-  initialOpacity: 1,
-  textSize: 16,
-  text: 'zhaoyang_duan',
-  speed: .5,
-  safeDistance: 20,
-});
-
-console.log(a);
