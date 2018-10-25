@@ -2,19 +2,26 @@
 自己封装的插件库, 采用ts开发
 
 ## 说明
-> 插件库包括 ```canvas特效```插件, ```业务```插件
-> 可根据需要, 引入lib下的对应js文件
+> 插件库包括 ```canvas特效```插件, ```业务```插件  
+> 最近更新于 18/10/25
 
-## 更新
-> 最近更新于 18/10/24
+## 用法
+```
+graph TD
+  A[Chrimasts] --> B(Go Shopping)
+  B --> C{Let me think}
+  C --> |One| D[Laptop]
+  C --> |Two| E[iPhone]
+  C --> |Three| F[Car]
+```
 
 ## 导航
-1. Canvas 
-  + [canvas-stars-line](#canvas-stars-line)
-  + [canvas-colorful-bubble](#canvas-colorful-bubble)
-  + [canvas-jumping-characters](#canvas-jumping-characters)
-2. Business
-  + [business-carousel](#business-carousel)
+- [x] Canvas 
+  - [x] [canvas-stars-line](#canvas-stars-line)
+  - [x] [canvas-colorful-bubble](#canvas-colorful-bubble)
+  - [x] [canvas-jumping-characters](#canvas-jumping-characters)
+- [x] Business
+  - [x] [business-carousel](#business-carousel)
 
 ## canvas-stars-line
 > 非常nice的```星空连线```特效插件, 自定义大多数配置
@@ -127,15 +134,15 @@ JumpingCharacters.render({
 > (Ps: 传入数组则随机取值)
 ```
 JumpingCharacters.render({
-  ele: HTMLCanvasElement,
-  cvsWidth: number 画布宽
-  cvsHeight: number 画布高
-  cvsBgColor: string 画布背景
-  text: string | string[] 产出文字
-  textColor: string | string[] 文字颜色
-  textSize: number 文字大小
-  safeDistance: number 安全距离(文字移动多远后消失)
-  initialOpacity: number 初始透明度
-  speed: number 移动速率
+  ele:            HTMLCanvasElement,
+  cvsWidth:       number            画布宽
+  cvsHeight:      number            画布高
+  cvsBgColor:     string            画布背景
+  text:           string | string[] 产出文字
+  textColor:      string | string[] 文字颜色
+  textSize:       number            文字大小
+  safeDistance:   number            安全距离(文字移动多远后消失)
+  initialOpacity: number            初始透明度
+  speed:          number            移动速率
 });
 ```
