@@ -6,14 +6,7 @@
 > 最近更新于 18/10/25
 
 ## 用法
-```
-graph TD
-  A[Chrimasts] --> B(Go Shopping)
-  B --> C{Let me think}
-  C --> |One| D[Laptop]
-  C --> |Two| E[iPhone]
-  C --> |Three| F[Car]
-```
+![使用流程图](https://github.com/ddzy/many-universal-image/blob/master/images/business/s1.PNG)
 
 ## 导航
 - [x] Canvas 
