@@ -145,7 +145,7 @@ namespace JumpingCharacters {
 
       const jc = new JC();
       saveCharactersArr[0] = jc;
-
+      
       _aidedTick();
     }, false);
   }
@@ -166,6 +166,7 @@ namespace JumpingCharacters {
         jc.move();
         jc.draw();
       }
+
     }, 1000/60);
   }
 
@@ -288,9 +289,13 @@ namespace JumpingCharacters {
         centerPoint,
       } = this;
 
-      this.opacity = this.opacity <= 0
-        ? 0
-        : this.opacity;
+      // this.opacity = this.opacity <= 0
+      //   ? 0
+      //   : this.opacity;
+      if (this.opacity <= 0) {
+        this.opacity = 0;
+        clearInterval(timer);
+      }
       
       yyg_pen.save();
       yyg_pen.beginPath();
@@ -315,7 +320,7 @@ namespace JumpingCharacters {
       } = this;
 
       centerPoint.y -= this.speed;
-      this.opacity -= .03;
+      this.opacity -= .01;
     }
   }
 
@@ -324,8 +329,9 @@ namespace JumpingCharacters {
 const a = JumpingCharacters.render({
   ele: '#jumping-characters',
   initialOpacity: 1,
-  textSize: 24,
-
+  textSize: 16,
+  text: 'zhaoyang_duan',
+  speed: 1
 });
 
 // console.log(a);
