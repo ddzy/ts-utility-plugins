@@ -16,7 +16,7 @@
 - [x] Business
   - [x] [business-carousel](#business-carousel)
 
-### canvas-stars-line
+## canvas-stars-line
 > 非常nice的```星空连线```特效插件, 自定义大多数配置
 #### 默认渲染
 ```
@@ -42,7 +42,7 @@ StarsLine
   .render(el: string)
 ```
 
-### business-carousel
+## business-carousel
 > 封装的```轮播```插件, 用法及其简单, 页面只需```一个div```元素, 不用撰写烦人的DOM, 插件会自动生成DOMTree
 > 可自定义常用配置项
 #### 基本用法
@@ -74,13 +74,13 @@ interface IDataSource {
 | delayTime    | number        | 3000        | 自动滚动延迟时间     |
 | duringTime   | number        | 1500        | 过渡时间             |
 | isHoverPause | boolean       | true        | 鼠标放置是否停止轮播 |
-3. effet
+#### effect说明
 ```
 Carousel.config({ effect: 'fade' | 'scroll'  })
 目前只支持 Fade & Scroll 两种状态轮播图
 ```
 
-### canvas-colorful-bubble
+## canvas-colorful-bubble
 > 构建的canvas气泡插件, 可自定义大多数配置  
 > 开启```鼠标```交互的情况下, 可用作```个人博客背景```
 1. 基本用法
@@ -110,7 +110,7 @@ ColorfulBubble
   .render(el: string)
 ```
 
-### canvas-jumping-characters
+## canvas-jumping-characters
 > 点击产生文字,并逐渐消失, 可用作个人博客背景, 增强用户体验.
 1. 采用默认配置项
 ```
