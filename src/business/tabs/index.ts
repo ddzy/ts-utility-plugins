@@ -6,6 +6,7 @@
  */
 
 /**
+ * @param ele 渲染区间
  * @param dataSource 数据来源
  * @param type 页签基本样式 line|card
  * @param defaultActiveKey 初始化选中面板的key
@@ -21,18 +22,19 @@
 namespace Tabs {
 
   export interface IDataSource {
-    tabPaneTitle?: {
-      iconUrl?: string,
-      text?: string,
+    tabPaneTitle: {
+      iconUrl: string,
+      text: string,
     };
-    tabPaneContent?: string;
+    tabPaneContent: string;
   }
 
   export interface ITabsProps {
+    ele?: string;
     dataSource: IDataSource[];
     type?: 'line' | 'card';
-    defaultActiveKey?: 1;
-    tabBarGap?: 5;
+    defaultActiveKey?: number;
+    tabBarGap?: number;
     tabBarStyle?: object;
     tabBarLineStyle?: object;
     animated?: boolean;
@@ -40,8 +42,33 @@ namespace Tabs {
     onTabClick?: () => void;
   }
 
+
+  export const defaultSettings = {
+    el: document.body,
+    dataSource: [],
+    type: 'line',
+    defaultActiveKey: 1,
+    tabBarGap: 5,
+    tabBarStyle: {},
+    tabBarLineStyle: {},
+    animated: true,
+    onChange: null,
+    onTabClick: null,
+  };
+
+
   export function render(_props: ITabsProps): void {
-    
+    _aidedInitSettings(_props);
+  }
+
+
+  export function _aidedInitSettings(_props: any): void {
+    for (const key in _props) {
+      if (_props.hasOwnProperty(key)) {
+        const element = _props[key];
+        Reflect.set(defaultSettings, key, element);
+      }
+    }
   }
 
 }
