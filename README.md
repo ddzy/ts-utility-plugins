@@ -3,7 +3,7 @@
 
 ## 说明
 > 插件库包括 ```canvas特效```插件, ```业务```插件  
-> 最近更新于 18/10/25
+> 最近更新于 18/10/26
 
 ## 用法
 ![使用流程图](https://github.com/ddzy/many-universal-image/blob/master/images/business/s1.PNG)
