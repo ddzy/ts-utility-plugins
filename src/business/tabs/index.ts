@@ -30,7 +30,7 @@ namespace Tabs {
   }
 
   export interface ITabsProps {
-    ele?: string;
+    ele: string;
     dataSource: IDataSource[];
     type?: 'line' | 'card';
     defaultActiveKey?: number;
@@ -44,7 +44,7 @@ namespace Tabs {
 
 
   export const defaultSettings = {
-    el: document.body,
+    ele: null,
     dataSource: [],
     type: 'line',
     defaultActiveKey: 1,
@@ -57,18 +57,90 @@ namespace Tabs {
   };
 
 
-  export function render(_props: ITabsProps): void {
+  export function render(_props: ITabsProps) {
     _aidedInitSettings(_props);
+
+    return Tabs;
   }
 
 
-  export function _aidedInitSettings(_props: any): void {
+  function _aidedInitSettings(_props: any): void {
     for (const key in _props) {
       if (_props.hasOwnProperty(key)) {
         const element = _props[key];
-        Reflect.set(defaultSettings, key, element);
+        key === 'ele'
+          ? _aidedInitEle(element)
+          : Reflect.set(defaultSettings, key, element);
       }
     }
   }
 
+
+  function _aidedInitEle(key: string): void {
+    const ele = Utils.getEle(key);
+
+    if (ele) {
+      Reflect.set(defaultSettings, 'ele', ele);
+    } else {
+      throw new Error('Please enter an exist HTMLElement!');
+    }
+  }
+
+
+  namespace Utils {
+    export function getEle(
+      el: string,
+    ): HTMLElement | null {
+      return document.querySelector(el);
+    }
+
+    export function setCss(
+      el: HTMLElement,
+      options: any,
+    ) {
+      for (const key in options) {
+        if (options.hasOwnProperty(key)) {
+          const element = options[key];
+          el.style.cssText += `${key}: ${element};`;
+        }
+      }
+
+      return Utils;
+    }
+
+    export function setAttr(
+      el: HTMLElement,
+      options: any,
+    ) {
+      for (const key in options) {
+        if (options.hasOwnProperty(key)) {
+          const element = options[key];
+          el.setAttribute(key, element);
+        }
+      }
+
+      return Utils;
+    }
+
+    export function isArray(
+      el: any,
+    ): boolean {
+      return el && Array.isArray(el);
+    }
+
+    export function getRandomWithPositive(
+      min: number,
+      max: number,
+    ): number {
+      return ~~(Math.random() * (max - min) + min);
+    }
+  }
+
 }
+
+const tabs = Tabs.render({
+  dataSource: [],
+  ele: '#app',
+});
+
+console.log(tabs);
