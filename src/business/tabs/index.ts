@@ -59,6 +59,7 @@ namespace Tabs {
 
   export function render(_props: ITabsProps) {
     _aidedInitSettings(_props);
+    _aidedInitTab();
 
     return Tabs;
   }
@@ -84,6 +85,11 @@ namespace Tabs {
     } else {
       throw new Error('Please enter an exist HTMLElement!');
     }
+  }
+
+
+  function _aidedInitTab() {
+    return new Tab();
   }
 
 
@@ -136,6 +142,16 @@ namespace Tabs {
     }
   }
 
+
+  class Tab {
+    public constructor() {
+      this.init();
+    }
+    
+    private init(): void {
+      
+    }
+  }
 }
 
 const tabs = Tabs.render({
