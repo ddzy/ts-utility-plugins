@@ -23,7 +23,7 @@ namespace Tabs {
 
   export interface IDataSource {
     tabPaneTitle: {
-      iconUrl: string,
+      icon: string,
       text: string,
     };
     tabPaneContent: string;
@@ -149,12 +149,81 @@ namespace Tabs {
     }
     
     private init(): void {
+      const { ele } = defaultSettings;
       
+      if (ele) {
+        const el = ele as HTMLElement;
+        el.innerHTML = this.handleCreateDOMTree();
+      }
+    }
+
+    private handleCreateDOMTree(): string {
+      const html: string = `
+        <div class="yyg-tabs-wrapper">
+          <div class="yyg-tabs-main">
+            <!-- 导航容器 -->
+            <div class="yyg-tabs-main-bar">
+              <div class="yyg-bar-nav-container">
+                <ul class="yyg-nav-list-box">
+                  <li class="yyg-nav-item yyg-nav-item-active">
+                    第一项,默认选中
+                  </li>
+                  <li class="yyg-nav-list-item">
+                    第二项
+                  </li>
+                </ul>
+                <div class="yyg-nav-line-box">
+                  <span class="yyg-nav-line"></span>
+                </div>
+              </div>
+            </div>
+            <!-- 内容容器 -->
+            <div class="yyg-tabs-main-content">
+              <div class="yyg-content-tabpane-container">
+                <ul class="yyg-tabpane-list">
+                  <li class="yyg-tabpane-item yyg-tabpane-item-active">
+                    内容第一项, 默认显示
+                  </li>
+                  <li class="yyg-tabpane-item">
+                    内容第二项
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      return html;
     }
   }
 }
 
 const tabs = Tabs.render({
-  dataSource: [],
+  dataSource: [{
+    tabPaneTitle: {
+      icon: '',
+      text: '标题一',
+    },
+    tabPaneContent: `
+      <h3>内容一内容一.</h3>
+    `,
+  }, {
+    tabPaneTitle: {
+      icon: '',
+      text: '标题二',
+    },
+    tabPaneContent: `
+      <h3>内容二内容二.</h3>
+    `,
+  },{
+    tabPaneTitle: {
+      icon: '',
+      text: '标题一',
+    },
+    tabPaneContent: `
+      <h3>内容三内容三.</h3>
+    `,
+  }],
   ele: '#app',
 });
