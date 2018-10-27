@@ -26,7 +26,9 @@ namespace Tabs {
       icon: string,
       text: string,
     };
-    tabPaneContent: string;
+    tabPaneContent: {
+      text: string,
+    };
   }
 
   export interface ITabsProps {
