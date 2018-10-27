@@ -160,6 +160,32 @@ namespace Tabs {
     }
 
     private handleCreateDOMTree(): string {
+      const { dataSource } = defaultSettings as any;
+      let navStr: string = '';
+      let contentStr: string = '';
+
+      if (dataSource.length !== 0) {
+        dataSource.forEach((item: IDataSource) => {
+          navStr += `
+            <li class="yyg-nav-item">
+              <div class="yyg-nav-item-icon">
+                ${item.tabPaneTitle.icon}
+              </div>
+              <div class="yyg-nav-item-text">
+                ${item.tabPaneTitle.text}
+              </div>
+            </li>
+          `;
+          contentStr += `
+            <li class="yyg-tabpane-item">
+              <div class="yyg-tabpane-item-content">
+                ${item.tabPaneContent.text}
+              </div>
+            </li>
+          `;
+        });
+      }
+
       const html: string = `
         <div class="yyg-tabs-wrapper">
           <div class="yyg-tabs-main">
@@ -167,12 +193,7 @@ namespace Tabs {
             <div class="yyg-tabs-main-bar">
               <div class="yyg-bar-nav-container">
                 <ul class="yyg-nav-list-box">
-                  <li class="yyg-nav-item yyg-nav-item-active">
-                    第一项,默认选中
-                  </li>
-                  <li class="yyg-nav-list-item">
-                    第二项
-                  </li>
+                  ${navStr}
                 </ul>
                 <div class="yyg-nav-line-box">
                   <span class="yyg-nav-line"></span>
@@ -183,12 +204,7 @@ namespace Tabs {
             <div class="yyg-tabs-main-content">
               <div class="yyg-content-tabpane-container">
                 <ul class="yyg-tabpane-list">
-                  <li class="yyg-tabpane-item yyg-tabpane-item-active">
-                    内容第一项, 默认显示
-                  </li>
-                  <li class="yyg-tabpane-item">
-                    内容第二项
-                  </li>
+                  ${contentStr}
                 </ul>
               </div>
             </div>
@@ -207,25 +223,31 @@ const tabs = Tabs.render({
       icon: '',
       text: '标题一',
     },
-    tabPaneContent: `
-      <h3>内容一内容一.</h3>
-    `,
+    tabPaneContent: {
+      text: `
+        <h3>内容一内容一.</h3>
+      `,
+    },
   }, {
     tabPaneTitle: {
       icon: '',
       text: '标题二',
     },
-    tabPaneContent: `
-      <h3>内容二内容二.</h3>
-    `,
+    tabPaneContent: {
+      text: `
+        <h3>内容二内容二.</h3>
+      `,
+    },
   },{
     tabPaneTitle: {
       icon: '',
       text: '标题一',
     },
-    tabPaneContent: `
-      <h3>内容三内容三.</h3>
-    `,
+    tabPaneContent: {
+      text: `
+        <h3>内容三内容三.</h3>
+      `,
+    },
   }],
   ele: '#app',
 });
