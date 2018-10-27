@@ -142,5 +142,3 @@ const tabs = Tabs.render({
   dataSource: [],
   ele: '#app',
 });
-
-console.log(tabs);
