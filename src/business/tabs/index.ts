@@ -165,9 +165,9 @@ namespace Tabs {
       let contentStr: string = '';
 
       if (dataSource.length !== 0) {
-        dataSource.forEach((item: IDataSource) => {
+        dataSource.forEach((item: IDataSource, index: number) => {
           navStr += `
-            <li class="yyg-nav-item">
+            <li class="yyg-nav-item" data-id=${index + 1}>
               <div class="yyg-nav-item-icon">
                 ${item.tabPaneTitle.icon}
               </div>
@@ -177,7 +177,7 @@ namespace Tabs {
             </li>
           `;
           contentStr += `
-            <li class="yyg-tabpane-item">
+            <li class="yyg-tabpane-item" data-id=${index + 1}>
               <div class="yyg-tabpane-item-content">
                 ${item.tabPaneContent.text}
               </div>
