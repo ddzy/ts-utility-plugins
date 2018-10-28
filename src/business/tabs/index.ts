@@ -161,12 +161,16 @@ namespace Tabs {
     }
     
     private init(): void {
+      this.handleInitEle();
+      this.handleSetStyle();
+    }
+
+    private handleInitEle() {
       const { ele } = defaultSettings;
-      
+
       if (ele) {
         const el = ele as HTMLElement;
         el.innerHTML = this.handleCreateDOMTree();
-        this.handleSetStyle();
       }
     }
 
