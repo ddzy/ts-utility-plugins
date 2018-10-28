@@ -258,7 +258,7 @@ namespace Tabs {
         }
         .yyg-tabs-main {
           box-sizing: border-box;
-          padding: 10px;
+          padding: 10px 0;
         }
         .yyg-tabs-main-bar {
           
@@ -302,6 +302,23 @@ namespace Tabs {
           margin-left: ${tabBarGap}px;
           background-color: #1890ff;
         }
+
+        /* 内容框 */
+        .yyg-tabs-main-bar {
+
+        }
+        .yyg-content-tabpane-container {
+          overflow: hidden;
+          box-sizing: border-box;
+          padding: 5px 0;
+        }
+        .yyg-tabpane-list {
+          width: 300%;
+        }
+        .yyg-tabpane-item {
+          float: left;
+          width: ${100 / dataSource.length}%;
+        }
       `;
     }
   }
@@ -316,7 +333,11 @@ const tabs = Tabs.render({
     },
     tabPaneContent: {
       text: `
-        <h3>内容一内容一.</h3>
+        <ol>
+          <li>todo1</li>
+          <li>todo2</li>
+          <li>todo3</li>
+        </ol>
       `,
     },
   }, {
