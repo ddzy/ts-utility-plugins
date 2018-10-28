@@ -103,6 +103,12 @@ namespace Tabs {
       return document.querySelector(el);
     }
 
+    export function getAllEle(
+      el: string,
+    ): NodeList | null {
+      return document.querySelectorAll(el);
+    }
+
     export function setCss(
       el: HTMLElement,
       options: any,
@@ -218,8 +224,14 @@ namespace Tabs {
     }
 
     private handleSetStyle(): void {
-      const { tabBarGap } = defaultSettings as any;
-      let oStyle = Utils.getEle('style');
+      const {
+        tabBarGap,
+        dataSource,
+      } = defaultSettings as any;
+      const oIconBoxArr = Utils
+        .getAllEle('.yyg-nav-item-icon') as any;
+      let oStyle = Utils
+        .getEle('style');
 
       if (!oStyle) {
         const oHead = Utils.getEle('head') as HTMLHeadElement;
@@ -227,6 +239,16 @@ namespace Tabs {
 
         oHead.appendChild(oStyle);
       }
+
+      dataSource.forEach((outer: IDataSource, oIndex: number) => {
+        oIconBoxArr.forEach((inner: any, iIndex: number) => {
+          if (outer.tabPaneTitle.icon) {
+            inner.innerHTML += outer.tabPaneTitle.icon;
+            Utils.setCss(inner, { 'flex': 1 });
+          }
+        });
+      });
+
 
       oStyle.innerText += `
         .yyg-tabs-wrapper {
@@ -243,16 +265,32 @@ namespace Tabs {
         .yyg-bar-nav-container {
           box-sizing: border-box;
           height: 50px;
-          background-color: #666;
-          line-height: 50px;
+          background-color: #f2f2f2;
+          line-height: 47px;
         }
         .yyg-nav-list-box {
           display: flex;
-          height: 100%;
         }
         .yyg-nav-item {
           flex: 1;
+          display: flex;
           margin-left: ${tabBarGap}px;
+          text-align: center;
+        }
+        /*
+          bar-item
+        */
+        .yyg-nav-item-icon {
+          flex: ${0};
+        }
+        .yyg-nav-item-text {
+          flex: 1;
+        }
+        .yyg-nav-line-box {
+          width: 155px;
+          height: 3px;
+          margin-left: ${tabBarGap}px;
+          background-color: #1890ff;
         }
       `;
     }
@@ -272,7 +310,7 @@ const tabs = Tabs.render({
     },
   }, {
     tabPaneTitle: {
-      icon: '',
+      icon: '<i></i>',
       text: '标题二',
     },
     tabPaneContent: {
