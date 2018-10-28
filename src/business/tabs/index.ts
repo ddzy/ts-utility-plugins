@@ -10,6 +10,7 @@
  * @param ele 渲染区间
  * @param dataSource 数据来源
  * @param type 页签基本样式 line|card
+ * @param mouse 切换属性 mouseenter | click
  * @param defaultActiveKey 初始化选中面板的key
  * @param tabBarGap tabs之间的间隙
  * @param tabBarStyle tab bar的样式对象
@@ -36,6 +37,7 @@ namespace Tabs {
     ele: string;
     dataSource: IDataSource[];
     type?: 'line' | 'card';
+    mouse?: 'mouseenter' | 'click';
     defaultActiveKey?: number;
     tabBarGap?: number;
     tabBarStyle?: object;
@@ -50,6 +52,7 @@ namespace Tabs {
     ele: null,
     dataSource: [],
     type: 'line',
+    mouse: 'mouseenter',
     defaultActiveKey: 1,
     tabBarGap: 5,
     tabBarStyle: {},
