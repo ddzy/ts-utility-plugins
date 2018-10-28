@@ -240,13 +240,14 @@ namespace Tabs {
         oHead.appendChild(oStyle);
       }
 
-      dataSource.forEach((outer: IDataSource, oIndex: number) => {
-        oIconBoxArr.forEach((inner: any, iIndex: number) => {
-          if (outer.tabPaneTitle.icon) {
-            inner.innerHTML += outer.tabPaneTitle.icon;
-            Utils.setCss(inner, { 'flex': 1 });
-          }
-        });
+      dataSource.forEach((item: IDataSource, index: number) => {
+        if (item.tabPaneTitle.icon) {
+          oIconBoxArr[index].innerHTML = item.tabPaneTitle.icon;
+          Utils.setCss(oIconBoxArr[index], {
+            flex: .6,
+            'text-align': 'right',
+          });
+        }
       });
 
 
@@ -265,7 +266,7 @@ namespace Tabs {
         .yyg-bar-nav-container {
           box-sizing: border-box;
           height: 50px;
-          background-color: #f2f2f2;
+          border-bottom: 1px solid #ccc;
           line-height: 47px;
         }
         .yyg-nav-list-box {
@@ -276,12 +277,21 @@ namespace Tabs {
           display: flex;
           margin-left: ${tabBarGap}px;
           text-align: center;
+          color: #5a5a5a;
+          font-size: 14px;
+          cursor: pointer;
+          user-select: none;
+          transition: color .3s ease-in;
+        }
+        .yyg-nav-item:hover {
+          color: #1890ff;
         }
         /*
           bar-item
         */
         .yyg-nav-item-icon {
           flex: ${0};
+          font-size: 12px;
         }
         .yyg-nav-item-text {
           flex: 1;
@@ -300,6 +310,7 @@ namespace Tabs {
 const tabs = Tabs.render({
   dataSource: [{
     tabPaneTitle: {
+      // icon: '<i class="icon iconfont icon-goumai"></i>',
       icon: '',
       text: '标题一',
     },
@@ -310,7 +321,8 @@ const tabs = Tabs.render({
     },
   }, {
     tabPaneTitle: {
-      icon: '<i></i>',
+      icon: '<i class="icon iconfont icon-gongnengjianyi"></i>',
+      // icon: '',
       text: '标题二',
     },
     tabPaneContent: {
