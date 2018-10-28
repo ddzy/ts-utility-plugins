@@ -156,6 +156,7 @@ namespace Tabs {
       if (ele) {
         const el = ele as HTMLElement;
         el.innerHTML = this.handleCreateDOMTree();
+        this.handleSetStyle();
       }
     }
 
@@ -213,6 +214,19 @@ namespace Tabs {
       `;
 
       return html;
+    }
+
+    private handleSetStyle(): void {
+      let oStyle = Utils.getEle('style');
+
+      if (!oStyle) {
+        const oHead = Utils.getEle('head') as HTMLHeadElement;
+        oStyle = document.createElement('style');
+
+        oHead.appendChild(oStyle);
+      }
+
+      console.log(oStyle);
     }
   }
 }
