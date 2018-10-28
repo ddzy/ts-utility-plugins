@@ -1,3 +1,4 @@
+
 /**
  * @name: business-tabs 
  * @description 业务插件,tabs标签页
@@ -217,6 +218,7 @@ namespace Tabs {
     }
 
     private handleSetStyle(): void {
+      const { tabBarGap } = defaultSettings as any;
       let oStyle = Utils.getEle('style');
 
       if (!oStyle) {
@@ -226,7 +228,33 @@ namespace Tabs {
         oHead.appendChild(oStyle);
       }
 
-      console.log(oStyle);
+      oStyle.innerText += `
+        .yyg-tabs-wrapper {
+          width: 100%;
+          height: 100%;
+        }
+        .yyg-tabs-main {
+          box-sizing: border-box;
+          padding: 10px;
+        }
+        .yyg-tabs-main-bar {
+          
+        }
+        .yyg-bar-nav-container {
+          box-sizing: border-box;
+          height: 50px;
+          background-color: #666;
+          line-height: 50px;
+        }
+        .yyg-nav-list-box {
+          display: flex;
+          height: 100%;
+        }
+        .yyg-nav-item {
+          flex: 1;
+          margin-left: ${tabBarGap}px;
+        }
+      `;
     }
   }
 }
