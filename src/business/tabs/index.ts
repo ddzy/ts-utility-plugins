@@ -320,7 +320,7 @@ namespace Tabs {
           padding: 5px 0;
         }
         .yyg-tabpane-list {
-          width: 300%;
+          width: ${dataSource.length * 100}%;
         }
         .yyg-tabpane-item {
           float: left;
