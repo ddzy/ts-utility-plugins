@@ -255,7 +255,6 @@ namespace Tabs {
 
     private handleSetStyle(): void {
       const {
-        tabBarGap,
         dataSource,
       } = defaultSettings as any;
       const oIconBoxArr = Utils
@@ -265,7 +264,6 @@ namespace Tabs {
       let oStyle = Utils
         .getEle('style');
       
-
       if (!oStyle) {
         const oHead = Utils.getEle('head') as HTMLHeadElement;
         oStyle = document.createElement('style');
@@ -308,7 +306,6 @@ namespace Tabs {
         .yyg-nav-item {
           flex: 1;
           display: flex;
-          margin-left: ${tabBarGap}px;
           text-align: center;
           color: #5a5a5a;
           font-size: 14px;
@@ -327,9 +324,8 @@ namespace Tabs {
           flex: 1;
         }
         .yyg-nav-line-box {
-          width: ${oNavItem.offsetWidth / 3 - tabBarGap}px;
+          width: ${oNavItem.clientWidth / dataSource.length}px;
           height: 3px;
-          margin-left: ${tabBarGap}px;
           background-color: #1890ff;
           transition: all .3s ease-in;
         }
@@ -376,7 +372,7 @@ namespace Tabs {
           Utils.addClass(item, 'yyg-nav-item-active');
 
           Utils.setCss(lineBox, {
-            transform: `translateX(${156 * index + tabBarGap * 2}px)`,
+            transform: `translateX(${156 * index + tabBarGap * (index)}px)`,
           });
 
           Utils.setCss(paneList, {
@@ -406,7 +402,7 @@ const tabs = Tabs.render({
     },
   }, {
     tabPaneTitle: {
-      icon: '<i class="icon iconfont icon-gongnengjianyi"></i>',
+      icon: '',
       // icon: '',
       text: '标题二',
     },
@@ -418,11 +414,21 @@ const tabs = Tabs.render({
   },{
     tabPaneTitle: {
       icon: '',
-      text: '标题一',
+      text: '标题三',
     },
     tabPaneContent: {
       text: `
         <h3>内容三内容三.</h3>
+      `,
+    },
+  },{
+    tabPaneTitle: {
+      icon: '',
+      text: '标题四',
+    },
+    tabPaneContent: {
+      text: `
+        <h3>内容四内容四.</h3>
       `,
     },
   }],
