@@ -255,6 +255,7 @@ namespace Tabs {
 
     private handleSetStyle(): void {
       const {
+        tabBarGap,
         dataSource,
       } = defaultSettings as any;
       const oIconBoxArr = Utils
@@ -306,6 +307,7 @@ namespace Tabs {
         .yyg-nav-item {
           flex: 1;
           display: flex;
+          margin-right: ${tabBarGap}px;
           text-align: center;
           color: #5a5a5a;
           font-size: 14px;
@@ -324,7 +326,7 @@ namespace Tabs {
           flex: 1;
         }
         .yyg-nav-line-box {
-          width: ${oNavItem.clientWidth / dataSource.length}px;
+          width: ${oNavItem.clientWidth / dataSource.length - tabBarGap}px;
           height: 3px;
           background-color: #1890ff;
           transition: all .3s ease-in;
@@ -372,7 +374,7 @@ namespace Tabs {
           Utils.addClass(item, 'yyg-nav-item-active');
 
           Utils.setCss(lineBox, {
-            transform: `translateX(${156 * index + tabBarGap * (index)}px)`,
+            transform: `translateX(${lineBox.clientWidth * index + tabBarGap * index}px)`,
           });
 
           Utils.setCss(paneList, {
@@ -433,4 +435,5 @@ const tabs = Tabs.render({
     },
   }],
   ele: '#app',
+  tabBarGap: 10,
 });

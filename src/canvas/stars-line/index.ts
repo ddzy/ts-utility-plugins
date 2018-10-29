@@ -491,5 +491,9 @@ namespace StarsLine {
 }
 
 
-
+StarsLine
+  .render('#stars-line')
+  .config({
+    allowMouse: true,
+  });
 
