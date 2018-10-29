@@ -260,8 +260,11 @@ namespace Tabs {
       } = defaultSettings as any;
       const oIconBoxArr = Utils
         .getAllEle('.yyg-nav-item-icon') as any;
+      const oNavItem = Utils
+        .getEle('.yyg-nav-item') as HTMLLIElement;
       let oStyle = Utils
         .getEle('style');
+      
 
       if (!oStyle) {
         const oHead = Utils.getEle('head') as HTMLHeadElement;
@@ -324,7 +327,7 @@ namespace Tabs {
           flex: 1;
         }
         .yyg-nav-line-box {
-          width: 155px;
+          width: ${oNavItem.offsetWidth / 3 - tabBarGap}px;
           height: 3px;
           margin-left: ${tabBarGap}px;
           background-color: #1890ff;
@@ -357,7 +360,7 @@ namespace Tabs {
     }
 
     private handleMouse(): void {
-      const { mouse } = defaultSettings;
+      const { mouse, tabBarGap } = defaultSettings;
       const paneList = Utils
         .getEle('.yyg-tabpane-list') as HTMLUListElement;
       const barItems = Utils
@@ -373,7 +376,7 @@ namespace Tabs {
           Utils.addClass(item, 'yyg-nav-item-active');
 
           Utils.setCss(lineBox, {
-            transform: `translateX(${156 * index}px)`,
+            transform: `translateX(${156 * index + tabBarGap * 2}px)`,
           });
 
           Utils.setCss(paneList, {
