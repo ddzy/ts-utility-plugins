@@ -301,7 +301,6 @@ namespace Tabs {
         }
         .yyg-nav-list-box {
           display: flex;
-          transition: all 1s ease-in;
         }
         .yyg-nav-item {
           flex: 1;
@@ -312,9 +311,7 @@ namespace Tabs {
           font-size: 14px;
           cursor: pointer;
           user-select: none;
-        }
-        .yyg-nav-item:hover {
-          color: #1890ff;
+          transition: all .3s ease-in;
         }
         /*
           bar-item
@@ -331,6 +328,7 @@ namespace Tabs {
           height: 3px;
           margin-left: ${tabBarGap}px;
           background-color: #1890ff;
+          transition: all .3s ease-in;
         }
 
         /* 内容框 */
@@ -344,7 +342,7 @@ namespace Tabs {
         }
         .yyg-tabpane-list {
           width: ${dataSource.length * 100}%;
-          transition: all .1s ease-in-out;
+          transition: all .3s ease-in-out;
         }
         .yyg-tabpane-item {
           float: left;
@@ -364,13 +362,23 @@ namespace Tabs {
         .getEle('.yyg-tabpane-list') as HTMLUListElement;
       const barItems = Utils
         .getAllEle('.yyg-nav-item') as NodeListOf<HTMLLIElement>;
+      const lineBox = Utils
+        .getEle('.yyg-nav-line-box') as HTMLDivElement;
 
-      barItems.forEach((item: HTMLLIElement) => {
+      barItems.forEach((item: HTMLLIElement, index: number) => {
         item.addEventListener(mouse, () => {
           barItems.forEach((ite: HTMLLIElement) => {
             Utils.removeClass(ite, 'yyg-nav-item-active');
           })
           Utils.addClass(item, 'yyg-nav-item-active');
+
+          Utils.setCss(lineBox, {
+            transform: `translateX(${156 * index}px)`,
+          });
+
+          Utils.setCss(paneList, {
+            transform: `translateX(${-index * 500}px)`,
+          });
         });
       });
     }
