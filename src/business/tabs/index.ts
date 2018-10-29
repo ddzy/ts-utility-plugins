@@ -389,8 +389,8 @@ namespace Tabs {
 const tabs = Tabs.render({
   dataSource: [{
     tabPaneTitle: {
-      // icon: '<i class="icon iconfont icon-goumai"></i>',
-      icon: '',
+      icon: '<i class="icon iconfont icon-hanbao"></i>',
+      // icon: '',
       text: '标题一',
     },
     tabPaneContent: {
@@ -404,8 +404,7 @@ const tabs = Tabs.render({
     },
   }, {
     tabPaneTitle: {
-      icon: '',
-      // icon: '',
+      icon: '<i class="icon iconfont icon-dianpu"></i>',
       text: '标题二',
     },
     tabPaneContent: {
