@@ -163,6 +163,7 @@ namespace Tabs {
     private init(): void {
       this.handleInitEle();
       this.handleSetStyle();
+      this.handleMouse();
     }
 
     private handleInitEle() {
@@ -327,6 +328,10 @@ namespace Tabs {
           width: ${100 / dataSource.length}%;
         }
       `;
+    }
+
+    private handleMouse(): void {
+      
     }
   }
 }
