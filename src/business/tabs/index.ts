@@ -152,6 +152,28 @@ namespace Tabs {
     ): number {
       return ~~(Math.random() * (max - min) + min);
     }
+
+    export function removeClass(
+      el: HTMLElement,
+      ...args: string[]
+    ) {
+      args.forEach((item: string) => {
+        el.classList.remove(item);
+      });
+
+      return Utils;
+    }
+
+    export function addClass(
+      el: HTMLElement,
+      ...args: string[]
+    ) {
+      args.forEach((item: string) => {
+        el.classList.add(item);
+      });
+
+      return Utils;
+    }
   }
 
 
@@ -279,6 +301,7 @@ namespace Tabs {
         }
         .yyg-nav-list-box {
           display: flex;
+          transition: all 1s ease-in;
         }
         .yyg-nav-item {
           flex: 1;
@@ -289,7 +312,6 @@ namespace Tabs {
           font-size: 14px;
           cursor: pointer;
           user-select: none;
-          transition: color .3s ease-in;
         }
         .yyg-nav-item:hover {
           color: #1890ff;
@@ -322,16 +344,35 @@ namespace Tabs {
         }
         .yyg-tabpane-list {
           width: ${dataSource.length * 100}%;
+          transition: all .1s ease-in-out;
         }
         .yyg-tabpane-item {
           float: left;
           width: ${100 / dataSource.length}%;
         }
+
+        /* 活动样式类 */
+        .yyg-nav-item-active {
+          color: #1890ff;
+        }
       `;
     }
 
     private handleMouse(): void {
-      
+      const { mouse } = defaultSettings;
+      const paneList = Utils
+        .getEle('.yyg-tabpane-list') as HTMLUListElement;
+      const barItems = Utils
+        .getAllEle('.yyg-nav-item') as NodeListOf<HTMLLIElement>;
+
+      barItems.forEach((item: HTMLLIElement) => {
+        item.addEventListener(mouse, () => {
+          barItems.forEach((ite: HTMLLIElement) => {
+            Utils.removeClass(ite, 'yyg-nav-item-active');
+          })
+          Utils.addClass(item, 'yyg-nav-item-active');
+        });
+      });
     }
   }
 }
