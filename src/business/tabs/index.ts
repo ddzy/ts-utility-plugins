@@ -466,5 +466,6 @@ const tabs = Tabs.render({
   }],
   ele: '#app',
   tabBarGap: 10,
-  type: 'card',
+  type: 'line',
+  mouse: 'click',
 });
