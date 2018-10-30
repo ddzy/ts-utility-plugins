@@ -198,14 +198,19 @@ namespace Tabs {
     }
 
     private handleCreateDOMTree(): string {
-      const { dataSource } = defaultSettings as any;
+      const {
+        dataSource,
+        type,
+      } = defaultSettings as any;
       let navStr: string = '';
       let contentStr: string = '';
 
       if (dataSource.length !== 0) {
         dataSource.forEach((item: IDataSource, index: number) => {
           navStr += `
-            <li class="yyg-nav-item" data-id=${index + 1}>
+            <li class="yyg-nav-item ${
+              type === 'line' ? 'yyg-nav-item-line' : 'yyg-nav-item-card'
+            }" data-id=${index + 1}>
               <div class="yyg-nav-item-icon">
                 ${item.tabPaneTitle.icon}
               </div>
@@ -343,7 +348,7 @@ namespace Tabs {
         }
         .yyg-tabpane-list {
           width: ${dataSource.length * 100}%;
-          transition: all .3s ease-in-out;
+          transition: all .2s ease-in-out;
         }
         .yyg-tabpane-item {
           float: left;
