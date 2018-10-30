@@ -395,6 +395,9 @@ namespace Tabs {
         ? 'yyg-nav-item-line-active'
         : 'yyg-nav-item-card-active';
       
+      // 默认第一项显示
+      Utils.addClass(barItems[0], whichTypeActiveClass);
+      
       barItems.forEach((item: HTMLLIElement, index: number) => {
         item.addEventListener(mouse, () => {
           barItems.forEach((ite: HTMLLIElement) => {
