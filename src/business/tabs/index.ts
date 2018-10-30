@@ -229,6 +229,12 @@ namespace Tabs {
         });
       }
 
+      const navBottomLineStr: string = `
+        <div class="yyg-nav-line-box">
+          <span class="yyg-nav-line"></span>
+        </div>
+      `;
+
       const html: string = `
         <div class="yyg-tabs-wrapper">
           <div class="yyg-tabs-main">
@@ -238,9 +244,7 @@ namespace Tabs {
                 <ul class="yyg-nav-list-box">
                   ${navStr}
                 </ul>
-                <div class="yyg-nav-line-box">
-                  <span class="yyg-nav-line"></span>
-                </div>
+                ${type === 'line' ? navBottomLineStr : ''}
               </div>
             </div>
             <!-- 内容容器 -->
@@ -355,31 +359,53 @@ namespace Tabs {
           width: ${100 / dataSource.length}%;
         }
 
+        /* type */
+        .yyg-nav-item-line {
+
+        }
+        .yyg-nav-item-card {
+          border: 1px solid #e8e8e8;
+          border-bottom: 0;
+          border-radius: 4px 4px 0 0;
+          background-color: #fafafa;
+        }
+
         /* 活动样式类 */
-        .yyg-nav-item-active {
+        .yyg-nav-item-card-active {
+          background-color: #fff;
+          color: #1890ff;
+        }
+        .yyg-nav-item-line-active {
           color: #1890ff;
         }
       `;
     }
 
     private handleMouse(): void {
-      const { mouse, tabBarGap } = defaultSettings;
+      const { mouse, tabBarGap, type } = defaultSettings;
       const paneList = Utils
         .getEle('.yyg-tabpane-list') as HTMLUListElement;
       const barItems = Utils
         .getAllEle('.yyg-nav-item') as NodeListOf<HTMLLIElement>;
       const lineBox = Utils
-        .getEle('.yyg-nav-line-box') as HTMLDivElement;
-
+        .getEle('.yyg-nav-line-box');
+      
+      // 判断不同type不同active样式
+      const whichTypeActiveClass: string = type === 'line'
+        ? 'yyg-nav-item-line-active'
+        : 'yyg-nav-item-card-active';
+      
       barItems.forEach((item: HTMLLIElement, index: number) => {
         item.addEventListener(mouse, () => {
           barItems.forEach((ite: HTMLLIElement) => {
-            Utils.removeClass(ite, 'yyg-nav-item-active');
+            Utils.removeClass(ite, whichTypeActiveClass);
           })
-          Utils.addClass(item, 'yyg-nav-item-active');
+          Utils.addClass(item, whichTypeActiveClass);
 
-          Utils.setCss(lineBox, {
-            transform: `translateX(${lineBox.clientWidth * index + tabBarGap * index}px)`,
+          lineBox && Utils.setCss(lineBox, {
+            transform: `translateX(${
+              lineBox.clientWidth * index + tabBarGap * index
+            }px)`,
           });
 
           Utils.setCss(paneList, {
@@ -440,4 +466,5 @@ const tabs = Tabs.render({
   }],
   ele: '#app',
   tabBarGap: 10,
+  type: 'card',
 });
