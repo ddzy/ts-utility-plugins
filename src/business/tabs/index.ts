@@ -382,7 +382,12 @@ namespace Tabs {
     }
 
     private handleMouse(): void {
-      const { mouse, tabBarGap, type } = defaultSettings;
+      const {
+        mouse,
+        tabBarGap,
+        type,
+        defaultActiveKey,
+      } = defaultSettings;
       const paneList = Utils
         .getEle('.yyg-tabpane-list') as HTMLUListElement;
       const barItems = Utils
@@ -394,9 +399,18 @@ namespace Tabs {
       const whichTypeActiveClass: string = type === 'line'
         ? 'yyg-nav-item-line-active'
         : 'yyg-nav-item-card-active';
-      
-      // 默认第一项显示
-      Utils.addClass(barItems[0], whichTypeActiveClass);
+
+      // 默认显示 defaultActiveKey
+      Utils.addClass(barItems[defaultActiveKey - 1], whichTypeActiveClass);
+      lineBox && Utils.setCss(lineBox, {
+        transform: `translateX(${
+          lineBox.clientWidth * (defaultActiveKey - 1) + tabBarGap * (defaultActiveKey - 1)
+        }px)`,
+      });
+      Utils.setCss(paneList, {
+        transform: `translateX(${-(defaultActiveKey - 1) * 500}px)`,
+      });
+
       
       barItems.forEach((item: HTMLLIElement, index: number) => {
         item.addEventListener(mouse, () => {
@@ -471,4 +485,5 @@ const tabs = Tabs.render({
   tabBarGap: 10,
   type: 'line',
   mouse: 'click',
+  defaultActiveKey: 2,
 });
