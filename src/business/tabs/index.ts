@@ -33,6 +33,15 @@ namespace Tabs {
     };
   }
 
+  export interface ITabBarStyleProps {
+    'background-color'?: string;
+    color?: string;
+    'font-size'?: string;
+    'font-family'?: string;
+    backgroundColorActive?: string;
+    colorActive?: string;
+  }
+
   export interface ITabsProps {
     ele: string;
     dataSource: IDataSource[];
@@ -40,7 +49,7 @@ namespace Tabs {
     mouse?: 'mouseenter' | 'click';
     defaultActiveKey?: number;
     tabBarGap?: number;
-    tabBarStyle?: object;
+    tabBarStyle?: ITabBarStyleProps;
     tabBarLineStyle?: object;
     animated?: boolean;
     onChange?: (activeKey: number | string) => void;
