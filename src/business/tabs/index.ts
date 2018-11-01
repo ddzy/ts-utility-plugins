@@ -3,7 +3,7 @@
  * @name: business-tabs 
  * @description 业务插件,tabs标签页
  * @author: yyg
- * @version 1.0.5
+ * @version 1.0.6
  */
 
 /**
@@ -497,9 +497,9 @@ const tabs = Tabs.render({
     },
   }],
   ele: '#app',
-  tabBarGap: 10,
+  tabBarGap: 5,
   type: 'card',
   mouse: 'click',
   defaultActiveKey: 2,
-  animated: false,
+  animated: true,
 });
