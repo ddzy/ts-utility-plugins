@@ -431,7 +431,6 @@ namespace Tabs {
           barItems.forEach((ite: HTMLLIElement) => {
             Utils.removeClass(ite, whichTypeActiveClass);
           })
-          Utils.addClass(item, whichTypeActiveClass);
 
           lineBox && Utils.setCss(lineBox, {
             transform: `translateX(${
@@ -439,9 +438,11 @@ namespace Tabs {
             }px)`,
           });
 
-          Utils.setCss(paneList, {
-            transform: `translateX(${-index * 500}px)`,
-          });
+          Utils
+            .addClass(item, whichTypeActiveClass)
+            .setCss(paneList, {
+              transform: `translateX(${-index * 500}px)`,
+            });
         });
       });
     }
