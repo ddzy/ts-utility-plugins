@@ -483,7 +483,7 @@ const tabs = Tabs.render({
   }],
   ele: '#app',
   tabBarGap: 10,
-  type: 'line',
+  type: 'card',
   mouse: 'click',
   defaultActiveKey: 2,
 });
