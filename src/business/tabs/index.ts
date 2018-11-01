@@ -409,18 +409,22 @@ namespace Tabs {
         ? 'yyg-tabpane-list-animated'
         : 'yyg-tabpane-list-noanimated';
 
-      // 默认显示 defaultActiveKey
-      Utils.addClass(barItems[defaultActiveKey - 1], whichTypeActiveClass);
+
       lineBox && Utils.setCss(lineBox, {
         transform: `translateX(${
           lineBox.clientWidth * (defaultActiveKey - 1) + tabBarGap * (defaultActiveKey - 1)
         }px)`,
       });
-      Utils.setCss(paneList, {
-        transform: `translateX(${-(defaultActiveKey - 1) * 500}px)`,
-      });
-      Utils.addClass(paneList, whichAnimatedClass);
-
+      
+      Utils
+        .addClass(
+          barItems[defaultActiveKey - 1],
+          whichTypeActiveClass
+        )
+        .setCss(paneList, {
+          transform: `translateX(${-(defaultActiveKey - 1) * 500}px)`,
+        })
+        .addClass(paneList, whichAnimatedClass);
       
       barItems.forEach((item: HTMLLIElement, index: number) => {
         item.addEventListener(mouse, () => {
