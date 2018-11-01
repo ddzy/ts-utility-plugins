@@ -352,7 +352,6 @@ namespace Tabs {
         }
         .yyg-tabpane-list {
           width: ${dataSource.length * 100}%;
-          transition: all .2s ease-in-out;
         }
         .yyg-tabpane-item {
           float: left;
@@ -378,6 +377,11 @@ namespace Tabs {
         .yyg-nav-item-line-active {
           color: #1890ff;
         }
+
+        /* animated */
+        .yyg-tabpane-list-animated {
+          transition: all .2s ease-in-out;
+        }
       `;
     }
 
@@ -387,6 +391,7 @@ namespace Tabs {
         tabBarGap,
         type,
         defaultActiveKey,
+        animated,
       } = defaultSettings;
       const paneList = Utils
         .getEle('.yyg-tabpane-list') as HTMLUListElement;
@@ -399,6 +404,10 @@ namespace Tabs {
       const whichTypeActiveClass: string = type === 'line'
         ? 'yyg-nav-item-line-active'
         : 'yyg-nav-item-card-active';
+      // 是否具有动画效果
+      const whichAnimatedClass: string = animated
+        ? 'yyg-tabpane-list-animated'
+        : 'yyg-tabpane-list-noanimated';
 
       // 默认显示 defaultActiveKey
       Utils.addClass(barItems[defaultActiveKey - 1], whichTypeActiveClass);
@@ -410,6 +419,7 @@ namespace Tabs {
       Utils.setCss(paneList, {
         transform: `translateX(${-(defaultActiveKey - 1) * 500}px)`,
       });
+      Utils.addClass(paneList, whichAnimatedClass);
 
       
       barItems.forEach((item: HTMLLIElement, index: number) => {
@@ -486,4 +496,5 @@ const tabs = Tabs.render({
   type: 'card',
   mouse: 'click',
   defaultActiveKey: 2,
+  animated: false,
 });
