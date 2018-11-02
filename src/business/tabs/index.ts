@@ -120,6 +120,15 @@ namespace Tabs {
       return document.querySelector(el);
     }
 
+    export function getAttr(
+      el: HTMLElement | null,
+      attr: string,
+    ) {
+      return el
+        ? el.getAttribute(attr)
+        : '';
+    }
+
     export function getAllEle(
       el: string,
     ): NodeList | null {
@@ -409,6 +418,7 @@ namespace Tabs {
         defaultActiveKey,
         animated,
         onTabClick,
+        onChange,
       } = defaultSettings;
       const paneList = Utils
         .getEle('.yyg-tabpane-list') as HTMLUListElement;
@@ -447,6 +457,9 @@ namespace Tabs {
         item.addEventListener(mouse, () => {
           // 钩子
           onTabClick && onTabClick();
+          onChange && onChange(
+            Utils.getAttr(item, 'data-id') as string,
+          );
 
           barItems.forEach((ite: HTMLLIElement) => {
             Utils.removeClass(ite, whichTypeActiveClass);
@@ -533,5 +546,8 @@ const tabs = Tabs.render({
   },
   onTabClick() {
     console.log(2);
+  },
+  onChange(...args: any[]) {
+    console.log(args);
   },
 });
