@@ -72,8 +72,8 @@ namespace Tabs {
     tabBarStyle: {},
     tabBarLineStyle: {},
     animated: true,
-    onChange: null,
-    onTabClick: null,
+    onChange: Function,
+    onTabClick: Function,
   };
 
 
@@ -408,6 +408,7 @@ namespace Tabs {
         type,
         defaultActiveKey,
         animated,
+        onTabClick,
       } = defaultSettings;
       const paneList = Utils
         .getEle('.yyg-tabpane-list') as HTMLUListElement;
@@ -444,6 +445,9 @@ namespace Tabs {
       
       barItems.forEach((item: HTMLLIElement, index: number) => {
         item.addEventListener(mouse, () => {
+          // 钩子
+          onTabClick && onTabClick();
+
           barItems.forEach((ite: HTMLLIElement) => {
             Utils.removeClass(ite, whichTypeActiveClass);
           })
@@ -469,7 +473,6 @@ const tabs = Tabs.render({
   dataSource: [{
     tabPaneTitle: {
       icon: '<i class="icon iconfont icon-hanbao"></i>',
-      // icon: '',
       text: '标题一',
     },
     tabPaneContent: {
@@ -527,5 +530,8 @@ const tabs = Tabs.render({
   tabBarLineStyle: {
     height: 10,
     'background-color': '#d50',
+  },
+  onTabClick() {
+    console.log(2);
   },
 });
