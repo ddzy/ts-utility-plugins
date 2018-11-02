@@ -36,7 +36,7 @@ namespace Tabs {
   export interface ITabBarStyleProps {
     'background-color'?: string;
     color?: string;
-    'font-size'?: string;
+    'font-size'?: number;
     'font-family'?: string;
     backgroundColorActive?: string;
     colorActive?: string;
@@ -275,6 +275,7 @@ namespace Tabs {
       const {
         tabBarGap,
         dataSource,
+        tabBarStyle,
       } = defaultSettings as any;
       const oIconBoxArr = Utils
         .getAllEle('.yyg-nav-item-icon') as any;
@@ -327,8 +328,8 @@ namespace Tabs {
           display: flex;
           margin-right: ${tabBarGap}px;
           text-align: center;
-          color: #5a5a5a;
-          font-size: 14px;
+          color: ${tabBarStyle['color'] || '#5a5a5a'};
+          font-size: ${tabBarStyle['font-size'] || 14}px;
           cursor: pointer;
           user-select: none;
           transition: all .3s ease-in;
@@ -375,16 +376,16 @@ namespace Tabs {
           border: 1px solid #e8e8e8;
           border-bottom: 0;
           border-radius: 4px 4px 0 0;
-          background-color: #fafafa;
+          background-color: ${tabBarStyle['background-color'] || '#fafafa'};
         }
 
         /* 活动样式类 */
         .yyg-nav-item-card-active {
-          background-color: #fff;
-          color: #1890ff;
+          background-color: ${tabBarStyle['backgroundColorActive'] || '#fff'};
+          color: ${tabBarStyle['colorActive'] || '#1890ff'};
         }
         .yyg-nav-item-line-active {
-          color: #1890ff;
+          color: ${tabBarStyle['colorActive'] || '#1890ff'};
         }
 
         /* animated */
@@ -511,4 +512,10 @@ const tabs = Tabs.render({
   mouse: 'click',
   defaultActiveKey: 2,
   animated: true,
+  tabBarStyle: {
+    "background-color": '#190',
+    backgroundColorActive: '#369',
+    colorActive: '#fff',
+    "font-family": 'Monaco',
+  },
 });
