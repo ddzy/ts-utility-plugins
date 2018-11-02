@@ -42,6 +42,11 @@ namespace Tabs {
     colorActive?: string;
   }
 
+  export interface ITabBarLineStyle {
+    'background-color'?: string;
+    height?: number;
+  }
+
   export interface ITabsProps {
     ele: string;
     dataSource: IDataSource[];
