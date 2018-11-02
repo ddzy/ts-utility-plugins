@@ -33,7 +33,7 @@ namespace Tabs {
     };
   }
 
-  export interface ITabBarStyleProps {
+  export interface ITabBarStyle {
     'background-color'?: string;
     color?: string;
     'font-size'?: number;
@@ -54,8 +54,8 @@ namespace Tabs {
     mouse?: 'mouseenter' | 'click';
     defaultActiveKey?: number;
     tabBarGap?: number;
-    tabBarStyle?: ITabBarStyleProps;
-    tabBarLineStyle?: object;
+    tabBarStyle?: ITabBarStyle;
+    tabBarLineStyle?: ITabBarLineStyle;
     animated?: boolean;
     onChange?: (activeKey: number | string) => void;
     onTabClick?: () => void;
@@ -281,6 +281,7 @@ namespace Tabs {
         tabBarGap,
         dataSource,
         tabBarStyle,
+        tabBarLineStyle,
       } = defaultSettings as any;
       const oIconBoxArr = Utils
         .getAllEle('.yyg-nav-item-icon') as any;
@@ -351,8 +352,8 @@ namespace Tabs {
         }
         .yyg-nav-line-box {
           width: ${oNavItem.clientWidth / dataSource.length - tabBarGap}px;
-          height: 3px;
-          background-color: #1890ff;
+          height: ${tabBarLineStyle['height'] || 3}px;
+          background-color: ${tabBarLineStyle['background-color'] || '#1890ff'};
           transition: all .3s ease-in;
         }
 
@@ -513,7 +514,7 @@ const tabs = Tabs.render({
   }],
   ele: '#app',
   tabBarGap: 5,
-  type: 'card',
+  type: 'line',
   mouse: 'click',
   defaultActiveKey: 2,
   animated: true,
@@ -522,5 +523,9 @@ const tabs = Tabs.render({
     backgroundColorActive: '#369',
     colorActive: '#fff',
     "font-family": 'Monaco',
+  },
+  tabBarLineStyle: {
+    height: 10,
+    'background-color': '#d50',
   },
 });
