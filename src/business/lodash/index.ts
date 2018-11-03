@@ -5,7 +5,7 @@
  */
 
 
-declare namespace lodash {
+namespace lodash {
 
   export namespace _Utils {
     export function _isArray(obj: any): boolean {
@@ -14,7 +14,6 @@ declare namespace lodash {
   }
 
   export namespace _Array {
-
     /**
      * 创建一个元素数组，将元素分成大小的长度。如果数组无法均匀分割，
      * 则最终的块将是剩余的元素。
@@ -44,10 +43,19 @@ declare namespace lodash {
     export function compact(arr: any[]) {
       return arr.filter((v: any) => v);
     }
+
+    /**
+     * 使用任何其他数组和/或值创建一个新数组连接数组。
+     * @param arr 源数组
+     * @param args concatenate值
+     */
+    export function concat(arr: any[], ...args: any[]): any[] {
+      return arr.concat(...args);
+    }
   }
 
 }
 
 // console.log(lodash._Array.chunk([1, 2, 3, 4], 1));
-console.log(lodash._Array.compact([false, undefined, null, NaN]))
-
+// console.log(lodash._Array.compact([false, undefined, null, NaN]))
+console.log(lodash._Array.concat([2], false, {name: 'duan'}, [2]));
