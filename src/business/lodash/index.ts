@@ -5,7 +5,7 @@
  */
 
 
-namespace lodash {
+declare namespace lodash {
 
   export namespace _Utils {
     export function _isArray(obj: any): boolean {
