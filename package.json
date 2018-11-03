@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ddzy/canvas-stars-line/issues"
   },
-  "homepage": "https://github.com/ddzy/canvas-stars-line#readme"
+  "homepage": "https://github.com/ddzy/canvas-stars-line#readme",
+  "devDependencies": {
+    "@types/node": "^10.12.2"
+  }
 }
