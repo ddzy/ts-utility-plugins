@@ -37,8 +37,17 @@ namespace lodash {
       return newArr;
     }
 
+    /**
+     * 创建一个删除了所有'false'值的数组
+     * @param arr 数组
+     */
+    export function compact(arr: any[]) {
+      return arr.filter((v: any) => v);
+    }
   }
 
 }
 
-console.log(lodash._Array.chunk([1, 2, 3, 4], 1));
+// console.log(lodash._Array.chunk([1, 2, 3, 4], 1));
+console.log(lodash._Array.compact([false, undefined, null, NaN]))
+
