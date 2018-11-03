@@ -58,4 +58,4 @@ namespace lodash {
 
 // console.log(lodash._Array.chunk([1, 2, 3, 4], 1));
 // console.log(lodash._Array.compact([false, undefined, null, NaN]))
-console.log(lodash._Array.concat([2], false, {name: 'duan'}, [2]));
+// console.log(lodash._Array.concat([2], false, {name: 'duan'}, [2]));
