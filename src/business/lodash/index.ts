@@ -23,17 +23,15 @@ namespace lodash {
      * @returns 新的数组
      */
     export function chunk(arr: any[], size: number = 1): any[] {
-      if (!_Utils._isArray(arr)) {
-        return [];
-      } else if (arr.length === 0) {
+      if (!_Utils._isArray(arr) || arr.length === 0) {
         return [];
       }
       const newArr: any[] = [];
+      let i: number = -1;
 
-      for (let i = 0; i < arr.length; i++) {
-        if (i % size === 0) {
-          newArr.push(arr.slice(i, i + size));
-        }
+      while (++i < arr.length) {
+        i % size === 0
+          && newArr.push(arr.slice(i, i + size));
       }
 
       return newArr;
@@ -43,4 +41,4 @@ namespace lodash {
 
 }
 
-console.log(lodash._Array.chunk([1, 2, 3, 4], 5));
+console.log(lodash._Array.chunk([1, 2, 3, 4], 1));
