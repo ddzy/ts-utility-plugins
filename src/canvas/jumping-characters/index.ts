@@ -52,7 +52,7 @@ namespace JumpingCharacters {
   }
   const saveCharactersArr: JC[] = []
   let yyg_pen: any = null;
-  let timer = 0;
+  let timer: any;
 
   
   export function render(
