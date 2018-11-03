@@ -52,6 +52,17 @@ namespace lodash {
     export function concat(arr: any[], ...args: any[]): any[] {
       return arr.concat(...args);
     }
+  
+    /**
+     * 创建一个未包含在其他给定数组中的数组值数组
+     * @param arr 源数组
+     * @param args 要排除的值
+     */
+    export function difference(arr: any[], ...args: any[]): any[] {
+      return arr
+        .map((v: any) => !args.includes(v) && v)
+        .filter((v: any) => v);
+    }
   }
 
 }
@@ -59,3 +70,4 @@ namespace lodash {
 // console.log(lodash._Array.chunk([1, 2, 3, 4], 1));
 // console.log(lodash._Array.compact([false, undefined, null, NaN]))
 // console.log(lodash._Array.concat([2], false, {name: 'duan'}, [2]));
+console.log(lodash._Array.difference([2, 3], 4, 5));
