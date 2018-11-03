@@ -3,7 +3,7 @@
     "target": "es5",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "module": "commonjs",
+    "module": "esnext",
     "noUnusedParameters": true,
     "strict": true,
     "esModuleInterop": true,
