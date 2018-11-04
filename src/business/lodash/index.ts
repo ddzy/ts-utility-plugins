@@ -73,6 +73,16 @@ namespace lodash {
     export function drop(arr: any[], size: number = 1): any[] {
       return arr.slice(size);
     }
+    
+
+    /**
+     * 创建一个数组切片，其中包含从末尾删除的n个元素。
+     * @param arr 源数组
+     * @param size 切片长度
+     */
+    export function dropRight(arr: any[], size: number = 1): any[] {
+      return arr.slice(0, arr.length - size);
+    }
   }
 
 }
@@ -81,4 +91,5 @@ namespace lodash {
 // console.log(lodash._Array.compact([false, undefined, null, NaN]))
 // console.log(lodash._Array.concat([2], false, {name: 'duan'}, [2]));
 // console.log(lodash._Array.difference([{name: 'duan'}]));
-console.log(lodash._Array.drop([2, 3, 4, 6], 3));
+// console.log(lodash._Array.drop([2, 3, 4, 6], 3));
+console.log(lodash._Array.dropRight([2, 3, 4, 5], 2));
