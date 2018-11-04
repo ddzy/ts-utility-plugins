@@ -63,6 +63,16 @@ namespace lodash {
         .map((v: any) => !args.includes(v) && v)
         .filter((v: any) => v);
     }
+
+    /**
+     * 创建一个数组切片，其中n个元素从头开始删除。
+     * @param arr 源数组
+     * @param size 切片长度
+     * @returns size位置到数组末的值数组
+     */
+    export function drop(arr: any[], size: number = 1): any[] {
+      return arr.slice(size);
+    }
   }
 
 }
@@ -70,4 +80,5 @@ namespace lodash {
 // console.log(lodash._Array.chunk([1, 2, 3, 4], 1));
 // console.log(lodash._Array.compact([false, undefined, null, NaN]))
 // console.log(lodash._Array.concat([2], false, {name: 'duan'}, [2]));
-console.log(lodash._Array.difference([{name: 'duan'}]));
+// console.log(lodash._Array.difference([{name: 'duan'}]));
+console.log(lodash._Array.drop([2, 3, 4, 6], 3));
