@@ -256,7 +256,7 @@ namespace Carousel {
 
 
     /**
-     * 节流 
+     * 节流
      * @param time 过渡时间
      * @param callback 回调函数
      */
@@ -538,7 +538,7 @@ namespace Carousel {
             // transition: all ${yyg_settings.duringTime}s ${yyg_settings.easing};
             transform: translateX(-${
           100 / (dataSource.length + 2)
-          }%); 
+          }%);
           }
           .yyg-content-item {
             float: left;
@@ -869,7 +869,7 @@ namespace Carousel {
       private oDotsItem: any = null;
       private oContentItemLength: number = 0;
 
-      private timer: number = 0;
+      private timer: any = 0;
       private count: number = 0;
 
       public constructor(
@@ -1264,7 +1264,7 @@ namespace Carousel {
 
       /**
        * 辅助 设置图片轮播,dot栏对应样式
-       * @param sign 
+       * @param sign
        */
       public aidedSetDotAndImg(
         sign: number,
