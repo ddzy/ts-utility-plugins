@@ -1,15 +1,18 @@
 # ts-utility-plugins
-自己封装的插件库, 采用纯原生ts开发
+
+封装的插件库, 采用纯原生ts开发
 
 ## 说明
-> 插件库包括 ```canvas特效```插件, ```业务```插件  
-> 最近更新于 18/11/3
+
+> 插件库包括 ```canvas特效```插件, ```业务```插件等等...
 
 ## 用法
+
 ![使用流程图](https://github.com/ddzy/many-universal-image/blob/master/images/business/s1.PNG)
 
-## 导航
-- [x] Canvas 
+## 目录
+
+- [x] Canvas
   - [x] [canvas-stars-line](#canvas-stars-line)
   - [x] [canvas-colorful-bubble](#canvas-colorful-bubble)
   - [x] [canvas-jumping-characters](#canvas-jumping-characters)
@@ -18,12 +21,17 @@
   - [x] [business-tab](#business-tab)
 
 ## canvas-stars-line
+
 > 非常nice的```星空连线```特效插件, 自定义大多数配置
+
 #### 默认渲染
+
+```ts
+StarsLine.render(el: string);    // el canvas元素
 ```
-StarsLine.render(el: string): void;    // el canvas元素
-```
+
 #### 自定义配置项
+
 | Key        | Type    | default | Introduce        |
 | ---------- | ------- | ------- | ---------------- |
 | cvsWidth   | number  | 500     | 画布宽           |
@@ -36,87 +44,108 @@ StarsLine.render(el: string): void;    // el canvas元素
 | ballSpeed  | number  | 1       | 星空点移动速度   |
 | ballColor  | string  | #fff    | 星空点颜色       |
 | isResize   | boolean | false   | 是否跟随窗口大小 |
+
 #### 支持链式调用
-```
+
+```ts
 StarsLine
   .config({...})
   .render(el: string)
 ```
 
 ## canvas-colorful-bubble
-> 构建的canvas气泡插件, 可自定义大多数配置  
+
+> 构建的canvas气泡插件, 可自定义大多数配置
+
 > 开启```鼠标```交互的情况下, 可用作```个人博客背景```
+
 1. 基本用法
-```
+
+```ts
 ColorfulBubble
   .config({})
   .render(el: string)
 ```
+
 2. 自定义配置项
-```
+
+```ts
 ColorfulBubble
   .config({
-    cvsWidth?:        number    画布宽
-    cvsHeight?:       number    画布高
-    cvsBgColor?:      string    画布背景
-    bubbleNum?:       number    气泡数量
-    bubbleOpacity?:   number    气泡透明度
-    bubbleSpeed?:     number    气泡移动速度
-    bubbleScaleRange?: {        气泡半径范围
-      min: number, 
-      max: number 
-    } 
-    allowMouse?:      boolean   是否允许鼠标交互
-    bubbleColorArr?:  string[]  气泡颜色数组
-    bubbleExpandRange?: number    气泡缩放极值
+    cvsWidth?:        number    // 画布宽
+    cvsHeight?:       number    // 画布高
+    cvsBgColor?:      string    // 画布背景
+    bubbleNum?:       number    // 气泡数量
+    bubbleOpacity?:   number    // 气泡透明度
+    bubbleSpeed?:     number    // 气泡移动速度
+    bubbleScaleRange?: {        // 气泡半径范围
+      min: number,
+      max: number
+    }
+    allowMouse?:      boolean   // 是否允许鼠标交互
+    bubbleColorArr?:  string[]  // 气泡颜色数组
+    bubbleExpandRange?: number  // 气泡缩放极值
   })
   .render(el: string)
 ```
 
 ## canvas-jumping-characters
+
 > 点击产生文字,并逐渐消失, 可用作个人博客背景, 增强用户体验.
+
 1. 采用默认配置项
-```
+
+```ts
 JumpingCharacters.render({
   ele: HTMLCanvasElement,
 });
 ```
+
 2. 自定义配置项
+
 > (Ps: 传入数组则随机取值)
-```
+
+```ts
 JumpingCharacters.render({
   ele:            HTMLCanvasElement,
-  cvsWidth:       number            画布宽
-  cvsHeight:      number            画布高
-  cvsBgColor:     string            画布背景
-  text:           string | string[] 产出文字
-  textColor:      string | string[] 文字颜色
-  textSize:       number            文字大小
-  safeDistance:   number            安全距离(文字移动多远后消失)
-  initialOpacity: number            初始透明度
-  speed:          number            移动速率
+  cvsWidth:       number                // 画布宽
+  cvsHeight:      number                // 画布高
+  cvsBgColor:     string                // 画布背景
+  text:           string | string[]     // 产出文字
+  textColor:      string | string[]     // 文字颜色
+  textSize:       number                // 文字大小
+  safeDistance:   number                // 安全距离(文字移动多远后消失)
+  initialOpacity: number                // 初始透明度
+  speed:          number                // 移动速率
 });
 ```
 
 ## business-carousel
+
 > 封装的```轮播```插件, 用法及其简单, 页面只需```一个div```元素, 不用撰写烦人的DOM, 插件会自动生成DOMTree
+
 > 可自定义常用配置项
+
 #### 基本用法
-```
+
+```ts
 Carousel
   .config({ dataSource: object[] })     轮播数据(必填)
-  .render(el: string)     轮播容器      
+  .render(el: string)     轮播容器
 ```
+
 #### 可配置项
-```
+
+```ts
 interface IDataSource {
-  text: string,         
+  text: string,
   img: {
     url: string,
     target: string,
   },
 }
 ```
+
 | Key          | Type          | Default     | Introduce            |
 | ------------ | ------------- | ----------- | -------------------- |
 | dataSource   | IDataSource[] |             | 基本数据, 必需       |
@@ -130,18 +159,24 @@ interface IDataSource {
 | delayTime    | number        | 3000        | 自动滚动延迟时间     |
 | duringTime   | number        | 1500        | 过渡时间             |
 | isHoverPause | boolean       | true        | 鼠标放置是否停止轮播 |
+
 #### effect说明
-```
+
+> 目前只支持 Fade & Scroll 两种状态轮播图
+
+```ts
 Carousel.config({ effect: 'fade' | 'scroll'  })
-目前只支持 Fade & Scroll 两种状态轮播图
 ```
 
 ## business-tab
-> tabs标签页插件, 只需传入 渲染的数据 和 渲染区间就可  
+
+> tabs标签页插件, 只需传入 渲染的数据 和 渲染区间就可
+
 > 可自定义大多数配置项
 
 #### 基本用法
-```
+
+```ts
   export interface IDataSource {
     tabPaneTitle: {
       icon: string,
@@ -154,8 +189,10 @@ Carousel.config({ effect: 'fade' | 'scroll'  })
 
   Tabs.render({ dataSource: IDataSource, ele: HTMLElement });
 ```
+
 #### 可配置项
-```
+
+```ts
 interface ITabBarStyle {
     'background-color'?: string;
     color?: string;
@@ -169,6 +206,7 @@ interface ITabBarLineStyle {
   height?: number;
 }
 ```
+
 | key              | value             | default       | introduce         |
 | ---------------- | ----------------- | ------------- | ----------------- |
 | ele              | HTMLElement       | document.body | 渲染区间(容器)    |
@@ -182,3 +220,9 @@ interface ITabBarLineStyle {
 | animated         | boolean           | true          | 是否开启动画      |
 | onTabClick       | ()=>void          | Function      | tab被点击的回调   |
 | onChange         | (activeKey)=>void | Function      | 切换面板的回调    |
+
+## 其它
+
+持续更新中...
+
+**Enjoy!**
