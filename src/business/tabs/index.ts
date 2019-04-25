@@ -1,6 +1,6 @@
 
 /**
- * @name: business-tabs 
+ * @name: business-tabs
  * @description 业务插件,tabs标签页
  * @author: yyg
  * @version 1.0.6
@@ -204,7 +204,7 @@ namespace Tabs {
     public constructor() {
       this.init();
     }
-    
+
     private init(): void {
       this.handleInitEle();
       this.handleSetStyle();
@@ -298,7 +298,7 @@ namespace Tabs {
         .getEle('.yyg-nav-item') as HTMLLIElement;
       let oStyle = Utils
         .getEle('style');
-      
+
       if (!oStyle) {
         const oHead = Utils.getEle('head') as HTMLHeadElement;
         oStyle = document.createElement('style');
@@ -327,7 +327,7 @@ namespace Tabs {
           padding: 10px 0;
         }
         .yyg-tabs-main-bar {
-          
+
         }
         .yyg-bar-nav-container {
           box-sizing: border-box;
@@ -426,7 +426,7 @@ namespace Tabs {
         .getAllEle('.yyg-nav-item') as NodeListOf<HTMLLIElement>;
       const lineBox = Utils
         .getEle('.yyg-nav-line-box');
-      
+
       // 判断不同type不同active样式
       const whichTypeActiveClass: string = type === 'line'
         ? 'yyg-nav-item-line-active'
@@ -442,7 +442,7 @@ namespace Tabs {
           lineBox.clientWidth * (defaultActiveKey - 1) + tabBarGap * (defaultActiveKey - 1)
         }px)`,
       });
-      
+
       Utils
         .addClass(
           barItems[defaultActiveKey - 1],
@@ -452,7 +452,7 @@ namespace Tabs {
           transform: `translateX(${-(defaultActiveKey - 1) * 500}px)`,
         })
         .addClass(paneList, whichAnimatedClass);
-      
+
       barItems.forEach((item: HTMLLIElement, index: number) => {
         item.addEventListener(mouse, () => {
           // 钩子
@@ -481,3 +481,6 @@ namespace Tabs {
     }
   }
 }
+
+
+export default Tabs;
