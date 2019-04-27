@@ -18,3 +18,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 
 - 更新`README`
+
+## [2019-4-27]
+
+### Added
+
+- 配置完成基本的`webpack + ts`开发环境
