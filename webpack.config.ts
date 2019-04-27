@@ -1,10 +1,10 @@
-const path = require('path');
+import * as path from 'path';
 
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+import htmlWebpackPlugin from 'html-webpack-plugin';
+import cleanWebpackPlugin from 'clean-webpack-plugin';
 
 
-module.exports = {
+export default {
   entry: './src/index.ts',
   output: {
     filename: 'index.js',
