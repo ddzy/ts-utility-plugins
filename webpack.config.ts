@@ -39,7 +39,7 @@ export default {
   plugins: [
     new htmlWebpackPlugin({
       title: 'ts插件库测试',
-      template: './sources/template/index.ejs',
+      template: './assets/template/index.ejs',
     }),
     new cleanWebpackPlugin(),
   ],
