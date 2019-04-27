@@ -19,6 +19,14 @@ module.exports = {
         test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /.html?$/,
+        use: 'html-loader',
+      },
+      {
+        test: /.ejs?$/,
+        use: 'ejs-loader',
       }
     ],
   },
@@ -29,7 +37,8 @@ module.exports = {
   },
   plugins: [
     new htmlWebpackPlugin({
-      title: '插件库测试'
+      title: 'ts插件库测试',
+      template: './sources/template/index.ejs',
     }),
     new cleanWebpackPlugin(),
   ],
