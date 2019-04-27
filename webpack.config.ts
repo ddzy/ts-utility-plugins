@@ -1,10 +1,10 @@
-const path = require('path');
+import * as path from 'path';
 
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+import htmlWebpackPlugin from 'html-webpack-plugin';
+import cleanWebpackPlugin from 'clean-webpack-plugin';
 
 
-module.exports = {
+export default {
   entry: './src/index.ts',
   output: {
     filename: 'index.js',
@@ -19,6 +19,14 @@ module.exports = {
         test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /.html?$/,
+        use: 'html-loader',
+      },
+      {
+        test: /.ejs?$/,
+        use: 'ejs-loader',
       }
     ],
   },
@@ -26,10 +34,12 @@ module.exports = {
     contentBase: './lib',
     hot: true,
     port: 3000,
+    open: true,
   },
   plugins: [
     new htmlWebpackPlugin({
-      title: '插件库测试'
+      title: 'ts插件库测试',
+      template: './assets/template/index.ejs',
     }),
     new cleanWebpackPlugin(),
   ],
