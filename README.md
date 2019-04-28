@@ -174,54 +174,74 @@ new Carousel({
 
 > tabs标签页插件, 只需传入 渲染的数据 和 渲染区间就可
 
-> 可自定义大多数配置项
+#### 8.1 基本用法
 
-#### 基本用法
+> **PS**: 默认会挂载于`body`上, 采用默认数据.
 
 ```ts
-  export interface IDataSource {
-    tabPaneTitle: {
-      icon: string,
-      text: string,
-    };
-    tabPaneContent: {
-      text: string,
-    };
-  }
-
-  Tabs.render({ dataSource: IDataSource, ele: HTMLElement });
+new Tab({});
 ```
 
-#### 可配置项
+#### 8.2 可用接口
+
+> **PS**: 如下列出了一系列配置项接口.
 
 ```ts
-interface ITabBarStyle {
-    'background-color'?: string;
-    color?: string;
-    'font-size'?: number;
-    'font-family'?: string;
-    backgroundColorActive?: string;
-    colorActive?: string;
+export interface ITabConfigProps {
+  container?: string;
+  dataSource?: ITabDataSource[];
+  type?: ITabTypeEffect;
+  mouse?: ITabMouseEffect;
+  defaultActiveKey?: number;
+  tabBarGap?: number;
+  tabBarStyle?: ITabBarStyle;
+  tabBarLineStyle?: ITabBarLineStyle;
+  animated?: boolean;
+  onChange?: (activeKey: number | string) => void;
+  onTabClick?: () => void;
 }
-interface ITabBarLineStyle {
+export interface ITabDataSource {
+  tabPaneTitle: {
+    icon?: string,
+    text?: string,
+  },
+  tabPaneContent: {
+    text?: string,
+  },
+};
+export interface ITabBarStyle {
+  'background-color'?: string;
+  color?: string;
+  'font-size'?: number;
+  'font-family'?: string;
+  backgroundColorActive?: string;
+  colorActive?: string;
+}
+export interface ITabBarLineStyle {
   'background-color'?: string;
   height?: number;
 }
+export type ITabTypeEffect = 'line' | 'card';
+export type ITabMouseEffect = 'mouseenter' | 'click';
 ```
 
-| key              | value             | default       | introduce         |
-| ---------------- | ----------------- | ------------- | ----------------- |
-| ele              | HTMLElement       | document.body | 渲染区间(容器)    |
-| dataSource       | IDataSource       | x             | 数据              |
-| type             | line(card)        | line          | 页签类型          |
-| mouse            | mouseenter(click) | mouseenter    | 切换属性          |
-| defaultActiveKey | number            | 1             | 初始化选中面板key |
-| tabBarGap        | number            | 5             | tabsBar之间的间隙 |
-| tabBarStyle      | ITabBarStyle      | {}            | tabBar样式对象    |
-| tabBarLineStyle  | ITabBarLineStyle  | {}            | 线条样式          |
-| animated         | boolean           | true          | 是否开启动画      |
-| onTabClick       | ()=>void          | Function      | tab被点击的回调   |
-| onChange         | (activeKey)=>void | Function      | 切换面板的回调    |
+#### 8.3 可配置项
+
+> **PS**: 下述表格中为所有的可配置项
+
+| Key              | Value             | Require | Description       |
+| ---------------- | ----------------- | ------- | ----------------- |
+| container        | HTMLElement       | false   | 挂载容器          |
+| dataSource       | IDataSource       | false   | 源数据            |
+| type             | line(card)        | false   | 页签类型          |
+| mouse            | mouseenter(click) | false   | 切换属性          |
+| defaultActiveKey | number            | false   | 初始化选中面板key |
+| tabBarGap        | number            | false   | tabsBar之间的间隙 |
+| tabBarStyle      | ITabBarStyle      | false   | tabBar样式对象    |
+| tabBarLineStyle  | ITabBarLineStyle  | false   | 线条样式          |
+| animated         | boolean           | false   | 是否开启动画      |
+| onTabClick       | ()=>void          | false   | tab被点击的回调   |
+| onChange         | (activeKey)=>void | false   | 切换面板的回调    |
 
 ## 九、其它
 
