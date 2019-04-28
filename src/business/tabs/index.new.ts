@@ -307,6 +307,9 @@ export default class Tab {
     } = Tab.defaultConfig;
     const paneList = utilityDOM
       .getEle('.yyg-tabpane-list') as HTMLUListElement;
+    // TODO: 解决滚动距离bug, 使用`paneList`父级宽度
+    const paneListParent = utilityDOM
+      .getEle('.yyg-content-tabpane-container') as HTMLDivElement;
     const barItems = utilityDOM
       .getAllEle('.yyg-nav-item') as NodeListOf<HTMLLIElement>;
     const lineBox = utilityDOM
@@ -334,7 +337,7 @@ export default class Tab {
         whichTypeActiveClass
       )
       .setCss(paneList, {
-        transform: `translateX(${-(defaultActiveKey - 1) * 500}px)`,
+        transform: `translateX(${-(defaultActiveKey - 1) * paneListParent.clientWidth}px)`,
       })
       .addClass(paneList, whichAnimatedClass);
 
@@ -359,7 +362,7 @@ export default class Tab {
         utilityDOM
           .addClass(item, whichTypeActiveClass)
           .setCss(paneList, {
-            transform: `translateX(${-index * 500}px)`,
+            transform: `translateX(${-index * paneListParent.clientWidth}px)`,
           });
       });
     });
