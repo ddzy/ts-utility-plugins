@@ -175,7 +175,10 @@ export default class Fade {
   public createStyle(): void {
     let oStyle: HTMLElement | null = utilityDOM
       .getEle('style');
-    const { dataSource } = Fade.defaultConfig;
+    const {
+      dataSource,
+      container,
+    } = Fade.defaultConfig;
 
     // style标签不存在
     if (!oStyle) {
@@ -187,112 +190,112 @@ export default class Fade {
     }
 
     oStyle.innerText += `
-    html, body, ul, p {
-      margin: 0;
-      padding: 0;
-    }
-    ul {
-      list-style-type: none;
-    }
-    .yyg-carousel-container {
-      box-sizing: border-box;
-      height: 100%;
-      padding: 10px;
-      border: 5px solid #1890ff;
-      border-radius: 20px;
-    }
-    .yyg-carousel-main {
-      position: relative;
-      // height: 100%;
-      height: 300px;
-    }
-    .yyg-arrow-wrapper {
-      display: none;
-      position: absolute;
-      z-index: 999;
-      top: 50%;
-      width: 30px;
-      heigth: 45px;
-      border-top-right-radius: 15px;
-      border-bottom-right-radius: 15px;
-      background-clip: padding-box;
-      background-color: rgba(0,0,0,.5);
-      color: #fff;
-      opacity: 0;
-      line-height: 45px;
-      font-size: 24px;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
-      transform: translateY(-50%);
-      transition: all .5s ease-in-out;
-    }
-    .yyg-arrow-prev-wrapper {
-      left: 0;
-    }
-    .yyg-arrow-next-wrapper {
-      right: 0;
-    }
-    .yyg-content-wrapper {
-      overflow: hidden;
-      height: 100%;
-    }
-    .yyg-content-list {
-      position: relative;
-      height: 100%;
-    }
-    .yyg-content-item {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      opacity: 0;
-    }
-    .yyg-content-item:first-child {
-      opacity: 1;
-      z-index: 0;
-    }
-    .yyg-content-item a img {
-      display: block;
-      max-width: 100%;
-      height: 100%;
-      border-radius: 6px;
-    }
-    .yyg-dots-wrapper {
-      position: absolute;
-      left: 50%;
-      bottom: 10px;
-      z-index: 888;
-      padding: 2px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background-color: rgba(0,0,0,.5);
-      font-size: 0;
-      transform: translateX(-50%);
-    }
-    .yyg-dot-item {
-      display: inline-block;
-      margin-left: 5px;
-      width: 12px;
-      height: 12px;
-      background-color: #fff;
-      border-radius: 50%;
-      transition: all .5s ease-in-out;
-    }
-    .yyg-dot-item:last-child {
-      margin-right: 5px;
-    }
-    .yyg-dot-item-active {
-      background-color: #d50;
-    }
-    .yyg-prev-wrapper-active {
-      left: 15px;
-      opacity: 1;
-    }
-    .yyg-next-wrapper-active {
-      right: 15px;
-      opacity: 1;
-    }
+      ${container} ul, p {
+        margin: 0;
+        padding: 0;
+      }
+      ${container} ul {
+        list-style-type: none;
+      }
+      ${container} .yyg-carousel-container {
+        box-sizing: border-box;
+        height: 100%;
+        padding: 10px;
+        border: 5px solid #1890ff;
+        border-radius: 20px;
+      }
+      ${container} .yyg-carousel-main {
+        position: relative;
+        // height: 100%;
+        height: 300px;
+      }
+      ${container} .yyg-arrow-wrapper {
+        display: none;
+        position: absolute;
+        z-index: 999;
+        top: 50%;
+        width: 30px;
+        heigth: 45px;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        background-clip: padding-box;
+        background-color: rgba(0,0,0,.5);
+        color: #fff;
+        opacity: 0;
+        line-height: 45px;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        transform: translateY(-50%);
+        transition: all .5s ease-in-out;
+      }
+      ${container} .yyg-arrow-prev-wrapper {
+        left: 0;
+      }
+      ${container} .yyg-arrow-next-wrapper {
+        right: 0;
+      }
+      ${container} .yyg-content-wrapper {
+        overflow: hidden;
+        height: 100%;
+      }
+      ${container} .yyg-content-list {
+        position: relative;
+        height: 100%;
+      }
+      ${container} .yyg-content-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        opacity: 0;
+      }
+      ${container} .yyg-content-item:first-child {
+        opacity: 1;
+        z-index: 0;
+      }
+      ${container} .yyg-content-item a img {
+        display: block;
+        max-width: 100%;
+        height: 100%;
+        border-radius: 6px;
+      }
+      ${container} .yyg-dots-wrapper {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        z-index: 888;
+        padding: 2px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: rgba(0,0,0,.5);
+        font-size: 0;
+        transform: translateX(-50%);
+      }
+      ${container} .yyg-dot-item {
+        display: inline-block;
+        margin-left: 5px;
+        width: 12px;
+        height: 12px;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: all .5s ease-in-out;
+      }
+      ${container} .yyg-dot-item:last-child {
+        margin-right: 5px;
+      }
+      ${container} .yyg-dot-item-active {
+        background-color: #d50;
+      }
+      ${container} .yyg-prev-wrapper-active {
+        left: 15px;
+        opacity: 1;
+      }
+      ${container} .yyg-next-wrapper-active {
+        right: 15px;
+        opacity: 1;
+      }
   `;
   }
 
