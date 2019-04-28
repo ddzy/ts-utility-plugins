@@ -4,10 +4,10 @@
 
 import utilityDOM from '../../../utility/dom/index';
 
-import { IConfigProps } from '../index.new';
+import { ICarouselConfigProps } from '../index.new';
 
 
-export default class Fade {
+export class Fade {
   private static defaultConfig = {
     container: 'body',
     dataSource: [
@@ -64,20 +64,20 @@ export default class Fade {
   private count: number = 0;
 
   public constructor(
-    config: IConfigProps,
+    config: ICarouselConfigProps,
   ) {
     this.init(config);
   }
 
   public init(
-    config: IConfigProps,
+    config: ICarouselConfigProps,
   ): void {
     this.initSettings(config);
     this.initDOM();
   }
 
   public initSettings(
-    config: IConfigProps,
+    config: ICarouselConfigProps,
   ): void {
     for (const key in config) {
       if (config.hasOwnProperty(key)) {
