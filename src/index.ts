@@ -1,6 +1,5 @@
 import Carousel from './business/carousel/index.new';
 
-
 new Carousel({
   container: '#app',
   dataSource: [{
@@ -37,3 +36,6 @@ new Carousel({
   duringTime: 1,
   effect: 'fade',
 });
+
+
+

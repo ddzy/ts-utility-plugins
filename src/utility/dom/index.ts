@@ -11,13 +11,13 @@ export interface IStaticPairs {
 export interface IUtilityDOMProps {
   getEle(sign: string): HTMLElement | null;
   getAllEle(sign: string): ArrayLike<HTMLElement> | null;
-  setAttr(ele: HTMLElement, options: IStaticPairs): ThisType<IUtilityDOMProps>;
-  setCss(ele: HTMLElement, options: IStaticPairs): ThisType<IUtilityDOMProps>;
+  setAttr(ele: HTMLElement, options: IStaticPairs): OmitThisParameter<IUtilityDOMProps>;
+  setCss(ele: HTMLElement, options: IStaticPairs): OmitThisParameter<IUtilityDOMProps>;
   getRandom(min: number, max: number): number;
   getRadian(angle: number): number;
   getAttr(ele: HTMLElement, key: string): string | null;
-  addClass(el: HTMLElement, className: string): ThisType<IUtilityDOMProps>;
-  removeClass(el: HTMLElement, className: string): ThisType<IUtilityDOMProps>;
+  addClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
+  removeClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
   throttle(time: number, callback: () => void): void;
 };
 

@@ -1305,6 +1305,8 @@ namespace Carousel {
 }
 
 
+export default Carousel;
+
 Carousel.config({
   dataSource: [{
     text: 'Slide One',
