@@ -10,9 +10,9 @@
 
 ## 二、用法
 
-![使用流程图](https://github.com/ddzy/many-universal-image/blob/master/images/business/s1.PNG)
-
 > **PS**: 重构代码中, 暂未实现对`npm引入`的支持
+
+![使用流程图](https://github.com/ddzy/many-universal-image/blob/master/images/business/s1.PNG)
 
 ## 三、目录
 
