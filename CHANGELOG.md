@@ -24,3 +24,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 配置完成基本的`webpack + ts`开发环境
+
+## [2019-4-28]
+
+### Added
+
+- 重构完成`business/carousel`
