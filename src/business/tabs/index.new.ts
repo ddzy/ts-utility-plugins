@@ -53,7 +53,7 @@ export default class Tab {
       {
         tabPaneTitle: {
           text: '面板一',
-          icon: '',
+          icon: '😂',
         },
         tabPaneContent: {
           text: '内容区块一',
@@ -62,7 +62,7 @@ export default class Tab {
       {
         tabPaneTitle: {
           text: '面板二',
-          icon: '',
+          icon: '😘',
         },
         tabPaneContent: {
           text: '内容区块二',
@@ -71,7 +71,7 @@ export default class Tab {
       {
         tabPaneTitle: {
           text: '面板三',
-          icon: '',
+          icon: '😍',
         },
         tabPaneContent: {
           text: '内容区块三',
@@ -182,6 +182,10 @@ export default class Tab {
         utilityDOM.setCss(oIconBoxArr[index], {
           flex: .6,
           'text-align': 'right',
+        });
+      } else {
+        utilityDOM.setCss(oIconBoxArr[index], {
+          display: 'none',
         });
       }
     });
