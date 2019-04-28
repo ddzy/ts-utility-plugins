@@ -161,6 +161,7 @@ export default class Tab {
       dataSource,
       tabBarStyle,
       tabBarLineStyle,
+      container,
     } = Tab.defaultConfig;
     const oIconBoxArr = utilityDOM
       .getAllEle('.yyg-nav-item-icon') as any;
@@ -192,27 +193,34 @@ export default class Tab {
 
 
     oStyle.innerText += `
-      .yyg-tabs-wrapper {
+      ${container} ul, li, p, h1, h2, h3 {
+        margin: 0;
+        padding: 0;
+      }
+      ${container} ul {
+        list-style-type: none;
+      }
+      ${container} .yyg-tabs-wrapper {
         width: 100%;
         height: 100%;
       }
-      .yyg-tabs-main {
+      ${container} .yyg-tabs-main {
         box-sizing: border-box;
         padding: 10px 0;
       }
-      .yyg-tabs-main-bar {
+      ${container} .yyg-tabs-main-bar {
 
       }
-      .yyg-bar-nav-container {
+      ${container} .yyg-bar-nav-container {
         box-sizing: border-box;
         height: 50px;
         border-bottom: 1px solid #ccc;
         line-height: 47px;
       }
-      .yyg-nav-list-box {
+      ${container} .yyg-nav-list-box {
         display: flex;
       }
-      .yyg-nav-item {
+      ${container} .yyg-nav-item {
         flex: 1;
         display: flex;
         margin-right: ${tabBarGap}px;
@@ -226,14 +234,14 @@ export default class Tab {
       /*
         bar-item
       */
-      .yyg-nav-item-icon {
+     ${container} .yyg-nav-item-icon {
         flex: ${0};
         font-size: 12px;
       }
       .yyg-nav-item-text {
         flex: 1;
       }
-      .yyg-nav-line-box {
+      ${container} .yyg-nav-line-box {
         width: ${oNavItem.clientWidth / dataSource.length - tabBarGap}px;
         height: ${tabBarLineStyle['height'] || 3}px;
         background-color: ${tabBarLineStyle['background-color'] || '#1890ff'};
@@ -241,27 +249,27 @@ export default class Tab {
       }
 
       /* 内容框 */
-      .yyg-tabs-main-bar {
+      ${container} .yyg-tabs-main-bar {
 
       }
-      .yyg-content-tabpane-container {
+      ${container} .yyg-content-tabpane-container {
         overflow: hidden;
         box-sizing: border-box;
         padding: 5px 0;
       }
-      .yyg-tabpane-list {
+      ${container} .yyg-tabpane-list {
         width: ${dataSource.length * 100}%;
       }
-      .yyg-tabpane-item {
+      ${container} .yyg-tabpane-item {
         float: left;
         width: ${100 / dataSource.length}%;
       }
 
       /* type */
-      .yyg-nav-item-line {
+      ${container} .yyg-nav-item-line {
 
       }
-      .yyg-nav-item-card {
+      ${container} .yyg-nav-item-card {
         border: 1px solid #e8e8e8;
         border-bottom: 0;
         border-radius: 4px 4px 0 0;
@@ -269,16 +277,16 @@ export default class Tab {
       }
 
       /* 活动样式类 */
-      .yyg-nav-item-card-active {
+      ${container} .yyg-nav-item-card-active {
         background-color: ${tabBarStyle['backgroundColorActive'] || '#fff'};
         color: ${tabBarStyle['colorActive'] || '#1890ff'};
       }
-      .yyg-nav-item-line-active {
+      ${container} .yyg-nav-item-line-active {
         color: ${tabBarStyle['colorActive'] || '#1890ff'};
       }
 
       /* animated */
-      .yyg-tabpane-list-animated {
+      ${container} .yyg-tabpane-list-animated {
         transition: all .2s ease-in-out;
       }
     `;
