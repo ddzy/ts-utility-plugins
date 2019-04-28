@@ -17,12 +17,12 @@
 ## 三、目录
 
 - [x] Canvas
-  - [x] [canvas-stars-line](#四、canvas-stars-line)
-  - [x] [canvas-colorful-bubble](#五、canvas-colorful-bubble)
-  - [x] [canvas-jumping-characters](#六、canvas-jumping-characters)
+  - [x] [canvas-stars-line](#四canvas-stars-line)
+  - [x] [canvas-colorful-bubble](#五canvas-colorful-bubble)
+  - [x] [canvas-jumping-characters](#六canvas-jumping-characters)
 - [x] Business
-  - [x] [business-carousel](#七、business-carousel)
-  - [x] [business-tab](#八、business-tab)
+  - [x] [business-carousel](#七business-carousel)
+  - [x] [business-tab](#八business-tab)
 
 ## 四、canvas-stars-line
 
