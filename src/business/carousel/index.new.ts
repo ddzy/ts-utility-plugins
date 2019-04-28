@@ -5,11 +5,11 @@
  * @constant 最近修改于 2019/4/28
  */
 
-import Scroll from './carousel-scroll/carouselScroll';
-import Fade from './carousel-fade/carouselFade';
+import { Scroll } from './carousel-scroll/carouselScroll';
+import { Fade } from './carousel-fade/carouselFade';
 
 
-export interface IConfigProps {
+export interface ICarouselConfigProps {
   container?: string,
   dataSource?: {
     text: string,
@@ -31,21 +31,21 @@ export interface IConfigProps {
   afterChange?: () => void;
 }
 
-export default class Carousel {
+export class Carousel {
   public constructor(
-    config: IConfigProps,
+    config: ICarouselConfigProps,
   ) {
     this.__init(config);
   }
 
   private __init(
-    config: IConfigProps,
+    config: ICarouselConfigProps,
   ): void {
     this.__initWhichEffect(config);
   }
 
   private __initWhichEffect(
-    config: IConfigProps,
+    config: ICarouselConfigProps,
   ): void {
     switch (config.effect) {
       case 'scroll': {

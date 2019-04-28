@@ -4,10 +4,10 @@
 
 import utilityDOM from '../../../utility/dom/index';
 
-import { IConfigProps } from '../index.new';
+import { ICarouselConfigProps } from '../index.new';
 
 
-export default class Scroll {
+export class Scroll {
 
   private static defaultConfig = {
     container: 'body',
@@ -113,14 +113,14 @@ export default class Scroll {
   private oItemWidth: number = 0;
 
   public constructor(
-    config: IConfigProps,
+    config: ICarouselConfigProps,
   ) {
     this.initSettings(config);
     this.initDOM();
   }
 
   public initSettings(
-    config: IConfigProps,
+    config: ICarouselConfigProps,
   ): void {
     for (const key in config) {
       if (config.hasOwnProperty(key)) {
