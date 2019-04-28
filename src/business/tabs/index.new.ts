@@ -21,7 +21,7 @@ export interface ITabConfigProps {
   onChange?: (activeKey: number | string) => void;
   onTabClick?: () => void;
 }
-interface ITabDataSource {
+export interface ITabDataSource {
   tabPaneTitle: {
     icon?: string,
     text?: string,
@@ -30,7 +30,7 @@ interface ITabDataSource {
     text?: string,
   },
 };
-interface ITabBarStyle {
+export interface ITabBarStyle {
   'background-color'?: string;
   color?: string;
   'font-size'?: number;
@@ -38,15 +38,15 @@ interface ITabBarStyle {
   backgroundColorActive?: string;
   colorActive?: string;
 }
-interface ITabBarLineStyle {
+export interface ITabBarLineStyle {
   'background-color'?: string;
   height?: number;
 }
-type ITabTypeEffect = 'line' | 'card';
-type ITabMouseEffect = 'mouseenter' | 'click';
+export type ITabTypeEffect = 'line' | 'card';
+export type ITabMouseEffect = 'mouseenter' | 'click';
 
 
-export default class Tab {
+export class Tab {
   public static defaultConfig = {
     container: 'body',
     dataSource: [
