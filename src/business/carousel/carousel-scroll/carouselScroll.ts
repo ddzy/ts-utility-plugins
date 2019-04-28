@@ -262,7 +262,10 @@ export default class Scroll {
   public createStyle(): void {
     let oStyle: HTMLElement | null = utilityDOM
       .getEle('style');
-    const { dataSource } = Scroll.defaultConfig;
+    const {
+      dataSource,
+      container,
+    } = Scroll.defaultConfig;
 
     // style标签不存在
     if (!oStyle) {
@@ -274,25 +277,25 @@ export default class Scroll {
     }
 
     oStyle.innerText += `
-      body, p, ul {
+      ${container} p, ${container} ul {
         margin: 0;
         padding: 0;
       }
-      ul {
+      ${container} ul {
         list-style-type: none;
       }
-      .yyg-carousel-container {
+      ${container} .yyg-carousel-container {
         box-sizing: border-box;
         height: 100%;
         padding: 10px;
         border: 5px solid #1890ff;
         border-radius: 20px;
       }
-      .yyg-carousel-main {
+      ${container} .yyg-carousel-main {
         position: relative;
         height: 100%;
       }
-      .yyg-arrow-wrapper {
+      ${container} .yyg-arrow-wrapper {
         position: absolute;
         z-index: 999;
         top: 50%;
@@ -312,38 +315,38 @@ export default class Scroll {
         transform: translateY(-50%);
         transition: all .5s ease-in-out;
       }
-      .yyg-arrow-prev-wrapper {
+      ${container} .yyg-arrow-prev-wrapper {
         left: -10px;
       }
-      .yyg-arrow-next-wrapper {
+      ${container} .yyg-arrow-next-wrapper {
         right: -10px;
       }
-      .yyg-content-wrapper {
+      ${container} .yyg-content-wrapper {
         overflow: hidden;
         height: 100%;
       }
-      .yyg-content-list {
+      ${container} .yyg-content-list {
         width: ${(dataSource.length + 2) * 100}%;
         height: 100%;
         // transition: all ${Scroll.defaultConfig.duringTime}s ${Scroll.defaultConfig.easing};
         transform: translateX(-${
       100 / (dataSource.length + 2)
-      }%);
+        }%);
       }
-      .yyg-content-item {
+      ${container} .yyg-content-item {
         float: left;
         width: ${100 / (dataSource.length + 2)}%;
         height: 100%;
         text-align: center;
       }
-      .yyg-content-item a img {
+      ${container} .yyg-content-item a img {
         display: block;
         max-width: 100%;
         // width: 100%;
         height: 100%;
         border-radius: 6px;
       }
-      .yyg-dots-wrapper {
+      ${container} .yyg-dots-wrapper {
         display: none;
         position: absolute;
         left: 50%;
@@ -355,7 +358,7 @@ export default class Scroll {
         font-size: 0;
         transform: translateX(-50%);
       }
-      .yyg-dot-item {
+      ${container} .yyg-dot-item {
         display: inline-block;
         margin-left: 5px;
         width: 12px;
@@ -364,17 +367,17 @@ export default class Scroll {
         border-radius: 50%;
         transition: all .5s ease-in-out;
       }
-      .yyg-dot-item:last-child {
+      ${container} .yyg-dot-item:last-child {
         margin-right: 5px;
       }
-      .yyg-dot-item-active {
+      ${container} .yyg-dot-item-active {
         background-color: #d50;
       }
-      .yyg-prev-wrapper-active {
+      ${container} .yyg-prev-wrapper-active {
         left: 15px;
         opacity: 1;
       }
-      .yyg-next-wrapper-active {
+      ${container} .yyg-next-wrapper-active {
         right: 15px;
         opacity: 1;
       }
