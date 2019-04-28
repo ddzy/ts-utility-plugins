@@ -1,26 +1,41 @@
-import * as Tabs from './business/tabs/index';
+import Carousel from './business/carousel/index.new';
 
-
-Tabs.default.render({
-  ele: '#app',
-  dataSource: [
-    {
-      tabPaneTitle: {
-        text: '面板一',
-        icon: '🐷'
-      },
-      tabPaneContent: {
-        text: '面板一内容, 面板一内容',
-      },
+new Carousel({
+  container: '#app',
+  dataSource: [{
+    text: 'Slide One',
+    img: {
+      url: 'https://img.alicdn.com/tps/i4/TB11ULPd3HqK1RjSZFPSuwwapXa.jpg_q90_.webp',
+      target: '#',
     },
-    {
-      tabPaneTitle: {
-        text: '面板二',
-        icon: '👌',
-      },
-      tabPaneContent: {
-        text: '面板二内容, 面板二内容'
-      },
-    }
-  ],
+  }, {
+    text: 'Slide Two',
+    img: {
+      url: 'https://img.alicdn.com/tfs/TB1Kc14ekvoK1RjSZFwXXciCFXa-520-280.png_q90_.webp',
+      target: '',
+    },
+  }, {
+    text: 'Slide Three',
+    img: {
+      url: 'https://aecpm.alicdn.com/simba/img/TB1JNHwKFXXXXafXVXXSutbFXXX.jpg',
+      target: '',
+    },
+  }, {
+    text: 'Slide Four',
+    img: {
+      url: 'https://img.alicdn.com/tfs/TB1twNrdgDqK1RjSZSyXXaxEVXa-520-280.jpg_q90_.webp',
+      target: '',
+    },
+  }],
+  showArrows: true,
+  showDots: true,
+  autoPlay: true,
+  easing: 'ease-in-out',
+  delayTime: 2000,
+  isHoverPause: true,
+  duringTime: 1,
+  effect: 'fade',
 });
+
+
+
