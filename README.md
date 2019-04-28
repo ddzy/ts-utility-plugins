@@ -1,28 +1,32 @@
 # ts-utility-plugins
 
-封装的插件库, 采用纯原生ts开发
+封装的插件库, 采用纯原生ts构建
 
-## 说明
+## 一、说明
 
-> 插件库包括 ```canvas特效```插件, ```业务```插件等等...
+> 插件库包括 `canvas特效`插件, `业务`插件、`工具组件`等等...
 
-## 用法
+> `README`后续会以`github page`形式展示
+
+## 二、用法
 
 ![使用流程图](https://github.com/ddzy/many-universal-image/blob/master/images/business/s1.PNG)
 
-## 目录
+> **PS**: 重构代码中, 暂未实现对`npm引入`的支持
+
+## 三、目录
 
 - [x] Canvas
-  - [x] [canvas-stars-line](#canvas-stars-line)
-  - [x] [canvas-colorful-bubble](#canvas-colorful-bubble)
-  - [x] [canvas-jumping-characters](#canvas-jumping-characters)
+  - [x] [canvas-stars-line](#四、canvas-stars-line)
+  - [x] [canvas-colorful-bubble](#五、canvas-colorful-bubble)
+  - [x] [canvas-jumping-characters](#六、canvas-jumping-characters)
 - [x] Business
-  - [x] [business-carousel](#business-carousel)
-  - [x] [business-tab](#business-tab)
+  - [x] [business-carousel](#七、business-carousel)
+  - [x] [business-tab](#八、business-tab)
 
-## canvas-stars-line
+## 四、canvas-stars-line
 
-> 非常nice的```星空连线```特效插件, 自定义大多数配置
+> 非常nice的`星空连线`特效插件, 自定义大多数配置
 
 #### 默认渲染
 
@@ -53,7 +57,7 @@ StarsLine
   .render(el: string)
 ```
 
-## canvas-colorful-bubble
+## 五、canvas-colorful-bubble
 
 > 构建的canvas气泡插件, 可自定义大多数配置
 
@@ -89,7 +93,7 @@ ColorfulBubble
   .render(el: string)
 ```
 
-## canvas-jumping-characters
+## 六、canvas-jumping-characters
 
 > 点击产生文字,并逐渐消失, 可用作个人博客背景, 增强用户体验.
 
@@ -120,21 +124,17 @@ JumpingCharacters.render({
 });
 ```
 
-## business-carousel
+## 七、business-carousel
 
 > 封装的```轮播```插件, 用法及其简单, 页面只需```一个div```元素, 不用撰写烦人的DOM, 插件会自动生成DOMTree
 
-> 可自定义常用配置项
-
-#### 基本用法
+#### 7.1 基本用法
 
 ```ts
-Carousel
-  .config({ dataSource: object[] })     轮播数据(必填)
-  .render(el: string)     轮播容器
+new Carousel({});
 ```
 
-#### 可配置项
+#### 7.2 可配置项
 
 ```ts
 interface IDataSource {
@@ -146,29 +146,31 @@ interface IDataSource {
 }
 ```
 
-| Key          | Type          | Default     | Introduce            |
-| ------------ | ------------- | ----------- | -------------------- |
-| dataSource   | IDataSource[] |             | 基本数据, 必需       |
-| afterChange  | () => void    |             | 切换后回调           |
-| beforeChange | () => void    |             | 切换前回调           |
-| autoPlay     | boolean       | true        | 是否自动切换         |
-| showDots     | boolean       | true        | 是否显示导航点       |
-| showArrows   | boolean       | true        | 是否显示箭头         |
-| easing       | string        | ease-in-out | 动画效果             |
-| effect       | Fade          | Scroll      | Scroll               | 切换效果 |
-| delayTime    | number        | 3000        | 自动滚动延迟时间     |
-| duringTime   | number        | 1500        | 过渡时间             |
-| isHoverPause | boolean       | true        | 鼠标放置是否停止轮播 |
+| Key          | Type          | require | Description          |
+| ------------ | ------------- | ------- | -------------------- |
+| dataSource   | IDataSource[] | false   | 基本数据             |
+| afterChange  | () => void    | false   | 切换后回调           |
+| beforeChange | () => void    | false   | 切换前回调           |
+| autoPlay     | boolean       | false   | 是否自动切换         |
+| showDots     | boolean       | false   | 是否显示导航点       |
+| showArrows   | boolean       | false   | 是否显示箭头         |
+| easing       | string        | false   | 动画效果             |
+| effect       | Fade          | false   | 切换效果             |
+| delayTime    | number        | false   | 自动滚动延迟时间     |
+| duringTime   | number        | false   | 过渡时间             |
+| isHoverPause | boolean       | false   | 鼠标放置是否停止轮播 |
 
-#### effect说明
+#### 7.3 注意事项
 
-> 目前只支持 Fade & Scroll 两种状态轮播图
+> 目前只支持 Fade & Scroll 两种状态轮播图, **默认使用`scroll`**
 
 ```ts
-Carousel.config({ effect: 'fade' | 'scroll'  })
+new Carousel({
+  effect: 'scroll' | 'fade',
+});
 ```
 
-## business-tab
+## 八、business-tab
 
 > tabs标签页插件, 只需传入 渲染的数据 和 渲染区间就可
 
@@ -221,7 +223,7 @@ interface ITabBarLineStyle {
 | onTabClick       | ()=>void          | Function      | tab被点击的回调   |
 | onChange         | (activeKey)=>void | Function      | 切换面板的回调    |
 
-## 其它
+## 九、其它
 
 持续更新中...
 
