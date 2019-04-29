@@ -24,6 +24,7 @@ export interface IUtilityDOMProps {
   isDOM(node: any): boolean;
 
   traversalDOMWithBFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
+  traversalDOMWithDFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
 };
 
 
@@ -109,7 +110,7 @@ const utilityDOM: IUtilityDOMProps = {
 
   /**
    * BFS遍历指定DOM节点
-   * @param container 查找的DOM容器
+   * @param container 遍历的DOM容器
    * @param callback 回调
    */
   traversalDOMWithBFS(container, callback) {
@@ -125,6 +126,32 @@ const utilityDOM: IUtilityDOMProps = {
 
       const children = node.children as ArrayLike<Element>;
       queue.push(...(Array.from(children)));
+    }
+  },
+
+  /**
+   * DFS遍历指定DOM节点
+   * @param container 遍历的DOM容器
+   * @param callback 回调
+   */
+  traversalDOMWithDFS(container, callback) {
+    if (!this.isDOM(container)) {
+      throw new TypeError('Require a DOM element');
+    }
+
+    callback && callback(container);
+
+    _aidedTraversal(container.children);
+
+    function _aidedTraversal(children: HTMLCollection) {
+      if (children.length === 0) {
+        return;
+      }
+
+      for (let i = 0, every; every = children[i++];) {
+        callback && callback(every as HTMLElement);
+        _aidedTraversal(every.children);
+      }
     }
   }
 };
