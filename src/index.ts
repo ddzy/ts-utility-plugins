@@ -1,12 +1,8 @@
-import {
-  ColorfulBubble,
-} from './canvas/colorful-bubble/index.new';
+import utilityDOM from './utility/dom/index';
 
-new ColorfulBubble({
-  container: '#cvs',
-  bubbleNum: 100,
-  allowMouse: false,
-  cvsBgColor: '#fff',
-  cvsWidth: window.innerWidth,
-  cvsHeight: window.innerHeight,
-});
+utilityDOM.traversalDOMWithBFS(
+  document.getElementById('app') as HTMLDivElement,
+  (node) => {
+    console.log(node);
+  }
+);

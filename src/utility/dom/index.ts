@@ -117,7 +117,7 @@ const utilityDOM: IUtilityDOMProps = {
       throw new TypeError('Require a DOM element');
     }
 
-    const queue: Element[] = [];
+    const queue: Element[] = [container];
 
     while (queue.length) {
       const node = (queue.shift() as HTMLElement);
