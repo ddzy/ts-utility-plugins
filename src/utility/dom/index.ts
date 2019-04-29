@@ -20,6 +20,10 @@ export interface IUtilityDOMProps {
   throttle(time: number, callback: (...args: any[]) => void): void;
   getFullRandom(min: number, max: number): number,
   getAnyRandom(min: number, max: number): number;
+
+  isDOM(node: any): boolean;
+
+  traversalDOMWithBFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
 };
 
 
@@ -89,6 +93,38 @@ const utilityDOM: IUtilityDOMProps = {
         callback.apply<ThisType<any>, any[], any>(globalThis, args);
         lastClickTime = currentClickTime;
       }
+    }
+  },
+
+
+  /**
+   * 检查是否DOM元素
+   * @param node 指定目标
+   */
+  isDOM(node) {
+    return node
+      && typeof node === 'object'
+      && node.nodeType === 1;
+  },
+
+  /**
+   * BFS遍历指定DOM节点
+   * @param container 查找的DOM容器
+   * @param callback 回调
+   */
+  traversalDOMWithBFS(container, callback) {
+    if (!this.isDOM(container)) {
+      throw new TypeError('Require a DOM element');
+    }
+
+    const queue: Element[] = [];
+
+    while (queue.length) {
+      const node = (queue.shift() as HTMLElement);
+      callback && callback(node);
+
+      const children = node.children as ArrayLike<Element>;
+      queue.push(...(Array.from(children)));
     }
   }
 };
