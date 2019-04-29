@@ -6,6 +6,7 @@
  */
 
 import utilityDOM from '../../utility/dom/index';
+import { Bubble } from './bubble/bubble';
 
 
 export interface IColorfulBubbleConfigProps {
@@ -57,7 +58,7 @@ export class ColorfulBubble {
     this.el.getContext('2d') as CanvasRenderingContext2D
   );
 
-  private bubbleArr = [];
+  private bubbleArr: Bubble[] = [];
   private mousePoint: {
     x: number,
     y: number,
@@ -77,6 +78,7 @@ export class ColorfulBubble {
   ): void {
     this._initConfig(config);
     this._initCanvas();
+    this.render();
   }
 
   private _initConfig(
@@ -136,5 +138,70 @@ export class ColorfulBubble {
       width: cvsWidth,
       height: cvsHeight,
     });
+  }
+
+  /**
+   * 实例化指定气泡
+   */
+  private handleCreateBubble(): void {
+    const defaultConfig = ColorfulBubble.defaultConfig;
+
+    const bubble: Bubble = new Bubble({
+      ...defaultConfig,
+      el: this.el,
+      pen: this.pen,
+      mousePoint: this.mousePoint,
+    });
+    this.bubbleArr.push(bubble);
+    bubble.draw();
+  }
+
+  private handleMoveBubble(): void {
+    const {
+      cvsWidth,
+      cvsHeight,
+    } = ColorfulBubble.defaultConfig;
+
+    this.pen.clearRect(0, 0, cvsWidth, cvsHeight);
+    this.bubbleArr.forEach((v) => {
+      v.move();
+      v.draw();
+    });
+
+    window.requestAnimationFrame(() => {
+      this.handleMoveBubble();
+    });
+  }
+
+  private handleMoveBubbleByMouse(): void {
+    const {
+      cvsWidth,
+      cvsHeight,
+    } = ColorfulBubble.defaultConfig;
+
+    this.el.addEventListener('mousemove', (e) => {
+      this.mousePoint.x = e.clientX;
+      this.mousePoint.y = e.clientY;
+    });
+
+    this.el.addEventListener('mouseleave', () => {
+      this.mousePoint.x = cvsWidth * 2;
+      this.mousePoint.y = cvsHeight * 2;
+    })
+  }
+
+  private render(): void {
+    const {
+      bubbleNum,
+      allowMouse,
+    } = ColorfulBubble.defaultConfig;
+
+    for (let i = 0; i < bubbleNum; i++) {
+      this.handleCreateBubble();
+    }
+
+    this.handleMoveBubble();
+
+    allowMouse && this.handleMoveBubbleByMouse();
   }
 }

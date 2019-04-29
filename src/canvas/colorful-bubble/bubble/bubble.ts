@@ -19,17 +19,22 @@ export interface IBubbleProps {
     max: number,
   };
   bubbleOpacity: number;
+  bubbleExpandRange: number;
+  mousePoint: {
+    x: number;
+    y: number;
+  };
 };
 
 export class Bubble {
   // 气泡初始半径
   private static BUBBLE_INITIAL_RADIUS: number;
 
-  private el: HTMLCanvasElement;
-  private pen: CanvasRenderingContext2D;
+  private readonly el: HTMLCanvasElement;
+  private readonly pen: CanvasRenderingContext2D;
 
-  private cvsWidth: number;
-  private cvsHeight: number;
+  private readonly cvsWidth: number;
+  private readonly cvsHeight: number;
 
   // 中心点坐标
   private readonly centerPoint: {
@@ -47,7 +52,14 @@ export class Bubble {
   private radius: number
   // 气泡透明度
   private readonly opacity: number
-
+  // 气泡伸缩范围
+  private readonly bubbleExpandRange: number;
+  // 鼠标当前坐标
+  // ! TODO 考虑提取至全局变量
+  private readonly mousePoint: {
+    x: number,
+    y: number,
+  };
 
   public constructor(
     config: IBubbleProps,
@@ -61,6 +73,8 @@ export class Bubble {
       bubbleColorArr,
       bubbleScaleRange,
       bubbleOpacity,
+      bubbleExpandRange,
+      mousePoint,
     } = config;
 
     this.el = el;
@@ -69,25 +83,30 @@ export class Bubble {
     this.cvsHeight = cvsHeight;
 
     this.centerPoint = {
-      x: utilityDOM.get
+      x: utilityDOM.getAnyRandom(
+        0,
+        cvsWidth,
+      ),
+      y: utilityDOM.getAnyRandom(
+        0,
+        cvsHeight,
+      ),
     };
-  }
-
-  public __init__(
-    config: IBubbleProps,
-  ): void {
-    const {
-      el,
-      pen,
-      cvsWidth,
-      cvsHeight,
-      bubbleSpeed,
-      bubbleColorArr,
-      bubbleScaleRange,
-      bubbleOpacity,
-    } = config;
-
-    this.el = el;
+    this.distance = {
+      x: utilityDOM.getAnyRandom(-bubbleSpeed, bubbleSpeed),
+      y: utilityDOM.getAnyRandom(-bubbleSpeed, bubbleSpeed),
+    };
+    this.color = bubbleColorArr[
+      utilityDOM.getFullRandom(0, bubbleColorArr.length)
+    ];
+    this.radius = utilityDOM.getAnyRandom(
+      bubbleScaleRange && bubbleScaleRange.min,
+      bubbleScaleRange && bubbleScaleRange.max,
+    );
+    this.opacity = bubbleOpacity;
+    Bubble.BUBBLE_INITIAL_RADIUS = this.radius;
+    this.bubbleExpandRange = bubbleExpandRange;
+    this.mousePoint = mousePoint;
   }
 
   public draw(): void {
@@ -119,6 +138,7 @@ export class Bubble {
     const {
       cvsWidth,
       cvsHeight,
+      mousePoint,
       bubbleExpandRange,
     } = this;
     const centerPoint = this.centerPoint;
