@@ -10,9 +10,9 @@
 
 ## 二、用法
 
-![使用流程图](https://github.com/ddzy/many-universal-image/blob/master/images/business/s1.PNG)
-
 > **PS**: 重构代码中, 暂未实现对`npm引入`的支持
+
+![使用流程图](https://github.com/ddzy/many-universal-image/blob/master/images/business/s1.PNG)
 
 ## 三、目录
 
@@ -59,39 +59,48 @@ StarsLine
 
 ## 五、canvas-colorful-bubble
 
-> 构建的canvas气泡插件, 可自定义大多数配置
+> 构建的canvas气泡插件, 可用作个人博客背景(本人已用上👌).
 
-> 开启```鼠标```交互的情况下, 可用作```个人博客背景```
-
-1. 基本用法
+#### 5.1 基本用法
 
 ```ts
-ColorfulBubble
-  .config({})
-  .render(el: string)
+new ColorfulBubble({
+  container:
+});
 ```
 
-2. 自定义配置项
+#### 5.2 可配置项
 
 ```ts
-ColorfulBubble
-  .config({
-    cvsWidth?:        number    // 画布宽
-    cvsHeight?:       number    // 画布高
-    cvsBgColor?:      string    // 画布背景
-    bubbleNum?:       number    // 气泡数量
-    bubbleOpacity?:   number    // 气泡透明度
-    bubbleSpeed?:     number    // 气泡移动速度
-    bubbleScaleRange?: {        // 气泡半径范围
-      min: number,
-      max: number
-    }
-    allowMouse?:      boolean   // 是否允许鼠标交互
-    bubbleColorArr?:  string[]  // 气泡颜色数组
-    bubbleExpandRange?: number  // 气泡缩放极值
-  })
-  .render(el: string)
+interface IStaticColorfulBubbleScaleRangeParams {
+  min: number,
+  max: number,
+};
 ```
+
+| Key               | Type                                  | Require | Description      |
+| ----------------- | ------------------------------------- | ------- | ---------------- |
+| container         | string                                | false   | 挂载的canvas节点 |
+| cvsWidth          | number                                | false   | 画布的初始宽     |
+| cvsHeight         | number                                | false   | 画布的初始高     |
+| cvsBgColor        | string                                | false   | 画布背景色       |
+| bubbleNum         | number                                | false   | 生成的气泡数量   |
+| bubbleScaleRange  | IStaticColorfulBubbleScaleRangeParams | false   | 气泡半径大小     |
+| bubbleExpandRange | number                                | false   | 气泡最大伸缩距离 |
+| bubbleOpacity     | number                                | false   | 气泡初始透明度   |
+| bubbleSpeed       | number                                | false   | 气泡运动步长     |
+| bubbleColorArr    | string[]                              | false   | 气泡颜色         |
+| allowMouse        | boolean                               | false   | 是否允许鼠标交互 |
+
+#### 5.3 注意事项
+
+> **Q**: 关于`container`配置项?
+
+***A***: 默认为可选, 但是不填的话会抛出`自定义的异常`, 所以最好还是提供一个挂载节点👌.
+
+> Q: 是否会添加`opacity`变化功能?
+
+***A***: 有时间再搞.
 
 ## 六、canvas-jumping-characters
 
@@ -146,7 +155,7 @@ interface IDataSource {
 }
 ```
 
-| Key          | Type          | require | Description          |
+| Key          | Type          | Require | Description          |
 | ------------ | ------------- | ------- | -------------------- |
 | dataSource   | IDataSource[] | false   | 基本数据             |
 | afterChange  | () => void    | false   | 切换后回调           |
