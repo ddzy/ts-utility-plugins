@@ -13,20 +13,24 @@ export interface IUtilityDOMProps {
   getAllEle(sign: string): ArrayLike<HTMLElement> | null;
   setAttr(ele: HTMLElement, options: IStaticPairs): OmitThisParameter<IUtilityDOMProps>;
   setCss(ele: HTMLElement, options: IStaticPairs): OmitThisParameter<IUtilityDOMProps>;
-  getRandom(min: number, max: number): number;
   getRadian(angle: number): number;
   getAttr(ele: HTMLElement, key: string): string | null;
   addClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
   removeClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
-  throttle(time: number, callback: () => void): void;
+  throttle(time: number, callback: (...args: any[]) => void): void;
   getFullRandom(min: number, max: number): number,
   getAnyRandom(min: number, max: number): number;
+
+  isDOM(node: any): boolean;
+
+  traversalDOMWithBFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
+  traversalDOMWithDFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
 };
 
 
 const utilityDOM: IUtilityDOMProps = {
   getEle(sign: string,) {
-    return document.querySelector(sign) || null;
+    return document.querySelector(sign);
   },
 
   getAllEle(sign) {
@@ -50,11 +54,6 @@ const utilityDOM: IUtilityDOMProps = {
     }
 
     return this;
-  },
-
-  // ! [Deprecate] 即将废弃
-  getRandom(min, max) {
-    return (Math.random() * (max - min) + min);
   },
 
   getFullRandom(min, max) {
@@ -85,24 +84,73 @@ const utilityDOM: IUtilityDOMProps = {
     return this;
   },
 
-  throttle(time, callback) {
-    // const currentClickTime: number = new Date().getTime();
+  throttle(timestamp, callback) {
+    let lastClickTime = Date.now();
 
-    //   if (
-    //     currentClickTime - this.lastClickTime >= time
-    //   ) {
-    //     callback();
+    return (...args: any[]) => {
+      const currentClickTime = Date.now();
 
-    //     this.lastClickTime = currentClickTime;
-    //   }
-
-    let last = 0;
-
-    return function (...args: any[]) {
-      var curr = +new Date()
-      if (curr - last > time){
+      if (currentClickTime - lastClickTime > timestamp){
         callback.apply<ThisType<any>, any[], any>(globalThis, args);
-        last = curr;
+        lastClickTime = currentClickTime;
+      }
+    }
+  },
+
+
+  /**
+   * 检查是否DOM元素
+   * @param node 指定目标
+   */
+  isDOM(node) {
+    return node
+      && typeof node === 'object'
+      && node.nodeType === 1;
+  },
+
+  /**
+   * BFS遍历指定DOM节点
+   * @param container 遍历的DOM容器
+   * @param callback 回调
+   */
+  traversalDOMWithBFS(container, callback) {
+    if (!this.isDOM(container)) {
+      throw new TypeError('Require a DOM element');
+    }
+
+    const queue: Element[] = [container];
+
+    while (queue.length) {
+      const node = (queue.shift() as HTMLElement);
+      callback && callback(node);
+
+      const children = node.children as ArrayLike<Element>;
+      queue.push(...(Array.from(children)));
+    }
+  },
+
+  /**
+   * DFS遍历指定DOM节点
+   * @param container 遍历的DOM容器
+   * @param callback 回调
+   */
+  traversalDOMWithDFS(container, callback) {
+    if (!this.isDOM(container)) {
+      throw new TypeError('Require a DOM element');
+    }
+
+    callback && callback(container);
+
+    _aidedTraversal(container.children);
+
+    function _aidedTraversal(children: HTMLCollection) {
+      if (children.length === 0) {
+        return;
+      }
+
+      for (let i = 0, every; every = children[i++];) {
+        callback && callback(every as HTMLElement);
+        _aidedTraversal(every.children);
       }
     }
   }

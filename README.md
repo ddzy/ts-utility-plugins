@@ -98,7 +98,7 @@ interface IStaticColorfulBubbleScaleRangeParams {
 
 ***A***: 默认为可选, 但是不填的话会抛出`自定义的异常`, 所以最好还是提供一个挂载节点👌.
 
-> Q: 是否会添加`opacity`变化功能?
+> **Q**: 是否会添加`opacity`变化功能?
 
 ***A***: 有时间再搞.
 
