@@ -19,6 +19,8 @@ export interface IUtilityDOMProps {
   addClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
   removeClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
   throttle(time: number, callback: () => void): void;
+  getFullRandom(min: number, max: number): number,
+  getAnyRandom(min: number, max: number): number;
 };
 
 
@@ -50,8 +52,17 @@ const utilityDOM: IUtilityDOMProps = {
     return this;
   },
 
+  // ! [Deprecate] 即将废弃
   getRandom(min, max) {
     return (Math.random() * (max - min) + min);
+  },
+
+  getFullRandom(min, max) {
+    return ~~(Math.random() * (max - min) + min);
+  },
+
+  getAnyRandom(min, max) {
+    return Math.random() * (max - min) + min;
   },
 
   getRadian(angle) {
