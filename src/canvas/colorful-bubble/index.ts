@@ -19,7 +19,7 @@
  */
 
 namespace ColorfulBubble {
-  
+
   export const yyg_settings: IProps.IConfigProps = {
     cvsWidth: 500,
     cvsHeight: 500,
@@ -106,11 +106,11 @@ namespace ColorfulBubble {
     ) {
       if (Utils.getEle(el)) {
         const e = Utils.getEle(el) as any;
-        
+
         if (e.localName === 'canvas') {
           yyg_el = e;
           yyg_pen = e.getContext('2d');
-          
+
           Utils.setCss(yyg_el, {
             display: 'block',
             'background-color': yyg_settings.cvsBgColor,
@@ -259,7 +259,7 @@ namespace ColorfulBubble {
     }
 
     /**
-     * 设置元素属性 
+     * 设置元素属性
      * @param el dom元素
      * @param options 属性配置项
      */
@@ -390,7 +390,7 @@ namespace ColorfulBubble {
         || centerPoint.y > cvsHeight - radius
         ? -this.distance.y
         : this.distance.y;
-      
+
       // 缩放检测
       if (mouseToBubbleDistance <= bubbleExpandRange) {
         this.radius += 1;
