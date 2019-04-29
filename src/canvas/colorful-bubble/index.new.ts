@@ -102,7 +102,7 @@ export class ColorfulBubble {
     } = ColorfulBubble.defaultConfig;
 
     if ( container ) {
-      let oContainer = utilityDOM.getEle('oContainer');
+      let oContainer = utilityDOM.getEle(container);
 
       if ( oContainer && oContainer.nodeType === 1 && oContainer.localName === 'canvas' ) {
         this.el = (oContainer as HTMLCanvasElement);
@@ -110,10 +110,10 @@ export class ColorfulBubble {
           this.el.getContext('2d') as CanvasRenderingContext2D
         );
       } else {
-        throw new Error('Invalid container!')
+        throw new Error('Please enter an valid container 🐷🐷🐷')
       }
     } else {
-      throw new TypeError('Invalid container you passed in!')
+      throw new TypeError('Please enter an valid container 🐷🐷🐷')
     }
   }
 
