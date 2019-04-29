@@ -14,7 +14,7 @@ export interface IColorfulBubbleConfigProps {
   cvsWidth?: number;
   cvsHeight?: number;
   cvsBgColor?: string;
-  bubblenum?: number;
+  bubbleNum?: number;
   bubbleScaleRange?: IStaticColorfulBubbleScaleRangeParams;
   bubbleExpandRange?: number;
   bubbleOpacity?: number;
