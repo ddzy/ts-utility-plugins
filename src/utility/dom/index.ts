@@ -13,7 +13,6 @@ export interface IUtilityDOMProps {
   getAllEle(sign: string): ArrayLike<HTMLElement> | null;
   setAttr(ele: HTMLElement, options: IStaticPairs): OmitThisParameter<IUtilityDOMProps>;
   setCss(ele: HTMLElement, options: IStaticPairs): OmitThisParameter<IUtilityDOMProps>;
-  getRandom(min: number, max: number): number;
   getRadian(angle: number): number;
   getAttr(ele: HTMLElement, key: string): string | null;
   addClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
@@ -50,11 +49,6 @@ const utilityDOM: IUtilityDOMProps = {
     }
 
     return this;
-  },
-
-  // ! [Deprecate] 即将废弃
-  getRandom(min, max) {
-    return (Math.random() * (max - min) + min);
   },
 
   getFullRandom(min, max) {
