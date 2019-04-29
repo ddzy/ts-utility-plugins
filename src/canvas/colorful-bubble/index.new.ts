@@ -173,7 +173,7 @@ export class ColorfulBubble {
     });
   }
 
-  private handleMoveBubbleByMouse(): void {
+  private handleStretchBubbleByMouse(): void {
     const {
       cvsWidth,
       cvsHeight,
@@ -202,6 +202,6 @@ export class ColorfulBubble {
 
     this.handleMoveBubble();
 
-    allowMouse && this.handleMoveBubbleByMouse();
+    allowMouse && this.handleStretchBubbleByMouse();
   }
 }
