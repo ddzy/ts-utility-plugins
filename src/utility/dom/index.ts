@@ -25,7 +25,7 @@ export interface IUtilityDOMProps {
 
 const utilityDOM: IUtilityDOMProps = {
   getEle(sign: string,) {
-    return document.querySelector(sign) || null;
+    return document.querySelector(sign);
   },
 
   getAllEle(sign) {
