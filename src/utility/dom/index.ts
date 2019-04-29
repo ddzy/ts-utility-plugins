@@ -18,7 +18,7 @@ export interface IUtilityDOMProps {
   getAttr(ele: HTMLElement, key: string): string | null;
   addClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
   removeClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
-  throttle(time: number, callback: () => void): void;
+  throttle(time: number, callback: (...args: any[]) => void): void;
   getFullRandom(min: number, max: number): number,
   getAnyRandom(min: number, max: number): number;
 };
@@ -85,24 +85,15 @@ const utilityDOM: IUtilityDOMProps = {
     return this;
   },
 
-  throttle(time, callback) {
-    // const currentClickTime: number = new Date().getTime();
+  throttle(timestamp, callback) {
+    let lastClickTime = Date.now();
 
-    //   if (
-    //     currentClickTime - this.lastClickTime >= time
-    //   ) {
-    //     callback();
+    return (...args: any[]) => {
+      const currentClickTime = Date.now();
 
-    //     this.lastClickTime = currentClickTime;
-    //   }
-
-    let last = 0;
-
-    return function (...args: any[]) {
-      var curr = +new Date()
-      if (curr - last > time){
+      if (currentClickTime - lastClickTime > timestamp){
         callback.apply<ThisType<any>, any[], any>(globalThis, args);
-        last = curr;
+        lastClickTime = currentClickTime;
       }
     }
   }
