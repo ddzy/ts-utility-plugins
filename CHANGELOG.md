@@ -31,3 +31,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - 重构完成`business/carousel`
 - 重构完成`business/tab`
+
+## [2019-4-29]
+
+### Added
+
+- 重构完成`canvas/colorful-bubble`🐓
