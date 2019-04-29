@@ -148,7 +148,6 @@ export class ColorfulBubble {
 
     const bubble: Bubble = new Bubble({
       ...defaultConfig,
-      el: this.el,
       pen: this.pen,
       mousePoint: this.mousePoint,
     });

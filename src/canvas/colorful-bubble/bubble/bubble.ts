@@ -8,7 +8,6 @@ import utilityDOM from '../../../utility/dom/index';
 
 
 export interface IBubbleProps {
-  el: HTMLCanvasElement,
   pen: CanvasRenderingContext2D,
   cvsWidth: number;
   cvsHeight: number;
@@ -30,7 +29,6 @@ export class Bubble {
   // 气泡初始半径
   private static BUBBLE_INITIAL_RADIUS: number;
 
-  private readonly el: HTMLCanvasElement;
   private readonly pen: CanvasRenderingContext2D;
 
   private readonly cvsWidth: number;
@@ -65,7 +63,6 @@ export class Bubble {
     config: IBubbleProps,
   ) {
     const {
-      el,
       pen,
       cvsWidth,
       cvsHeight,
@@ -77,7 +74,6 @@ export class Bubble {
       mousePoint,
     } = config;
 
-    this.el = el;
     this.pen = pen;
     this.cvsWidth = cvsWidth;
     this.cvsHeight = cvsHeight;
@@ -140,10 +136,10 @@ export class Bubble {
       cvsHeight,
       mousePoint,
       bubbleExpandRange,
+      centerPoint,
+      distance,
+      radius,
     } = this;
-    const centerPoint = this.centerPoint;
-    const distance = this.distance;
-    const radius = this.radius;
 
     // 鼠标 - 球中心 距离
     const mouseToBubbleDistanceX: number = Math
