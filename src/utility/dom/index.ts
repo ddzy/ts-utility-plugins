@@ -22,9 +22,11 @@ export interface IUtilityDOMProps {
   getAnyRandom(min: number, max: number): number;
 
   isDOM(node: any): boolean;
+  isFunction(el: any): boolean;
 
   traversalDOMWithBFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
   traversalDOMWithDFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
+  traversalDOMWithNodeIterator(container: HTMLElement, callback: (node: HTMLElement) => void): void;
 };
 
 
@@ -109,6 +111,15 @@ const utilityDOM: IUtilityDOMProps = {
   },
 
   /**
+   * 检查是否函数
+   * @param ele 任意值
+   */
+  isFunction(ele) {
+    return typeof ele === 'function';
+  },
+
+
+  /**
    * BFS遍历指定DOM节点
    * @param container 遍历的DOM容器
    * @param callback 回调
@@ -153,7 +164,23 @@ const utilityDOM: IUtilityDOMProps = {
         _aidedTraversal(every.children);
       }
     }
-  }
+  },
+
+  traversalDOMWithNodeIterator(container, callback) {
+    if (!this.isDOM(container)) {
+      throw new TypeError('Require a DOM element');
+    }
+
+    const nodeIterator: NodeIterator = document.createNodeIterator(
+      container,
+      NodeFilter.SHOW_ELEMENT,
+    );
+    let currentNode: Node | null = null;
+
+    while ((currentNode = nodeIterator.nextNode())) {
+      callback && callback(currentNode as HTMLElement);
+    }
+  },
 };
 
 

@@ -7,8 +7,15 @@ import utilityDOM from './utility/dom/index';
 //   }
 // );
 
-utilityDOM.traversalDOMWithDFS(
-  document.getElementById('app') as HTMLDivElement,
+// utilityDOM.traversalDOMWithDFS(
+//   document.getElementById('app') as HTMLDivElement,
+//   (node) => {
+//     console.log(node);
+//   },
+// );
+
+utilityDOM.traversalDOMWithNodeIterator(
+  document.querySelector('#app') as HTMLDivElement,
   (node) => {
     console.log(node);
   },
