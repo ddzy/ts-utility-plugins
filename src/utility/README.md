@@ -13,20 +13,20 @@
 ## 三、目录
 
 - [DOM](#四DOM)
-  - [getEle](#4.1getEle)
-  - [getAllEle](#4.2getAllEle)
-  - [setAttr](#4.3setAttr)
-  - [setCss](#4.4setCss)
-  - [getRadian](#4.5getRadian)
-  - [getAttr](#4.6getAttr)
-  - [addClass](#4.7addClass)
-  - [removeClass](#4.8removeClass)
-  - [throttle](#4.9throttle)
-  - [getFullRandom](#4.10getFullRandom)
-  - [getAnyRandom](#4.11getAnyRandom)
-  - [isDOM](#4.12isDOM)
-  - [traversalDOMWithBFS](#4.13traversalDOMWithBFS)
-  - [traversalDOMWithDFS](#4.14traversalDOMWithDFS)
+  - [getEle](#41-getele)
+  - [getAllEle](#42-getAllEle)
+  - [setAttr](#43-setAttr)
+  - [setCss](#44-setCss)
+  - [getRadian](#45-getRadian)
+  - [getAttr](#46-getAttr)
+  - [addClass](#47-addClass)
+  - [removeClass](#48-removeClass)
+  - [throttle](#49-throttle)
+  - [getFullRandom](#410-getFullRandom)
+  - [getAnyRandom](#411-getAnyRandom)
+  - [isDOM](#412-isDOM)
+  - [traversalDOMWithBFS](#413-traversalDOMWithBFS)
+  - [traversalDOMWithDFS](#414-traversalDOMWithDFS)
 - [Array](#五Array)
 - [Object](#六Object)
 - [String](#七String)
@@ -35,33 +35,33 @@
 
 ## 四、DOM
 
-#### 4.1 getEle
+### 4.1 getEle
 
-#### 4.2 getAllEle
+### 4.2 getAllEle
 
-#### 4.3 setAttr
+### 4.3 setAttr
 
-#### 4.4 setCss
+### 4.4 setCss
 
-#### 4.5 getRadian
+### 4.5 getRadian
 
-#### 4.6 getAttr
+### 4.6 getAttr
 
-#### 4.7 addClass
+### 4.7 addClass
 
-#### 4.8 removeClass
+### 4.8 removeClass
 
-#### 4.9 throttle
+### 4.9 throttle
 
-#### 4.10 getFullRandom
+### 4.10 getFullRandom
 
-#### 4.11 getAnyRandom
+### 4.11 getAnyRandom
 
-#### 4.12 isDOM
+### 4.12 isDOM
 
-#### 4.13 traversalDOMWithBFS
+### 4.13 traversalDOMWithBFS
 
-#### 4.14 traversalDOMWithDFS
+### 4.14 traversalDOMWithDFS
 
 ## 五、Array
 

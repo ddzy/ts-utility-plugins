@@ -30,13 +30,13 @@
 
 > 非常nice的`星空连线`特效插件, 自定义大多数配置
 
-#### 默认渲染
+### 默认渲染
 
 ```ts
 StarsLine.render(el: string);    // el canvas元素
 ```
 
-#### 自定义配置项
+### 自定义配置项
 
 | Key        | Type    | default | Introduce        |
 | ---------- | ------- | ------- | ---------------- |
@@ -51,7 +51,7 @@ StarsLine.render(el: string);    // el canvas元素
 | ballColor  | string  | #fff    | 星空点颜色       |
 | isResize   | boolean | false   | 是否跟随窗口大小 |
 
-#### 支持链式调用
+### 支持链式调用
 
 ```ts
 StarsLine
@@ -63,7 +63,7 @@ StarsLine
 
 > 构建的canvas气泡插件, 可用作个人博客背景(本人已用上👌).
 
-#### 5.1 基本用法
+### 5.1 基本用法
 
 ```ts
 new ColorfulBubble({
@@ -71,7 +71,7 @@ new ColorfulBubble({
 });
 ```
 
-#### 5.2 可配置项
+### 5.2 可配置项
 
 ```ts
 interface IStaticColorfulBubbleScaleRangeParams {
@@ -94,7 +94,7 @@ interface IStaticColorfulBubbleScaleRangeParams {
 | bubbleColorArr    | string[]                              | false   | 气泡颜色         |
 | allowMouse        | boolean                               | false   | 是否允许鼠标交互 |
 
-#### 5.3 注意事项
+### 5.3 注意事项
 
 > **Q**: 关于`container`配置项?
 
@@ -139,13 +139,13 @@ JumpingCharacters.render({
 
 > 封装的```轮播```插件, 用法及其简单, 页面只需```一个div```元素, 不用撰写烦人的DOM, 插件会自动生成DOMTree
 
-#### 7.1 基本用法
+### 7.1 基本用法
 
 ```ts
 new Carousel({});
 ```
 
-#### 7.2 可配置项
+### 7.2 可配置项
 
 ```ts
 interface IDataSource {
@@ -171,7 +171,7 @@ interface IDataSource {
 | duringTime   | number        | false   | 过渡时间             |
 | isHoverPause | boolean       | false   | 鼠标放置是否停止轮播 |
 
-#### 7.3 注意事项
+### 7.3 注意事项
 
 > 目前只支持 Fade & Scroll 两种状态轮播图, **默认使用`scroll`**
 
@@ -185,7 +185,7 @@ new Carousel({
 
 > tabs标签页插件, 只需传入 渲染的数据 和 渲染区间就可
 
-#### 8.1 基本用法
+### 8.1 基本用法
 
 > **PS**: 默认会挂载于`body`上, 采用默认数据.
 
@@ -193,7 +193,7 @@ new Carousel({
 new Tab({});
 ```
 
-#### 8.2 可用接口
+### 8.2 可用接口
 
 > **PS**: 如下列出了一系列配置项接口.
 
@@ -236,7 +236,7 @@ export type ITabTypeEffect = 'line' | 'card';
 export type ITabMouseEffect = 'mouseenter' | 'click';
 ```
 
-#### 8.3 可配置项
+### 8.3 可配置项
 
 > **PS**: 下述表格中为所有的可配置项
 
@@ -256,15 +256,15 @@ export type ITabMouseEffect = 'mouseenter' | 'click';
 
 ## 九、utility-dom
 
-> 一系列与`DOM`有关的工具函数, [项目目录](https://github.com/ddzy/ts-utility-plugins/tree/master/src/utility/dom).
+一系列与`DOM`有关的工具函数, [项目目录](https://github.com/ddzy/ts-utility-plugins/tree/master/src/utility/dom).
 
-#### 9.1 完整接口
+### 9.1 完整接口
 
-> PS: 暂时未提取`*.d.ts`
+> 暂时未提取`*.d.ts`
 
 所有方法的完整接口, [戳这里](https://github.com/ddzy/ts-utility-plugins/blob/master/src/utility/dom/index.ts)
 
-#### 9.1 工具详解
+### 9.1 工具详解
 
 内容过多, 已迁移至[此处](./src/utility/README.md)展示.
 
