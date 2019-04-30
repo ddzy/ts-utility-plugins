@@ -1,9 +1,3 @@
-/**
- * @description 气泡
- * @author ddzy
- * @since 最近修改于19/4/29
- */
-
 import utilityNumber from '../../../utility/number/index';
 
 
