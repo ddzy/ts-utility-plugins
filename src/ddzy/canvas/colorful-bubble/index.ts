@@ -1,10 +1,3 @@
-/**
- * @name canvas-colorful-bulle
- * @description 五彩气泡背景插件
- * @author ddzy
- * @version 最近更新于19/4/29
- */
-
 import utilityDOM from '../../utility/dom/index';
 import { Bubble } from './bubble/bubble';
 

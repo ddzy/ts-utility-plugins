@@ -1,10 +1,3 @@
-/**
- * @author: ddzy
- * @description: DOM相关工具方法
- * @since: 2019/4/28
- */
-
-
 export interface IStaticPairs {
   [key: string]: any;
 };
