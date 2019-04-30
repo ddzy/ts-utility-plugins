@@ -266,7 +266,7 @@ export type ITabMouseEffect = 'mouseenter' | 'click';
 
 ### 9.1 工具详解
 
-内容过多, 已迁移至[此处](./src/utility/README.md)展示.
+内容过多, 已迁移至[此处](./utility/README.md)展示.
 
 ## 十、其它
 
