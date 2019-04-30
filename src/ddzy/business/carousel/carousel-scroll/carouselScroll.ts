@@ -2,9 +2,9 @@
  * 滑动轮播
  */
 
-import { utilityDOM } from '../../../utility/index';
+import utilityDOM from '../../../utility/dom/index';
 
-import { ICarouselConfigProps } from '../index.new';
+import { ICarouselConfigProps } from '..';
 
 
 export class Scroll {

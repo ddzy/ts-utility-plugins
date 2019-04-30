@@ -1,6 +1,8 @@
 import utilityDOM from './dom/index';
 
 
-export {
+const utility = {
   utilityDOM,
 };
+
+export default utility;
