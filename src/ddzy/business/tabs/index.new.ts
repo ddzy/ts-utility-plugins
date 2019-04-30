@@ -5,7 +5,7 @@
  * @since: 最近修改于2019/4/28
  */
 
-import utilityDOM from '../../utility/dom/index';
+import { utilityDOM } from '../../utility/index';
 
 
 export interface ITabConfigProps {

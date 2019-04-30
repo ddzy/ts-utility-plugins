@@ -4,7 +4,7 @@
  * @since 最近修改于19/4/29
  */
 
-import utilityDOM from '../../../utility/dom/index';
+import { utilityDOM } from '../../../utility/index';
 
 
 export interface IBubbleProps {

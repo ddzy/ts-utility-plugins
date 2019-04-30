@@ -1,4 +1,4 @@
-import utilityDOM from './utility/dom/index';
+// import utilityDOM from './utility/dom/index';
 
 // utilityDOM.traversalDOMWithBFS(
 //   document.getElementById('app') as HTMLDivElement,
@@ -21,9 +21,9 @@ import utilityDOM from './utility/dom/index';
 //   },
 // );
 
-utilityDOM.traversalDOMWithTreeWalker(
-  document.querySelector('#app') as HTMLDivElement,
-  (node) => {
-    console.log(node);
-  },
-);
+// utilityDOM.traversalDOMWithTreeWalker(
+//   document.querySelector('#app') as HTMLDivElement,
+//   (node) => {
+//     console.log(node);
+//   },
+// );

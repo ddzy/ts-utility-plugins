@@ -5,7 +5,7 @@
  * @version 最近更新于19/4/29
  */
 
-import utilityDOM from '../../utility/dom/index';
+import { utilityDOM } from '../../utility/index';
 import { Bubble } from './bubble/bubble';
 
 
