@@ -41,3 +41,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 
 - 重构完成`canvas/colorful-bubble`🐓
+
+## [2019-4-30]
+
+### Added
+
+- 增加`bucket`, 对应github用户名, 方便贡献代码
+
+### Changed
+
+- 重构整个项目目录, 移至对应`bucket`下方
