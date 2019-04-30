@@ -1,10 +1,3 @@
-/**
- * @name: business-carousel
- * @description 业务轮播插件
- * @author: yyg
- * @constant 最近修改于 2019/4/28
- */
-
 import { Scroll } from './carousel-scroll/carouselScroll';
 import { Fade } from './carousel-fade/carouselFade';
 
