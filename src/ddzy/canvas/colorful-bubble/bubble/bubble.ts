@@ -4,7 +4,7 @@
  * @since 最近修改于19/4/29
  */
 
-import { utilityDOM } from '../../../utility/index';
+import utilityNumber from '../../../utility/number/index';
 
 
 export interface IBubbleProps {
@@ -79,23 +79,23 @@ export class Bubble {
     this.cvsHeight = cvsHeight;
 
     this.centerPoint = {
-      x: utilityDOM.getAnyRandom(
+      x: utilityNumber.getAnyRandom(
         0,
         cvsWidth,
       ),
-      y: utilityDOM.getAnyRandom(
+      y: utilityNumber.getAnyRandom(
         0,
         cvsHeight,
       ),
     };
     this.distance = {
-      x: utilityDOM.getAnyRandom(-bubbleSpeed, bubbleSpeed),
-      y: utilityDOM.getAnyRandom(-bubbleSpeed, bubbleSpeed),
+      x: utilityNumber.getAnyRandom(-bubbleSpeed, bubbleSpeed),
+      y: utilityNumber.getAnyRandom(-bubbleSpeed, bubbleSpeed),
     };
     this.color = bubbleColorArr[
-      utilityDOM.getFullRandom(0, bubbleColorArr.length)
+      utilityNumber.getFullRandom(0, bubbleColorArr.length)
     ];
-    this.radius = utilityDOM.getAnyRandom(
+    this.radius = utilityNumber.getAnyRandom(
       bubbleScaleRange && bubbleScaleRange.min,
       bubbleScaleRange && bubbleScaleRange.max,
     );
@@ -123,7 +123,7 @@ export class Bubble {
       centerPoint.y,
       radius,
       0,
-      utilityDOM.getRadian(360),
+      utilityNumber.getRadian(360),
     );
     pen.fill();
     pen.closePath();
