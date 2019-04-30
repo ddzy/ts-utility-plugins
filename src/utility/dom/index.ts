@@ -27,6 +27,7 @@ export interface IUtilityDOMProps {
   traversalDOMWithBFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
   traversalDOMWithDFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
   traversalDOMWithNodeIterator(container: HTMLElement, callback: (node: HTMLElement) => void): void;
+  traversalDOMWithTreeWalker(container: HTMLElement, callback: (node: HTMLElement) => void): void;
 };
 
 
@@ -184,6 +185,27 @@ const utilityDOM: IUtilityDOMProps = {
 
     while ((currentNode = nodeIterator.nextNode())) {
       callback && callback(currentNode as HTMLElement);
+    }
+  },
+
+  /**
+   * TreeWalker遍历指定DOM节点
+   * @param container 遍历的DOM容器
+   * @param callback 执行回调
+   */
+  traversalDOMWithTreeWalker(container, callback) {
+    if (!this.isDOM(container)) {
+      throw new TypeError('Require a DOM element');
+    }
+
+    const treeWalker: TreeWalker = document.createTreeWalker(
+      container,
+      NodeFilter.SHOW_ELEMENT,
+    );
+    let currentNode: Node | null = null;
+
+    while (( currentNode = treeWalker.nextNode() )) {
+      callback && callback(( currentNode as HTMLElement ));
     }
   },
 };

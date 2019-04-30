@@ -14,7 +14,14 @@ import utilityDOM from './utility/dom/index';
 //   },
 // );
 
-utilityDOM.traversalDOMWithNodeIterator(
+// utilityDOM.traversalDOMWithNodeIterator(
+//   document.querySelector('#app') as HTMLDivElement,
+//   (node) => {
+//     console.log(node);
+//   },
+// );
+
+utilityDOM.traversalDOMWithTreeWalker(
   document.querySelector('#app') as HTMLDivElement,
   (node) => {
     console.log(node);
