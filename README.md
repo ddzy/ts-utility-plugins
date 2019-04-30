@@ -23,6 +23,8 @@
 - [x] Business
   - [x] [business-carousel](#七business-carousel)
   - [x] [business-tab](#八business-tab)
+- [x] Utility
+  - [ ] [utility-dom](#九utility-dom)
 
 ## 四、canvas-stars-line
 
@@ -252,7 +254,21 @@ export type ITabMouseEffect = 'mouseenter' | 'click';
 | onTabClick       | ()=>void          | false   | tab被点击的回调   |
 | onChange         | (activeKey)=>void | false   | 切换面板的回调    |
 
-## 九、其它
+## 九、utility-dom
+
+> 一系列与`DOM`有关的工具函数, [项目目录](https://github.com/ddzy/ts-utility-plugins/tree/master/src/utility/dom).
+
+#### 9.1 完整接口
+
+> PS: 暂时未提取`*.d.ts`
+
+所有方法的完整接口, [戳这里](https://github.com/ddzy/ts-utility-plugins/blob/master/src/utility/dom/index.ts)
+
+#### 9.1 工具详解
+
+内容过多, 已迁移至[此处](./src/utility/README.md)展示.
+
+## 十、其它
 
 持续更新中...
 
