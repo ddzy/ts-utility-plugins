@@ -31,7 +31,7 @@ export interface IUtilityDOMProps {
 
 
 const utilityDOM: IUtilityDOMProps = {
-  getEle(sign: string,) {
+  getEle(sign,) {
     return document.querySelector(sign);
   },
 
@@ -166,6 +166,11 @@ const utilityDOM: IUtilityDOMProps = {
     }
   },
 
+  /**
+   * NodeIterator遍历指定DOM节点
+   * @param container 遍历的DOM容器
+   * @param callback 执行回调
+   */
   traversalDOMWithNodeIterator(container, callback) {
     if (!this.isDOM(container)) {
       throw new TypeError('Require a DOM element');
