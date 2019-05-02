@@ -51,3 +51,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 
 - 重构整个项目目录, 移至对应`bucket`下方
+
+## [2019-5-2]
+
+### Added
+
+- 初步构建`dist`
+- 添加`script`引入的支持
