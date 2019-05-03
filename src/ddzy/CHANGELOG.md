@@ -18,3 +18,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 
 - 重构完成`canvas/colorful-bubble`🐓
+
+## [2019-5-3]
+
+### Changed
+
+- 重构完成`canvas/jumping-characters`
