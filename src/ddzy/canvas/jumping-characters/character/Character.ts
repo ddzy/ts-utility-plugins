@@ -79,12 +79,8 @@ export class Character {
       mousePoint,
     } = this;
 
-    // this.opacity = this.opacity <= 0
-    //   ? 0
-    //   : this.opacity;
     if (this.opacity <= 0) {
       this.opacity = 0;
-      // clearInterval(timer);
       this.handleCancelTimer();
     }
 
