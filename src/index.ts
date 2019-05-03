@@ -1,4 +1,4 @@
-import {JumpingCharacters} from './ddzy/canvas/jumping-characters/index.new';
+import {JumpingCharacters} from './ddzy/canvas/jumping-characters';
 
 new JumpingCharacters({
   container: '#cvs',

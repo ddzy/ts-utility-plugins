@@ -1,29 +1,26 @@
-/**
- * @name: canvas-jumping-characters
- * @description 字节跳动, 博客背景插件
- * @author: yyg
- * @version 1.0.8
- */
+import utilityDOM from '../../utility/dom/index';
+import utilityNumber from '../../utility/number/index';
+import { Character } from './character/Character';
 
 
-/**
- * @param ele 画布元素
- * @param cvsWidth 画布宽
- * @param cvsHeight 画布高
- * @param cvsBgColor 画布背景
- * @param text   string | string[] 文字
- * @param textColor string | string[] 文字颜色
- * @param textSize 文字大小
- * @param safeDistance 安全距离(移动多远消失)
- * @param initialOpacity 初始透明度
- * @param speed 移动速度
- */
+export interface IJumpingCharactersProps {
+  container: string;
+  cvsWidth?: number;
+  cvsHeight?: number;
+  cvsBgColor?: string;
+  text?: string[];
+  textColor?: string[];
+  textSize?: number;
+  safeDistance?: number;
+  initialOpacity?: 1;
+  speed?: number;
+};
 
 
-namespace JumpingCharacters {
+export class JumpingCharacters {
 
-  export const yyg_settings: IProps.IRenderProps = {
-    ele: '',
+  public static readonly defaultConfig = {
+    container: 'body',
     cvsWidth: 500,
     cvsHeight: 500,
     cvsBgColor: '#000',
@@ -41,290 +38,177 @@ namespace JumpingCharacters {
     safeDistance: 20,
     initialOpacity: 1,
     speed: 1,
+  };
+
+  public constructor(
+    config: IJumpingCharactersProps,
+  ) {
+    this.__init__(config);
   }
 
-  const mousePoint: {
+  private el: HTMLCanvasElement = (
+    document.createElement('canvas')
+  );
+  private pen = (
+    this.el.getContext('2d') as CanvasRenderingContext2D
+  );
+  private readonly mousePoint: {
     x: number,
     y: number,
   } = {
     x: 0,
     y: 0,
+  };
+  private readonly saveCharactersArr: Character[] = [];
+
+  private timer: any = 0;
+
+
+  private __init__(
+    config: IJumpingCharactersProps,
+  ): void {
+    this._initConfig(config);
+    this._initCanvas();
+    this.render();
   }
-  const saveCharactersArr: JC[] = []
-  let yyg_pen: any = null;
-  let timer: any;
-
-
-  export function render(
-    _props: IProps.IRenderProps,
-  ) {
-    _aidedInitSettings(_props);
-    _aidedInitJC();
-
-    return JumpingCharacters;
-  }
-
 
   /**
-   * 初始化自定义配置辅助函数
-   * @param options 配置项
+   * 初始化配置项
+   * @param config 传入配置
    */
-  function _aidedInitSettings(
-    options: any,
-  ) {
-    for (const key in options) {
-      if (options.hasOwnProperty(key)) {
-        const element = options[key];
-
-        key === 'ele'
-          ? _aidedInitCvs(element)
-          : Reflect.set(yyg_settings, key, element);
-
-        _aidedInitCvsSelfConfiguration();
+  private _initConfig(
+    config: IJumpingCharactersProps,
+  ): void {
+    for (const key in config) {
+      if (config.hasOwnProperty(key)) {
+        const value = Reflect.get(config, key);
+        Reflect.set(JumpingCharacters.defaultConfig, key, value);
       }
     }
   }
 
-
   /**
-   * 初始化canvas
-   * @param ele canvas元素
+   * 初始化canvas相关
    */
-  function _aidedInitCvs(
-    ele: string
-  ): void {
-    const el = Utils.getEle(ele);
+  private _initCanvas(): void {
+    this._initCanvasElAndPen();
+    this._initCanvasDefaultStyle();
+  }
 
-    if (el) {
-      if (el.localName === 'canvas') {
-        const e = el as HTMLCanvasElement;
+  private _initCanvasElAndPen(): void {
+    const {
+      container,
+    } = JumpingCharacters.defaultConfig;
 
-        // set the initial canvas context
-        Reflect.set(yyg_settings, 'ele', e);
-        yyg_pen = e.getContext('2d');
+    if ( container ) {
+      let oContainer = utilityDOM.getEle(container);
+
+      if ( oContainer && oContainer.nodeType === 1 && oContainer.localName === 'canvas' ) {
+        this.el = (oContainer as HTMLCanvasElement);
+        this.pen = (
+          this.el.getContext('2d') as CanvasRenderingContext2D
+        );
       } else {
-        throw new Error('Please enter the HTMLCanvasElement!');
+        throw new Error('Please enter an valid container...')
       }
     } else {
-      throw new Error('Please enter an exist HTMLElement!');
+      throw new TypeError('Please enter an valid container...')
     }
   }
 
-
-  /**
-   * 初始化 canvas相关属性,样式配置
-   */
-  function _aidedInitCvsSelfConfiguration() {
+  private _initCanvasDefaultStyle(): void {
+    const { el } = this;
     const {
-      ele,
-      cvsWidth,
-      cvsHeight,
       cvsBgColor,
-    } = yyg_settings as any;
+      cvsWidth,
+      cvsHeight,
+    } = JumpingCharacters.defaultConfig;
 
-    Utils
-      .setCss(ele, {
-        'background-color': cvsBgColor,
-      })
-      .setAttr(ele, {
-        width: cvsWidth,
-        height: cvsHeight,
-      })
+    utilityDOM.setCss(el, {
+      display: 'block',
+      'background-color': cvsBgColor,
+    });
+    utilityDOM.setAttr(el, {
+      width: cvsWidth,
+      height: cvsHeight,
+    });
   }
 
-
-  /**
-   * 初始化 主类 辅助函数
-   */
-  function _aidedInitJC() {
-    const { ele } = yyg_settings as any;
-
-    ele.addEventListener('click', (e: MouseEvent) => {
-      mousePoint.x = e.clientX;
-      mousePoint.y = e.clientY;
-
-      const jc = new JC();
-      saveCharactersArr[0] = jc;
-
-      _aidedTick();
-    }, false);
-  }
-
-
-  function _aidedTick() {
+  private aidedHandleTick(): void {
+    const { pen, saveCharactersArr } = this;
     const {
       cvsWidth,
       cvsHeight,
-    } = yyg_settings;
+    } = JumpingCharacters.defaultConfig;
 
-    clearInterval(timer);
+    pen.clearRect(0, 0, cvsWidth, cvsHeight);
 
-    timer = setInterval(() => {
-      yyg_pen.clearRect(0, 0, cvsWidth, cvsHeight);
+    for (const character of saveCharactersArr) {
+      character.handleDraw();
+      character.handleMove();
+    }
+  }
 
-      for (const jc of saveCharactersArr) {
-        jc.move();
-        jc.draw();
-      }
+  private aidedHandleCancelTimer(): void {
+    clearInterval(this.timer);
+  }
 
+  private handleCreateCharacter(): void {
+    const {
+      pen,
+      saveCharactersArr,
+      mousePoint,
+      aidedHandleCancelTimer,
+    } = this;
+    const { defaultConfig } = JumpingCharacters
+    const {
+      text,
+      textColor,
+    } = defaultConfig;
+
+    const character = new Character({
+      ...defaultConfig,
+      text: text[utilityNumber.getFullRandom(
+        0,
+        text.length,
+      )],
+      textColor: textColor[utilityNumber.getFullRandom(
+        0,
+        textColor.length,
+      )],
+      pen,
+      mousePoint,
+      handleCancelTimer: aidedHandleCancelTimer,
+    });
+    saveCharactersArr[0] = character;
+  }
+
+  /**
+   * 主运动函数
+   */
+  private handleAnimateCharacter(): void {
+    this.aidedHandleCancelTimer();
+
+    this.timer = setInterval(() => {
+      this.aidedHandleTick();
     }, 1000/60);
   }
 
+  private render(): void {
+    const {
+      el,
+      mousePoint,
+    } = this;
 
-  namespace IProps {
-    export interface IRenderProps {
-      ele: string,
-      cvsWidth?: number,
-      cvsHeight?: number,
-      cvsBgColor?: string,
-      text?: string[] | string,
-      textColor?: string[] | string,
-      textSize?: number,
-      safeDistance?: number,
-      initialOpacity?: number,
-      speed?: number,
-    }
-  }
+    el.addEventListener('click', (e: MouseEvent) => {
+      mousePoint.x = e.clientX;
+      mousePoint.y = e.clientY;
 
+      this.handleCreateCharacter();
 
-  namespace Utils {
-    export function getEle(
-      el: string,
-    ): HTMLElement | null {
-      return document.querySelector(el);
-    }
-
-    export function setCss(
-      el: HTMLElement,
-      options: any,
-    ) {
-      for (const key in options) {
-        if (options.hasOwnProperty(key)) {
-          const element = options[key];
-          el.style.cssText += `${key}: ${element};`;
-        }
-      }
-
-      return Utils;
-    }
-
-    export function setAttr(
-      el: HTMLElement,
-      options: any,
-    ) {
-      for (const key in options) {
-        if (options.hasOwnProperty(key)) {
-          const element = options[key];
-          el.setAttribute(key, element);
-        }
-      }
-
-      return Utils;
-    }
-
-    export function isArray(
-      el: any,
-    ): boolean {
-      return el && Array.isArray(el);
-    }
-
-    export function getRandomWithPositive(
-      min: number,
-      max: number,
-    ): number {
-      return ~~(Math.random() * (max - min) + min);
-    }
-  }
-
-
-  class JC {
-    private opacity: number;
-    private textSize: number;
-    private readonly textColor: string;
-    private readonly text: string;
-    private readonly safeDistance: number;
-    private readonly centerPoint: {
-      x: number,
-      y: number,
-    };
-    private readonly speed: number;
-
-    public constructor() {
-      const {
-        initialOpacity,
-        textSize,
-        textColor,
-        safeDistance,
-        text,
-        speed,
-      } = yyg_settings as any;
-
-      this.opacity = initialOpacity;
-      this.textSize = textSize;
-      this.text = Utils.isArray(text)
-        ? text[Utils.getRandomWithPositive(0, text.length)]
-        : text;
-      this.textColor = Utils.isArray(textColor)
-        ? textColor[Utils.getRandomWithPositive(
-            0,
-            textColor.length,
-          )]
-        : textColor;
-      this.safeDistance = safeDistance;
-      this.centerPoint = mousePoint;
-      this.speed = speed;
-
-      this._init();
-    }
-
-    public _init(): void {
-      this.draw();
-    }
-
-    public draw(): void {
-      const {
-        text,
-        textColor,
-        textSize,
-        centerPoint,
-      } = this;
-
-      // this.opacity = this.opacity <= 0
-      //   ? 0
-      //   : this.opacity;
-      if (this.opacity <= 0) {
-        this.opacity = 0;
-        clearInterval(timer);
-      }
-
-      yyg_pen.save();
-      yyg_pen.beginPath();
-      yyg_pen.fillStyle = textColor;
-      yyg_pen.font = `${textSize}px 'Fira Code Regular'`;
-      yyg_pen.textAlign = 'center';
-      yyg_pen.textBaseLine = 'middle';
-      yyg_pen.globalAlpha = this.opacity;
-      yyg_pen.fillText(
-        text,
-        centerPoint.x,
-        centerPoint.y,
-      );
-
-      yyg_pen.closePath();
-      yyg_pen.restore();
-    }
-
-    public move(): void {
-      const {
-        centerPoint,
-      } = this;
-
-      centerPoint.y -= this.speed;
-      this.opacity -= .01;
-    }
+      // TODO: 使用requestAnimationFrame重构
+      this.handleAnimateCharacter();
+    }, false);
   }
 
 }
-
-
-export default JumpingCharacters;
