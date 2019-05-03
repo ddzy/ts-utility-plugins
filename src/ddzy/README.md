@@ -9,6 +9,9 @@
 部分插件已投入使用:
 
 - [canvas-colorful-bubble](https://blog.yyge.top/)
+- [canvas-jumping-characters](https://blog.yyge.top/)
+
+**TODO**: 后续会考虑放置到`GitHub-pages`展示
 
 ## 二、用法
 
@@ -108,34 +111,34 @@ interface IStaticColorfulBubbleScaleRangeParams {
 
 ## 六、canvas-jumping-characters
 
-> 点击产生文字,并逐渐消失, 可用作个人博客背景, 增强用户体验.
+> 点击产生文字,并逐渐消失, 可用作个人博客背景.
 
-1. 采用默认配置项
+### 6.1 基本用法
 
 ```ts
-JumpingCharacters.render({
-  ele: HTMLCanvasElement,
+new JumpingCharacters({
+  container: '#app',
 });
 ```
 
-2. 自定义配置项
+### 6.2 可配置项
 
-> (Ps: 传入数组则随机取值)
+| Key            | Type     | Require | Description                  |
+| -------------- | -------- | ------- | ---------------------------- |
+| container      | string   | true    | 挂载的canvas节点             |
+| cvsWidth       | number   | false   | 画布的初始宽                 |
+| cvsHeight      | number   | false   | 画布的初始高                 |
+| cvsBgColor     | string   | false   | 画布背景色                   |
+| text           | string[] | false   | 产生的文字                   |
+| textColor      | string[] | false   | 文字颜色                     |
+| textSize       | number   | false   | 文字大小                     |
+| safeDistance   | number   | false   | 安全距离(文字移动多远后消失) |
+| initialOpacity | number   | false   | 初始透明度                   |
+| speed          | number   | false   | 移动速率                     |
 
-```ts
-JumpingCharacters.render({
-  ele:            HTMLCanvasElement,
-  cvsWidth:       number                // 画布宽
-  cvsHeight:      number                // 画布高
-  cvsBgColor:     string                // 画布背景
-  text:           string | string[]     // 产出文字
-  textColor:      string | string[]     // 文字颜色
-  textSize:       number                // 文字大小
-  safeDistance:   number                // 安全距离(文字移动多远后消失)
-  initialOpacity: number                // 初始透明度
-  speed:          number                // 移动速率
-});
-```
+### 6.3 注意事项
+
+待补充...
 
 ## 七、business-carousel
 
