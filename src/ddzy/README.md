@@ -1,18 +1,20 @@
 # ts-utility-plugins/ddzy
 
-封装的插件库, 采用纯原生ts构建
+一些有用的插件库集合
 
 ## 一、说明
 
 > 插件库包括 `canvas特效`插件, `业务`插件、`工具组件`等等...
 
-> `README`后续会以`github page`形式展示
+部分插件已投入使用:
+
+- [canvas-colorful-bubble](https://blog.yyge.top/)
 
 ## 二、用法
 
 > **PS**: 重构代码中, 暂未实现对`npm引入`的支持
 
-![使用流程图](https://github.com/ddzy/many-universal-image/blob/master/images/business/s1.PNG)
+详细用法, 参考[这里](https://github.com/ddzy/ts-utility-plugins#usage)
 
 ## 三、目录
 
@@ -61,7 +63,7 @@ StarsLine
 
 ## 五、canvas-colorful-bubble
 
-> 构建的canvas气泡插件, 可用作个人博客背景(本人已用上👌).
+> 构建的canvas气泡插件, 可用作个人博客背景(本人已用上👌, [点这里](https://blog.yyge.top/)查看).
 
 ### 5.1 基本用法
 
@@ -254,15 +256,9 @@ export type ITabMouseEffect = 'mouseenter' | 'click';
 | onTabClick       | ()=>void          | false   | tab被点击的回调   |
 | onChange         | (activeKey)=>void | false   | 切换面板的回调    |
 
-## 九、utility-dom
+## 九、utility
 
-一系列与`DOM`有关的工具函数, [项目目录](https://github.com/ddzy/ts-utility-plugins/tree/master/src/utility/dom).
-
-### 9.1 完整接口
-
-> 暂时未提取`*.d.ts`
-
-所有方法的完整接口, [戳这里](https://github.com/ddzy/ts-utility-plugins/blob/master/src/utility/dom/index.ts)
+一系列工具函数, [项目目录](https://github.com/ddzy/ts-utility-plugins/tree/master/src/ddzy/utility).
 
 ### 9.1 工具详解
 

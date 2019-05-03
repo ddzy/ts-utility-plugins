@@ -1,6 +1,6 @@
 # ts-utility-plugins
 
-封装的插件库, 采用纯原生ts构建
+好玩、有趣、优雅的插件库
 
 ## Desc
 
