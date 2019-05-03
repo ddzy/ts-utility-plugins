@@ -1,5 +1,5 @@
 /**
- * @name: canvas-jumping-characters 
+ * @name: canvas-jumping-characters
  * @description 字节跳动, 博客背景插件
  * @author: yyg
  * @version 1.0.8
@@ -54,7 +54,7 @@ namespace JumpingCharacters {
   let yyg_pen: any = null;
   let timer: any;
 
-  
+
   export function render(
     _props: IProps.IRenderProps,
   ) {
@@ -75,11 +75,11 @@ namespace JumpingCharacters {
     for (const key in options) {
       if (options.hasOwnProperty(key)) {
         const element = options[key];
-        
+
         key === 'ele'
           ? _aidedInitCvs(element)
           : Reflect.set(yyg_settings, key, element);
-        
+
         _aidedInitCvsSelfConfiguration();
       }
     }
@@ -145,7 +145,7 @@ namespace JumpingCharacters {
 
       const jc = new JC();
       saveCharactersArr[0] = jc;
-      
+
       _aidedTick();
     }, false);
   }
@@ -296,7 +296,7 @@ namespace JumpingCharacters {
         this.opacity = 0;
         clearInterval(timer);
       }
-      
+
       yyg_pen.save();
       yyg_pen.beginPath();
       yyg_pen.fillStyle = textColor;
@@ -325,3 +325,6 @@ namespace JumpingCharacters {
   }
 
 }
+
+
+export default JumpingCharacters;
