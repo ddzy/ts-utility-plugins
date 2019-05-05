@@ -8,4 +8,9 @@ import {
 
 new StarsLine({
   container: '#cvs',
+  cvsBgColor: '#fff',
+  cvsWidth: window.innerWidth,
+  cvsHeight: window.innerHeight,
+  ballNum: 200,
+  safeDistance: 80,
 });

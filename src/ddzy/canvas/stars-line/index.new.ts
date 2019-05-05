@@ -8,7 +8,7 @@ export interface IStarsLineProps {
   cvsWidth?: number;
   cvsHeight?: number;
   cvsBgColor?: string;
-  ballNum?: 50;
+  ballNum?: number;
   ballRadius?: IStaticStarsLineBallRadiusParams;
   lineColor?: string;
   lineWidth?: number;
@@ -32,13 +32,13 @@ export class StarsLine {
     ballNum: 50,
     ballRadius: {
       min: 1,
-      max: 3,
+      max: 2,
     },
     allowMouse: false,
-    lineColor: ``,
+    lineColor: '',
     lineWidth: 1,
     ballSpeed: 1,
-    ballColor: '#1890ff',
+    ballColor: '',
     safeDistance: 50,
   };
 
@@ -146,7 +146,9 @@ export class StarsLine {
 
     const ball = new Ball({
       pen,
-      color: ballColor,
+      color: ballColor
+        ? ballColor
+        : `rgba(24,144,255, ${utilityNumber.getAnyRandom(0, 1)})`,
       radius: utilityNumber.getAnyRandom(
         ballRadius.min,
         ballRadius.max,
@@ -157,7 +159,10 @@ export class StarsLine {
       cvsHeight,
       ballArr,
       safeDistance,
-      lineColor: lineColor ? lineColor : `rgba(24,144,255, ${utilityNumber.getAnyRandom(0, 1)})`,
+      lineColor: lineColor
+        ? lineColor
+        // : `rgba(24,144,255, ${utilityNumber.getAnyRandom(0, 1)})`,
+        : `rgba(238, 238, 238, ${utilityNumber.getAnyRandom(0, 1)})`,
       lineWidth,
     });
 

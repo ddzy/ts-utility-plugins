@@ -85,11 +85,12 @@ export class Ball {
     const {
       pen,
       mousePoint,
+      color,
     } = this;
 
     pen.save();
     pen.beginPath();
-    pen.fillStyle = this.color;
+    pen.fillStyle = color;
     pen.arc(
       mousePoint.x,
       mousePoint.y,
