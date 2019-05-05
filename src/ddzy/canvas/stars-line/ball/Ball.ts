@@ -1,5 +1,7 @@
 import utilityDOM from "../../../utility/dom";
 import utilityNumber from "../../../utility/number";
+import { Line } from '../line/Line';
+
 
 export interface IBallProps {
   cvsWidth: number;
@@ -14,6 +16,8 @@ export interface IBallProps {
   };
   ballArr: Ball[];
   safeDistance: number;
+  lineColor: string;
+  lineWidth: number;
 };
 
 
@@ -29,6 +33,8 @@ export class Ball {
     x: number,
     y: number,
   }
+  private readonly lineColor: string;
+  private readonly lineWidth: number;
   private readonly distance: {
     x: number,
     y: number,
@@ -44,22 +50,27 @@ export class Ball {
       color,
       radius,
       speed,
-      mousePoint,
+      // mousePoint,
       cvsWidth,
       cvsHeight,
       ballArr,
       safeDistance,
+      lineWidth,
+      lineColor,
     } = config;
 
     this.pen = pen;
     this.color = color;
     this.radius = radius;
     this.speed = speed;
+    // TODO: 重构鼠标移动连线
     // this.mousePoint = mousePoint;
     this.mousePoint = {
       x: utilityNumber.getAnyRandom(0, cvsWidth),
       y: utilityNumber.getAnyRandom(0, cvsHeight),
     };
+    this.lineWidth = lineWidth;
+    this.lineColor = lineColor;
     this.distance = {
       x: utilityDOM.getAnyRandom(-this.speed, this.speed),
       y: utilityDOM.getAnyRandom(-this.speed, this.speed),
@@ -119,31 +130,36 @@ export class Ball {
     const {
       ballArr,
       safeDistance,
+      pen,
+      lineColor,
+      lineWidth,
     } = this;
 
-    for (const innerItem of ballArr) {
-      if(
-        outerItem !== innerItem && Math.sqrt(
-          Math.pow((
-            outerItem.mousePoint.x - innerItem.mousePoint.x),
-            2) + Math.pow((
-              outerItem.mousePoint.y - innerItem.mousePoint.y),
-            2)
-        ) < safeDistance
-      ) {
-        // new Line({
-        //   lineColor: yyg_lineColor,
-        //   lineWidth: yyg_lineWidth,
-        //   startPoint: {
-        //     x: outerItem.mousePoint.x,
-        //     y: outerItem.mousePoint.y,
-        //   },
-        //   endPoint: {
-        //     x: innerItem.mousePoint.x,
-        //     y: innerItem.mousePoint.y,
-        //   },
-        //   opacity: .5,
-        // });
+    if (outerItem) {
+      for (const innerItem of ballArr) {
+        if(
+          outerItem !== innerItem && Math.sqrt(
+            Math.pow((
+              outerItem.mousePoint.x - innerItem.mousePoint.x),
+              2) + Math.pow((
+                outerItem.mousePoint.y - innerItem.mousePoint.y),
+              2)
+          ) < safeDistance
+        ) {
+          new Line({
+            lineColor,
+            lineWidth,
+            startPoint: {
+              x: outerItem.mousePoint.x,
+              y: outerItem.mousePoint.y,
+            },
+            endPoint: {
+              x: innerItem.mousePoint.x,
+              y: innerItem.mousePoint.y,
+            },
+            pen,
+          });
+        }
       }
     }
   }

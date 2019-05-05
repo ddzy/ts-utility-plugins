@@ -35,11 +35,11 @@ export class StarsLine {
       max: 3,
     },
     allowMouse: false,
-    lineColor: '#1890ff',
+    lineColor: ``,
     lineWidth: 1,
     ballSpeed: 1,
     ballColor: '#1890ff',
-    safeDistance: 90,
+    safeDistance: 50,
   };
 
   public constructor(config: IStarsLineProps) {
@@ -140,6 +140,8 @@ export class StarsLine {
       ballRadius,
       ballSpeed,
       safeDistance,
+      lineColor,
+      lineWidth,
     } = StarsLine.defaultConfig;
 
     const ball = new Ball({
@@ -155,6 +157,8 @@ export class StarsLine {
       cvsHeight,
       ballArr,
       safeDistance,
+      lineColor: lineColor ? lineColor : `rgba(24,144,255, ${utilityNumber.getAnyRandom(0, 1)})`,
+      lineWidth,
     });
 
     this.ballArr.push(ball);
@@ -201,7 +205,7 @@ export class StarsLine {
       ball.move();
       ball.draw();
       ball.drawLine(
-        !flag ? ball : { mousePoint },
+        !flag && ball,
       );
     }
 
