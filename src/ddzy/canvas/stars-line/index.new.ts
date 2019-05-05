@@ -15,6 +15,7 @@ export interface IStarsLineProps {
   ballSpeed?: number;
   ballColor?: string;
   safeDistance?: number;
+  allowMouse?: boolean;
 };
 export interface IStaticStarsLineBallRadiusParams {
   min: number,
@@ -130,7 +131,6 @@ export class StarsLine {
   private aidedCreateBall(): void {
     const {
       pen,
-      mousePoint,
       ballArr,
     } = this;
     const {
@@ -154,16 +154,18 @@ export class StarsLine {
         ballRadius.max,
       ),
       speed: ballSpeed,
-      mousePoint,
       cvsWidth,
       cvsHeight,
       ballArr,
       safeDistance,
       lineColor: lineColor
         ? lineColor
-        // : `rgba(24,144,255, ${utilityNumber.getAnyRandom(0, 1)})`,
         : `rgba(238, 238, 238, ${utilityNumber.getAnyRandom(0, 1)})`,
       lineWidth,
+      centerPoint: {
+        x: utilityNumber.getAnyRandom(0, cvsWidth),
+        y: utilityNumber.getAnyRandom(0, cvsHeight),
+      },
     });
 
     this.ballArr.push(ball);
@@ -182,7 +184,7 @@ export class StarsLine {
       allowMouse,
     } = StarsLine.defaultConfig;
 
-    // 鼠标交互
+    // * 启用鼠标交互?
     allowMouse && el.addEventListener('mousemove', (e: MouseEvent) => {
       this.flag = true;
       mousePoint.x = e.clientX;
@@ -197,7 +199,6 @@ export class StarsLine {
     const {
       flag,
       ballArr,
-      mousePoint,
     } = this;
     const {
       cvsWidth,

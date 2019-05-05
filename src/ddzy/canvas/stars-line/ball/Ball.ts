@@ -10,14 +10,14 @@ export interface IBallProps {
   color: string;
   radius: number;
   speed: number;
-  mousePoint: {
-    x: number,
-    y: number,
-  };
   ballArr: Ball[];
   safeDistance: number;
   lineColor: string;
   lineWidth: number;
+  centerPoint: {
+    x: number,
+    y: number,
+  };
 };
 
 
@@ -28,13 +28,16 @@ export class Ball {
   private readonly pen: CanvasRenderingContext2D;
   private readonly color: string;
   private readonly radius: number;
+  // 球移动步数
   private readonly speed: number;
-  private readonly mousePoint: {
+  // 球中心坐标
+  private readonly centerPoint: {
     x: number,
     y: number,
   }
   private readonly lineColor: string;
   private readonly lineWidth: number;
+  // 球移动速率
   private readonly distance: {
     x: number,
     y: number,
@@ -50,25 +53,20 @@ export class Ball {
       color,
       radius,
       speed,
-      // mousePoint,
       cvsWidth,
       cvsHeight,
       ballArr,
       safeDistance,
       lineWidth,
       lineColor,
+      centerPoint,
     } = config;
 
     this.pen = pen;
     this.color = color;
     this.radius = radius;
     this.speed = speed;
-    // TODO: 重构鼠标移动连线
-    // this.mousePoint = mousePoint;
-    this.mousePoint = {
-      x: utilityNumber.getAnyRandom(0, cvsWidth),
-      y: utilityNumber.getAnyRandom(0, cvsHeight),
-    };
+    this.centerPoint = centerPoint;
     this.lineWidth = lineWidth;
     this.lineColor = lineColor;
     this.distance = {
@@ -84,17 +82,18 @@ export class Ball {
   public draw(): void {
     const {
       pen,
-      mousePoint,
+      centerPoint,
       color,
+      radius,
     } = this;
 
     pen.save();
     pen.beginPath();
     pen.fillStyle = color;
     pen.arc(
-      mousePoint.x,
-      mousePoint.y,
-      this.radius,
+      centerPoint.x,
+      centerPoint.y,
+      radius,
       0,
       utilityDOM.getRadian(360)
     );
@@ -106,27 +105,27 @@ export class Ball {
   public move(): void {
     const {
       distance,
-      mousePoint,
+      centerPoint,
       cvsWidth,
       cvsHeight,
     } = this;
 
-    mousePoint.x += distance.x;
-    mousePoint.y += distance.y;
+    centerPoint.x += distance.x;
+    centerPoint.y += distance.y;
 
     // 碰撞检测
-    distance.x = (mousePoint.x > cvsWidth
-      || mousePoint.x < 0)
+    distance.x = (centerPoint.x > cvsWidth
+      || centerPoint.x < 0)
       ? -distance.x
       : distance.x;
-      distance.y = (mousePoint.y > cvsHeight
-      || mousePoint.y < 0)
+      distance.y = (centerPoint.y > cvsHeight
+      || centerPoint.y < 0)
       ? -distance.y
       : distance.y;
   }
 
   public drawLine(
-    outerItem: any,
+    outerItem: Ball | false,
   ): void {
     const {
       ballArr,
@@ -141,9 +140,9 @@ export class Ball {
         if(
           outerItem !== innerItem && Math.sqrt(
             Math.pow((
-              outerItem.mousePoint.x - innerItem.mousePoint.x),
+              outerItem.centerPoint.x - innerItem.centerPoint.x),
               2) + Math.pow((
-                outerItem.mousePoint.y - innerItem.mousePoint.y),
+                outerItem.centerPoint.y - innerItem.centerPoint.y),
               2)
           ) < safeDistance
         ) {
@@ -151,12 +150,12 @@ export class Ball {
             lineColor,
             lineWidth,
             startPoint: {
-              x: outerItem.mousePoint.x,
-              y: outerItem.mousePoint.y,
+              x: outerItem.centerPoint.x,
+              y: outerItem.centerPoint.y,
             },
             endPoint: {
-              x: innerItem.mousePoint.x,
-              y: innerItem.mousePoint.y,
+              x: innerItem.centerPoint.x,
+              y: innerItem.centerPoint.y,
             },
             pen,
           });

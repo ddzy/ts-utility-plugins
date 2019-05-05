@@ -13,4 +13,5 @@ new StarsLine({
   cvsHeight: window.innerHeight,
   ballNum: 200,
   safeDistance: 80,
+  allowMouse: true,
 });
