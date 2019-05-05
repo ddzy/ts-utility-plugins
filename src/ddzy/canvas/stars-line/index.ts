@@ -31,7 +31,7 @@ namespace StarsLine {
 
 
 
-  
+
   export namespace IProps {
     export interface ILineProps {
       startPoint: { x: number, y: number };
@@ -121,15 +121,15 @@ namespace StarsLine {
 
 
   namespace Init {
-    
+
     export function initCanvas(
       el: string,
     ): void {
       yyg_el = Utils.getEle(el);
       yyg_pen = yyg_el.getContext('2d');
-      
+
       const oBody = Utils.getEle('body') as HTMLBodyElement;
-  
+
       Utils.setAttr(yyg_el, {
         width: yyg_cvsWidth,
         height: yyg_cvsHeight,
@@ -148,7 +148,7 @@ namespace StarsLine {
     export function reseizeCanvas() {
       window.addEventListener('resize', () => {
         const { winWidth, winHeight, } = Utils.getWinRange();
-        
+
         yyg_cvsWidth = winWidth;
         yyg_cvsHeight = winHeight;
 
@@ -160,17 +160,17 @@ namespace StarsLine {
     }
 
   }
-  
+
 
 
   namespace Utils {
-  
+
     /**
      * 连线安全距离
      */
     export const LINE_MIN_DISTANCE: number = 90;
-  
-  
+
+
     /**
      * 获取元素
      * @param id 元素id
@@ -180,8 +180,8 @@ namespace StarsLine {
     ): HTMLElement | null {
       return document.querySelector(sign) || null;
     }
-  
-  
+
+
     /**
      * 获取窗口宽高
      */
@@ -194,8 +194,8 @@ namespace StarsLine {
         winHeight: window.innerHeight,
       };
     }
-  
-  
+
+
     /**
      * 设置元素属性
      * @param ele 元素
@@ -209,11 +209,11 @@ namespace StarsLine {
       for (const key in options) {
         ele.setAttribute(key, options[key]);
       }
-  
+
       return ele;
     }
-  
-  
+
+
     /**
      * 设置元素样式
      * @param el 元素
@@ -228,11 +228,11 @@ namespace StarsLine {
           ele.style.cssText += `${item}: ${options[item]};`;
         }
       }
-  
+
       return ele;
     }
-  
-  
+
+
     /**
      * 取随机值
      * @param min 最小值
@@ -244,8 +244,8 @@ namespace StarsLine {
     ): number {
       return (Math.random() * (max - min) + min);
     }
-  
-  
+
+
     /**
      * 转化弧度
      * @param angle 角度
@@ -255,8 +255,8 @@ namespace StarsLine {
     ): number {
       return (Math.PI / 180) * angle;
     }
-  
-  
+
+
     /**
      * 获取元素属性值
      * @param ele 元素
@@ -268,18 +268,18 @@ namespace StarsLine {
     ): string | null {
       return ele.getAttribute(key);
     }
-  
+
   };
-  
+
 
 
   namespace Main {
-  
+
     /**
      * 星空线
      */
     export class Line {
-  
+
       private readonly startPoint: {
         x: number,
         y: number,
@@ -291,7 +291,7 @@ namespace StarsLine {
       private readonly lineColor: string;
       private readonly lineWidth: number ;
       private readonly opacity: number;
-  
+
       public constructor(
         props: IProps.ILineProps,
       ) {
@@ -302,7 +302,7 @@ namespace StarsLine {
         this.opacity = props.opacity || 1;
         this.draw();
       }
-  
+
       public draw(): void {
         yyg_pen.save();
         yyg_pen.beginPath();
@@ -322,15 +322,15 @@ namespace StarsLine {
         yyg_pen.closePath();
         yyg_pen.restore();
       }
-  
+
     }
-  
-  
+
+
     /**
      * 星空点
      */
     export class Ball {
-  
+
       public readonly centerPoint: {
         x: number,
         y: number,
@@ -342,7 +342,7 @@ namespace StarsLine {
         x: number,
         y: number,
       }
-  
+
       public constructor(
         props: IProps.IBallProps
       ) {
@@ -358,8 +358,8 @@ namespace StarsLine {
           y: Utils.getRandom(-this.speed, this.speed),
         };
       }
-  
-  
+
+
       public draw(): void {
         yyg_pen.save();
         yyg_pen.beginPath();
@@ -375,12 +375,12 @@ namespace StarsLine {
         yyg_pen.closePath();
         yyg_pen.restore();
       }
-  
-  
+
+
       public move(): void {
         this.centerPoint.x += this.distance.x;
         this.centerPoint.y += this.distance.y;
-  
+
         // 碰撞检测
         this.distance.x = (this.centerPoint.x > yyg_cvsWidth
           || this.centerPoint.x < 0)
@@ -391,8 +391,8 @@ namespace StarsLine {
           ? -this.distance.y
           : this.distance.y;
       }
-  
-  
+
+
       // 连线
       public drawLine(
         outerItem: Ball,
@@ -403,7 +403,7 @@ namespace StarsLine {
               Math.pow((
                 outerItem.centerPoint.x - innerItem.centerPoint.x),
                 2) + Math.pow((
-                  outerItem.centerPoint.y - innerItem.centerPoint.y), 
+                  outerItem.centerPoint.y - innerItem.centerPoint.y),
                 2)
             ) < Utils.LINE_MIN_DISTANCE
           ) {
@@ -423,14 +423,14 @@ namespace StarsLine {
           }
         }
       }
-  
+
     }
   }
-  
-  
+
+
 
   namespace Render {
-  
+
     /**
      * 创建点工厂
      */
@@ -443,7 +443,7 @@ namespace StarsLine {
       yyg_ballArr.push(ball);
       ball.draw();
     }
-  
+
     /**
      * 星空点
      * @param num 点数量
@@ -455,13 +455,13 @@ namespace StarsLine {
         createBallFactory();
       }
     }
-  
+
     /**
      * 星空点移动
      */
     export function move(): void {
       yyg_pen.clearRect(0, 0, yyg_cvsWidth, yyg_cvsHeight);
-  
+
       // 是否鼠标交互
       yyg_allowMouse && yyg_el
         .addEventListener('mousemove', (
@@ -482,10 +482,13 @@ namespace StarsLine {
       }
 
       yyg_flag = false;
-  
+
       window.requestAnimationFrame(move);
     }
-  
+
   }
-  
+
 }
+
+
+export default StarsLine;
