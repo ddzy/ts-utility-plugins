@@ -1,5 +1,6 @@
 import utilityDOM from '../../utility/dom/index';
 import { Ball } from './ball/Ball';
+import utilityNumber from '../../utility/number';
 
 
 export interface IStarsLineProps {
@@ -8,12 +9,16 @@ export interface IStarsLineProps {
   cvsHeight?: number;
   cvsBgColor?: string;
   ballNum?: 50;
-  ballRadius?: number;
+  ballRadius?: IStaticStarsLineBallRadiusParams;
   lineColor?: string;
   lineWidth?: number;
   ballSpeed?: number;
   ballColor?: string;
   safeDistance?: number;
+};
+export interface IStaticStarsLineBallRadiusParams {
+  min: number,
+  max: number,
 };
 
 
@@ -24,8 +29,11 @@ export class StarsLine {
     cvsWidth: 500,
     cvsHeight: 500,
     cvsBgColor: '#000',
-    ballNum: 100,
-    ballRadius: utilityDOM.getAnyRandom(1, 3),
+    ballNum: 50,
+    ballRadius: {
+      min: 1,
+      max: 3,
+    },
     allowMouse: false,
     lineColor: '#1890ff',
     lineWidth: 1,
@@ -137,7 +145,10 @@ export class StarsLine {
     const ball = new Ball({
       pen,
       color: ballColor,
-      radius: ballRadius,
+      radius: utilityNumber.getAnyRandom(
+        ballRadius.min,
+        ballRadius.max,
+      ),
       speed: ballSpeed,
       mousePoint,
       cvsWidth,
@@ -147,8 +158,12 @@ export class StarsLine {
     });
 
     this.ballArr.push(ball);
+    ball.draw();
   }
 
+  /**
+   * [辅助]: 处理鼠标移动
+   */
   private aidedMoveBallByMouse(): void {
     const {
       el,
@@ -166,12 +181,21 @@ export class StarsLine {
     }, false);
   }
 
+  /**
+   * [辅助]: 处理球数组移动
+   */
   private aidedMoveBallArr(): void {
     const {
       flag,
       ballArr,
       mousePoint,
     } = this;
+    const {
+      cvsWidth,
+      cvsHeight,
+    } = StarsLine.defaultConfig;
+
+    this.pen.clearRect(0, 0, cvsWidth, cvsHeight);
 
     for (const ball of ballArr) {
       ball.move();
@@ -183,7 +207,9 @@ export class StarsLine {
 
     this.flag = false;
 
-    window.requestAnimationFrame(this.aidedMoveBallArr);
+    window.requestAnimationFrame(() => {
+      this.aidedMoveBallArr();
+    });
   }
 
   private handleCreateBall(): void {
@@ -197,16 +223,6 @@ export class StarsLine {
   }
 
   private handleMoveBall(): void {
-    const {
-      pen,
-    } = this;
-    const {
-      cvsWidth,
-      cvsHeight,
-    } = StarsLine.defaultConfig;
-
-    pen.clearRect(0, 0, cvsWidth, cvsHeight);
-
     this.aidedMoveBallByMouse();
     this.aidedMoveBallArr();
   }

@@ -1,4 +1,5 @@
 import utilityDOM from "../../../utility/dom";
+import utilityNumber from "../../../utility/number";
 
 export interface IBallProps {
   cvsWidth: number;
@@ -54,7 +55,11 @@ export class Ball {
     this.color = color;
     this.radius = radius;
     this.speed = speed;
-    this.mousePoint = mousePoint;
+    // this.mousePoint = mousePoint;
+    this.mousePoint = {
+      x: utilityNumber.getAnyRandom(0, cvsWidth),
+      y: utilityNumber.getAnyRandom(0, cvsHeight),
+    };
     this.distance = {
       x: utilityDOM.getAnyRandom(-this.speed, this.speed),
       y: utilityDOM.getAnyRandom(-this.speed, this.speed),
@@ -63,8 +68,6 @@ export class Ball {
     this.cvsHeight = cvsHeight;
     this.ballArr = ballArr;
     this.safeDistance = safeDistance;
-
-    this.draw();
   }
 
   public draw(): void {

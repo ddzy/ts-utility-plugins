@@ -1,13 +1,11 @@
-import StarsLine from './ddzy/canvas/stars-line/index';
+// import StarsLine from './ddzy/canvas/stars-line/index';
+import {
+  StarsLine,
+} from './ddzy/canvas/stars-line/index.new';
 
 
 // ! BUG: 鼠标进画布, 关闭定时器
 
-StarsLine
-  .config({
-    ballNum: 50,
-    allowMouse: true,
-    ballColor: '#09c',
-    lineColor: '#09c',
-  })
-  .render('#cvs');
+new StarsLine({
+  container: '#cvs',
+});
