@@ -1,7 +1,7 @@
 // import StarsLine from './ddzy/canvas/stars-line/index';
 import {
   StarsLine,
-} from './ddzy/canvas/stars-line/index.new';
+} from './ddzy/canvas/stars-line';
 
 
 // ! BUG: 鼠标进画布, 关闭定时器
