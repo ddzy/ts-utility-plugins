@@ -33,36 +33,44 @@
 
 ## 四、canvas-stars-line
 
-> 非常nice的`星空连线`特效插件, 自定义大多数配置
+> 非常nice的`星空连线`特效插件
 
-### 默认渲染
-
-```ts
-StarsLine.render(el: string);    // el canvas元素
-```
-
-### 自定义配置项
-
-| Key        | Type    | default | Introduce        |
-| ---------- | ------- | ------- | ---------------- |
-| cvsWidth   | number  | 500     | 画布宽           |
-| cvsHeight  | number  | 500     | 画布高           |
-| cvsBgColor | string  | #000    | 画布背景颜色     |
-| ballNum    | number  | 100     | 星空点数量       |
-| allowMouse | boolean | false   | 是否允许鼠标交互 |
-| lineColor  | string  | #1890ff | 连线颜色         |
-| lineWidth  | number  | 1       | 连线宽度         |
-| ballSpeed  | number  | 1       | 星空点移动速度   |
-| ballColor  | string  | #fff    | 星空点颜色       |
-| isResize   | boolean | false   | 是否跟随窗口大小 |
-
-### 支持链式调用
+### 4.1 基本用法
 
 ```ts
-StarsLine
-  .config({...})
-  .render(el: string)
+new StarsLine({
+  container: '#app',
+});
 ```
+
+### 4.2 可配置项
+
+```ts
+export interface IStaticStarsLineBallRadiusParams {
+  min: number,
+  max: number,
+};
+```
+
+| Key          | Type                             | Require | Description      |
+| ------------ | -------------------------------- | ------- | ---------------- |
+| container    | string                           | true    | 挂载的canvas节点 |
+| cvsWidth     | number                           | false   | 画布宽           |
+| cvsHeight    | number                           | false   | 画布高           |
+| cvsBgColor   | string                           | false   | 画布背景颜色     |
+| ballNum      | number                           | false   | 星空点数量       |
+| ballRadius   | IStaticStarsLineBallRadiusParams | false   | 星的半径         |
+| allowMouse   | boolean                          | false   | 是否允许鼠标交互 |
+| lineColor    | string                           | false   | 连线颜色         |
+| lineWidth    | number                           | false   | 连线宽度         |
+| ballSpeed    | number                           | false   | 星空点移动速度   |
+| ballColor    | string                           | false   | 星空点颜色       |
+| isResize     | boolean                          | false   | 是否跟随窗口大小 |
+| safeDistance | number                           | false   | 连线安全距离     |
+
+### 4.3 注意事项
+
+鼠标交互(`allowMouse`)暂未实现.
 
 ## 五、canvas-colorful-bubble
 
