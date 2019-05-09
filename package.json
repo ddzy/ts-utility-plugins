@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.ts",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "check": "tsc -w"
   },
   "repository": {
     "type": "git",
