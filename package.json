@@ -1,7 +1,7 @@
 {
   "name": "ts-utility-plugins",
   "version": "1.0.0",
-  "description": "个人封装的canvas特效, 业务插件库",
+  "description": "ts构建的学习类库, 囊括canvas、business、utility等多个区块",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
