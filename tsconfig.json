@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "commonjs",
@@ -14,6 +14,8 @@
       "es2015",
       "es2016"
     ],
-    "sourceMap": true
+    "sourceMap": true,
+    "allowJs": true,
+    "noEmit": true
   }
 }
