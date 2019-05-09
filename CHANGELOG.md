@@ -41,3 +41,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - 初步构建`dist`
 - 添加`script`引入的支持
+
+## [2019-5-9]
+
+### Added
+
+- 增加`babel`构建
+
+### Removed
+
+- 移除初始的`ts-loader`构建方式
