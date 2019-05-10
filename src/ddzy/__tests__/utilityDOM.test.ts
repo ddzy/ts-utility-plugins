@@ -135,16 +135,6 @@ describe('utilityDOM tests', () => {
     });
   });
 
-  describe('getRadian', () => {
-    test('getRadian should receive a number with angle and return a number with radian', () => {
-      const origin = [180, 90, 0, 360];
-
-      for (const v of origin) {
-        expect(typeof utilidyDOM.getRadian(v)).toBe('number');
-      }
-    });
-  });
-
   describe('getAttr', () => {
     test('getAttr should return null when nothing matched ', () => {
       document.body.innerHTML += `
