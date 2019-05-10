@@ -51,3 +51,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Removed
 
 - 移除初始的`ts-loader`构建方式
+
+## [2019-5-10]
+
+### Added
+
+- 集成`jest`单测环境
