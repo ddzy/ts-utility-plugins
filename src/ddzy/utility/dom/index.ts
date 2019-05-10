@@ -6,16 +6,12 @@ export interface IUtilityDOMProps {
   getAllEle(sign: string): ArrayLike<HTMLElement> | null;
   setAttr(ele: HTMLElement, options: IStaticPairs): OmitThisParameter<IUtilityDOMProps>;
   setCss(ele: HTMLElement, options: IStaticPairs): OmitThisParameter<IUtilityDOMProps>;
-  getRadian(angle: number): number;
   getAttr(ele: HTMLElement, key: string): string | null;
   addClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
   removeClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
   throttle(time: number, callback: (...args: any[]) => void): void;
-  getFullRandom(min: number, max: number): number,
-  getAnyRandom(min: number, max: number): number;
 
   isDOM(node: any): boolean;
-  isFunction(el: any): boolean;
 
   traversalDOMWithBFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
   traversalDOMWithDFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
@@ -68,32 +64,6 @@ const utilityDOM: IUtilityDOMProps = {
     }
 
     return this;
-  },
-
-  /**
-   * 获取指定范围内的随机整数
-   * @param min 小边界
-   * @param max 大边界
-   */
-  getFullRandom(min, max) {
-    return ~~(Math.random() * (max - min) + min);
-  },
-
-  /**
-   * 获取指定范围内的随机任意数
-   * @param min 小边界
-   * @param max 大边界
-   */
-  getAnyRandom(min, max) {
-    return Math.random() * (max - min) + min;
-  },
-
-  /**
-   * 角度转弧度
-   * @param angle 角度值
-   */
-  getRadian(angle) {
-    return (Math.PI / 180) * angle;
   },
 
   /**
@@ -155,15 +125,6 @@ const utilityDOM: IUtilityDOMProps = {
       && typeof node === 'object'
       && node.nodeType === 1;
   },
-
-  /**
-   * 检查是否函数
-   * @param ele 任意值
-   */
-  isFunction(ele) {
-    return typeof ele === 'function';
-  },
-
 
   /**
    * BFS遍历指定DOM节点
