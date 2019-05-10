@@ -70,8 +70,8 @@ export class Ball {
     this.lineWidth = lineWidth;
     this.lineColor = lineColor;
     this.distance = {
-      x: utilityDOM.getAnyRandom(-this.speed, this.speed),
-      y: utilityDOM.getAnyRandom(-this.speed, this.speed),
+      x: utilityNumber.getAnyRandom(-this.speed, this.speed),
+      y: utilityNumber.getAnyRandom(-this.speed, this.speed),
     };
     this.cvsWidth = cvsWidth;
     this.cvsHeight = cvsHeight;
@@ -95,7 +95,7 @@ export class Ball {
       centerPoint.y,
       radius,
       0,
-      utilityDOM.getRadian(360)
+      utilityNumber.getRadian(360)
     );
     pen.fill();
     pen.closePath();
