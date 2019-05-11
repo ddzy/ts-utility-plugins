@@ -1,17 +1,21 @@
-// import StarsLine from './ddzy/canvas/stars-line/index';
 import {
-  StarsLine,
-} from './ddzy/canvas/stars-line';
+  Draggable,
+} from './ddzy/business/draggable/index';
 
 
-// ! BUG: 鼠标进画布, 关闭定时器
+// new Draggable.Sort({
 
-new StarsLine({
-  container: '#cvs',
-  cvsBgColor: '#fff',
-  cvsWidth: window.innerWidth,
-  cvsHeight: window.innerHeight,
-  ballNum: 200,
-  safeDistance: 80,
-  allowMouse: true,
-});
+// })
+
+const container = document.getElementById('drag-wrapper') as HTMLDivElement;
+
+container.style.cssText += `
+  width: 200px;
+  height: 200px;
+  border: 1px solid #1890ff;
+`;
+document.body.style.cssText += `
+  width: 800px;
+  height: 600px;
+  background-color: #ccc;
+`;
