@@ -13,13 +13,19 @@
  *    dragleave
  *    drop
  * 问题:
- *    1. dragover必须preventDefault, 否则drop无法触发
+ *    1. ondrop无法触发?
+ *      -> ondragover必须preventDefault
  *    2. 如何添加过渡效果?
  *      2.1 dragstart, source的opacity -> 0
  *      2.2 dragend, source的opacity -> 1
  *      2.3 碰撞检测
  *      2.4 边界检测
  *        2.4.1 第一个和最后一个
+ *    3. 父子同时设置draggable, 子元素的ondrop触发多次?
+ *      -> 父级的ondrop不能在子事件循环监听, 需要提取至外部
+ *    4. 父级元素的ondragenter和ondragleave会触发子元素的状态, 给所有的子元素增加`pointer-events: none`.
+ *    5. 如何判断移动方向?
+ *      -> 保存上一步和本步的下标, 据下标大小判断.
  */
 
 /**
@@ -31,7 +37,7 @@
  * @param [dragTargetStyle] 碰撞目标样式
  * @param [gap] 列表项间距
  */
-import utilidyDOM from '../../../utility/dom/index';
+import utilityDOM from '../../../utility/dom/index';
 
 
 // TODO: 添加至utility/others
@@ -152,9 +158,9 @@ export class SortDraggable {
     } = SortDraggable.defaultProps;
 
     let tempStr: string = '';
-    dataSource.forEach((v) => {
+    dataSource.forEach((v, i) => {
       tempStr += `
-        <li class="ddzy-drag-list-item">
+        <li class="ddzy-drag-list-item ddzy-drag-item-${i}">
           <div class="ddzy-drag-item-title-box">
             <div class="ddzy-drag-item-title">
               ${v.titleText}
@@ -190,7 +196,7 @@ export class SortDraggable {
       container,
     } = SortDraggable.defaultProps;
 
-    const mountWrapper = utilidyDOM.getEle(container);
+    const mountWrapper = utilityDOM.getEle(container);
 
     if (mountWrapper) {
       mountWrapper.innerHTML += dom;
@@ -227,7 +233,7 @@ export class SortDraggable {
         overflow: hidden;
         cursor: move;
         min-height: 40px;
-        margin-top: 8px;
+        margin: 8px 0;
         background-color: #fff;
         color: #303133;
         border: 1px solid #ebeef5;
@@ -238,6 +244,7 @@ export class SortDraggable {
       .ddzy-drag-item-title-box {
         flex: 1;
         background-color: #d50;
+        pointer-events: none;
       }
       .ddzy-drag-item-title {
         height: 100%;
@@ -247,6 +254,7 @@ export class SortDraggable {
       }
       .ddzy-drag-item-content-box {
         flex: 5;
+        pointer-events: none;
       }
       .ddzy-drag-item-content {
         padding-left: 8px;
@@ -301,7 +309,82 @@ export class SortDraggable {
    * Drag events
    */
   private _initDrag(): void {
-    // TODO: 先完成主要功能, 后续作拆分
+    // !: 先完成主要功能, 后续作拆分
+
+    // * 拖拽项集合
+    const originItems = Array.from(
+      utilityDOM
+        .getAllEle('.ddzy-drag-list-item') as ArrayLike<HTMLLIElement>
+    );
+    const originList = utilityDOM
+      .getEle('.ddzy-drag-main-list') as HTMLUListElement;
+
+    // * 依据下标判断移动方向.
+    const saveIndex = {
+      prev: 0,
+      current: 0,
+    };
+    // * 维护一个可变队列
+
+    utilityDOM.setAttr(originList, {
+      draggable: 'true',
+    });
+
+    originItems.forEach((origin) => {
+      // 添加draggable配置项
+      utilityDOM.setAttr(origin, {
+        draggable: 'true',
+      });
+
+      // origin拖拽开始
+      origin.addEventListener('dragstart', (e) => {
+        const t = e.target as HTMLLIElement;
+        const transfer = e.dataTransfer as DataTransfer;
+        const id = utilityDOM.getAttr(t, 'class') as string;
+
+        // 更新saveIndex
+        saveIndex.prev = originItems.indexOf(t);
+
+        transfer.setData('origin', id);
+      });
+
+      // 进入target元素
+      origin.addEventListener('dragenter', (e) => {
+        const t = e.target as HTMLLIElement;
+        const c = utilityDOM.getAttr(t, 'class');
+
+        utilityDOM.setCss(t, {
+          opacity: .5,
+          'border': '1px dashed #444',
+        });
+      });
+
+      origin.addEventListener('dragleave', (e) => {
+        const t = e.target as HTMLLIElement;
+
+        utilityDOM.setCss(t, {
+          opacity: 1,
+          border: '1px solid #ebeef5',
+        });
+      });
+
+      // 解决drop无法触发的bug
+      origin.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+    });
+
+    originList.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const t = e.target as HTMLUListElement;
+      const transfer = e.dataTransfer as DataTransfer;
+
+      const id = transfer.getData('origin');
+
+      utilityDOM.setCss(t, {
+        opacity: 1,
+      });
+    });
   }
 
 };
