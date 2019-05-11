@@ -5,7 +5,7 @@ import {
 
 // new Draggable.Sort({
 
-// });
+// })
 
 const container = document.getElementById('drag-wrapper') as HTMLDivElement;
 
