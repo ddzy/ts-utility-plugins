@@ -47,6 +47,10 @@
 
 关于如何贡献, 已移至[Wiki](https://github.com/ddzy/ts-utility-plugins/wiki/%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE%3F).
 
+## CHANGELOG
+
+@see: [CHANGELOG](./CHANGELOG.md)
+
 ## License
 
 @see: [MIT](./LICENSE)
