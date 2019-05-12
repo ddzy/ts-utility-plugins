@@ -309,82 +309,64 @@ export class SortDraggable {
    * Drag events
    */
   private _initDrag(): void {
-    // !: 先完成主要功能, 后续作拆分
 
-    // * 拖拽项集合
-    const originItems = Array.from(
-      utilityDOM
-        .getAllEle('.ddzy-drag-list-item') as ArrayLike<HTMLLIElement>
+    const originList = utilityDOM.getEle(
+      '.ddzy-drag-main-list'
+    ) as HTMLUListElement;
+    const originItem = Array.from(
+      utilityDOM.getAllEle(
+        '.ddzy-drag-list-item'
+      ) as ArrayLike<HTMLLIElement>
     );
-    const originList = utilityDOM
-      .getEle('.ddzy-drag-main-list') as HTMLUListElement;
 
-    // * 依据下标判断移动方向.
-    const saveIndex = {
-      prev: 0,
-      current: 0,
-    };
-    // * 维护一个可变队列
+    let origin: any = null;
 
-    utilityDOM.setAttr(originList, {
-      draggable: 'true',
-    });
+    originItem.forEach((target) => {
 
-    originItems.forEach((origin) => {
-      // 添加draggable配置项
-      utilityDOM.setAttr(origin, {
+      utilityDOM.setAttr(target, {
         draggable: 'true',
       });
 
-      // origin拖拽开始
-      origin.addEventListener('dragstart', (e) => {
-        const t = e.target as HTMLLIElement;
-        const transfer = e.dataTransfer as DataTransfer;
-        const id = utilityDOM.getAttr(t, 'class') as string;
-
-        // 更新saveIndex
-        saveIndex.prev = originItems.indexOf(t);
-
-        transfer.setData('origin', id);
+      // 拖拽开始
+      target.addEventListener('dragstart', (e) => {
+        origin = target;
       });
 
-      // 进入target元素
-      origin.addEventListener('dragenter', (e) => {
-        const t = e.target as HTMLLIElement;
-        const c = utilityDOM.getAttr(t, 'class');
+      target.addEventListener('dragenter', (e) => {
+        const originIndex = this._aidedFindIndex(
+          origin,
+          0,
+        );
+        const targetIndex = this._aidedFindIndex(
+          target,
+          0,
+        );
+        const diff = targetIndex - originIndex;
 
-        utilityDOM.setCss(t, {
-          opacity: .5,
-          'border': '1px dashed #444',
-        });
+        if (diff > 0) {
+          const sb = target.nextElementSibling as HTMLLIElement;
+          originList.insertBefore(origin, sb);
+        }
+        else {
+          originList.insertBefore(origin, target);
+        }
       });
 
-      origin.addEventListener('dragleave', (e) => {
-        const t = e.target as HTMLLIElement;
-
-        utilityDOM.setCss(t, {
-          opacity: 1,
-          border: '1px solid #ebeef5',
-        });
-      });
-
-      // 解决drop无法触发的bug
-      origin.addEventListener('dragover', (e) => {
-        e.preventDefault();
-      });
     });
 
-    originList.addEventListener('drop', (e) => {
-      e.preventDefault();
-      const t = e.target as HTMLUListElement;
-      const transfer = e.dataTransfer as DataTransfer;
+  }
 
-      const id = transfer.getData('origin');
-
-      utilityDOM.setCss(t, {
-        opacity: 1,
-      });
-    });
+  _aidedFindIndex(
+    node: Element | null,
+    count: number,
+  ): any {
+    if (!node) {
+      return count;
+    }
+    return this._aidedFindIndex(
+      node.previousElementSibling,
+      ++count
+    );
   }
 
 };
