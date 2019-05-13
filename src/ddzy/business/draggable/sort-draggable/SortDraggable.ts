@@ -90,7 +90,7 @@ export interface ISortDraggableProps {
   onDragEnterHook?: (origin: HTMLElement, target: HTMLElement) => void;
   onDragLeaveHook?: (origin: HTMLElement, target: HTMLElement) => void;
   onDragOverHook?: (origin: HTMLElement, target: HTMLElement) => void;
-  onDropHook?: (origin: HTMLElement, target: HTMLElement) => void;
+  onDropHook?: (origin: HTMLElement) => void;
 };
 export interface IStaticDataSourceParams {
   titleText?: string;
@@ -177,7 +177,7 @@ export class SortDraggable {
     onDragEnterHook(_origin: HTMLElement, _target: HTMLElement) { },
     onDragLeaveHook(_origin: HTMLElement, _target: HTMLElement) { },
     onDragOverHook(_origin: HTMLElement, _target: HTMLElement) { },
-    onDropHook(_origin: HTMLElement, _target: HTMLElement) { },
+    onDropHook(_origin: HTMLElement) { },
   };
 
   public constructor(
@@ -526,30 +526,30 @@ export class SortDraggable {
       });
 
       target.addEventListener('dragstart', () => {
-        onDragStartHook(this.origin);
         this.handleDragStart(target);
+        onDragStartHook(this.origin);
       });
 
       target.addEventListener('dragenter', () => {
-        onDragEnterHook(this.origin, target);
         this.handleDragEnter(target);
         // ?: 是否启用过渡
         animate && this.handleDragAnimation(target);
+        onDragEnterHook(this.origin, target);
       });
 
       target.addEventListener('dragleave', () => {
-        onDragLeaveHook(this.origin, target);
         this.handleDragLeave(target);
+        onDragLeaveHook(this.origin, target);
       });
 
       target.addEventListener('dragover', (e) => {
-        onDragOverHook(this.origin, target);
         this.handleDragOver(e);
+        onDragOverHook(this.origin, target);
       });
 
       target.addEventListener('drop', () => {
-        onDropHook(this.origin, target);
         this.handleDrop();
+        onDropHook(this.origin);
       });
     });
   }
