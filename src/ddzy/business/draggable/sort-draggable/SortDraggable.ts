@@ -519,7 +519,6 @@ export class SortDraggable {
       onDropHook,
     } = SortDraggable.defaultProps;
 
-    // TODO: 事件委托
     dragItems.forEach((target) => {
       utilityDOM.setAttr(target, {
         draggable: 'true',
