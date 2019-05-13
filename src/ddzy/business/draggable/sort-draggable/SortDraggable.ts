@@ -27,44 +27,6 @@
 import utilityDOM from '../../../utility/dom/index';
 
 
-// TODO: 添加至utility/others
-// 错误处理
-function invariant(
-  condition: boolean,
-  message: string,
-) {
-  if (condition) {
-    throw new TypeError(`
-      Ddzy's plugin error: ${message}.
-    `);
-  }
-}
-// TODO: 添加至utility/others
-// 驼峰 -> 连字符形式
-function convertHumpToHyphen(hump: string): string {
-  const reg: RegExp = /[A-Z]+/;
-
-  return hump.replace(reg, (m) => {
-    return `-${m.toLowerCase()}`;
-  });
-}
-// TODO: 添加至utility/dom
-// 键值对 -> cssText
-// pair
-function convertPairToCSSText(
-  pair: Partial<CSSStyleDeclaration>,
-): string {
-  let text = '';
-
-  for (const key in pair) {
-    const value = Reflect.get(pair, key);
-    text += `${convertHumpToHyphen(key)}: ${value}; `;
-  }
-
-  return text;
-}
-
-
 export interface ISortDraggableProps {
   container: string;
   dataSource?: IStaticDataSourceParams[];
@@ -262,10 +224,10 @@ export class SortDraggable {
       dragTargetActiveStyle,
     } = SortDraggable.defaultProps;
 
-    const tempWrapperStyle = convertPairToCSSText(dragWrapperStyle);
-    const tempOriginStyle = convertPairToCSSText(dragOriginStyle);
-    const tempOriginActiveStyle = convertPairToCSSText(dragOriginActiveStyle);
-    const tempTargetActiveStyle = convertPairToCSSText(dragTargetActiveStyle);
+    const tempWrapperStyle = utilityDOM. convertPairToCSSText(dragWrapperStyle);
+    const tempOriginStyle = utilityDOM. convertPairToCSSText(dragOriginStyle);
+    const tempOriginActiveStyle = utilityDOM. convertPairToCSSText(dragOriginActiveStyle);
+    const tempTargetActiveStyle = utilityDOM. convertPairToCSSText(dragTargetActiveStyle);
 
     const style: string = `
       body, ul, li {
