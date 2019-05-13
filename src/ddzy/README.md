@@ -2,7 +2,7 @@
 
 一些有用的插件库集合
 
-## 一、说明
+## 说明
 
 > 插件库包括 `canvas特效`插件, `业务`插件、`工具组件`等等...
 
@@ -13,29 +13,33 @@
 
 **TODO**: 后续会考虑放置到`GitHub-pages`展示
 
-## 二、用法
+## 用法
 
 > **PS**: 重构代码中, 暂未实现对`npm引入`的支持
 
 详细用法, 参考[这里](https://github.com/ddzy/ts-utility-plugins#usage)
 
-## 三、目录
+## 目录
 
 - [x] Canvas
-  - [x] [canvas-stars-line](#四canvas-stars-line)
-  - [x] [canvas-colorful-bubble](#五canvas-colorful-bubble)
-  - [x] [canvas-jumping-characters](#六canvas-jumping-characters)
+  - [x] [canvas-stars-line](#canvas-stars-line)
+  - [x] [canvas-colorful-bubble](#canvas-colorful-bubble)
+  - [x] [canvas-jumping-characters](#canvas-jumping-characters)
 - [x] Business
-  - [x] [business-carousel](#七business-carousel)
-  - [x] [business-tab](#八business-tab)
+  - [x] [business-carousel](#business-carousel)
+  - [x] [business-tab](#business-tab)
+  - [x] [business-draggable](#business-draggable)
 - [x] Utility
-  - [ ] [utility-dom](#九utility-dom)
+  - [ ] [utility-dom](#utility)
+  - [ ] [utility-number](#utility)
+  - [ ] [utility-others](#utility)
+  - [ ] [utility-function](#utility)
 
-## 四、canvas-stars-line
+## canvas-stars-line
 
 > 非常nice的`星空连线`特效插件
 
-### 4.1 基本用法
+### a. 基本用法
 
 ```ts
 new StarsLine({
@@ -43,7 +47,7 @@ new StarsLine({
 });
 ```
 
-### 4.2 可配置项
+### b. 可配置项
 
 ```ts
 export interface IStaticStarsLineBallRadiusParams {
@@ -68,15 +72,15 @@ export interface IStaticStarsLineBallRadiusParams {
 | isResize     | boolean                          | false   | 是否跟随窗口大小 |
 | safeDistance | number                           | false   | 连线安全距离     |
 
-### 4.3 注意事项
+### c. 注意事项
 
 鼠标交互(`allowMouse`)暂未实现.
 
-## 五、canvas-colorful-bubble
+## canvas-colorful-bubble
 
 > 构建的canvas气泡插件, 可用作个人博客背景(本人已用上👌, [点这里](https://blog.yyge.top/)查看).
 
-### 5.1 基本用法
+### a. 基本用法
 
 ```ts
 new ColorfulBubble({
@@ -84,7 +88,7 @@ new ColorfulBubble({
 });
 ```
 
-### 5.2 可配置项
+### b. 可配置项
 
 ```ts
 interface IStaticColorfulBubbleScaleRangeParams {
@@ -107,7 +111,7 @@ interface IStaticColorfulBubbleScaleRangeParams {
 | bubbleColorArr    | string[]                              | false   | 气泡颜色         |
 | allowMouse        | boolean                               | false   | 是否允许鼠标交互 |
 
-### 5.3 注意事项
+### c. 注意事项
 
 > **Q**: 关于`container`配置项?
 
@@ -117,11 +121,11 @@ interface IStaticColorfulBubbleScaleRangeParams {
 
 ***A***: 有时间再搞.
 
-## 六、canvas-jumping-characters
+## canvas-jumping-characters
 
 > 点击产生文字,并逐渐消失, 可用作个人博客背景.
 
-### 6.1 基本用法
+### a. 基本用法
 
 ```ts
 new JumpingCharacters({
@@ -129,7 +133,7 @@ new JumpingCharacters({
 });
 ```
 
-### 6.2 可配置项
+### b. 可配置项
 
 | Key            | Type     | Require | Description                  |
 | -------------- | -------- | ------- | ---------------------------- |
@@ -144,21 +148,21 @@ new JumpingCharacters({
 | initialOpacity | number   | false   | 初始透明度                   |
 | speed          | number   | false   | 移动速率                     |
 
-### 6.3 注意事项
+### c. 注意事项
 
 待补充...
 
-## 七、business-carousel
+## business-carousel
 
 > 封装的```轮播```插件, 用法及其简单, 页面只需```一个div```元素, 不用撰写烦人的DOM, 插件会自动生成DOMTree
 
-### 7.1 基本用法
+### a. 基本用法
 
 ```ts
 new Carousel({});
 ```
 
-### 7.2 可配置项
+### b. 可配置项
 
 ```ts
 interface IDataSource {
@@ -184,7 +188,7 @@ interface IDataSource {
 | duringTime   | number        | false   | 过渡时间             |
 | isHoverPause | boolean       | false   | 鼠标放置是否停止轮播 |
 
-### 7.3 注意事项
+### c. 注意事项
 
 > 目前只支持 Fade & Scroll 两种状态轮播图, **默认使用`scroll`**
 
@@ -194,11 +198,11 @@ new Carousel({
 });
 ```
 
-## 八、business-tab
+## business-tab
 
 > tabs标签页插件, 只需传入 渲染的数据 和 渲染区间就可
 
-### 8.1 基本用法
+### a. 基本用法
 
 > **PS**: 默认会挂载于`body`上, 采用默认数据.
 
@@ -206,7 +210,7 @@ new Carousel({
 new Tab({});
 ```
 
-### 8.2 可用接口
+### b. 可用接口
 
 > **PS**: 如下列出了一系列配置项接口.
 
@@ -249,7 +253,7 @@ export type ITabTypeEffect = 'line' | 'card';
 export type ITabMouseEffect = 'mouseenter' | 'click';
 ```
 
-### 8.3 可配置项
+### c. 可配置项
 
 > **PS**: 下述表格中为所有的可配置项
 
@@ -267,15 +271,56 @@ export type ITabMouseEffect = 'mouseenter' | 'click';
 | onTabClick       | ()=>void          | false   | tab被点击的回调   |
 | onChange         | (activeKey)=>void | false   | 切换面板的回调    |
 
-## 九、utility
+## business-draggable
+
+### a. 前置说明
+
+该组件模块只暴露出了`Draggable`对象, 并挂载了多个不同类型拖拽组件:
+
+- SortDraggable
+- 待补充...
+
+### b. 基本用法
+
+```ts
+new Draggable.SortDraggable({
+  container: '#app',
+});
+```
+
+### c. 可用接口
+
+```ts
+export interface IStaticDataSourceParams {
+  titleText?: string;
+  contentText?: string;
+};
+```
+
+### d. 可配置项
+
+| Key                   | Value                                              | Require | Description                  |
+| --------------------- | -------------------------------------------------- | ------- | ---------------------------- |
+| container             | HTMLElement                                        | true    | 挂载容器                     |
+| dataSource            | IStaticDataSourceParams                            | false   | 源数据                       |
+| animate               | boolean                                            | false   | 是否开启过渡效果             |
+| dragWrapperStyle      | Partial<CSSStyleDeclaration>                       | false   | 拖拽外部容器的样式           |
+| dragOriginStyle       | Partial<CSSStyleDeclaration>                       | false   | 拖拽对象的初始样式           |
+| dragOriginActiveStyle | Partial<CSSStyleDeclaration>                       | false   | 拖拽该对象时的样式           |
+| dragTargetActiveStyle | Partial<CSSStyleDeclaration>                       | false   | 拖拽时目标对象的样式         |
+| onDragStartHook       | (origin: HTMLElement) => void                      | false   | 开始拖拽时的钩子             |
+| onDragEnterHook       | (origin: HTMLElement, target: HTMLElement) => void | false   | 拖拽进入目标时的钩子         |
+| onDragLeaveHook       | (origin: HTMLElement, target: HTMLElement) => void | false   | 拖拽离开目标时的钩子         |
+| onDragOverHook        | (origin: HTMLElement, target: HTMLElement) => void | false   | 在目标对象上持续拖拽时的钩子 |
+| onDropHook            | (origin: HTMLElement) => void                      | false   | 放置拖拽对象时的钩子         |
+
+## utility
 
 一系列工具函数, [项目目录](https://github.com/ddzy/ts-utility-plugins/tree/master/src/ddzy/utility).
 
-### 9.1 工具详解
+避免篇幅过长, 已迁移至[此处](./utility/README.md)展示.
 
-内容过多, 已迁移至[此处](./utility/README.md)展示.
-
-## 十、其它
+## 其它
 
 持续更新中...
 
