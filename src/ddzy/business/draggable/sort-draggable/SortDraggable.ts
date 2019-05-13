@@ -320,6 +320,10 @@ export class SortDraggable {
     );
 
     let origin: any = null;
+    let originBeforeRect: any = null;
+    let targetBeforeRect: any = null;
+    let originAfterRect = null;
+    let targetAfterRect = null
 
     originItem.forEach((target) => {
 
@@ -328,11 +332,14 @@ export class SortDraggable {
       });
 
       // 拖拽开始
-      target.addEventListener('dragstart', (e) => {
+      target.addEventListener('dragstart', () => {
         origin = target;
+        originBeforeRect = origin.getBoundingClientRect();
       });
 
-      target.addEventListener('dragenter', (e) => {
+      target.addEventListener('dragenter', () => {
+        targetBeforeRect = target.getBoundingClientRect();
+
         const originIndex = this._aidedFindIndex(
           origin,
           0,
@@ -343,20 +350,56 @@ export class SortDraggable {
         );
         const diff = targetIndex - originIndex;
 
-        if (diff > 0) {
-          const sb = target.nextElementSibling as HTMLLIElement;
-          originList.insertBefore(origin, sb);
-        }
-        else {
-          originList.insertBefore(origin, target);
-        }
+        diff > 0
+          ? (
+            originList.insertBefore(
+              origin,
+              (target.nextElementSibling as HTMLLIElement)
+              )
+            )
+          : (
+              originList.insertBefore(origin, target)
+            );
+
+        // Animation
+        originAfterRect = origin.getBoundingClientRect();
+        targetAfterRect = target.getBoundingClientRect();
+
+        const originDiffDistance = originAfterRect.top - originBeforeRect.top;
+        const targetDiffDistance = targetAfterRect.top - targetBeforeRect.top;
+
+        console.log(originDiffDistance);
+
+        /**
+         * 1. 移动至before位置
+         * 2. 过渡至after位置
+         */
+        utilityDOM.setCss(origin, {
+          transition: 'none',
+          transform: `translateY(${-originDiffDistance}px)`,
+        });
+        utilityDOM.setCss(target, {
+          transition: 'none',
+          transform: `translateY(${-targetDiffDistance}px)`,
+        });
+
+        originBeforeRect = originAfterRect;
+
+        setTimeout(() => {
+          utilityDOM.setCss(origin, {
+            transition: `all .3s ease`,
+            transform: `translateY(${0}px)`,
+          });
+          utilityDOM.setCss(target, {
+            transition: `all .3s ease`,
+            transform: `translateY(${0}px)`,
+          });
+        }, 0);
       });
-
     });
-
   }
 
-  _aidedFindIndex(
+  private _aidedFindIndex(
     node: Element | null,
     count: number,
   ): any {
