@@ -1,29 +1,3 @@
-/**
- * source:
- *    dragstart
- *    drag
- *    dragend
- * target:
- *    dragenter
- *    dragover
- *    dragleave
- *    drop
- * 问题:
- *    1. ondrop无法触发?
- *      -> ondragover必须preventDefault
- *    2. 如何添加过渡效果?
- *      2.1 dragstart, source的opacity -> 0
- *      2.2 dragend, source的opacity -> 1
- *      2.3 碰撞检测
- *      2.4 边界检测
- *        2.4.1 第一个和最后一个
- *    3. 父子同时设置draggable, 子元素的ondrop触发多次?
- *      -> 父级的ondrop不能在子事件循环监听, 需要提取至外部
- *    4. 父级元素的ondragenter和ondragleave会触发子元素的状态, 给所有的子元素增加`pointer-events: none`.
- *    5. 如何判断移动方向?
- *      -> 保存上一步和本步的下标, 据下标大小判断.
- */
-
 import utilityDOM from '../../../utility/dom/index';
 
 
@@ -190,7 +164,6 @@ export class SortDraggable {
       <div id="ddzy-drag-wrapper">
         <div class="ddzy-drag-main">
           <ul class="ddzy-drag-main-list">
-            <!-- TODO: dataSource动态生成 -->
             ${tempStr}
           </ul>
         </div>
