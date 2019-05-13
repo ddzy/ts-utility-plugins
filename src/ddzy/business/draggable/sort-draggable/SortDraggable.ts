@@ -436,16 +436,71 @@ export class SortDraggable {
     }, 0);
   }
 
+  private handleDragStart(
+    target: HTMLElement,
+  ): void {
+    // 存储被拖拽元素
+    this.origin = target;
+    this.position.originBeforeRect = this.origin.getBoundingClientRect();
+
+    utilityDOM.addClass(this.origin, 'ddzy-drag-origin-active');
+  }
+
+  private handleDragEnter(
+    target: HTMLElement,
+  ): void {
+    const {
+      dragContainer,
+    } = this;
+
+    this.position.targetBeforeRect = target.getBoundingClientRect();
+
+    // 排序依据(移动方向)有两种方式
+    //    1. 递归(迭代)DOM树, 找origin & target的位置(√)
+    //    2. 维护一个DOM排序数组
+    const originIndex = SortDraggable._aidedFindIndex(this.origin, 0);
+    const targetIndex = SortDraggable._aidedFindIndex(target, 0);
+    const diff = targetIndex - originIndex;
+    diff > 0
+      ? (
+        dragContainer.insertBefore(this.origin, (
+          target.nextElementSibling as HTMLLIElement
+        ))
+      )
+      : (
+        dragContainer.insertBefore(this.origin, target)
+      );
+
+    // ?: insert后的新位置, `animate`时只需交换两者位置信息即可
+    this.position.originAfterRect = this.origin.getBoundingClientRect();
+    this.position.targetAfterRect = target.getBoundingClientRect();
+  }
+
+  private handleDragLeave(
+    target: HTMLElement,
+  ): void {
+    utilityDOM.removeClass(target, 'ddzy-drag-target-active');
+  }
+
+  private handleDragOver(
+    e: DragEvent,
+  ): void {
+    e.preventDefault();
+  }
+
+  private handleDrop(): void {
+    utilityDOM.removeClass(this.origin, 'ddzy-drag-origin-active');
+    utilityDOM.removeClass(this.origin, 'ddzy-drag-target-active');
+  }
+
+  /**
+   * 处理拖拽相关
+   */
   private handleDrag(): void {
     this.handleInitDragVarible();
 
-    const {
-      dragContainer,
-      dragItems,
-    } = this;
-    const {
-      animate,
-    } = SortDraggable.defaultProps;
+    const { dragItems } = this;
+    const { animate } = SortDraggable.defaultProps;
 
     dragItems.forEach((target) => {
       utilityDOM.setAttr(target, {
@@ -453,51 +508,25 @@ export class SortDraggable {
       });
 
       target.addEventListener('dragstart', () => {
-        // 存储被拖拽元素
-        this.origin = target;
-        this.position.originBeforeRect = this.origin.getBoundingClientRect();
-
-        utilityDOM.addClass(this.origin, 'ddzy-drag-origin-active');
+        this.handleDragStart(target);
       });
 
       target.addEventListener('dragenter', () => {
-        this.position.targetBeforeRect = target.getBoundingClientRect();
-
-        // 排序依据(移动方向)有两种方式
-        //    1. 递归(迭代)DOM树, 找origin & target的位置(√)
-        //    2. 维护一个DOM排序数组
-        const originIndex = SortDraggable._aidedFindIndex(this.origin, 0);
-        const targetIndex = SortDraggable._aidedFindIndex(target, 0);
-        const diff = targetIndex - originIndex;
-        diff > 0
-          ? (
-            dragContainer.insertBefore(this.origin, (
-              target.nextElementSibling as HTMLLIElement
-            ))
-          )
-          : (
-            dragContainer.insertBefore(this.origin, target)
-          );
-
-        // ?: insert后的新位置, `animate`时只需交换两者位置信息即可
-        this.position.originAfterRect = this.origin.getBoundingClientRect();
-        this.position.targetAfterRect = target.getBoundingClientRect();
-
-        // ?: [animate]配置项
+        this.handleDragEnter(target);
+        // ?: 是否启用过渡
         animate && this.handleDragAnimation(target);
       });
 
       target.addEventListener('dragleave', () => {
-        utilityDOM.removeClass(target, 'ddzy-drag-target-active');
+        this.handleDragLeave(target);
       });
 
       target.addEventListener('dragover', (e) => {
-        e.preventDefault();
+        this.handleDragOver(e);
       });
 
       target.addEventListener('drop', () => {
-        utilityDOM.removeClass(this.origin, 'ddzy-drag-origin-active');
-        utilityDOM.removeClass(this.origin, 'ddzy-drag-target-active');
+        this.handleDrop();
       });
     });
   }
