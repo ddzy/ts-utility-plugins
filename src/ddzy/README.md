@@ -314,6 +314,20 @@ export interface IStaticDataSourceParams {
 | onDragOverHook        | (origin: HTMLElement, target: HTMLElement) => void | false   | 在目标对象上持续拖拽时的钩子 |
 | onDropHook            | (origin: HTMLElement) => void                      | false   | 放置拖拽对象时的钩子         |
 
+### e. 问题记录
+
+> **Q**: 关于draggable的事件触发时机?
+
+***A***: source(`ondragstart`、`ondrag`、`ondragend`), target(`ondragenter`、`ondragover`、`ondragleave`、`ondrop`)
+
+> **Q**: `ondrop`事件无法触发?
+
+***A***: `ondragover`必须进行`e.preventDefault()`
+
+> **Q**: 父元素设置`draggable`, 子元素会触发drag事件
+
+***A***: 给所有子元素添加`pointer-events: none`.
+
 ## utility
 
 一系列工具函数, [项目目录](https://github.com/ddzy/ts-utility-plugins/tree/master/src/ddzy/utility).
