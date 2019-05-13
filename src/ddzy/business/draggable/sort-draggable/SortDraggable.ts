@@ -378,19 +378,6 @@ export class SortDraggable {
     }
   }
 
-  /**
-   * drag相关的变量提取, 考虑到后续可能会用到
-   */
-  private aidedInitDragVarible(): void {
-    this.dragContainer = utilityDOM.getEle(
-      '.ddzy-drag-main-list'
-    ) as HTMLUListElement;
-    this.dragItems = Array.from(
-      utilityDOM.getAllEle(
-        '.ddzy-drag-list-item'
-      ) as ArrayLike<HTMLLIElement>
-    );
-  }
 
   private handleRenderDOM(): void {
     const dom = this.aidedCreateDOM();
@@ -402,13 +389,63 @@ export class SortDraggable {
     this.aidedMountStyle(style);
   }
 
+  /**
+   * drag相关的变量提取, 考虑到后续可能会用到
+   */
+  private handleInitDragVarible(): void {
+    this.dragContainer = utilityDOM.getEle(
+      '.ddzy-drag-main-list'
+    ) as HTMLUListElement;
+    this.dragItems = Array.from(
+      utilityDOM.getAllEle(
+        '.ddzy-drag-list-item'
+      ) as ArrayLike<HTMLLIElement>
+    );
+  }
+
+  private handleDragAnimation(
+    target: HTMLElement,
+  ): void {
+    const originDiffDistance = this.position.originAfterRect.top - this.position.originBeforeRect.top;
+    const targetDiffDistance = this.position.targetAfterRect.top - this.position.targetBeforeRect.top;
+
+    // ?: [animate] - 先置origin & target于原位(animate配置项必须)
+    utilityDOM.setCss(this.origin, {
+      transition: 'none',
+      transform: `translateY(${-originDiffDistance}px)`,
+    });
+    utilityDOM.setCss(target, {
+      transition: 'none',
+      transform: `translateY(${-targetDiffDistance}px)`,
+    });
+
+    utilityDOM.addClass(target, 'ddzy-drag-target-active');
+
+    // ?: 由于origin移动到了新位置, 所以此处需更新其beforeRect
+    this.position.originBeforeRect = this.position.originAfterRect;
+
+    setTimeout(() => {
+      utilityDOM.setCss(this.origin, {
+        transition: `all .3s ease`,
+        transform: `translateY(${0}px)`,
+      });
+      utilityDOM.setCss(target, {
+        transition: `all .3s ease`,
+        transform: `translateY(${0}px)`,
+      });
+    }, 0);
+  }
+
   private handleDrag(): void {
-    this.aidedInitDragVarible();
+    this.handleInitDragVarible();
 
     const {
       dragContainer,
       dragItems,
     } = this;
+    const {
+      animate,
+    } = SortDraggable.defaultProps;
 
     dragItems.forEach((target) => {
       utilityDOM.setAttr(target, {
@@ -434,50 +471,33 @@ export class SortDraggable {
         const diff = targetIndex - originIndex;
         diff > 0
           ? (
-              dragContainer.insertBefore(this.origin, (
-                target.nextElementSibling as HTMLLIElement
-              ))
-            )
+            dragContainer.insertBefore(this.origin, (
+              target.nextElementSibling as HTMLLIElement
+            ))
+          )
           : (
-              dragContainer.insertBefore(this.origin, target)
-            );
+            dragContainer.insertBefore(this.origin, target)
+          );
 
         // ?: insert后的新位置, `animate`时只需交换两者位置信息即可
         this.position.originAfterRect = this.origin.getBoundingClientRect();
         this.position.targetAfterRect = target.getBoundingClientRect();
 
-        const originDiffDistance = this.position.originAfterRect.top - this.position.originBeforeRect.top;
-        const targetDiffDistance = this.position.targetAfterRect.top - this.position.targetBeforeRect.top;
-
-        // ?: [animate] - 先置origin & target于原位(animate配置项必须)
-        utilityDOM.setCss(this.origin, {
-          transition: 'none',
-          transform: `translateY(${-originDiffDistance}px)`,
-        });
-        utilityDOM.setCss(target, {
-          transition: 'none',
-          transform: `translateY(${-targetDiffDistance}px)`,
-        });
-
-        utilityDOM.addClass(target, 'ddzy-drag-target-active');
-
-        // ?: 由于origin移动到了新位置, 所以此处需更新其beforeRect
-        this.position.originBeforeRect = this.position.originAfterRect;
-
-        setTimeout(() => {
-          utilityDOM.setCss(this.origin, {
-            transition: `all .3s ease`,
-            transform: `translateY(${0}px)`,
-          });
-          utilityDOM.setCss(target, {
-            transition: `all .3s ease`,
-            transform: `translateY(${0}px)`,
-          });
-        }, 0);
+        // ?: [animate]配置项
+        animate && this.handleDragAnimation(target);
       });
 
       target.addEventListener('dragleave', () => {
         utilityDOM.removeClass(target, 'ddzy-drag-target-active');
+      });
+
+      target.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+
+      target.addEventListener('drop', () => {
+        utilityDOM.removeClass(this.origin, 'ddzy-drag-origin-active');
+        utilityDOM.removeClass(this.origin, 'ddzy-drag-target-active');
       });
     });
   }
