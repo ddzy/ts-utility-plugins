@@ -86,6 +86,11 @@ export interface ISortDraggableProps {
   dragOriginStyle?: Partial<CSSStyleDeclaration>;
   dragOriginActiveStyle?: Partial<CSSStyleDeclaration>;
   dragTargetActiveStyle?: Partial<CSSStyleDeclaration>;
+  onDragStartHook?: (origin: HTMLElement) => void;
+  onDragEnterHook?: (origin: HTMLElement, target: HTMLElement) => void;
+  onDragLeaveHook?: (origin: HTMLElement, target: HTMLElement) => void;
+  onDragOverHook?: (origin: HTMLElement, target: HTMLElement) => void;
+  onDropHook?: (origin: HTMLElement, target: HTMLElement) => void;
 };
 export interface IStaticDataSourceParams {
   titleText?: string;
@@ -98,7 +103,7 @@ export interface IStaticDataSourceParams {
 /**
  * TODO: 提取`aidedFindIndex` -> utilityDOM
  * TODO: origin & target样式处理 [√]
- * TODO: animate配置项
+ * TODO: animate配置项 [√]
  * TODO: hooks钩子
  */
 
@@ -168,6 +173,11 @@ export class SortDraggable {
       opacity: '.5',
     },
     animate: true,
+    onDragStartHook(_origin: HTMLElement) { },
+    onDragEnterHook(_origin: HTMLElement, _target: HTMLElement) { },
+    onDragLeaveHook(_origin: HTMLElement, _target: HTMLElement) { },
+    onDragOverHook(_origin: HTMLElement, _target: HTMLElement) { },
+    onDropHook(_origin: HTMLElement, _target: HTMLElement) { },
   };
 
   public constructor(
@@ -500,32 +510,45 @@ export class SortDraggable {
     this.handleInitDragVarible();
 
     const { dragItems } = this;
-    const { animate } = SortDraggable.defaultProps;
+    const {
+      animate,
+      onDragStartHook,
+      onDragEnterHook,
+      onDragOverHook,
+      onDragLeaveHook,
+      onDropHook,
+    } = SortDraggable.defaultProps;
 
+    // TODO: 事件委托
     dragItems.forEach((target) => {
       utilityDOM.setAttr(target, {
         draggable: 'true',
       });
 
       target.addEventListener('dragstart', () => {
+        onDragStartHook(this.origin);
         this.handleDragStart(target);
       });
 
       target.addEventListener('dragenter', () => {
+        onDragEnterHook(this.origin, target);
         this.handleDragEnter(target);
         // ?: 是否启用过渡
         animate && this.handleDragAnimation(target);
       });
 
       target.addEventListener('dragleave', () => {
+        onDragLeaveHook(this.origin, target);
         this.handleDragLeave(target);
       });
 
       target.addEventListener('dragover', (e) => {
+        onDragOverHook(this.origin, target);
         this.handleDragOver(e);
       });
 
       target.addEventListener('drop', () => {
+        onDropHook(this.origin, target);
         this.handleDrop();
       });
     });
