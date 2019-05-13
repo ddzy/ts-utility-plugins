@@ -94,9 +94,7 @@ export interface ISortDraggableProps {
 };
 export interface IStaticDataSourceParams {
   titleText?: string;
-  titleStyle?: {};
   contentText?: string;
-  contentStyle?: {};
 };
 
 
@@ -128,33 +126,23 @@ export class SortDraggable {
     dataSource: [
       {
         titleText: '1',
-        titleStyle: {},
         contentText: '第一项的内容',
-        contentStyle: {},
       },
       {
         titleText: '2',
-        titleStyle: {},
         contentText: '第二项的内容',
-        contentStyle: {},
       },
       {
         titleText: '3',
-        titleStyle: {},
         contentText: '第三项的内容',
-        contentStyle: {},
       },
       {
         titleText: '4',
-        titleStyle: {},
         contentText: '第四项的内容',
-        contentStyle: {},
       },
       {
         titleText: '5',
-        titleStyle: {},
         contentText: '第五项的内容',
-        contentStyle: {},
       },
     ],
     dragWrapperStyle: {
@@ -308,6 +296,10 @@ export class SortDraggable {
       ul {
         list-style-type: none;
       }
+      #ddzy-drag-wrapper div {
+        box-sizing: border-box;
+        overflow: hidden;
+      }
       #ddzy-drag-wrapper {
         height: 100%;
         ${tempWrapperStyle}
@@ -343,6 +335,11 @@ export class SortDraggable {
         line-height: 2.5;
         color: #fff;
         text-align: center;
+      }
+      .ddzy-drag-item-title img {
+        display: block;
+        max-width: 100%;
+        height: 100%;
       }
       .ddzy-drag-item-content-box {
         flex: 5;
