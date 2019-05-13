@@ -41,6 +41,7 @@ import utilityDOM from '../../../utility/dom/index';
 
 
 // TODO: 添加至utility/others
+// 错误处理
 function invariant(
   condition: boolean,
   message: string,
@@ -51,16 +52,40 @@ function invariant(
     `);
   }
 }
+// TODO: 添加至utility/others
+// 驼峰 -> 连字符形式
+function convertHumpToHyphen(hump: string): string {
+  const reg: RegExp = /[A-Z]+/;
+
+  return hump.replace(reg, (m) => {
+    return `-${m.toLowerCase()}`;
+  });
+}
+// TODO: 添加至utility/dom
+// 键值对 -> cssText
+// pair
+function convertPairToCSSText(
+  pair: Partial<CSSStyleDeclaration>,
+): string {
+  let text = '';
+
+  for (const key in pair) {
+    const value = Reflect.get(pair, key);
+    text += `${convertHumpToHyphen(key)}: ${value}; `;
+  }
+
+  return text;
+}
 
 
 export interface ISortDraggableProps {
   container: string;
   dataSource?: IStaticDataSourceParams[];
   animate?: boolean;
-  dragWrappgerStyle?: IStaticDragWrapperStyle;
-  dragOriginStyle?: IStaticDragOriginStyle;
-  dragTargetStyle?: IStaitcDragTargetStyle;
-  gap?: number;
+  dragWrapperStyle?: Partial<CSSStyleDeclaration>;
+  dragOriginStyle?: Partial<CSSStyleDeclaration>;
+  dragOriginActiveStyle?: Partial<CSSStyleDeclaration>;
+  dragTargetActiveStyle?: Partial<CSSStyleDeclaration>;
 };
 export interface IStaticDataSourceParams {
   titleText?: string;
@@ -68,19 +93,11 @@ export interface IStaticDataSourceParams {
   contentText?: string;
   contentStyle?: {};
 };
-export interface IStaticDragWrapperStyle {
-  'background-color': string;
-};
-export interface IStaticDragOriginStyle {
-};
-export interface IStaitcDragTargetStyle {
-  'opacity': number;
-};
 
 
 /**
  * TODO: 提取`aidedFindIndex` -> utilityDOM
- * TODO: origin & target样式处理
+ * TODO: origin & target样式处理 [√]
  * TODO: animate配置项
  * TODO: hooks钩子
  */
@@ -136,15 +153,21 @@ export class SortDraggable {
       },
     ],
     dragWrapperStyle: {
-      'background-color': '#ccc',
+      backgroundColor: '#fff',
     },
     dragOriginStyle: {
+      margin: '8px 0',
+      border: '1px solid #ebeef5',
+      borderRadius: '4px',
+      boxShadow: '0 2px 12px 0 rgba(0, 0, 0, .1)',
     },
-    dragTargetStyle: {
-      opacity: .5,
+    dragOriginActiveStyle: {
+      boxShadow: '0 2px 12px 0 rgba(0, 0, 0, .4)',
+    },
+    dragTargetActiveStyle: {
+      opacity: '.5',
     },
     animate: true,
-    tap: 8,
   };
 
   public constructor(
@@ -255,6 +278,18 @@ export class SortDraggable {
   }
 
   private aidedCreateStyle(): string {
+    const {
+      dragWrapperStyle,
+      dragOriginStyle,
+      dragOriginActiveStyle,
+      dragTargetActiveStyle,
+    } = SortDraggable.defaultProps;
+
+    const tempWrapperStyle = convertPairToCSSText(dragWrapperStyle);
+    const tempOriginStyle = convertPairToCSSText(dragOriginStyle);
+    const tempOriginActiveStyle = convertPairToCSSText(dragOriginActiveStyle);
+    const tempTargetActiveStyle = convertPairToCSSText(dragTargetActiveStyle);
+
     const style: string = `
       body, ul, li {
         margin: 0;
@@ -265,7 +300,7 @@ export class SortDraggable {
       }
       #ddzy-drag-wrapper {
         height: 100%;
-        // background-color: #ddd;
+        ${tempWrapperStyle}
       }
       .ddzy-drag-main {
         heigth: 100%;
@@ -282,12 +317,9 @@ export class SortDraggable {
         overflow: hidden;
         cursor: move;
         min-height: 40px;
-        margin: 8px 0;
         background-color: #fff;
         color: #303133;
-        border: 1px solid #ebeef5;
-        border-radius: 4px;
-        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+        ${tempOriginStyle}
         transition: .3s all ease;
       }
       .ddzy-drag-item-title-box {
@@ -310,6 +342,15 @@ export class SortDraggable {
         line-height: 2.5;
         color: #666;
       }
+
+      /* Active Classes(Configurations) */
+      .ddzy-drag-origin-active {
+        ${tempOriginActiveStyle}
+      }
+      .ddzy-drag-target-active {
+        ${tempTargetActiveStyle}
+      }
+
     `;
 
     return style;
@@ -350,7 +391,6 @@ export class SortDraggable {
     );
   }
 
-
   private handleRenderDOM(): void {
     const dom = this.aidedCreateDOM();
     this.aidedMountDOM(dom);
@@ -378,6 +418,8 @@ export class SortDraggable {
         // 存储被拖拽元素
         this.origin = target;
         this.position.originBeforeRect = this.origin.getBoundingClientRect();
+
+        utilityDOM.addClass(this.origin, 'ddzy-drag-origin-active');
       });
 
       target.addEventListener('dragenter', () => {
@@ -416,6 +458,8 @@ export class SortDraggable {
           transform: `translateY(${-targetDiffDistance}px)`,
         });
 
+        utilityDOM.addClass(target, 'ddzy-drag-target-active');
+
         // ?: 由于origin移动到了新位置, 所以此处需更新其beforeRect
         this.position.originBeforeRect = this.position.originAfterRect;
 
@@ -429,6 +473,10 @@ export class SortDraggable {
             transform: `translateY(${0}px)`,
           });
         }, 0);
+      });
+
+      target.addEventListener('dragleave', () => {
+        utilityDOM.removeClass(target, 'ddzy-drag-target-active');
       });
     });
   }
