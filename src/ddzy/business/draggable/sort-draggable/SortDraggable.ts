@@ -304,7 +304,7 @@ export class SortDraggable {
       }
       .ddzy-drag-main {
         heigth: 100%;
-        padding: 10px;
+        padding: 0.625rem;
       }
       .ddzy-drag-main-list {
         display: flex;
@@ -316,7 +316,8 @@ export class SortDraggable {
         flex-direction: row;
         overflow: hidden;
         cursor: move;
-        min-height: 40px;
+        min-height: 2.5rem;
+        margin: 0.5rem 0;
         background-color: #fff;
         color: #303133;
         ${tempOriginStyle}
@@ -338,7 +339,7 @@ export class SortDraggable {
         pointer-events: none;
       }
       .ddzy-drag-item-content {
-        padding-left: 8px;
+        padding-left: 0.5rem;
         line-height: 2.5;
         color: #666;
       }
