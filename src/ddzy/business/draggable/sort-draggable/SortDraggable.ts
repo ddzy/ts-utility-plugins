@@ -1,8 +1,4 @@
 /**
- * @description 排序拖拽
- */
-
-/**
  * source:
  *    dragstart
  *    drag
@@ -28,15 +24,6 @@
  *      -> 保存上一步和本步的下标, 据下标大小判断.
  */
 
-/**
- * @param container 挂载容器
- * @param [dataSource] 元数据
- * @param [animate] 启用过渡
- * @param [dragWrapperStyle] 拖拽容器样式
- * @param [dragOriginStyle] 拖拽对象样式
- * @param [dragTargetStyle] 碰撞目标样式
- * @param [gap] 列表项间距
- */
 import utilityDOM from '../../../utility/dom/index';
 
 
@@ -96,14 +83,6 @@ export interface IStaticDataSourceParams {
   titleText?: string;
   contentText?: string;
 };
-
-
-/**
- * TODO: 提取`aidedFindIndex` -> utilityDOM
- * TODO: origin & target样式处理 [√]
- * TODO: animate配置项 [√]
- * TODO: hooks钩子
- */
 
 
 export class SortDraggable {
