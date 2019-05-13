@@ -78,8 +78,28 @@ export interface IStaitcDragTargetStyle {
 };
 
 
+/**
+ * TODO: 提取`aidedFindIndex` -> utilityDOM
+ * TODO: origin & target样式处理
+ * TODO: animate配置项
+ * TODO: hooks钩子
+ */
+
 
 export class SortDraggable {
+
+  public static _aidedFindIndex(
+    node: Element | null,
+    count: number,
+  ): any {
+    if (!node) {
+      return count;
+    }
+    return this._aidedFindIndex(
+      node.previousElementSibling,
+      ++count
+    );
+  }
 
   public static readonly defaultProps = {
     container: 'body',
@@ -133,12 +153,41 @@ export class SortDraggable {
     this.__init__(props);
   }
 
+
+  // 拖拽容器, origin任意父级
+  private dragContainer: HTMLElement = (
+    document.createElement('ul')
+  );
+  // 拖拽列表
+  private dragItems: HTMLElement[] = [
+    document.createElement('li'),
+  ];
+  // 保存被拖拽元素
+  private origin: HTMLElement = (
+    document.createElement('div')
+  );
+  // 储存拖拽前后, origin & target位置信息
+  private position = {
+    originBeforeRect: {
+      top: 0,
+    },
+    originAfterRect: {
+      top: 0,
+    },
+    targetBeforeRect: {
+      top: 0,
+    },
+    targetAfterRect: {
+      top: 0,
+    },
+  };
+
+
   private __init__(
     props: ISortDraggableProps,
   ): void {
     this._initProps(props);
     this.render();
-    this._initDrag();
   }
 
   private _initProps(
@@ -287,6 +336,21 @@ export class SortDraggable {
     }
   }
 
+  /**
+   * drag相关的变量提取, 考虑到后续可能会用到
+   */
+  private aidedInitDragVarible(): void {
+    this.dragContainer = utilityDOM.getEle(
+      '.ddzy-drag-main-list'
+    ) as HTMLUListElement;
+    this.dragItems = Array.from(
+      utilityDOM.getAllEle(
+        '.ddzy-drag-list-item'
+      ) as ArrayLike<HTMLLIElement>
+    );
+  }
+
+
   private handleRenderDOM(): void {
     const dom = this.aidedCreateDOM();
     this.aidedMountDOM(dom);
@@ -297,84 +361,53 @@ export class SortDraggable {
     this.aidedMountStyle(style);
   }
 
-  /**
-   * Create DOM tree and Style
-   */
-  private render(): void {
-    this.handleRenderDOM();
-    this.handleRenderStyle();
-  }
+  private handleDrag(): void {
+    this.aidedInitDragVarible();
 
-  /**
-   * Drag events
-   */
-  private _initDrag(): void {
+    const {
+      dragContainer,
+      dragItems,
+    } = this;
 
-    const originList = utilityDOM.getEle(
-      '.ddzy-drag-main-list'
-    ) as HTMLUListElement;
-    const originItem = Array.from(
-      utilityDOM.getAllEle(
-        '.ddzy-drag-list-item'
-      ) as ArrayLike<HTMLLIElement>
-    );
-
-    let origin: any = null;
-    let originBeforeRect: any = null;
-    let targetBeforeRect: any = null;
-    let originAfterRect = null;
-    let targetAfterRect = null
-
-    originItem.forEach((target) => {
-
+    dragItems.forEach((target) => {
       utilityDOM.setAttr(target, {
         draggable: 'true',
       });
 
-      // 拖拽开始
       target.addEventListener('dragstart', () => {
-        origin = target;
-        originBeforeRect = origin.getBoundingClientRect();
+        // 存储被拖拽元素
+        this.origin = target;
+        this.position.originBeforeRect = this.origin.getBoundingClientRect();
       });
 
       target.addEventListener('dragenter', () => {
-        targetBeforeRect = target.getBoundingClientRect();
+        this.position.targetBeforeRect = target.getBoundingClientRect();
 
-        const originIndex = this._aidedFindIndex(
-          origin,
-          0,
-        );
-        const targetIndex = this._aidedFindIndex(
-          target,
-          0,
-        );
+        // 排序依据(移动方向)有两种方式
+        //    1. 递归(迭代)DOM树, 找origin & target的位置(√)
+        //    2. 维护一个DOM排序数组
+        const originIndex = SortDraggable._aidedFindIndex(this.origin, 0);
+        const targetIndex = SortDraggable._aidedFindIndex(target, 0);
         const diff = targetIndex - originIndex;
-
         diff > 0
           ? (
-            originList.insertBefore(
-              origin,
-              (target.nextElementSibling as HTMLLIElement)
-              )
+              dragContainer.insertBefore(this.origin, (
+                target.nextElementSibling as HTMLLIElement
+              ))
             )
           : (
-              originList.insertBefore(origin, target)
+              dragContainer.insertBefore(this.origin, target)
             );
 
-        // Animation
-        originAfterRect = origin.getBoundingClientRect();
-        targetAfterRect = target.getBoundingClientRect();
+        // ?: insert后的新位置, `animate`时只需交换两者位置信息即可
+        this.position.originAfterRect = this.origin.getBoundingClientRect();
+        this.position.targetAfterRect = target.getBoundingClientRect();
 
-        const originDiffDistance = originAfterRect.top - originBeforeRect.top;
-        const targetDiffDistance = targetAfterRect.top - targetBeforeRect.top;
+        const originDiffDistance = this.position.originAfterRect.top - this.position.originBeforeRect.top;
+        const targetDiffDistance = this.position.targetAfterRect.top - this.position.targetBeforeRect.top;
 
-        console.log(originDiffDistance);
-
-        /**
-         * 1. 移动至before位置
-         * 2. 过渡至after位置
-         */
-        utilityDOM.setCss(origin, {
+        // ?: [animate] - 先置origin & target于原位(animate配置项必须)
+        utilityDOM.setCss(this.origin, {
           transition: 'none',
           transform: `translateY(${-originDiffDistance}px)`,
         });
@@ -383,10 +416,11 @@ export class SortDraggable {
           transform: `translateY(${-targetDiffDistance}px)`,
         });
 
-        originBeforeRect = originAfterRect;
+        // ?: 由于origin移动到了新位置, 所以此处需更新其beforeRect
+        this.position.originBeforeRect = this.position.originAfterRect;
 
         setTimeout(() => {
-          utilityDOM.setCss(origin, {
+          utilityDOM.setCss(this.origin, {
             transition: `all .3s ease`,
             transform: `translateY(${0}px)`,
           });
@@ -399,17 +433,10 @@ export class SortDraggable {
     });
   }
 
-  private _aidedFindIndex(
-    node: Element | null,
-    count: number,
-  ): any {
-    if (!node) {
-      return count;
-    }
-    return this._aidedFindIndex(
-      node.previousElementSibling,
-      ++count
-    );
+  private render(): void {
+    this.handleRenderDOM();
+    this.handleRenderStyle();
+    this.handleDrag();
   }
 
 };
