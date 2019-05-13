@@ -36,3 +36,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 测试`utility/`相关工具函数
+
+## [2019-5-13]
+
+### Added
+
+- 新增`business/draggable/SortDraggable`插件

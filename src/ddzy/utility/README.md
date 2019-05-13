@@ -2,13 +2,13 @@
 
 详细罗列出所有的工具函数, 主文档参考[这里](../README.md)
 
-## 一、说明
+## 说明
 
 `utility`总共分为`n`多个大区块——`dom`相关、`Array`相关...诸如此类.
 
-## 二、目录
+## 目录
 
-- [DOM](#四DOM)
+- [DOM](#DOM)
   - [getEle](#getele)
   - [getAllEle](#getAllEle)
   - [setAttr](#setAttr)
@@ -22,26 +22,29 @@
   - [traversalDOMWithDFS](#traversalDOMWithDFS)
   - [traversalDOMWithNodeIterator](#traversaldomwithnodeiterator)
   - [traversalDOMWithTreeWalker](#traversaldomwithtreewalker)
-- [Array](#五Array)
-- [Object](#六Object)
-- [String](#七String)
-- [Number](#八Number)
+  - [convertPairToCSSText](#convertPairToCSSText)
+- [Array](#Array)
+- [Object](#Object)
+- [String](#String)
+- [Number](#Number)
   - [getRadian](#getRadian)
   - [getFullRandom](#getFullRandom)
   - [getAnyRandom](#getAnyRandom)
-- [Function](#九Function)
+- [Function](#Function)
   - [isFunction](#isfunction)
-- ...
+- [Others](#Others)
+  - [invariant](#invariant)
+  - [convertHumpToHyphen](#convertHumpToHyphen)
 
-## 三、DOM
+## DOM
 
 ### isDOM
 
-#### 说明
+#### a. 说明
 
 检查是否DOM元素
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.isDOM('ddzy') // false
@@ -50,11 +53,11 @@ utilityDOM.isDOM(document.createElement('div')) // true
 
 ### setCss
 
-#### 说明
+#### a. 说明
 
 设置单个DOM样式
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.setCss(document.createElement('div'), {
@@ -65,11 +68,11 @@ utilityDOM.setCss(document.createElement('div'), {
 
 ### setAttr
 
-#### 说明
+#### a. 说明
 
 设置单个DOM属性
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.setAttr(document.createElement('div'), {
@@ -80,11 +83,11 @@ utilityDOM.setAttr(document.createElement('div'), {
 
 ### getEle
 
-#### 说明
+#### a. 说明
 
 获取指定单个DOM元素
 
-#### 用法
+#### b. 用法
 
 ```ts
 const node = utilityDOM.getEle('#app');
@@ -92,11 +95,11 @@ const node = utilityDOM.getEle('#app');
 
 ### getAttr
 
-#### 说明
+#### a. 说明
 
 获取DOM的特定属性值
 
-#### 用法
+#### b. 用法
 
 ```ts
 const value = utilityDOM.getAttr(
@@ -107,11 +110,11 @@ const value = utilityDOM.getAttr(
 
 ### getAllEle
 
-#### 说明
+#### a. 说明
 
 获取指定的所有DOM元素
 
-#### 用法
+#### b. 用法
 
 ```ts
 const list = utilityDOM.getAllEle('.text');
@@ -119,11 +122,11 @@ const list = utilityDOM.getAllEle('.text');
 
 ### addClass
 
-#### 说明
+#### a. 说明
 
 指定DOM添加单个类名
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.addClass(document.createElement('div'), 'text');
@@ -131,11 +134,11 @@ utilityDOM.addClass(document.createElement('div'), 'text');
 
 ### removeClass
 
-#### 说明
+#### a. 说明
 
 移出指定DOM元素的单个类名
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.removeClass(document.createElement('div'), 'text');
@@ -143,11 +146,11 @@ utilityDOM.removeClass(document.createElement('div'), 'text');
 
 ### traversalDOMWithBFS
 
-#### 说明
+#### a. 说明
 
 BFS遍历指定DOM节点
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.traversalDOMWithBFS(
@@ -160,11 +163,11 @@ utilityDOM.traversalDOMWithBFS(
 
 ### traversalDOMWithDFS
 
-#### 说明
+#### a. 说明
 
 DFS遍历指定DOM节点
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.traversalDOMWithDFS(
@@ -177,11 +180,11 @@ utilityDOM.traversalDOMWithDFS(
 
 ### traversalDOMWithNodeIterator
 
-#### 说明
+#### a. 说明
 
 `NodeIterator`遍历指定DOM节点
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.traversalDOMWithNodeIterator(
@@ -194,11 +197,11 @@ utilityDOM.traversalDOMWithNodeIterator(
 
 ### traversalDOMWithTreeWalker
 
-#### 说明
+#### a. 说明
 
 `TreeWalker`遍历指定DOM节点
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.traversalDOMWithTreeWalker(
@@ -211,11 +214,11 @@ utilityDOM.traversalDOMWithTreeWalker(
 
 ### throttle
 
-#### 说明
+#### a. 说明
 
 节流函数
 
-#### 用法
+#### b. 用法
 
 ```ts
 function log(e) {
@@ -227,27 +230,45 @@ const foo = utilityDOM.throttle(500, log);
 window.addEventListener('resize', foo);
 ```
 
-## 四、Array
+### convertPairToCSSText
+
+#### a. 说明
+
+将给定的`CSS样式键值对`转化为相应的`cssText`字符串.
+
+#### b. 用法
+
+```ts
+const rules = {
+  border: '1px dotted red',
+  backgroundColor: 'blue',
+};
+
+// 'border: 1px dotted red; background-color: blue; '
+utilityDOM.convertPairToCSSText(rules);
+```
+
+## Array
 
 updating...
 
-## 五、Object
+## Object
 
 updating...
 
-## 六、String
+## String
 
 updating...
 
-## 七、Number
+## Number
 
 ### getRadian
 
-#### 说明
+#### a. 说明
 
 角度值转`弧度`值
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.getRadian(90); //1.57....
@@ -255,13 +276,13 @@ utilityDOM.getRadian(90); //1.57....
 
 ### getFullRandom
 
-#### 说明
+#### a. 说明
 
 获取指定范围内的随机`整数`
 
 > 注意区分其与[getAnyRandom](#getanyrandom)的异同
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.getFullRandom(1, 10); // 9, 4, 5, ...
@@ -269,29 +290,62 @@ utilityDOM.getFullRandom(1, 10); // 9, 4, 5, ...
 
 ### getAnyRandom
 
-#### 说明
+#### a. 说明
 
 获取指定范围内的随机`任意数`
 
 > 注意区分其与[getFullRandom](#getfullrandom)的异同
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.getAnyRandom(1, 10); // 3, 4, 5, 2.2, 7.88 ...
 ```
 
-## 八、Function
+## Function
 
 ### isFunction
 
-#### 说明
+#### a. 说明
 
 检查是否函数
 
-#### 用法
+#### b. 用法
 
 ```ts
 utilityDOM.isFunction({}); // false
 utilityDOM.isFunction(new Function()); // true
+```
+
+## Others
+
+### invariant
+
+#### a. 说明
+
+自定义的处理异常方法
+
+#### b. 用法
+
+```ts
+// 'Ddzy's plugins error: i will be throwed.'
+utilityOthers.invariant(true, 'i will be throwed');
+
+// undefined
+utilityOthers.invariant(false, '...');
+```
+
+### convertHumpToHyphen
+
+#### a. 说明
+
+将`驼峰`格式字符串转为`连字符`形式
+
+#### b. 用法
+
+```ts
+const hump = 'backgroundColor';
+
+// background-color
+const hyphen = utilityOthers.convertHumpToHyphen(hump);
 ```

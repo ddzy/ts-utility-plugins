@@ -1,3 +1,5 @@
+import utilityOthers from '../others/index';
+
 export interface IStaticPairs {
   [key: string]: any;
 };
@@ -17,6 +19,8 @@ export interface IUtilityDOMProps {
   traversalDOMWithDFS(container: HTMLElement, callback: (node: HTMLElement) => void): void;
   traversalDOMWithNodeIterator(container: HTMLElement, callback: (node: HTMLElement) => void): void;
   traversalDOMWithTreeWalker(container: HTMLElement, callback: (node: HTMLElement) => void): void;
+
+  convertPairToCSSText(pair: Partial<CSSStyleDeclaration>): string;
 };
 
 
@@ -213,6 +217,21 @@ const utilityDOM: IUtilityDOMProps = {
     while (( currentNode = treeWalker.nextNode() )) {
       callback && callback(( currentNode as HTMLElement ));
     }
+  },
+
+  /**
+   * 样式组转化为内联样式(style.cssText)
+   * @param pair CSS样式键值对
+   */
+  convertPairToCSSText(pair) {
+    let text = '';
+
+    for (const key in pair) {
+      const value = Reflect.get(pair, key);
+      text += `${utilityOthers.convertHumpToHyphen(key)}: ${value}; `;
+    }
+
+    return text;
   },
 };
 
