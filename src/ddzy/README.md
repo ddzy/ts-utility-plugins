@@ -304,10 +304,10 @@ export interface IStaticDataSourceParams {
 | container             | HTMLElement                                        | true    | 挂载容器                     |
 | dataSource            | IStaticDataSourceParams                            | false   | 源数据                       |
 | animate               | boolean                                            | false   | 是否开启过渡效果             |
-| dragWrapperStyle      | Partial<CSSStyleDeclaration>                       | false   | 拖拽外部容器的样式           |
-| dragOriginStyle       | Partial<CSSStyleDeclaration>                       | false   | 拖拽对象的初始样式           |
-| dragOriginActiveStyle | Partial<CSSStyleDeclaration>                       | false   | 拖拽该对象时的样式           |
-| dragTargetActiveStyle | Partial<CSSStyleDeclaration>                       | false   | 拖拽时目标对象的样式         |
+| dragWrapperStyle      | Partial\<CSSStyleDeclaration>                       | false   | 拖拽外部容器的样式           |
+| dragOriginStyle       | Partial\<CSSStyleDeclaration>                       | false   | 拖拽对象的初始样式           |
+| dragOriginActiveStyle | Partial\<CSSStyleDeclaration>                       | false   | 拖拽该对象时的样式           |
+| dragTargetActiveStyle | Partial\<CSSStyleDeclaration>                       | false   | 拖拽时目标对象的样式         |
 | onDragStartHook       | (origin: HTMLElement) => void                      | false   | 开始拖拽时的钩子             |
 | onDragEnterHook       | (origin: HTMLElement, target: HTMLElement) => void | false   | 拖拽进入目标时的钩子         |
 | onDragLeaveHook       | (origin: HTMLElement, target: HTMLElement) => void | false   | 拖拽离开目标时的钩子         |
