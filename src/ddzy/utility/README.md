@@ -23,6 +23,7 @@
   - [traversalDOMWithNodeIterator](#traversaldomwithnodeiterator)
   - [traversalDOMWithTreeWalker](#traversaldomwithtreewalker)
   - [convertPairToCSSText](#convertPairToCSSText)
+  - [_querySelector](#_querySelector)
 - [Array](#Array)
 - [Object](#Object)
 - [String](#String)
@@ -246,6 +247,28 @@ const rules = {
 
 // 'border: 1px dotted red; background-color: blue; '
 utilityDOM.convertPairToCSSText(rules);
+```
+
+### _querySelector
+
+#### a. 说明
+
+简易的`querySelector`, 具体的实现可参考jQuery的`Sizzle`引擎
+
+#### b. 用法
+
+```html
+<div id="app">
+  <kbd>Ctrl + J</kbd>
+</div>
+```
+
+```ts
+utilityDOM._querySelector('#app');  // <div id="app"></div>
+utilityDOM._querySelector('kbd');  // <kbd>Ctrl + J</kbd>
+
+utilityDOM._querySelector('.text')  // null
+utilityDOM._querySelector('span')  // null
 ```
 
 ## Array
