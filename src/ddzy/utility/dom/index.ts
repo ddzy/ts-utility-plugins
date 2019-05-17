@@ -250,9 +250,9 @@ const utilityDOM: IUtilityDOMProps = {
       if ( matched[1] ) {
         return document.getElementById(matched[1]);
       } else if ( matched[2] ) {
-        return document.getElementsByClassName(matched[2])[0];
+        return document.getElementsByClassName(matched[2])[0] || null;
       } else {
-        return document.getElementsByTagName(matched[3])[0];
+        return document.getElementsByTagName(matched[3])[0] || null;
       }
     }
 
