@@ -42,3 +42,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 新增`business/draggable/SortDraggable`插件
+
+## [2019-5-17]
+
+### Added
+
+- 新增`utility/dom/_querySelector`工具函数
