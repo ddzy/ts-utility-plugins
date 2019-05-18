@@ -1,3 +1,5 @@
-import utilityDOM from './ddzy/utility/dom/index';
+import { Upload } from './ddzy/business/upload/index';
 
-utilityDOM._querySelector('div');
+new Upload.Dragger({
+  container: '#app',
+});
