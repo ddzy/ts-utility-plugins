@@ -14,6 +14,11 @@ import utilityDOM from "../../../utility/dom";
  * @param [onRemoveClickHook] 删除图片列表的某项触发
  */
 
+/**
+ * BUG1: 无法在ondrop内部直接使用`e.dataTransfer.files`获取文件列表, 需要自定义数组, 再遍历一遍;
+ * BUG2: ondrag和onclick无法共存, 导致无法追加自定义样式, 只需监听onmouseup, 并在其中自行调用`label`标签的click方法 - `label.click()`;
+ */
+
 
 export interface IDraggerUploadProps {
   container?: string;
@@ -33,6 +38,13 @@ export interface IStaticDraggerUploadSizeParams {
   max: number,
 };
 
+export interface IDraggerUploadState {
+  files: File[];
+  oContainer: HTMLDivElement,
+  oLabel: HTMLLabelElement,
+  oInput: HTMLInputElement,
+}
+
 
 export class DraggerUpload {
   public static readonly defaultProps = {
@@ -49,10 +61,22 @@ export class DraggerUpload {
     this.__init__(props);
   }
 
+
+  public readonly state: IDraggerUploadState = {
+    files: [],
+    oContainer: document.createElement('div'),
+    oLabel: document.createElement('label'),
+    oInput: document.createElement('input'),
+  };
+
+
   private __init__(props: IDraggerUploadProps): void {
     this._initProps(props);
     this._initDOM();
     this._initStyle();
+    this._initCommonEle();
+    this.handleDragUpload();
+    this.handleClickUpload();
   }
 
   private _initProps(
@@ -74,27 +98,42 @@ export class DraggerUpload {
     this.handleMountStyle(this.handleCreateStyle());
   }
 
+  /**
+   * 初始化一些常用的变量
+   */
+  private _initCommonEle(): void {
+    const oContainer = utilityDOM.getEle('.ddzy-upload-drag-container') as HTMLDivElement;
+    const oLabel = utilityDOM.getEle('.ddzy-upload-drag-main-content') as HTMLLabelElement;
+    const oInput = utilityDOM.getEle('.ddzy-upload-drag-main-input') as HTMLInputElement;
+
+    this.state.oContainer = oContainer;
+    this.state.oLabel = oLabel;
+    this.state.oInput = oInput;
+  }
+
   private handleCreateDOM(): string {
     let html: string = `
       <div id="ddzy-upload-wrapper">
         <div class="ddzy-upload-main">
           <!-- 拖拽容器 -->
-          <div class="ddzy-upload-drag-container">
-            <input id="ddzy-upload-drag-input" type="file" multiple="true" accept="image/jpg, image/jpeg, image/gif, image/png" style="display: none;" />
+          <div class="ddzy-upload-drag-container" draggable="true">
+            <div class="ddzy-upload-drag-main">
+              <input id="ddzy-upload-drag-main-input" class="ddzy-upload-drag-main-input" type="file" multiple="true" accept="image/jpg, image/jpeg, image/gif, image/png, image/ico" style="display: none;" />
 
-            <label for="ddzy-upload-drag-input" class="ddzy-upload-drag-content">
-              <div class="ddzy-upload-drag-icon-box">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-upload"></use>
-                </svg>
-              </div>
-              <div class="ddzy-upload-drag-title-box">
-                <h3>Click or Drag to upload</h3>
-              </div>
-              <div class="ddzy-upload-drag-description-box">
-                <p>Support mutiple files but only image</p>
-              </div>
-            </label>
+              <label for="ddzy-upload-drag-main-input" class="ddzy-upload-drag-main-content">
+                <div class="ddzy-upload-drag-icon-box">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-upload"></use>
+                  </svg>
+                </div>
+                <div class="ddzy-upload-drag-title-box">
+                  <h3>Click or Drag to upload</h3>
+                </div>
+                <div class="ddzy-upload-drag-description-box">
+                  <p>Support mutiple files but only image</p>
+                </div>
+              </label>
+            </div>
           </div>
           <!-- 文件列表 -->
           <div class="ddzy-upload-show-container">
@@ -181,14 +220,19 @@ export class DraggerUpload {
 
       /* 拖拽上传部分 */
       .ddzy-upload-drag-container {
-        border: 1px dashed #666;
-        background-color: #f7f7f7;
+        border: 1px dashed #ccc;
+        background-color: #f9f9f9;
         cursor: pointer;
+        transition: all .3s ease;
       }
       .ddzy-upload-drag-container:hover {
         border-color: #1890ff;
       }
-      .ddzy-upload-drag-content {
+      .ddzy-upload-drag-main {
+        pointer-events: none;
+      }
+
+      .ddzy-upload-drag-main-content {
         padding: 8px;
         text-align: center;
       }
@@ -266,6 +310,13 @@ export class DraggerUpload {
       .ddzy-upload-show-close {
         text-align: right;
       }
+
+
+      /* Active classes */
+      .ddzy-upload-drag-container-active {
+        border-color: #1890ff;
+        filter: blur(1px);
+      }
     `;
 
     return css;
@@ -288,5 +339,92 @@ export class DraggerUpload {
       `;;
       document.head.appendChild(oStyle);
     }
+  }
+
+  private handleDragEnter(): void {
+    const {
+      oContainer,
+    } = this.state;
+
+    utilityDOM.addClass(oContainer, 'ddzy-upload-drag-container-active');
+  }
+
+  private handleDragLeave(): void {
+    const {
+      oContainer,
+    } = this.state;
+
+    utilityDOM.removeClass(oContainer, 'ddzy-upload-drag-container-active');
+  }
+
+  private handleDragDrop(e: DragEvent): void {
+    const {
+      oContainer,
+    } = this.state;
+    const dataTransfer = e.dataTransfer as DataTransfer;
+
+    utilityDOM.removeClass(oContainer, 'ddzy-upload-drag-container-active');
+
+    Array.from(dataTransfer.files).forEach((v) => {
+      this.state.files.push(v);
+    });
+  }
+
+  private handleChange(e: Event): void {
+    const {
+      files,
+    } = this.state;
+
+    const target = e.target as HTMLInputElement;
+    const fileList = target.files as FileList;
+
+    Array.from(fileList).forEach((v) => {
+      files.push(v);
+    });
+  }
+
+  /**
+   * 处理拖拽形式上传到本地
+   */
+  private handleDragUpload(): void {
+    const { oContainer } = this.state;
+
+    // ? 解决浏览器默认打开预览窗口
+    document.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+    document.addEventListener('drop', (e) => {
+      e.preventDefault();
+    });
+
+    oContainer.addEventListener('dragenter', () => {
+      this.handleDragEnter();
+    });
+    oContainer.addEventListener('dragleave', () => {
+      this.handleDragLeave();
+    });
+    oContainer.addEventListener('drop', (e) => {
+      this.handleDragDrop(e);
+    });
+  }
+
+  /**
+   * 处理点击上传到本地
+   */
+  private handleClickUpload(): void {
+    const {
+      oContainer,
+      oLabel,
+      oInput,
+    } = this.state;
+
+    // ? 解决ondrag和onclick冲突, 导致无法弹起文件选框的问题
+    oContainer.addEventListener('mouseup', () => {
+      oLabel.click();
+    });
+
+    oInput.addEventListener('change', (e) => {
+      this.handleChange(e);
+    });
   }
 }
