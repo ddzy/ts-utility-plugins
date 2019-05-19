@@ -184,36 +184,36 @@ export class DraggerUpload {
       }
 
       #ddzy-upload-wrapper .ddzy-upload-drag-main-content {
-        padding: 8px;
+        padding: 0.5rem;
         text-align: center;
       }
       #ddzy-upload-wrapper .ddzy-upload-drag-icon-box {
-        margin-top: 8px;
+        margin-top: 0.5rem;
       }
       #ddzy-upload-wrapper .ddzy-upload-drag-title-box {
-        margin-top: 22px;
+        margin-top: 1.375rem;
       }
       #ddzy-upload-wrapper .ddzy-upload-drag-description-box {
-        margin-top: 10px;
-        margin-bottom: 16px;
+        margin-top: 0.625rem;
+        margin-bottom: 1rem;
       }
       #ddzy-upload-wrapper .ddzy-upload-drag-icon-box svg {
         color: #1890ff;
-        min-width: 40px;
-        min-height: 40px;
+        min-width: 2.5rem;
+        min-height: 2.5rem;
       }
       #ddzy-upload-wrapper .ddzy-upload-drag-title-box h3 {
         color: #888;
       }
       #ddzy-upload-wrapper .ddzy-upload-drag-description-box p {
         color: #999;
-        font-size: 14px;
+        font-size: 0.875rem;
       }
 
 
       /* 文件列表部分 */
       #ddzy-upload-wrapper .ddzy-upload-show-container {
-        margin-top: 8px;
+        margin-top: 0.5rem;
       }
       #ddzy-upload-wrapper .ddzy-upload-show-content {
 
@@ -223,8 +223,8 @@ export class DraggerUpload {
       }
       #ddzy-upload-wrapper .ddzy-upload-show-item {
         display: flex;
-        margin-top: 8px;
-        padding: 4px 8px;
+        margin-top: 0.5rem;
+        padding: 0.25rem 0.5rem;
         border: 1px solid #ddd;
         color: #666;
         transition: all .3s ease;
@@ -245,13 +245,13 @@ export class DraggerUpload {
         display: inline-block;
       }
       #ddzy-upload-wrapper .ddzy-upload-show-action-preview {
-        margin-left: 8px;
+        margin-left: 0.5rem;
       }
       #ddzy-upload-wrapper .ddzy-upload-show-action-send {
-        margin-left: 4px;
+        margin-left: 0.25rem;
       }
       #ddzy-upload-wrapper .ddzy-upload-show-action-name {
-        margin-left: 16px;
+        margin-left: 1rem;
       }
       #ddzy-upload-wrapper .ddzy-upload-show-action-loading {
 
