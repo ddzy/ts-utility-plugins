@@ -3,9 +3,9 @@ import utilityDOM from "../../../utility/dom";
 /**
  * @name 拖拽图片上传组件
  * @param [container] 挂载的节点
- * @param [onChangeHook] 文件更改事件
- * @param [size] 上传图片的限制大小(KB)
  * ? 下述为单项文件上传至本地列表时触发
+ * @param [onBeforeUpload] 文件上传前触发, 在此处进行文件格式、文件大小限制
+ * @param [onChangeHook] 文件更改事件
  * @param [onErrorHook] FileReader读取失败时触发
  * @param [onSuccessHook] FileReader读取成功时触发
  * ? 下述为单项文件上传服务器时触发
@@ -22,20 +22,15 @@ import utilityDOM from "../../../utility/dom";
 
 export interface IDraggerUploadProps {
   container?: string;
-  size?: IStaticDraggerUploadSizeParams,
 
   onChangeHook?: (e: Event) => void;
-
   onSuccessHook?: (e: FileReader) => void;
   onErrorHook?: (e: FileReader) => void;
+  onBeforeUploadHook?: (file: File, fileList: FileList) => boolean | Promise<File | undefined>;
 
   onUploadClickHook?: (file: File) => void;
   onPreviewClickHook?: (file: File) => void;
   onRemoveClickHook?: (file: File) => void;
-};
-export interface IStaticDraggerUploadSizeParams {
-  min: number,
-  max: number,
 };
 
 export interface IDraggerUploadState {
@@ -47,12 +42,8 @@ export interface IDraggerUploadState {
 
 
 export class DraggerUpload {
-  public static readonly defaultProps = {
+  public static readonly defaultProps: IDraggerUploadProps = {
     container: 'body',
-    size: {
-      min: 2,
-      max: 2048,
-    },
   };
 
   public constructor(
@@ -185,7 +176,7 @@ export class DraggerUpload {
       container,
     } = DraggerUpload.defaultProps;
 
-    const mountWrapper = utilityDOM.getEle(container);
+    const mountWrapper = utilityDOM.getEle(container as string);
 
     if (mountWrapper) {
       mountWrapper.innerHTML += text;
@@ -357,7 +348,40 @@ export class DraggerUpload {
     utilityDOM.removeClass(oContainer, 'ddzy-upload-drag-container-active');
   }
 
-  private handleDragDrop(e: DragEvent): void {
+
+  /**
+   * 处理文件上传前的钩子, 根据onBeforeUploadHook返回true或resolve来添加至本地列表, 反之不添加
+   * @param file 单个文件对象
+   * @param files 文件列表
+   */
+  private handleAppendToFiles(file: File, files: FileList): void {
+    const {
+      onBeforeUploadHook,
+    } = DraggerUpload.defaultProps;
+
+    if ( onBeforeUploadHook ) {
+      const result = onBeforeUploadHook(file, files);
+
+      if ( result instanceof Promise ) {
+        result
+          .then(( newFile ) => {
+            newFile instanceof File
+              ? (this.state.files.push(newFile))
+              : (this.state.files.push(file));
+          })
+          .catch(() => { })
+      } else {
+        if ( result ) {
+          this.state.files.push(file);
+        }
+      }
+    } else {
+      this.state.files.push(file);
+    }
+  }
+
+
+  private handleDrop(e: DragEvent): void {
     const {
       oContainer,
     } = this.state;
@@ -365,21 +389,17 @@ export class DraggerUpload {
 
     utilityDOM.removeClass(oContainer, 'ddzy-upload-drag-container-active');
 
-    Array.from(dataTransfer.files).forEach((v) => {
-      this.state.files.push(v);
+    Array.from(dataTransfer.files).forEach((file) => {
+      this.handleAppendToFiles(file, dataTransfer.files);
     });
   }
 
   private handleChange(e: Event): void {
-    const {
-      files,
-    } = this.state;
-
     const target = e.target as HTMLInputElement;
     const fileList = target.files as FileList;
 
-    Array.from(fileList).forEach((v) => {
-      files.push(v);
+    Array.from(fileList).forEach((file) => {
+      this.handleAppendToFiles(file, fileList);
     });
   }
 
@@ -404,7 +424,7 @@ export class DraggerUpload {
       this.handleDragLeave();
     });
     oContainer.addEventListener('drop', (e) => {
-      this.handleDragDrop(e);
+      this.handleDrop(e);
     });
   }
 
