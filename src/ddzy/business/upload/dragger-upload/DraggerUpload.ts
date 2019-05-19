@@ -1,20 +1,6 @@
 import utilityDOM from "../../../utility/dom";
 
 /**
- * @name 拖拽图片上传组件
- * @param [container] 挂载的节点
- * ? 下述为单项文件上传至本地列表时触发
- * @param [onBeforeUpload] 文件上传前触发, 在此处进行文件格式、文件大小限制
- * @param [onChangeHook] 文件更改事件
- * @param [onErrorHook] FileReader读取失败时触发
- * @param [onSuccessHook] FileReader读取成功时触发
- * ? 下述为单项文件上传服务器时触发
- * @param [onUploadClickHook] 自定义图片上传
- * @param [onPreviewClickHook] 自定义图片预览
- * @param [onRemoveClickHook] 删除图片列表的某项触发
- */
-
-/**
  * BUG1: 无法在ondrop内部直接使用`e.dataTransfer.files`获取文件列表, 需要自定义数组, 再遍历一遍;
  * BUG2: ondrag和onclick无法共存, 导致无法追加自定义样式, 只需监听onmouseup, 并在其中自行调用`label`标签的click方法 - `label.click()`;
  */
@@ -674,7 +660,6 @@ export class DraggerUpload {
     onChangeHook && onChangeHook(e);
 
     Array.from(fileList).forEach((file) => {
-      console.log(file);
       this.handleBeforeUploadHook(file, fileList);
     });
   }
