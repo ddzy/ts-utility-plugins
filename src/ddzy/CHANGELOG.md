@@ -48,3 +48,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 新增`utility/dom/_querySelector`工具函数
+
+## [2019-5-19]
+
+### Added
+
+- 新增`business/upload/DraggerUpload`插件
