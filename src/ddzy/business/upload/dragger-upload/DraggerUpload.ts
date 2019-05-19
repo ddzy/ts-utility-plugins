@@ -176,7 +176,7 @@ export class DraggerUpload {
       #ddzy-upload-wrapper {
         height: 100%;
       }
-      .ddzy-upload-main {
+      #ddzy-upload-wrapper .ddzy-upload-main {
         height: 100%;
         user-select: none;
         cursor: pointer;
@@ -184,58 +184,58 @@ export class DraggerUpload {
 
 
       /* 拖拽上传部分 */
-      .ddzy-upload-drag-container {
+      #ddzy-upload-wrapper .ddzy-upload-drag-container {
         border: 1px dashed #ccc;
         background-color: #f9f9f9;
         cursor: pointer;
         transition: all .3s ease;
       }
-      .ddzy-upload-drag-container:hover {
+      #ddzy-upload-wrapper .ddzy-upload-drag-container:hover {
         border-color: #1890ff;
       }
-      .ddzy-upload-drag-main {
+      #ddzy-upload-wrapper .ddzy-upload-drag-main {
         pointer-events: none;
       }
 
-      .ddzy-upload-drag-main-content {
+      #ddzy-upload-wrapper .ddzy-upload-drag-main-content {
         padding: 8px;
         text-align: center;
       }
-      .ddzy-upload-drag-icon-box {
+      #ddzy-upload-wrapper .ddzy-upload-drag-icon-box {
         margin-top: 8px;
       }
-      .ddzy-upload-drag-title-box {
+      #ddzy-upload-wrapper .ddzy-upload-drag-title-box {
         margin-top: 22px;
       }
-      .ddzy-upload-drag-description-box {
+      #ddzy-upload-wrapper .ddzy-upload-drag-description-box {
         margin-top: 10px;
         margin-bottom: 16px;
       }
-      .ddzy-upload-drag-icon-box svg {
+      #ddzy-upload-wrapper .ddzy-upload-drag-icon-box svg {
         color: #1890ff;
         min-width: 40px;
         min-height: 40px;
       }
-      .ddzy-upload-drag-title-box h3 {
+      #ddzy-upload-wrapper .ddzy-upload-drag-title-box h3 {
         color: #888;
       }
-      .ddzy-upload-drag-description-box p {
+      #ddzy-upload-wrapper .ddzy-upload-drag-description-box p {
         color: #999;
         font-size: 14px;
       }
 
 
       /* 文件列表部分 */
-      .ddzy-upload-show-container {
+      #ddzy-upload-wrapper .ddzy-upload-show-container {
         margin-top: 8px;
       }
-      .ddzy-upload-show-content {
+      #ddzy-upload-wrapper .ddzy-upload-show-content {
 
       }
-      .ddzy-upload-show-list {
+      #ddzy-upload-wrapper .ddzy-upload-show-list {
 
       }
-      .ddzy-upload-show-item {
+      #ddzy-upload-wrapper .ddzy-upload-show-item {
         display: flex;
         margin-top: 8px;
         padding: 4px 8px;
@@ -243,37 +243,37 @@ export class DraggerUpload {
         color: #666;
         transition: all .3s ease;
       }
-      .ddzy-upload-show-item:hover {
+      #ddzy-upload-wrapper .ddzy-upload-show-item:hover {
         background-color: #f3f4f5;
       }
-      .ddzy-upload-show-item svg:hover {
+      #ddzy-upload-wrapper .ddzy-upload-show-item svg:hover {
         color: #1890ff;
       }
-      .ddzy-upload-show-action-box {
+      #ddzy-upload-wrapper .ddzy-upload-show-action-box {
         flex: 8;
       }
-      .ddzy-upload-show-action {
+      #ddzy-upload-wrapper .ddzy-upload-show-action {
 
       }
-      .ddzy-upload-show-action > span {
+      #ddzy-upload-wrapper .ddzy-upload-show-action > span {
         display: inline-block;
       }
-      .ddzy-upload-show-action-preview {
+      #ddzy-upload-wrapper .ddzy-upload-show-action-preview {
         margin-left: 8px;
       }
-      .ddzy-upload-show-action-send {
+      #ddzy-upload-wrapper .ddzy-upload-show-action-send {
         margin-left: 4px;
       }
-      .ddzy-upload-show-action-name {
+      #ddzy-upload-wrapper .ddzy-upload-show-action-name {
         margin-left: 16px;
       }
-      .ddzy-upload-show-action-loading {
+      #ddzy-upload-wrapper .ddzy-upload-show-action-loading {
 
       }
-      .ddzy-upload-show-close-box {
+      #ddzy-upload-wrapper .ddzy-upload-show-close-box {
         flex: 1;
       }
-      .ddzy-upload-show-close {
+      #ddzy-upload-wrapper .ddzy-upload-show-close {
         text-align: right;
       }
 
@@ -288,30 +288,30 @@ export class DraggerUpload {
       }
 
       /* Active classes */
-      .ddzy-upload-drag-container-active {
+      #ddzy-upload-wrapper .ddzy-upload-drag-container-active {
         border-color: #1890ff;
         filter: blur(1px);
       }
 
-      .ddzy-upload-show-item-in-animate {
+      #ddzy-upload-wrapper .ddzy-upload-show-item-in-animate {
         transition: none;
         opacity: 0;
         transform: translateX(100%);
       }
 
-      .ddzy-upload-show-item-out-animate {
+      #ddzy-upload-wrapper .ddzy-upload-show-item-out-animate {
         transform: translateX(-100%);
         opacity: 0;
       }
 
-      .ddzy-upload-show-action-loading-active {
+      #ddzy-upload-wrapper .ddzy-upload-show-action-loading-active {
         animation: showItemLoading .5s linear infinite;
       }
-      .ddzy-upload-show-action-loading-success {
+      #ddzy-upload-wrapper .ddzy-upload-show-action-loading-success {
         animation: none;
         color: #52c41a;
       }
-      .ddzy-upload-show-action-loading-faild {
+      #ddzy-upload-wrapper .ddzy-upload-show-action-loading-faild {
         animation: none;
         color: #f5222d;
       }
