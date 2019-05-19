@@ -364,7 +364,13 @@ export class DraggerUpload {
     const oShowItems = utilityDOM.getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
     const oShowItem = oShowItems[oShowItems.length - 1];
 
-    utilityDOM.addClass(oShowItem, 'ddzy-upload-show-item-in-animate');
+    // ! [Bug-fix] 解决多文件上传至本地时, 只显示最后一个文件的问题
+    Array.from(oShowItems).forEach((v) => {
+      v === oShowItem
+        ? (utilityDOM.addClass(v, 'ddzy-upload-show-item-in-animate'))
+        : (utilityDOM.removeClass(v, 'ddzy-upload-show-item-in-animate'));
+    });
+
     setTimeout(() => {
       utilityDOM.removeClass(oShowItem, 'ddzy-upload-show-item-in-animate');
     }, 0);
@@ -668,6 +674,7 @@ export class DraggerUpload {
     onChangeHook && onChangeHook(e);
 
     Array.from(fileList).forEach((file) => {
+      console.log(file);
       this.handleBeforeUploadHook(file, fileList);
     });
   }
