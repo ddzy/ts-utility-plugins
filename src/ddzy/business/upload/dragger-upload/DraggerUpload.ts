@@ -3,6 +3,7 @@ import utilityDOM from "../../../utility/dom";
 /**
  * @name 拖拽图片上传组件
  * @param [container] 挂载的节点
+ * @param [animate] 是否启用过渡动画
  * ? 下述为单项文件上传至本地列表时触发
  * @param [onBeforeUpload] 文件上传前触发, 在此处进行文件格式、文件大小限制
  * @param [onChangeHook] 文件更改事件
@@ -35,9 +36,10 @@ export interface IDraggerUploadProps {
 
 export interface IDraggerUploadState {
   files: File[];
-  oContainer: HTMLDivElement,
-  oLabel: HTMLLabelElement,
-  oInput: HTMLInputElement,
+  oContainer: HTMLDivElement;
+  oLabel: HTMLLabelElement;
+  oInput: HTMLInputElement;
+  oShowList: HTMLUListElement;
 }
 
 
@@ -58,6 +60,7 @@ export class DraggerUpload {
     oContainer: document.createElement('div'),
     oLabel: document.createElement('label'),
     oInput: document.createElement('input'),
+    oShowList: document.createElement('ul'),
   };
 
 
@@ -96,10 +99,12 @@ export class DraggerUpload {
     const oContainer = utilityDOM.getEle('.ddzy-upload-drag-container') as HTMLDivElement;
     const oLabel = utilityDOM.getEle('.ddzy-upload-drag-main-content') as HTMLLabelElement;
     const oInput = utilityDOM.getEle('.ddzy-upload-drag-main-input') as HTMLInputElement;
+    const oShowList = utilityDOM.getEle('.ddzy-upload-show-list') as HTMLUListElement;
 
     this.state.oContainer = oContainer;
     this.state.oLabel = oLabel;
     this.state.oInput = oInput;
+    this.state.oShowList = oShowList;
   }
 
   private handleCreateDOM(): string {
@@ -130,37 +135,7 @@ export class DraggerUpload {
           <div class="ddzy-upload-show-container">
             <div class="ddzy-upload-show-content">
               <ul class="ddzy-upload-show-list">
-                <li class="ddzy-upload-show-item">
-                  <div class="ddzy-upload-show-action-box">
-                    <div class="ddzy-upload-show-action">
-                      <span class="ddzy-upload-show-action-loading">
-                        <svg class="icon" aria-hidden="true">
-                          <use xlink:href="#icon-Loading"></use>
-                        </svg>
-                      </span>
-                      <span class="ddzy-upload-show-action-name" title="图片名称">
-                        miaomiao.jpg
-                      </span>
-                      <span class="ddzy-upload-show-action-preview" title="预览">
-                        <svg class="icon" aria-hidden="true">
-                          <use xlink:href="#icon-eye"></use>
-                        </svg>
-                      </span>
-                      <span class="ddzy-upload-show-action-send" title="上传">
-                        <svg class="icon" aria-hidden="true">
-                          <use xlink:href="#icon-upload1"></use>
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="ddzy-upload-show-close-box">
-                    <div class="ddzy-upload-show-close" title="移除">
-                      <svg class="icon" aria-hidden="true">
-                        <use  xlink:href="#icon-et-wrong"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </li>
+
               </ul>
             </div>
           </div>
@@ -263,6 +238,7 @@ export class DraggerUpload {
       }
       .ddzy-upload-show-item {
         display: flex;
+        margin-top: 8px;
         padding: 4px 8px;
         border: 1px solid #ddd;
         color: #666;
@@ -308,6 +284,12 @@ export class DraggerUpload {
         border-color: #1890ff;
         filter: blur(1px);
       }
+
+      .ddzy-upload-show-item-in-animate {
+        transition: none;
+        opacity: 0;
+        transform: translateX(100%);
+      }
     `;
 
     return css;
@@ -350,11 +332,75 @@ export class DraggerUpload {
 
 
   /**
-   * 处理文件上传前的钩子, 根据onBeforeUploadHook返回true或resolve来添加至本地列表, 反之不添加
+   * 处理添加至本地预览列表
+   * @param file 单个文件对象
+   */
+  private handleAppendToShow(file: File): void {
+    const { oShowList } = this.state;
+    const { name } = file;
+
+    const text = `
+      <li class="ddzy-upload-show-item">
+        <div class="ddzy-upload-show-action-box">
+          <div class="ddzy-upload-show-action">
+            <span class="ddzy-upload-show-action-loading">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-Loading"></use>
+              </svg>
+            </span>
+            <span class="ddzy-upload-show-action-name" title="图片名称">
+              ${name}
+            </span>
+            <span class="ddzy-upload-show-action-preview" title="预览">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-eye"></use>
+              </svg>
+            </span>
+            <span class="ddzy-upload-show-action-send" title="上传">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-upload1"></use>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="ddzy-upload-show-close-box">
+          <div class="ddzy-upload-show-close" title="移除">
+            <svg class="icon" aria-hidden="true">
+              <use  xlink:href="#icon-et-wrong"></use>
+            </svg>
+          </div>
+        </div>
+      </li>
+    `;
+
+    oShowList.innerHTML += text;
+
+    // ? 入场动画
+    const oShowItems = utilityDOM.getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+    const oShowItem = oShowItems[oShowItems.length - 1];
+
+    utilityDOM.addClass(oShowItem, 'ddzy-upload-show-item-in-animate');
+    setTimeout(() => {
+      utilityDOM.removeClass(oShowItem, 'ddzy-upload-show-item-in-animate');
+    }, 0);
+  }
+
+
+  /**
+   * 处理添加至文件数组, 后续会用到
+   * @param file 单个文件对象
+   */
+  private handleAppendToFiles(file: File): void {
+    this.state.files.push(file);
+  }
+
+
+  /**
+   * 处理文件上传前的钩子, 根据`onBeforeUploadHook`返回true或resolve来添加至本地列表, 反之不添加
    * @param file 单个文件对象
    * @param files 文件列表
    */
-  private handleAppendToFiles(file: File, files: FileList): void {
+  private handleBeforeUploadHook(file: File, files: FileList): void {
     const {
       onBeforeUploadHook,
     } = DraggerUpload.defaultProps;
@@ -365,18 +411,24 @@ export class DraggerUpload {
       if ( result instanceof Promise ) {
         result
           .then(( newFile ) => {
-            newFile instanceof File
-              ? (this.state.files.push(newFile))
-              : (this.state.files.push(file));
+            if ( newFile instanceof File ) {
+              this.handleAppendToFiles(newFile);
+              this.handleAppendToShow(newFile);
+            } else {
+              this.handleAppendToFiles(file);
+              this.handleAppendToShow(file);
+            }
           })
           .catch(() => { })
       } else {
         if ( result ) {
-          this.state.files.push(file);
+          this.handleAppendToFiles(file);
+          this.handleAppendToShow(file);
         }
       }
     } else {
-      this.state.files.push(file);
+      this.handleAppendToFiles(file);
+      this.handleAppendToShow(file);
     }
   }
 
@@ -390,7 +442,7 @@ export class DraggerUpload {
     utilityDOM.removeClass(oContainer, 'ddzy-upload-drag-container-active');
 
     Array.from(dataTransfer.files).forEach((file) => {
-      this.handleAppendToFiles(file, dataTransfer.files);
+      this.handleBeforeUploadHook(file, dataTransfer.files);
     });
   }
 
@@ -399,7 +451,7 @@ export class DraggerUpload {
     const fileList = target.files as FileList;
 
     Array.from(fileList).forEach((file) => {
-      this.handleAppendToFiles(file, fileList);
+      this.handleBeforeUploadHook(file, fileList);
     });
   }
 
