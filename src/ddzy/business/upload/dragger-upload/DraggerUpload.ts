@@ -23,6 +23,7 @@ import utilityDOM from "../../../utility/dom";
 
 export interface IDraggerUploadProps {
   container?: string;
+  animate?: boolean;
 
   onChangeHook?: (e: Event) => void;
   onSuccessHook?: (e: FileReader) => void;
@@ -46,6 +47,7 @@ export interface IDraggerUploadState {
 export class DraggerUpload {
   public static readonly defaultProps: IDraggerUploadProps = {
     container: 'body',
+    animate: true,
   };
 
   public constructor(
@@ -290,6 +292,11 @@ export class DraggerUpload {
         opacity: 0;
         transform: translateX(100%);
       }
+
+      .ddzy-upload-show-item-out-animate {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
     `;
 
     return css;
@@ -332,6 +339,76 @@ export class DraggerUpload {
 
 
   /**
+   * 处理单项列表进场动画
+   */
+  private handleLocalItemAnimateIn(): void {
+    const oShowItems = utilityDOM.getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+    const oShowItem = oShowItems[oShowItems.length - 1];
+
+    utilityDOM.addClass(oShowItem, 'ddzy-upload-show-item-in-animate');
+    setTimeout(() => {
+      utilityDOM.removeClass(oShowItem, 'ddzy-upload-show-item-in-animate');
+    }, 0);
+  }
+
+  /**
+   * 处理单项列表出场动画
+   */
+  private handleLocalItemAnimateOut(
+    currentItem: HTMLLIElement,
+  ): void {
+    const { oShowList } = this.state;
+
+    utilityDOM.addClass(currentItem, 'ddzy-upload-show-item-out-animate');
+
+    setTimeout(() => {
+      oShowList.removeChild(currentItem);
+    }, 300);
+  }
+
+  /**
+   * 处理本地列表项移除
+   */
+  private handleLocalItemClose(): void {
+    const oShowItems = utilityDOM.getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+
+    Array.from(oShowItems).forEach((li) => {
+      const oShowItemCloseBtn = li
+        .getElementsByClassName('ddzy-upload-show-close')[0]
+        .firstElementChild as SVGAElement;
+
+      oShowItemCloseBtn.addEventListener('click', () => {
+        this.handleLocalItemAnimateOut(li);
+      })
+    })
+  }
+
+  /**
+   * 处理本地列表项预览
+   */
+  private handleLocalItemPreview(): void {
+
+  }
+
+  /**
+   * 处理本地列表项上传至服务器
+   */
+  private handleLocalItemSend(): void {
+
+  }
+
+  /**
+   * 处理本地展示的单项列表相关(入场、预览、移除、出场...)
+   */
+  private handleLocalItem(): void {
+    this.handleLocalItemAnimateIn();
+    this.handleLocalItemClose();
+    this.handleLocalItemPreview();
+    this.handleLocalItemSend();
+  }
+
+
+  /**
    * 处理添加至本地预览列表
    * @param file 单个文件对象
    */
@@ -344,7 +421,7 @@ export class DraggerUpload {
         <div class="ddzy-upload-show-action-box">
           <div class="ddzy-upload-show-action">
             <span class="ddzy-upload-show-action-loading">
-              <svg class="icon" aria-hidden="true">
+              <svg class="icon" aria-hidden="true" data-index=${oShowList.children.length}>
                 <use xlink:href="#icon-Loading"></use>
               </svg>
             </span>
@@ -352,12 +429,12 @@ export class DraggerUpload {
               ${name}
             </span>
             <span class="ddzy-upload-show-action-preview" title="预览">
-              <svg class="icon" aria-hidden="true">
+              <svg class="icon" aria-hidden="true" data-index=${oShowList.children.length}>
                 <use xlink:href="#icon-eye"></use>
               </svg>
             </span>
             <span class="ddzy-upload-show-action-send" title="上传">
-              <svg class="icon" aria-hidden="true">
+              <svg class="icon" aria-hidden="true" data-index=${oShowList.children.length}>
                 <use xlink:href="#icon-upload1"></use>
               </svg>
             </span>
@@ -365,7 +442,7 @@ export class DraggerUpload {
         </div>
         <div class="ddzy-upload-show-close-box">
           <div class="ddzy-upload-show-close" title="移除">
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" aria-hidden="true" data-index=${oShowList.children.length}>
               <use  xlink:href="#icon-et-wrong"></use>
             </svg>
           </div>
@@ -375,14 +452,7 @@ export class DraggerUpload {
 
     oShowList.innerHTML += text;
 
-    // ? 入场动画
-    const oShowItems = utilityDOM.getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
-    const oShowItem = oShowItems[oShowItems.length - 1];
-
-    utilityDOM.addClass(oShowItem, 'ddzy-upload-show-item-in-animate');
-    setTimeout(() => {
-      utilityDOM.removeClass(oShowItem, 'ddzy-upload-show-item-in-animate');
-    }, 0);
+    this.handleLocalItem();
   }
 
 
