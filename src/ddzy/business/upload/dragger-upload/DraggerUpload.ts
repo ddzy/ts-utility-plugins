@@ -3,7 +3,6 @@ import utilityDOM from "../../../utility/dom";
 /**
  * @name 拖拽图片上传组件
  * @param [container] 挂载的节点
- * @param [animate] 是否启用过渡动画
  * ? 下述为单项文件上传至本地列表时触发
  * @param [onBeforeUpload] 文件上传前触发, 在此处进行文件格式、文件大小限制
  * @param [onChangeHook] 文件更改事件
@@ -23,7 +22,6 @@ import utilityDOM from "../../../utility/dom";
 
 export interface IDraggerUploadProps {
   container?: string;
-  animate?: boolean;
 
   onChangeHook?: (e: Event) => void;
   onBeforeUploadHook?: (file: File, fileList: File[]) => boolean | Promise<File | undefined>;
@@ -47,7 +45,6 @@ export interface IDraggerUploadState {
 export class DraggerUpload {
   public static readonly defaultProps: IDraggerUploadProps = {
     container: 'body',
-    animate: true,
   };
 
   public constructor(
@@ -643,9 +640,15 @@ export class DraggerUpload {
 
   private handleDrop(e: DragEvent): void {
     const {
+      onChangeHook,
+    } = DraggerUpload.defaultProps;
+    const {
       oContainer,
     } = this.state;
     const dataTransfer = e.dataTransfer as DataTransfer;
+
+    // ? 执行文件更改钩子
+    onChangeHook && onChangeHook(e);
 
     utilityDOM.removeClass(oContainer, 'ddzy-upload-drag-container-active');
 
@@ -655,8 +658,14 @@ export class DraggerUpload {
   }
 
   private handleChange(e: Event): void {
+    const {
+      onChangeHook,
+    } = DraggerUpload.defaultProps;
     const target = e.target as HTMLInputElement;
     const fileList = target.files as FileList;
+
+    // ? 执行文件更改钩子
+    onChangeHook && onChangeHook(e);
 
     Array.from(fileList).forEach((file) => {
       this.handleBeforeUploadHook(file, fileList);

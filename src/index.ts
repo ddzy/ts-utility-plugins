@@ -53,4 +53,8 @@ new Upload.Dragger({
   // onUploadClickFailHook() {
   //   console.log('上传失败')
   // },
+
+  onChangeHook(e) {
+    console.log(e);
+  },
 });
