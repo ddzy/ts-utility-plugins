@@ -29,6 +29,7 @@
   - [x] [business-carousel](#business-carousel)
   - [x] [business-tab](#business-tab)
   - [x] [business-draggable](#business-draggable)
+  - [x] [business-upload](#business-upload)
 - [x] Utility
   - [ ] [utility-dom](#utility)
   - [ ] [utility-number](#utility)
@@ -304,10 +305,10 @@ export interface IStaticDataSourceParams {
 | container             | HTMLElement                                        | true    | 挂载容器                     |
 | dataSource            | IStaticDataSourceParams                            | false   | 源数据                       |
 | animate               | boolean                                            | false   | 是否开启过渡效果             |
-| dragWrapperStyle      | Partial\<CSSStyleDeclaration>                       | false   | 拖拽外部容器的样式           |
-| dragOriginStyle       | Partial\<CSSStyleDeclaration>                       | false   | 拖拽对象的初始样式           |
-| dragOriginActiveStyle | Partial\<CSSStyleDeclaration>                       | false   | 拖拽该对象时的样式           |
-| dragTargetActiveStyle | Partial\<CSSStyleDeclaration>                       | false   | 拖拽时目标对象的样式         |
+| dragWrapperStyle      | Partial\<CSSStyleDeclaration>                      | false   | 拖拽外部容器的样式           |
+| dragOriginStyle       | Partial\<CSSStyleDeclaration>                      | false   | 拖拽对象的初始样式           |
+| dragOriginActiveStyle | Partial\<CSSStyleDeclaration>                      | false   | 拖拽该对象时的样式           |
+| dragTargetActiveStyle | Partial\<CSSStyleDeclaration>                      | false   | 拖拽时目标对象的样式         |
 | onDragStartHook       | (origin: HTMLElement) => void                      | false   | 开始拖拽时的钩子             |
 | onDragEnterHook       | (origin: HTMLElement, target: HTMLElement) => void | false   | 拖拽进入目标时的钩子         |
 | onDragLeaveHook       | (origin: HTMLElement, target: HTMLElement) => void | false   | 拖拽离开目标时的钩子         |
@@ -326,7 +327,45 @@ export interface IStaticDataSourceParams {
 
 > **Q**: 父元素设置`draggable`, 子元素会触发drag事件
 
-***A***: 给所有子元素添加`pointer-events: none`.
+***A***: 给所有子元素添加`pointer-events: none`
+
+## business-upload
+
+### a. 前置说明
+
+该组件模块暂时只暴露出了`Upload`对象, 并挂载了多个不同类型上传组件:
+
+- DraggerUpload 拖拽上传
+- 待补充...
+
+### b. 基本用法
+
+```ts
+new Upload.Dragger({});
+```
+
+### c. 可配置项
+
+| Key                      | Value                                                                   | Require | Description                                                                                                                                                                 |
+| ------------------------ | ----------------------------------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| container                | string                                                                  | false   | 挂载到的容器                                                                                                                                                                |
+| onChangeHook             | (e: Event) => void                                                      | false   | 文件改变时触发                                                                                                                                                              |
+| onBeforeUploadHook       | (file: File, fileList: File[]) => boolean \| Promise<File \| undefined> | false   | 文件上传至本地列表前触发, 在此处进行预处理(`文件大小判断`), 返回`true`或者Promise为`resolve`时添加到本地列表, 反之不添加                                                    |
+| onUploadClickHook        | (file: File, FileList: File[]) => boolean \| Promise<any>               | false   | 点击上传按钮时触发, 在此处进行自定义文件上传操作, 此时会上传至服务器, 返回`true`或者Promise为`resolve`时触发`onUploadClickSuccessHook`钩子, 反之触发`onUploadClickFailHook` |
+| onUploadClickSuccessHook | (file: File, fileList: File[]) => void                                  | false   | 成功上传至服务器时触发                                                                                                                                                      |
+| onUploadClickFailHook    | (file: File, fileList: File[]) => void                                  | false   | 上传至服务器发生错误时触发                                                                                                                                                  |
+| onPreviewClickHook       | (file: File, fileList: File[]) => void                                  | false   | 自定义图片预览                                                                                                                                                              |
+| onRemoveClickHook        | (file: File, fileList: File[]) => void                                  | false   | 将图片从本地列表移除时触发                                                                                                                                                  |
+
+### d. 问题记录
+
+> **Q**: 无法在`ondrop`事件内部直接使用`e.dataTransfer.files`获取文件列表
+
+***A***: 需要自定义数组, 遍历一遍
+
+> **Q**: `ondrag`和`onclick`无法共存, 导致无法追加自定义样式
+
+***A***: 只需监听`onmouseup`, 并在其中自行调用`label`标签的click方法 - `label.click()`
 
 ## utility
 
