@@ -38,4 +38,19 @@ new Upload.Dragger({
   //     document.body.appendChild(img);
   //   })
   // },
+  // onUploadClickHook(file) {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       reject(file);
+  //     }, 3000);
+  //   });
+  // },
+
+  // onUploadClickSuccessHook() {
+  //   console.log('上传成功!')
+  // },
+
+  // onUploadClickFailHook() {
+  //   console.log('上传失败')
+  // },
 });

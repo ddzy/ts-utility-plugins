@@ -26,13 +26,13 @@ export interface IDraggerUploadProps {
   animate?: boolean;
 
   onChangeHook?: (e: Event) => void;
-  onSuccessHook?: (e: FileReader) => void;
-  onErrorHook?: (e: FileReader) => void;
   onBeforeUploadHook?: (file: File, fileList: File[]) => boolean | Promise<File | undefined>;
 
-  onUploadClickHook?: (file: File, FileList: File[]) => void;
+  onUploadClickHook?: (file: File, FileList: File[]) => boolean | Promise<any>;
   onPreviewClickHook?: (file: File, fileList: File[]) => void;
   onRemoveClickHook?: (file: File, fileList: File[]) => void;
+  onUploadClickSuccessHook?: (file: File, fileList: File[]) => void;
+  onUploadClickFailHook?: (file: File, fileList: File[]) => void;
 };
 
 export interface IDraggerUploadState {
@@ -280,6 +280,15 @@ export class DraggerUpload {
         text-align: right;
       }
 
+      /* Animation */
+      @keyframes showItemLoading {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
       /* Active classes */
       .ddzy-upload-drag-container-active {
@@ -297,6 +306,19 @@ export class DraggerUpload {
         transform: translateX(-100%);
         opacity: 0;
       }
+
+      .ddzy-upload-show-action-loading-active {
+        animation: showItemLoading .5s linear infinite;
+      }
+      .ddzy-upload-show-action-loading-success {
+        animation: none;
+        color: #52c41a;
+      }
+      .ddzy-upload-show-action-loading-faild {
+        animation: none;
+        color: #f5222d;
+      }
+
     `;
 
     return css;
@@ -406,8 +428,7 @@ export class DraggerUpload {
 
     Array.from(oShowItems).forEach((li) => {
       const oShowItemPreviewBtn = li
-        .getElementsByClassName('ddzy-upload-show-action-preview')[0]
-        .firstElementChild as SVGAElement;
+        .getElementsByClassName('ddzy-upload-show-action-preview')[0] as HTMLSpanElement;
 
       oShowItemPreviewBtn.addEventListener('click', () => {
         // ? 根据当前点击的li的下标找到对应的file
@@ -421,14 +442,101 @@ export class DraggerUpload {
   }
 
   /**
-   * 处理本地列表项上传至服务器
+   * 处理成功上传至服务器
    */
-  private handleLocalItemSend(): void {
+  private handleLocalItemSendSuccess(
+    showItem: HTMLLIElement,
+    file: File,
+    fileList: File[],
+  ): void {
+    const {
+      onUploadClickSuccessHook,
+    } = DraggerUpload.defaultProps;
+    const oShowItemLoadingBtn = showItem
+      .getElementsByClassName('ddzy-upload-show-action-loading')[0] as HTMLSpanElement;
 
+    // ? 处理成功上传至服务器时的loading状态
+    utilityDOM
+      .addClass(oShowItemLoadingBtn, 'ddzy-upload-show-action-loading-success');
+
+    // ? 执行成功上传至服务器的钩子
+    onUploadClickSuccessHook && onUploadClickSuccessHook(file, fileList);
   }
 
   /**
-   * 处理本地展示的单项列表相关(入场、预览、移除、出场...)
+   * 处理上传至服务器失败
+   */
+  private handleLocalItemSendFaild(
+    showItem: HTMLLIElement,
+    file: File,
+    fileList: File[],
+  ): void {
+    const {
+      onUploadClickFailHook,
+    } = DraggerUpload.defaultProps;
+    const oShowItemLoadingBtn = showItem
+      .getElementsByClassName('ddzy-upload-show-action-loading')[0] as HTMLSpanElement;
+
+    // ? 处理上传至服务器失败时的loading状态
+    utilityDOM
+      .addClass(oShowItemLoadingBtn, 'ddzy-upload-show-action-loading-faild');
+
+    // ? 执行上传至服务器失败的钩子
+    onUploadClickFailHook && onUploadClickFailHook(file, fileList);
+  }
+
+  /**
+   * 处理本地列表项上传至服务器
+   */
+  private handleLocalItemSend(): void {
+    const oShowItems = utilityDOM
+      .getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+    const { files } = this.state;
+    const { onUploadClickHook } = DraggerUpload.defaultProps;
+
+    Array.from(oShowItems).forEach((li) => {
+      const oShowItemSendBtn = li
+        .getElementsByClassName('ddzy-upload-show-action-send')[0]
+        .firstElementChild as SVGAElement;
+      const oShowItemLoadingBtn = li
+        .getElementsByClassName('ddzy-upload-show-action-loading')[0] as HTMLSpanElement;
+
+      oShowItemSendBtn.addEventListener('click', () => {
+        const index: number = Number(utilityDOM.getAttr(li, 'data-index'));
+        const file: File = files[index];
+
+        // ? 处理上传时的loading状态
+        utilityDOM
+          .addClass(oShowItemLoadingBtn, 'ddzy-upload-show-action-loading-active');
+
+        // ? 执行上传钩子
+        if (onUploadClickHook) {
+          const result = onUploadClickHook(file, files);
+
+          if ( result instanceof Promise ) {
+            result
+              .then(() => {
+                // ? 成功上传至远程服务器
+                this.handleLocalItemSendSuccess(li, file, files);
+              })
+              .catch(() => {
+                // ? 上传远程服务器失败
+                this.handleLocalItemSendFaild(li, file, files);
+              })
+          } else {
+            if ( result ) {
+              this.handleLocalItemSendSuccess(li, file, files);
+            } else {
+              this.handleLocalItemSendFaild(li, file, files);
+            }
+          }
+        }
+      });
+    })
+  }
+
+  /**
+   * 处理本地展示的单项列表相关(入场、预览、上传、移除、出场...)
    */
   private handleLocalItem(): void {
     this.handleLocalItemAnimateIn();
@@ -505,13 +613,13 @@ export class DraggerUpload {
       onBeforeUploadHook,
     } = DraggerUpload.defaultProps;
 
-    if ( onBeforeUploadHook ) {
+    if (onBeforeUploadHook) {
       const result = onBeforeUploadHook(file, Array.from(files));
 
-      if ( result instanceof Promise ) {
+      if (result instanceof Promise) {
         result
-          .then(( newFile ) => {
-            if ( newFile instanceof File ) {
+          .then((newFile) => {
+            if (newFile instanceof File) {
               this.handleAppendToFiles(newFile);
               this.handleAppendToShow(newFile);
             } else {
@@ -521,7 +629,7 @@ export class DraggerUpload {
           })
           .catch(() => { })
       } else {
-        if ( result ) {
+        if (result) {
           this.handleAppendToFiles(file);
           this.handleAppendToShow(file);
         }
