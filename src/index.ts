@@ -15,4 +15,27 @@ new Upload.Dragger({
   //     }
   //   });
   // },
+  // onRemoveClickHook(file, fileList) {
+  //   console.log({
+  //     file,
+  //     fileList,
+  //   });
+  // },
+  // onPreviewClickHook(file) {
+  //   const reader = new FileReader();
+  //   const img = new Image();
+
+  //   reader.readAsDataURL(file);
+
+  //   reader.addEventListener('load', (e) => {
+  //     const target = e.target as FileReader;
+  //     const url = target.result as string;
+
+  //     img.src = url;
+  //   });
+
+  //   img.addEventListener('load', () => {
+  //     document.body.appendChild(img);
+  //   })
+  // },
 });

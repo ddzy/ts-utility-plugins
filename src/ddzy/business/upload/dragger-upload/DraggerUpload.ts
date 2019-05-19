@@ -28,11 +28,11 @@ export interface IDraggerUploadProps {
   onChangeHook?: (e: Event) => void;
   onSuccessHook?: (e: FileReader) => void;
   onErrorHook?: (e: FileReader) => void;
-  onBeforeUploadHook?: (file: File, fileList: FileList) => boolean | Promise<File | undefined>;
+  onBeforeUploadHook?: (file: File, fileList: File[]) => boolean | Promise<File | undefined>;
 
-  onUploadClickHook?: (file: File) => void;
-  onPreviewClickHook?: (file: File) => void;
-  onRemoveClickHook?: (file: File) => void;
+  onUploadClickHook?: (file: File, FileList: File[]) => void;
+  onPreviewClickHook?: (file: File, fileList: File[]) => void;
+  onRemoveClickHook?: (file: File, fileList: File[]) => void;
 };
 
 export interface IDraggerUploadState {
@@ -369,8 +369,15 @@ export class DraggerUpload {
   /**
    * 处理本地列表项移除
    */
-  private handleLocalItemClose(): void {
-    const oShowItems = utilityDOM.getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+  private handleLocalItemRemove(): void {
+    const oShowItems = utilityDOM
+      .getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+    const {
+      onRemoveClickHook,
+    } = DraggerUpload.defaultProps;
+    const {
+      files,
+    } = this.state;
 
     Array.from(oShowItems).forEach((li) => {
       const oShowItemCloseBtn = li
@@ -378,6 +385,11 @@ export class DraggerUpload {
         .firstElementChild as SVGAElement;
 
       oShowItemCloseBtn.addEventListener('click', () => {
+        const index: number = Number(utilityDOM.getAttr(li, 'data-index'));
+        const file: File = files[index];
+
+        // ? 执行移除钩子
+        onRemoveClickHook && onRemoveClickHook(file, files);
         this.handleLocalItemAnimateOut(li);
       })
     })
@@ -387,7 +399,25 @@ export class DraggerUpload {
    * 处理本地列表项预览
    */
   private handleLocalItemPreview(): void {
+    const oShowItems = utilityDOM
+      .getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+    const { files } = this.state;
+    const { onPreviewClickHook } = DraggerUpload.defaultProps;
 
+    Array.from(oShowItems).forEach((li) => {
+      const oShowItemPreviewBtn = li
+        .getElementsByClassName('ddzy-upload-show-action-preview')[0]
+        .firstElementChild as SVGAElement;
+
+      oShowItemPreviewBtn.addEventListener('click', () => {
+        // ? 根据当前点击的li的下标找到对应的file
+        const index: number = Number(utilityDOM.getAttr(li, 'data-index'));
+        const file: File = files[index];
+
+        // ? 执行预览钩子
+        onPreviewClickHook && onPreviewClickHook(file, files);
+      });
+    })
   }
 
   /**
@@ -402,7 +432,7 @@ export class DraggerUpload {
    */
   private handleLocalItem(): void {
     this.handleLocalItemAnimateIn();
-    this.handleLocalItemClose();
+    this.handleLocalItemRemove();
     this.handleLocalItemPreview();
     this.handleLocalItemSend();
   }
@@ -417,7 +447,7 @@ export class DraggerUpload {
     const { name } = file;
 
     const text = `
-      <li class="ddzy-upload-show-item">
+      <li class="ddzy-upload-show-item" data-index=${oShowList.children.length}>
         <div class="ddzy-upload-show-action-box">
           <div class="ddzy-upload-show-action">
             <span class="ddzy-upload-show-action-loading">
@@ -476,7 +506,7 @@ export class DraggerUpload {
     } = DraggerUpload.defaultProps;
 
     if ( onBeforeUploadHook ) {
-      const result = onBeforeUploadHook(file, files);
+      const result = onBeforeUploadHook(file, Array.from(files));
 
       if ( result instanceof Promise ) {
         result
