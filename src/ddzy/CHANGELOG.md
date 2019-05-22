@@ -54,3 +54,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 新增`business/upload/DraggerUpload`插件
+
+## [2019-5-22]
+
+### Added
+
+- 新增`utility/array/isStrictArray`工具函数
+- 新增`utility/object/isPlainObject`工具函数
+- 新增`utility/others/isBasicValue`工具函数
+- 新增`utility/others/deepClone`工具函数

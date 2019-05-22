@@ -25,7 +25,9 @@
   - [convertPairToCSSText](#convertPairToCSSText)
   - [_querySelector](#_querySelector)
 - [Array](#Array)
+  - [isStrictArray](#isStrictArray)
 - [Object](#Object)
+  - [isPlainObject](#isPlainObject)
 - [String](#String)
 - [Number](#Number)
   - [getRadian](#getRadian)
@@ -34,8 +36,10 @@
 - [Function](#Function)
   - [isFunction](#isfunction)
 - [Others](#Others)
+  - [isBasicValue](#isBasicValue)
   - [invariant](#invariant)
   - [convertHumpToHyphen](#convertHumpToHyphen)
+  - [deepClone](#deepClone)
 
 ## DOM
 
@@ -273,11 +277,62 @@ utilityDOM._querySelector('span')  // null
 
 ## Array
 
-updating...
+### isStrictArray
+
+#### a. 说明
+
+判断是否严格的数组
+
+#### b. 用法
+
+```html
+<p></p>
+<p></p>
+```
+
+```ts
+const o1 = document.querySelectorAll('p');
+utilityArray.isStrictArray(o1);   // false
+
+const o2 = {
+  name: 'ddzy',
+  age: 20,
+  length: 2,
+}
+utilityArray.isStrictArray(o2)    // false
+
+const o3 = [];
+utilityArray.isStrictArray(o3)    // true
+```
 
 ## Object
 
-updating...
+### isPlainObject
+
+#### a. 说明
+
+是否普通的**键值对**对象
+
+#### b. 用法
+
+```html
+<p></p>
+<p></p>
+```
+
+```ts
+const o1 = document.querySelectorAll('p');
+utilityObject.isPlainObject(o1)   // false
+
+const o2 = [];
+utilityObject.isPlainObject(o2)   // false
+
+const o3 = {
+  name: 'ddzy',
+  age: 20,
+};
+utilityObject.isPlainObject(o3)   // true
+```
 
 ## String
 
@@ -342,6 +397,33 @@ utilityDOM.isFunction(new Function()); // true
 
 ## Others
 
+### isBasicValue
+
+#### a. 说明
+
+判断是否**基本类型**的值
+
+#### b. 用法
+
+```ts
+const o1 = [
+  {},
+  [],
+  function() {},
+];
+o1.forEach((v) => utilityOthers.isBasicValue(v));   // false
+
+const o2 = [
+  0,
+  '',
+  false,
+  undefined,
+  null,
+  Symbol,
+]
+o2.forEach((v) => utilityOthers.isBasicValue(v));    // true
+```
+
 ### invariant
 
 #### a. 说明
@@ -371,4 +453,20 @@ const hump = 'backgroundColor';
 
 // background-color
 const hyphen = utilityOthers.convertHumpToHyphen(hump);
+```
+
+### deepClone
+
+#### a. 说明
+
+深拷贝
+
+#### b. 用法
+
+```ts
+const origin = {
+  ...
+};
+
+utilityOthers.deepClone(origin);
 ```
