@@ -10,7 +10,7 @@ const utilityObject: IUtilityObjectProps = {
    */
   isPlainObject(origin) {
     return origin && (
-      ({}).toString.call<null, any[], any>(null, origin) === '[object Object]'
+      ({}).toString.call(origin) === '[object Object]'
     );
   },
 };

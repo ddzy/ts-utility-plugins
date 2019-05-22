@@ -36,3 +36,13 @@ const origin = {
 const result = utilityOthers.deepClone(origin);
 
 console.log(result);
+
+console.log('---');
+
+origin.program.deepth = 10;
+origin.program.related.website[0].name = 'frrrr'
+origin.skills[0] = 'what?';
+origin.program.related.website = [];
+
+console.log(origin);
+console.log(result);
