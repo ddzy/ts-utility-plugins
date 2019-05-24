@@ -63,3 +63,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - 新增`utility/object/isPlainObject`工具函数
 - 新增`utility/others/isBasicValue`工具函数
 - 新增`utility/others/deepClone`工具函数
+
+## [2019-5-24]
+
+### Added
+
+- 新增`utility/array/toFlatArrayOutPlace`数组扁平化工具方法
+- 新增`utility/dom/debounce`防抖工具方法

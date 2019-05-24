@@ -13,6 +13,9 @@ export interface IUtilityDOMProps {
   removeClass(el: HTMLElement, className: string): OmitThisParameter<IUtilityDOMProps>;
 
   throttle(time: number, callback: (...args: any[]) => void): void;
+  debounce(callback: (...args: any[]) => void, options: {
+    timestamp?: number,
+  }): (...args: any[]) => void;
 
   isDOM(node: any): boolean;
 
@@ -119,6 +122,21 @@ const utilityDOM: IUtilityDOMProps = {
         callback.apply<ThisType<any>, any[], any>(globalThis, args);
         lastClickTime = currentClickTime;
       }
+    }
+  },
+
+  debounce(callback, options) {
+    let timer: any = null;
+    let {
+      timestamp = 500,
+    } = options;
+
+    return (...args: any[]) => {
+      clearTimeout(timer);
+
+      timer = setTimeout(() => {
+        callback.apply(this, args);
+      }, timestamp);
     }
   },
 

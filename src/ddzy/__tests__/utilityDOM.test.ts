@@ -1,4 +1,3 @@
-import utilidyDOM from '../utility/dom/index';
 import utilityDOM from '../utility/dom/index';
 
 
@@ -16,7 +15,7 @@ describe('utilityDOM tests', () => {
       ];
 
       for (const v of origin) {
-        expect(utilidyDOM.isDOM(v)).toBeFalsy();
+        expect(utilityDOM.isDOM(v)).toBeFalsy();
       }
     });
 
@@ -27,7 +26,7 @@ describe('utilityDOM tests', () => {
       ];
 
       for (const v of origin) {
-        expect(utilidyDOM.isDOM(v)).toBeTruthy();
+        expect(utilityDOM.isDOM(v)).toBeTruthy();
       }
     });
   });
@@ -43,7 +42,7 @@ describe('utilityDOM tests', () => {
       ];
 
       for (const v of origin) {
-        expect(utilidyDOM.getEle(v)).toBe(null);
+        expect(utilityDOM.getEle(v)).toBe(null);
       }
     });
 
@@ -55,7 +54,7 @@ describe('utilityDOM tests', () => {
       const origin = ['#app'];
 
       for (const v of origin) {
-        expect(utilidyDOM.getEle(v)).toBe(
+        expect(utilityDOM.getEle(v)).toBe(
           document.getElementById('app')
         )
       }
@@ -77,7 +76,7 @@ describe('utilityDOM tests', () => {
       ];
 
       for (const v of origin) {
-        expect(utilidyDOM.getEle(v)).toBe(null);
+        expect(utilityDOM.getEle(v)).toBe(null);
       }
     });
 
@@ -93,7 +92,7 @@ describe('utilityDOM tests', () => {
       const origin = ['.text'];
 
       for (const v of origin) {
-        expect(utilidyDOM.getAllEle(v)).toBe(
+        expect(utilityDOM.getAllEle(v)).toBe(
           document.querySelectorAll('.text')
         );
       }
@@ -106,7 +105,7 @@ describe('utilityDOM tests', () => {
         <input id="text"></div>
       `;
 
-      expect(utilidyDOM.setAttr(
+      expect(utilityDOM.setAttr(
         document.getElementById('text') as HTMLElement,
         {
           class: 'text',
@@ -142,7 +141,7 @@ describe('utilityDOM tests', () => {
       `;
 
       expect(
-        utilidyDOM.getAttr((document.getElementById('text') as HTMLElement), 'disabled')
+        utilityDOM.getAttr((document.getElementById('text') as HTMLElement), 'disabled')
       ).toBeNull();
     });
 
@@ -151,7 +150,7 @@ describe('utilityDOM tests', () => {
         <input type="text" id="text" class="text" />
       `;
 
-      expect(utilidyDOM.getAttr(
+      expect(utilityDOM.getAttr(
         (document.getElementById('text') as HTMLElement),
         'type',
       )).toBe('text');
@@ -164,7 +163,7 @@ describe('utilityDOM tests', () => {
         <div id="app" class="c1"></div>
       `;
 
-      utilidyDOM.addClass(
+      utilityDOM.addClass(
         (document.getElementById('app') as HTMLElement),
         'c2',
       );
@@ -179,7 +178,7 @@ describe('utilityDOM tests', () => {
         <div id="app" class="c1 c2"></div>
       `;
 
-      utilidyDOM.removeClass(
+      utilityDOM.removeClass(
         (document.getElementById('app') as HTMLElement),
         'c2',
       );
@@ -209,7 +208,7 @@ describe('utilityDOM tests', () => {
       ];
       const result: HTMLElement[] = [];
 
-      utilidyDOM.traversalDOMWithBFS(
+      utilityDOM.traversalDOMWithBFS(
         (document.getElementById('app') as HTMLElement),
         (node) => {
           result.push(node);
@@ -244,7 +243,7 @@ describe('utilityDOM tests', () => {
       ];
       const result: HTMLElement[] = [];
 
-      utilidyDOM.traversalDOMWithDFS(
+      utilityDOM.traversalDOMWithDFS(
         (document.getElementById('app') as HTMLElement),
         (node) => {
           result.push(node);
@@ -286,7 +285,7 @@ describe('utilityDOM tests', () => {
       const received = ['.ddzy', 'ddzy', '#ddzy', ''];
 
       for (const v of received) {
-        expect(utilidyDOM._querySelector(v)).toBeNull();
+        expect(utilityDOM._querySelector(v)).toBeNull();
       }
     });
 
@@ -312,7 +311,7 @@ describe('utilityDOM tests', () => {
       ];
 
       for (const [i, v] of received.entries()) {
-        expect(utilidyDOM._querySelector(v)).toBe(expected[i]);
+        expect(utilityDOM._querySelector(v)).toBe(expected[i]);
       }
     });
   });
