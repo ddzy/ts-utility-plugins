@@ -1,48 +1,27 @@
-import utilityOthers from './ddzy/utility/others/index';
+import utilityArray from "./ddzy/utility/array";
 
-
-const origin = {
-  name: 'duan',
-  age: 20,
-  skills: ['run', 'programm', 'read'],
-  friends: [
-    {
-      name: 'jack',
-      age: 21,
-    },
-    {
-      name: 'lucy',
-      age: 22,
-    },
-  ],
-  program: {
-    deepth: 40,
-    related: {
-      website: [
-        {
-          name: 'juejin',
-          address: 'https://juejin.io/timeline',
-        },
-        {
-          name: 'zhihu',
-          address: 'https://zhihu.com'
-        },
+const origin = [
+  'duan',
+  1998,
+  [
+    'a',
+    'b',
+    [
+      'c',
+      'd',
+      [
+        'e',
+        'f',
+        123
       ],
-    },
+    ],
+  ],
+  {
+    name: 'duan',
+    age: 20,
   },
-  focus: true,
-};
+];
 
-const result = utilityOthers.deepClone(origin);
+const result = utilityArray.toFlatArrayOutPlace(origin);
 
-console.log(result);
-
-console.log('---');
-
-origin.program.deepth = 10;
-origin.program.related.website[0].name = 'frrrr'
-origin.skills[0] = 'what?';
-origin.program.related.website = [];
-
-console.log(origin);
 console.log(result);

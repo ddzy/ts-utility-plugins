@@ -17,6 +17,7 @@
   - [addClass](#addClass)
   - [removeClass](#removeClass)
   - [throttle](#throttle)
+  - [debounce](#debounce)
   - [isDOM](#isDOM)
   - [traversalDOMWithBFS](#traversalDOMWithBFS)
   - [traversalDOMWithDFS](#traversalDOMWithDFS)
@@ -26,6 +27,7 @@
   - [_querySelector](#_querySelector)
 - [Array](#Array)
   - [isStrictArray](#isStrictArray)
+  - [toFlatArrayOutPlace](#toFlatArrayOutPlace)
 - [Object](#Object)
   - [isPlainObject](#isPlainObject)
 - [String](#String)
@@ -275,6 +277,32 @@ utilityDOM._querySelector('.text')  // null
 utilityDOM._querySelector('span')  // null
 ```
 
+### debounce
+
+#### a. 说明
+
+防抖函数
+
+#### b. 用法
+
+```html
+<input id="username" type="text" />
+```
+
+```ts
+const usernameInput = document.getElementById('username');
+
+function print(e) {
+  console.log(e);
+}
+
+const debounced = utilityDOM.debounce(print, {
+  timestamp: 500,   // Default
+});
+
+usernameInput.addEventListener('change', debounced);
+```
+
 ## Array
 
 ### isStrictArray
@@ -303,6 +331,41 @@ utilityArray.isStrictArray(o2)    // false
 
 const o3 = [];
 utilityArray.isStrictArray(o3)    // true
+```
+
+### toFlatArrayOutPlace
+
+#### a. 说明
+
+数组扁平化(非原地算法)
+
+#### b. 用法
+
+```ts
+const origin = [
+  'duan',
+  1998,
+  [
+    'a',
+    'b',
+    [
+      'c',
+      'd',
+      [
+        'e',
+        'f',
+        123
+      ],
+    ],
+  ],
+  {
+    name: 'duan',
+    age: 20,
+  },
+];
+
+// ['duan', 1998, 'a', 'b', 'c', 'd', 'e', 'f', 123, { name: 'duan', age: 20 }]
+utilityArray.toFlatArrayOutPlace(origin);
 ```
 
 ## Object
