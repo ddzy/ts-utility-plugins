@@ -38,7 +38,7 @@ describe('utilityArray tests', () => {
     });
   });
 
-  describe('toFlatArrayOutPlace tests', () => {
+  describe('toFlatArrayOutPlace', () => {
     test('toFlatArrayOutPlace should flatten the origin array', () => {
       const received = [
         'duan',
