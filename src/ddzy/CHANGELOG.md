@@ -70,3 +70,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - 新增`utility/array/toFlatArrayOutPlace`数组扁平化工具方法
 - 新增`utility/dom/debounce`防抖工具方法
+
+## [2019-5-25]
+
+### Added
+
+- 新增`utility/array/_call`工具函数
+- 新增`utility/array/_bind`工具函数
+- 新增`utility/others/isNull`
+- 新增`utility/others/isUndefined`
+- 新增`business/es6_achieve`, 旨在用es5实现es6的相关方法

@@ -1,27 +1,25 @@
-import utilityArray from "./ddzy/utility/array";
+import utilityFunction from './ddzy/utility/function/index';
 
-const origin = [
-  'duan',
-  1998,
-  [
-    'a',
-    'b',
-    [
-      'c',
-      'd',
-      [
-        'e',
-        'f',
-        123
-      ],
-    ],
-  ],
-  {
-    name: 'duan',
-    age: 20,
+// utilityFunction._call('push', {}, 123);
+
+Function.prototype['_call' as 'prototype'] = utilityFunction._call;
+
+
+const origin = {
+  name: 'duan',
+};
+
+const target = {
+  say(...args: any[]) {
+    console.log(this['name' as keyof typeof target]);
+    console.log(args);
   },
-];
+};
 
-const result = utilityArray.toFlatArrayOutPlace(origin);
 
-console.log(result);
+// target.say['_call' as 'prototype'](origin, 1, 2, 3, 4);
+// target.say['_call' as 'prototype'](null, 1, 2, 3, 4);
+
+Function.prototype['_bind' as 'prototype'] = utilityFunction._bind;
+
+target.say['_bind' as 'prototype'](origin)(['one', 'two', 'three'])

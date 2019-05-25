@@ -37,8 +37,12 @@
   - [getAnyRandom](#getAnyRandom)
 - [Function](#Function)
   - [isFunction](#isfunction)
+  - [_call](#_call)
+  - [_bind](#_bind)
 - [Others](#Others)
   - [isBasicValue](#isBasicValue)
+  - [isNull](#isNull)
+  - [isUndefined](#isUndefined)
   - [invariant](#invariant)
   - [convertHumpToHyphen](#convertHumpToHyphen)
   - [deepClone](#deepClone)
@@ -458,6 +462,54 @@ utilityDOM.isFunction({}); // false
 utilityDOM.isFunction(new Function()); // true
 ```
 
+### _call
+
+#### a. 说明
+
+模拟实现`call`方法
+
+#### b. 用法
+
+```ts
+const origin = {
+  name: 'ddzy',
+};
+const target = {
+  printName(...args: any[]) {
+    console.log(this.name);   // 'ddzy'
+    console.log(args);    // [1, 2]
+  },
+};
+
+Function.prototype['_call'] = utilityFunction._call;
+
+target.printName['_call'](origin, 1, 2);
+```
+
+### _bind
+
+#### a. 说明
+
+模拟实现原生`bind`方法
+
+#### b. 用法
+
+```ts
+const origin = {
+  name: 'ddzy',
+};
+const target = {
+  printName(...args: any[]) {
+    console.log(this.name);   // 'ddzy'
+    console.log(args);    // [1, 2]
+  },
+};
+
+Function.prototype['_bind'] = utilityFunction._bind;
+
+target.printName['_call'](origin)([1, 2]);
+```
+
 ## Others
 
 ### isBasicValue
@@ -485,6 +537,34 @@ const o2 = [
   Symbol,
 ]
 o2.forEach((v) => utilityOthers.isBasicValue(v));    // true
+```
+
+### isNull
+
+#### a. 说明
+
+判断是否为`null`
+
+#### b. 用法
+
+```ts
+utilityOthers.isNull(0);    // false
+utilityOthers.isNull(undefined)   // false
+utilityOthers.isNull(null)    // true
+```
+
+### isUndefined
+
+#### a. 说明
+
+判断是否为`undefined`
+
+#### b. 用法
+
+```ts
+utilityOthers.isNull(0);    // false
+utilityOthers.isNull(null)   // false
+utilityOthers.isNull(undefined)    // true
 ```
 
 ### invariant
