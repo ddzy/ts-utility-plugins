@@ -3,6 +3,8 @@ import utilityArray from '../array/index';
 
 export interface IUtilityOthersProps {
   isBasicValue: (origin: any) => boolean;
+  isNull: (origin: any) => boolean;
+  isUndefined: (origin: any) => boolean;
 
   invariant: (condition: boolean, message: string) => void;
   convertHumpToHyphen: (hump: string) => string;
@@ -48,6 +50,23 @@ const utilityOthers: IUtilityOthersProps = {
       || typeof origin === 'symbol'
       || typeof origin === 'boolean'
       || origin == undefined
+  },
+
+  /**
+   * 判断是否undefined
+   * @param origin 任意值
+   */
+  isUndefined(origin) {
+    return typeof origin === 'undefined';
+  },
+
+  /**
+   * 判断是否为null
+   * @param origin 任意值
+   */
+  isNull(origin) {
+    return !(utilityOthers.isUndefined(origin))
+      && origin == undefined;
   },
 
   /**
