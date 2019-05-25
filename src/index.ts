@@ -1,27 +1,5 @@
-import utilityArray from "./ddzy/utility/array";
+import ES6Achieve from './ddzy/business/es6_achieve/index';
 
-const origin = [
-  'duan',
-  1998,
-  [
-    'a',
-    'b',
-    [
-      'c',
-      'd',
-      [
-        'e',
-        'f',
-        123
-      ],
-    ],
-  ],
-  {
-    name: 'duan',
-    age: 20,
-  },
-];
+var result = ES6Achieve._const('key', {});
 
-const result = utilityArray.toFlatArrayOutPlace(origin);
-
-console.log(result);
+result.key = {};
