@@ -31,10 +31,12 @@
   - [x] [business-draggable](#business-draggable)
   - [x] [business-upload](#business-upload)
 - [x] Utility
-  - [ ] [utility-dom](#utility)
-  - [ ] [utility-number](#utility)
-  - [ ] [utility-others](#utility)
-  - [ ] [utility-function](#utility)
+  - [x] [utility-dom](#utility)
+  - [x] [utility-number](#utility)
+  - [x] [utility-others](#utility)
+  - [x] [utility-function](#utility)
+  - [x] [utility-array][#utility]
+  - [x] [utility-object](#utility)
 
 ## canvas-stars-line
 
