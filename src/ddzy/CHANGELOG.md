@@ -80,3 +80,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - 新增`utility/others/isNull`
 - 新增`utility/others/isUndefined`
 - 新增`business/es6_achieve`, 旨在用es5实现es6的相关方法
+
+## [2019-5-28]
+
+### Changed
+
+- 重构`README.md`
+  - 移除旧的API相关说明, 由于文档已搬运至`Gitbook`, 添加[Gitbook在线站点](https://ddzy.gitbook.io/ts-utility-plugins-docs/)
