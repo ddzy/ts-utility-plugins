@@ -83,6 +83,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [2019-5-28]
 
+### Added
+
+- 新增`canvas`和`business`的`README.md`
+
 ### Changed
 
 - 重构`README.md`
