@@ -11,8 +11,6 @@
 - [canvas-colorful-bubble](https://blog.yyge.top/)
 - [canvas-jumping-characters](https://blog.yyge.top/)
 
-~~~**TODO**: 后续会考虑放置到`GitHub-pages`展示~~~
-
 `2019/5/28`, 已将所有的API说明, 搬运至`Gitbook`在线站点, 很舒服~
 
 **Gitbook地址**: [https://ddzy.gitbook.io/ts-utility-plugins-docs/](https://ddzy.gitbook.io/ts-utility-plugins-docs/)
