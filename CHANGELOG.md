@@ -57,3 +57,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 集成`jest`单测环境
+
+## [2019-5-27]
+
+### Marked
+
+- 项目被[@HelloGithub](https://github.com/521xueweihan/HelloGitHub/issues/595)团队收录
