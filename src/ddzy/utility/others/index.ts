@@ -8,6 +8,7 @@ export interface IUtilityOthersProps {
 
   invariant: (condition: boolean, message: string) => void;
   convertHumpToHyphen: (hump: string) => string;
+  convertURLParameterToObject: (url: string) => Record<string, any>;
 
   deepClone: <T extends object>(origin: T) => Partial<T>;
 };
@@ -113,6 +114,31 @@ const utilityOthers: IUtilityOthersProps = {
     }
 
     return _aidedDeepClone(origin, target);
+  },
+
+  /**
+   * 提取URL中的GET请求参数
+   * @param url 需要解析的url
+   */
+  convertURLParameterToObject(url) {
+    const matchURLReg: RegExp = /(?:(?<=[^\/])(\?.+))/;
+    const matchParameterReg: RegExp = /[\?\&]{1}(?:(\w+)=(\w+))/g;
+    const final: Record<string, any> = {};
+
+    const matchedCompleteURL = url.match(matchURLReg);
+
+    if ( matchedCompleteURL ) {
+      const matchedPairs = matchedCompleteURL[1].match(matchParameterReg);
+      if ( matchedPairs ) {
+        matchedPairs.forEach((v) => {
+          const [key, value] = v.split('=');
+
+          final[key.substr(1)] = value;
+        });
+      }
+    }
+
+    return final;
   },
 };
 

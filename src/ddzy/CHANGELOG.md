@@ -90,4 +90,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 
 - 重构`README.md`
-  - 移除旧的API相关说明, 由于文档已搬运至`Gitbook`, 添加[Gitbook在线站点](https://ddzy.gitbook.io/ts-utility-plugins-docs/)
+  - 移除旧的API相关说明, 文档已搬运至`Gitbook`, 添加[Gitbook在线站点](https://ddzy.gitbook.io/ts-utility-plugins-docs/)
+
+## [2019-5-31]
+
+### Added
+
+- 新增`utility/others/convertURLParameterToObject`工具函数
+
+### Changed
+
+- 更新[ts-utility-plugins-docs](https://ddzy.gitbook.io/ts-utility-plugins-docs/)API文档👌
