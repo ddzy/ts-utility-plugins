@@ -1,25 +1,22 @@
-import utilityFunction from './ddzy/utility/function/index';
+import utilityOthers from "./ddzy/utility/others";
 
-// utilityFunction._call('push', {}, 123);
+const result = utilityOthers.convertURLParameterToObject(
+  'https://github.com/ddzy?username=duan&age=20&token=kslgjadg',
+);
 
-Function.prototype['_call' as 'prototype'] = utilityFunction._call;
+const result2 = utilityOthers.convertURLParameterToObject(
+  'https://github.com/ddzy??username=duan&&age=20'
+);
 
+const result3 = utilityOthers.convertURLParameterToObject(
+  'https://github.com/ddzy/username=duan?age=20&token=askndg',
+);
 
-const origin = {
-  name: 'duan',
-};
+const result4 = utilityOthers.convertURLParameterToObject(
+  'https://github.com/ddzy&username=duan?age=20?token=askndg',
+);
 
-const target = {
-  say(...args: any[]) {
-    console.log(this['name' as keyof typeof target]);
-    console.log(args);
-  },
-};
-
-
-// target.say['_call' as 'prototype'](origin, 1, 2, 3, 4);
-// target.say['_call' as 'prototype'](null, 1, 2, 3, 4);
-
-Function.prototype['_bind' as 'prototype'] = utilityFunction._bind;
-
-target.say['_bind' as 'prototype'](origin)(['one', 'two', 'three'])
+console.log(result);
+console.log(result2);
+console.log(result3);
+console.log(result4);
