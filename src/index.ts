@@ -5,7 +5,7 @@ const result = utilityOthers.convertURLParameterToObject(
 );
 
 const result2 = utilityOthers.convertURLParameterToObject(
-  'https://github.com/ddzy??username=duan&&age=20'
+  'https://github.com/ddzy??username=duan&&age=20',
 );
 
 const result3 = utilityOthers.convertURLParameterToObject(
