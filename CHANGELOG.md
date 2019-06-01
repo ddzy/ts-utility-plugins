@@ -63,3 +63,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Marked
 
 - 项目被[@HelloGithub](https://github.com/521xueweihan/HelloGitHub/issues/595)团队收录
+
+## [2019-6-1]
+
+### Added
+
+- 引入`jest`测试覆盖率

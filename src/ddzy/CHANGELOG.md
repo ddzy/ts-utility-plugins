@@ -101,3 +101,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 
 - 更新[ts-utility-plugins-docs](https://ddzy.gitbook.io/ts-utility-plugins-docs/)API文档👌
+
+## [2019-6-1]
+
+### Added
+
+- 新增`utility/function/getFuncParams`工具方法
+- 新增`utility/string`区块, 实现一些常用的字符串工具函数
+  - 新增`getRandomStr`方法

@@ -1,22 +1,25 @@
-import utilityOthers from "./ddzy/utility/others";
+import utilityString from "./ddzy/utility/string";
 
-const result = utilityOthers.convertURLParameterToObject(
-  'https://github.com/ddzy?username=duan&age=20&token=kslgjadg',
+const result1 = utilityString.getRandomStr();
+const result2 = utilityString.getRandomStr([]);
+const result3 = utilityString.getRandomStr(
+  ['a', 'b', 'c', '1', '2', '3', '_', '-'],
+  8,
+);
+const result4 = utilityString.getRandomStr(
+  undefined,
+  undefined,
+  false,
+);
+const result5 = utilityString.getRandomStr(
+  undefined,
+  undefined,
+  true,
 );
 
-const result2 = utilityOthers.convertURLParameterToObject(
-  'https://github.com/ddzy??username=duan&&age=20',
-);
 
-const result3 = utilityOthers.convertURLParameterToObject(
-  'https://github.com/ddzy/username=duan?age=20&token=askndg',
-);
-
-const result4 = utilityOthers.convertURLParameterToObject(
-  'https://github.com/ddzy&username=duan?age=20?token=askndg',
-);
-
-console.log(result);
+console.log(result1)
 console.log(result2);
 console.log(result3);
 console.log(result4);
+console.log(result5);
