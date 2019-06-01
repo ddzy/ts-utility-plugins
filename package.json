@@ -4,7 +4,7 @@
   "description": "ts构建的学习类库, 囊括canvas、business、utility等多个区块",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "build": "webpack --config webpack.config.ts",
     "start": "webpack-dev-server",
     "check": "tsc -w"
