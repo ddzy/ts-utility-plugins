@@ -5,12 +5,14 @@ export interface IUtilityFunctionProps {
 
   _call(context: any, ...args: any[]): void;
   _bind(context: any): (args: any[]) => any;
+
+  getParamNames(origin: Function): string[];
 }
 
 const utilityFunction: IUtilityFunctionProps = {
 
   /**
-   * 检查是否函数
+   * 判断是否函数(Function || Symbol)
    * @param ele 任意值
    */
   isFunction(ele) {
@@ -41,7 +43,30 @@ const utilityFunction: IUtilityFunctionProps = {
     return function (args) {
       that['_call'](context, ...args);
     }
-  }
+  },
+
+  /**
+   * 获取函数的形参名称数组
+   * @param origin 目标函数
+   * @returns {string[]} 函数参数名称数组
+   */
+  getParamNames(origin) {
+    if (!utilityFunction.isFunction(origin)) {
+      return [];
+    }
+
+    let final: string[] = [];
+    const originToStr: string = origin.toString();
+    const matchParamsReg: RegExp = /(?:(?<=\()(.+)(?=\)))/;
+    const matchedResult = originToStr.match(matchParamsReg);
+
+    if ( matchedResult ) {
+      let matchedParams = matchedResult[1];
+      final = matchedParams.split(/[,\s]+/g);
+    }
+
+    return final;
+  },
 
 };
 
