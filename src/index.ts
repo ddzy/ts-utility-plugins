@@ -4,4 +4,8 @@ const bst = new utilityAlgorithm.BST({
   nodes: [2, 5, 3, 8, 7, 4, 9, 12, 23],
 });
 
-bst.handleInsert(1).handleInsert(-5).handleInsert(-2);
+// bst.handleInsert(1).handleInsert(-5).handleInsert(-2);
+bst.handleRemove(8);
+bst.print();
+bst.handleRemove(23).handleInsert(23);
+bst.print();

@@ -53,8 +53,6 @@ export class BinarySearchTree {
     for (const value of nodes) {
       this.handleInsert(value);
     }
-
-    this.print();
   }
 
   private _aidedHandleInsert(
@@ -95,6 +93,35 @@ export class BinarySearchTree {
     }
   }
 
+  private _aidedHandleRemove(
+    node: TreeNode | null,
+    value: number,
+  ): void {
+    if (!node) {
+      return;
+    }
+    else {
+      if (node.value === value) {
+        if (node.parent) {
+          node.parent.left = node.left;
+          node.parent.right = node.right;
+          if (node.left) {
+            node.left.parent = node.parent
+          }
+          if (node.right) {
+            node.right.parent = node.parent;
+          }
+        }
+      }
+      if (node.value > value) {
+        this._aidedHandleRemove(node.left, value);
+      }
+      if (node.value < value) {
+        this._aidedHandleRemove(node.right, value);
+      }
+    }
+  }
+
   /**
    * 添加新节点, 入口
    * @param value 节点值
@@ -112,8 +139,26 @@ export class BinarySearchTree {
     return this;
   }
 
+  /**
+   * 移除指定节点, 入口
+   * @param value 节点值
+   */
+  public handleRemove(
+    value: number,
+  ): BinarySearchTree {
+    const { state } = this;
+
+    this._aidedHandleRemove(state.root, value);
+
+    return this;
+  }
 
   public print(): void {
+    // TODO: getDepth
+    // TODO: getHeight
+    // TODO: frontOrderTraversal
+    // TODO: middleOrderTraversal
+    // TODO: backOrderTraversal
     console.log(this.state.root);
   }
 };
