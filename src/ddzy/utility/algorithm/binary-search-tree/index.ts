@@ -64,15 +64,22 @@ export class BinarySearchTree {
     newNode: TreeNode,
   ): void {
     if (!node) {
+      // ? 更新根节点
       this.state.root = newNode;
     }
     else {
+      if (!newNode.left && !newNode.right) {
+        // ? 更新叶子节点的parent
+        newNode.parent = node;
+      }
       if (node.value > newNode.value) {
         if (!node.left) {
           node.left = newNode;
           node.parent = this.state.parent;
+          this.state.parent = node;
         }
         else {
+          this.state.parent = node;
           this._aidedHandleInsert(node.left, newNode);
         }
       }
@@ -80,13 +87,13 @@ export class BinarySearchTree {
         if (!node.right) {
           node.right = newNode;
           node.parent = this.state.parent;
+          this.state.parent = node;
         }
         else {
+          this.state.parent = node;
           this._aidedHandleInsert(node.right, newNode);
         }
       }
-
-      this.state.parent = node;
     }
   }
 
