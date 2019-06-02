@@ -10,7 +10,6 @@ export interface IBinarySearchTreeProps {
 export interface IBinarySearchTreeState {
   root: TreeNode | null;
   parent: TreeNode | null;
-  countDepth: number;
 };
 
 
@@ -28,7 +27,6 @@ export class BinarySearchTree {
   public readonly state: IBinarySearchTreeState = {
     root: null,
     parent: null,
-    countDepth: 0,
   };
 
   private __init__(
@@ -162,11 +160,6 @@ export class BinarySearchTree {
     }
   }
 
-  private _aidedHandleResetState(): void {
-    this.state.parent = null;
-    this.state.countDepth = 0;
-  }
-
   private _aidedHandleHasValue(
     node: TreeNode | null,
     value: number,
@@ -235,8 +228,6 @@ export class BinarySearchTree {
     value?: number
   ): number {
     const { root } = this.state;
-
-    this._aidedHandleResetState();
 
     return this._aidedHandleGetDepth(root, value);
   }
