@@ -51,9 +51,7 @@ export class BinarySearchTree {
     const { nodes } = BinarySearchTree.defaultProps;
 
     for (const value of nodes) {
-      this.handleInsert(new TreeNode({
-        value,
-      }));
+      this.handleInsert(value);
     }
 
     this.print();
@@ -102,9 +100,12 @@ export class BinarySearchTree {
    * @param value 节点值
    */
   public handleInsert(
-    newNode: TreeNode,
+    value: number,
   ): void {
     const { state } = this;
+    const newNode = new TreeNode({
+      value,
+    });
 
     this._aidedHandleInsert(state.root, newNode);
   }
