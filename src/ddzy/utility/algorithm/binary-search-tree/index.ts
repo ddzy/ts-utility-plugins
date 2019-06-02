@@ -1,6 +1,7 @@
 import {
   TreeNode,
 } from './tree-node/index';
+import utilityOthers from '../../others';
 
 
 export interface IBinarySearchTreeProps {
@@ -9,6 +10,7 @@ export interface IBinarySearchTreeProps {
 export interface IBinarySearchTreeState {
   root: TreeNode | null;
   parent: TreeNode | null;
+  countDepth: number;
 };
 
 
@@ -26,6 +28,7 @@ export class BinarySearchTree {
   public readonly state: IBinarySearchTreeState = {
     root: null,
     parent: null,
+    countDepth: 0,
   };
 
   private __init__(
@@ -122,6 +125,77 @@ export class BinarySearchTree {
     }
   }
 
+  private _aidedHandleGetDepth(
+    node: TreeNode | null,
+    value?: number,
+  ): number {
+    if (utilityOthers.isUndefined(value)) {
+      // TODO: 整棵树的深度
+      if (!node) {
+        return 0;
+      }
+
+      return Math.max(
+        (this._aidedHandleGetDepth(node.left, value)) + 1,
+        (this._aidedHandleGetDepth(node.right, value)) + 1,
+      );
+    }
+    else {
+      // TODO: 指定节点的深度
+      if (this.handleHasValue(value as number)) {
+        let initialDepth = 1;
+
+        this.handleFrontOrderTraversal((currentNode) => {
+          if (currentNode.value === value) {
+            let n: TreeNode | null = currentNode;
+            while ((n = n.parent)) {
+              initialDepth++;
+            }
+          }
+        });
+
+        return initialDepth;
+      }
+      else {
+        return 0;
+      }
+    }
+  }
+
+  private _aidedHandleResetState(): void {
+    this.state.parent = null;
+    this.state.countDepth = 0;
+  }
+
+  private _aidedHandleHasValue(
+    node: TreeNode | null,
+    value: number,
+  ): boolean {
+    let result = false;
+
+    this._aidedHandleFrontOrderTraversal(node, (currentNode) => {
+      if (currentNode.value === value) {
+        result = true;
+      }
+    });
+
+    return result;
+  }
+
+  private _aidedHandleFrontOrderTraversal(
+    node: TreeNode | null,
+    callback: (node: TreeNode) => void,
+  ): void {
+    if (!node) {
+      return;
+    }
+    else {
+      callback(node);
+      node.left && (this._aidedHandleFrontOrderTraversal(node.left, callback));
+      node.right && (this._aidedHandleFrontOrderTraversal(node.right, callback));
+    }
+  }
+
   /**
    * 添加新节点, 入口
    * @param value 节点值
@@ -153,12 +227,53 @@ export class BinarySearchTree {
     return this;
   }
 
+  /**
+   * 获取指定节点的深度, 入口
+   * @param [value] 节点值, 默认不传则获取整棵树的深度
+   */
+  public handleGetDepth(
+    value?: number
+  ): number {
+    const { root } = this.state;
+
+    this._aidedHandleResetState();
+
+    return this._aidedHandleGetDepth(root, value);
+  }
+
+  /**
+   * 查找二叉树中是否有指定的值, 入口
+   * @param value 节点值
+   */
+  public handleHasValue(
+    value: number,
+  ): boolean {
+    const { root } = this.state;
+
+    return this._aidedHandleHasValue(root, value);
+  }
+
+  /**
+   * 先序遍历, 入口
+   * @param callback 回调
+   */
+  public handleFrontOrderTraversal(
+    callback: (node: TreeNode) => void,
+  ): BinarySearchTree {
+    const { root } = this.state;
+
+    this._aidedHandleFrontOrderTraversal(root, callback);
+
+    return this;
+  }
+
   public print(): void {
-    // TODO: getDepth
+    // TODO: getDepth √
     // TODO: getHeight
-    // TODO: frontOrderTraversal
+    // TODO: frontOrderTraversal √
     // TODO: middleOrderTraversal
     // TODO: backOrderTraversal
+    // TODO: hasValue √
     console.log(this.state.root);
   }
 };
