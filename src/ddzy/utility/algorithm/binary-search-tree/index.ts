@@ -101,13 +101,15 @@ export class BinarySearchTree {
    */
   public handleInsert(
     value: number,
-  ): void {
+  ): BinarySearchTree {
     const { state } = this;
     const newNode = new TreeNode({
       value,
     });
 
     this._aidedHandleInsert(state.root, newNode);
+
+    return this;
   }
 
 
