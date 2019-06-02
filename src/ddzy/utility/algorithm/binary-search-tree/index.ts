@@ -189,6 +189,34 @@ export class BinarySearchTree {
     }
   }
 
+  private _aidedHandleMiddleOrderTraversal(
+    node: TreeNode | null,
+    callback: (node: TreeNode) => void,
+  ): void {
+    if (!node) {
+      return;
+    }
+    else {
+      node.left && (this._aidedHandleFrontOrderTraversal(node.left, callback));
+      callback(node);
+      node.right && (this._aidedHandleFrontOrderTraversal(node.right, callback));
+    }
+  }
+
+  private _aidedHandleBackOrderTraversal(
+    node: TreeNode | null,
+    callback: (node: TreeNode) => void,
+  ): void {
+    if (!node) {
+      return;
+    }
+    else {
+      node.left && (this._aidedHandleFrontOrderTraversal(node.left, callback));
+      node.right && (this._aidedHandleFrontOrderTraversal(node.right, callback));
+      callback(node);
+    }
+  }
+
   /**
    * 添加新节点, 入口
    * @param value 节点值
@@ -258,12 +286,36 @@ export class BinarySearchTree {
     return this;
   }
 
+  /**
+   * 中序遍历, 入口
+   * @param callback 回调
+   */
+  public handleMiddleOrderTraversal(
+    callback: (node: TreeNode) => void,
+  ): void {
+    const { root } = this.state;
+
+    this._aidedHandleMiddleOrderTraversal(root, callback);
+  }
+
+  /**
+   * 后序遍历, 入口
+   * @param callback 回调
+   */
+  public handlBackOrderTraversal(
+    callback: (node: TreeNode) => void,
+  ): void {
+    const { root } = this.state;
+
+    this._aidedHandleBackOrderTraversal(root, callback);
+  }
+
   public print(): void {
     // TODO: getDepth √
     // TODO: getHeight
     // TODO: frontOrderTraversal √
-    // TODO: middleOrderTraversal
-    // TODO: backOrderTraversal
+    // TODO: middleOrderTraversal √
+    // TODO: backOrderTraversal √
     // TODO: hasValue √
     console.log(this.state.root);
   }
