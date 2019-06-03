@@ -69,3 +69,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 引入`jest`测试覆盖率
+
+## [2019-6-3]
+
+### Changed
+
+- 重构`package.json`
+  - 更改了`repository`、`author`、`bugs`、`license`等一系列配置项
