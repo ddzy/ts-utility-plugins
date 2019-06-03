@@ -43,4 +43,6 @@ const bst = new utilityAlgorithm.BST({
 // console.log(bst.handleGetHeight(23));
 // console.log(bst.handleGetHeight(7));
 
-console.log(bst.handleGetLeaves());
+// console.log(bst.handleGetLeaves());
+
+console.log(bst.handleGetRoot());

@@ -40,7 +40,7 @@ export class BinarySearchTree {
     this.__init__(props);
   }
 
-  public readonly state: IBinarySearchTreeState = {
+  private readonly state: IBinarySearchTreeState = {
     root: null,
   };
 
@@ -375,6 +375,10 @@ export class BinarySearchTree {
     return this._aidedHandleGetLeaves();
   }
 
+  public handleGetRoot(): TreeNode | null {
+    return this.state.root;
+  }
+
   public print(): void {
     // TODO: getDepth √
     // TODO: getHeight √
@@ -383,6 +387,7 @@ export class BinarySearchTree {
     // TODO: backOrderTraversal √
     // TODO: hasValue √
     // TODO: getLeaves √
+    // TODO: getRoot √
     console.log(this.state.root);
   }
 };
