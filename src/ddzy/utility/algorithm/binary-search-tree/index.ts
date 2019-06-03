@@ -266,13 +266,11 @@ export class BinarySearchTree {
     let result: number | null = null;
 
     if (current) {
-      while ((current = current.left)) {
-        if (!current.left && !current.right) {
-          result = current.value;
-          break;
-        }
+      while (current && current.left) {
+        current = current.left;
       }
-      return result;
+
+      return current.value;
     }
     else {
       return result;
@@ -286,13 +284,11 @@ export class BinarySearchTree {
     let result: number | null = null;
 
     if (current) {
-      while ((current = current.right)) {
-        if (!current.left && !current.right) {
-          result = current.value;
-          break;
-        }
+      while (current && current.right) {
+        current = current.right;
       }
-      return result;
+
+      return current.value;
     }
     else {
       return result;
