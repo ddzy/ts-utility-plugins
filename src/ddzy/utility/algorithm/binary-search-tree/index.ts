@@ -259,6 +259,46 @@ export class BinarySearchTree {
     return result;
   }
 
+  private _aidedHandleGetMinValue(
+    node: TreeNode | null,
+  ): number | null {
+    let current = node;
+    let result: number | null = null;
+
+    if (current) {
+      while ((current = current.left)) {
+        if (!current.left && !current.right) {
+          result = current.value;
+          break;
+        }
+      }
+      return result;
+    }
+    else {
+      return result;
+    }
+  }
+
+  private _aidedHandleGetMaxValue(
+    node: TreeNode | null,
+  ): number | null {
+    let current = node;
+    let result: number | null = null;
+
+    if (current) {
+      while ((current = current.right)) {
+        if (!current.left && !current.right) {
+          result = current.value;
+          break;
+        }
+      }
+      return result;
+    }
+    else {
+      return result;
+    }
+  }
+
   /**
    * 添加新节点, 入口
    * @param value 节点值
@@ -376,7 +416,21 @@ export class BinarySearchTree {
   }
 
   public handleGetRoot(): TreeNode | null {
-    return this.state.root;
+    const { root } = this.state;
+
+    return root;
+  }
+
+  public handleGetMinValue(): number | null {
+    const { root } = this.state;
+
+    return this._aidedHandleGetMinValue(root);
+  }
+
+  public handleGetMaxValue(): number | null {
+    const { root } = this.state;
+
+    return this._aidedHandleGetMaxValue(root);
   }
 
   public print(): void {
@@ -388,6 +442,8 @@ export class BinarySearchTree {
     // TODO: hasValue √
     // TODO: getLeaves √
     // TODO: getRoot √
+    // TODO: getMinValue √
+    // TODO: getMaxValue √
     console.log(this.state.root);
   }
 };

@@ -45,4 +45,8 @@ const bst = new utilityAlgorithm.BST({
 
 // console.log(bst.handleGetLeaves());
 
-console.log(bst.handleGetRoot());
+// console.log(bst.handleGetRoot());
+
+console.log(bst.handleGetMinValue());
+
+console.log(bst.handleGetMaxValue());
