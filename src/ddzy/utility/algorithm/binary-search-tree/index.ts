@@ -421,12 +421,18 @@ export class BinarySearchTree {
     return root;
   }
 
+  /**
+   * 获取最小值, 入口
+   */
   public handleGetMinValue(): number | null {
     const { root } = this.state;
 
     return this._aidedHandleGetMinValue(root);
   }
 
+  /**
+   * 获取最大值, 入口
+   */
   public handleGetMaxValue(): number | null {
     const { root } = this.state;
 
