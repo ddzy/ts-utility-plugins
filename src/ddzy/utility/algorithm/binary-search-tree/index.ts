@@ -9,11 +9,27 @@ export interface IBinarySearchTreeProps {
 };
 export interface IBinarySearchTreeState {
   root: TreeNode | null;
-  parent: TreeNode | null;
 };
 
 
 export class BinarySearchTree {
+
+  /**
+   * 获取指定节点的高度(height), 通用
+   * @param node 指定节点
+   */
+  private static $getNodeHeight(
+    node: TreeNode | null,
+  ): number {
+    if (!node) {
+      return 0
+    }
+    return Math.max(
+      BinarySearchTree.$getNodeHeight(node.left) + 1,
+      BinarySearchTree.$getNodeHeight(node.right) + 1,
+    );
+  }
+
   public static readonly defaultProps: IBinarySearchTreeProps = {
     nodes: [2, 5, 3, 8, 7, 4, 9, 12, 23],
   };
@@ -24,9 +40,8 @@ export class BinarySearchTree {
     this.__init__(props);
   }
 
-  public readonly state: IBinarySearchTreeState = {
+  private readonly state: IBinarySearchTreeState = {
     root: null,
-    parent: null,
   };
 
   private __init__(
@@ -72,22 +87,18 @@ export class BinarySearchTree {
       if (node.value > newNode.value) {
         if (!node.left) {
           node.left = newNode;
-          node.parent = this.state.parent;
-          this.state.parent = node;
+          newNode.parent = node;
         }
         else {
-          this.state.parent = node;
           this._aidedHandleInsert(node.left, newNode);
         }
       }
       else if (node.value < newNode.value) {
         if (!node.right) {
           node.right = newNode;
-          node.parent = this.state.parent;
-          this.state.parent = node;
+          newNode.parent = node;
         }
         else {
-          this.state.parent = node;
           this._aidedHandleInsert(node.right, newNode);
         }
       }
@@ -129,14 +140,7 @@ export class BinarySearchTree {
   ): number {
     if (utilityOthers.isUndefined(value)) {
       // TODO: 整棵树的深度
-      if (!node) {
-        return 0;
-      }
-
-      return Math.max(
-        (this._aidedHandleGetDepth(node.left, value)) + 1,
-        (this._aidedHandleGetDepth(node.right, value)) + 1,
-      );
+      return BinarySearchTree.$getNodeHeight(node);
     }
     else {
       // TODO: 指定节点的深度
@@ -217,6 +221,80 @@ export class BinarySearchTree {
     }
   }
 
+  private _aidedHandleGetHeight(
+    node: TreeNode | null,
+    value?: number,
+  ): number {
+    if (utilityOthers.isUndefined(value)) {
+      // TODO: 整棵树的高度(Depth = Height)
+      if (!node) {
+        return 0;
+      }
+
+      return this.handleGetDepth(value);
+    }
+    else {
+      // TODO: 指定节点的高度
+      let initialDepth: number = 1;
+
+      this.handleFrontOrderTraversal((currentNode) => {
+        if (currentNode.value === value) {
+          initialDepth = BinarySearchTree.$getNodeHeight(currentNode);
+        }
+      });
+
+      return initialDepth;
+    }
+  }
+
+  private _aidedHandleGetLeaves(): TreeNode[] {
+    const result: TreeNode[] = [];
+
+    this.handleFrontOrderTraversal((node) => {
+      if (!node.left && !node.right) {
+        result.push(node);
+      }
+    });
+
+    return result;
+  }
+
+  private _aidedHandleGetMinValue(
+    node: TreeNode | null,
+  ): number | null {
+    let current = node;
+    let result: number | null = null;
+
+    if (current) {
+      while (current && current.left) {
+        current = current.left;
+      }
+
+      return current.value;
+    }
+    else {
+      return result;
+    }
+  }
+
+  private _aidedHandleGetMaxValue(
+    node: TreeNode | null,
+  ): number | null {
+    let current = node;
+    let result: number | null = null;
+
+    if (current) {
+      while (current && current.right) {
+        current = current.right;
+      }
+
+      return current.value;
+    }
+    else {
+      return result;
+    }
+  }
+
   /**
    * 添加新节点, 入口
    * @param value 节点值
@@ -292,10 +370,12 @@ export class BinarySearchTree {
    */
   public handleMiddleOrderTraversal(
     callback: (node: TreeNode) => void,
-  ): void {
+  ): BinarySearchTree {
     const { root } = this.state;
 
     this._aidedHandleMiddleOrderTraversal(root, callback);
+
+    return this;
   }
 
   /**
@@ -304,19 +384,54 @@ export class BinarySearchTree {
    */
   public handlBackOrderTraversal(
     callback: (node: TreeNode) => void,
-  ): void {
+  ): BinarySearchTree {
     const { root } = this.state;
 
     this._aidedHandleBackOrderTraversal(root, callback);
+
+    return this;
   }
 
-  public print(): void {
-    // TODO: getDepth √
-    // TODO: getHeight
-    // TODO: frontOrderTraversal √
-    // TODO: middleOrderTraversal √
-    // TODO: backOrderTraversal √
-    // TODO: hasValue √
-    console.log(this.state.root);
+  /**
+   * 获取节点高度, 入口
+   * @param value 节点值
+   */
+  public handleGetHeight(
+    value?: number,
+  ): number {
+    const { root } = this.state;
+
+    return this._aidedHandleGetHeight(root, value);
+  }
+
+  /**
+   * 获取叶子节点, 入口
+   */
+  public handleGetLeaves(): TreeNode[] {
+    return this._aidedHandleGetLeaves();
+  }
+
+  public handleGetRoot(): TreeNode | null {
+    const { root } = this.state;
+
+    return root;
+  }
+
+  /**
+   * 获取最小值, 入口
+   */
+  public handleGetMinValue(): number | null {
+    const { root } = this.state;
+
+    return this._aidedHandleGetMinValue(root);
+  }
+
+  /**
+   * 获取最大值, 入口
+   */
+  public handleGetMaxValue(): number | null {
+    const { root } = this.state;
+
+    return this._aidedHandleGetMaxValue(root);
   }
 };

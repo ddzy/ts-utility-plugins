@@ -109,3 +109,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - 新增`utility/function/getFuncParams`工具方法
 - 新增`utility/string`区块, 实现一些常用的字符串工具函数
   - 新增`getRandomStr`方法
+
+## [2019-6-3]
+
+### Added
+
+- 新增`utility/algorithm`区块, 记录数据结构与算法
+  - 新增`binary-search-tree`工具组件
