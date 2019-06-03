@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ddzy/canvas-stars-line.git"
+    "url": "git+https://github.com/ddzy/ts-utility-plugins.git"
   },
-  "author": "yyg",
-  "license": "ISC",
+  "author": "ddzy",
+  "license": "Apache",
   "bugs": {
-    "url": "https://github.com/ddzy/canvas-stars-line/issues"
+    "url": "https://github.com/ddzy/ts-utility-plugins/issues"
   },
-  "homepage": "https://github.com/ddzy/canvas-stars-line#readme",
+  "homepage": "https://ddzy.gitbook.io/ts-utility-plugins-docs",
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
