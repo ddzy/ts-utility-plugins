@@ -432,18 +432,4 @@ export class BinarySearchTree {
 
     return this._aidedHandleGetMaxValue(root);
   }
-
-  public print(): void {
-    // TODO: getDepth √
-    // TODO: getHeight √
-    // TODO: frontOrderTraversal √
-    // TODO: middleOrderTraversal √
-    // TODO: backOrderTraversal √
-    // TODO: hasValue √
-    // TODO: getLeaves √
-    // TODO: getRoot √
-    // TODO: getMinValue √
-    // TODO: getMaxValue √
-    console.log(this.state.root);
-  }
 };
