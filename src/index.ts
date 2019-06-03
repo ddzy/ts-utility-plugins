@@ -12,11 +12,11 @@ const bst = new utilityAlgorithm.BST({
 // console.log(bst.handleGetDepth());
 // console.log(bst.handleGetDepth(4));
 
-console.log(bst.handleGetDepth(23));
-console.log(bst.handleGetDepth(9));
-console.log(bst.handleGetDepth(7));
-console.log(bst.handleGetDepth(2));
-console.log(bst.handleGetDepth(-1));
+// console.log(bst.handleGetDepth(23));
+// console.log(bst.handleGetDepth(9));
+// console.log(bst.handleGetDepth(7));
+// console.log(bst.handleGetDepth(2));
+// console.log(bst.handleGetDepth(-1));
 
 // console.log(bst.handleHasValue(23));
 // console.log(bst.handleHasValue(6));
@@ -42,3 +42,5 @@ console.log(bst.handleGetDepth(-1));
 // console.log(bst.handleGetHeight(9));
 // console.log(bst.handleGetHeight(23));
 // console.log(bst.handleGetHeight(7));
+
+console.log(bst.handleGetLeaves());

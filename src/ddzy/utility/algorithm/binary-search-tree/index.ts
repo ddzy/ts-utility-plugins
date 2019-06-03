@@ -247,6 +247,18 @@ export class BinarySearchTree {
     }
   }
 
+  private _aidedHandleGetLeaves(): TreeNode[] {
+    const result: TreeNode[] = [];
+
+    this.handleFrontOrderTraversal((node) => {
+      if (!node.left && !node.right) {
+        result.push(node);
+      }
+    });
+
+    return result;
+  }
+
   /**
    * 添加新节点, 入口
    * @param value 节点值
@@ -322,10 +334,12 @@ export class BinarySearchTree {
    */
   public handleMiddleOrderTraversal(
     callback: (node: TreeNode) => void,
-  ): void {
+  ): BinarySearchTree {
     const { root } = this.state;
 
     this._aidedHandleMiddleOrderTraversal(root, callback);
+
+    return this;
   }
 
   /**
@@ -334,18 +348,31 @@ export class BinarySearchTree {
    */
   public handlBackOrderTraversal(
     callback: (node: TreeNode) => void,
-  ): void {
+  ): BinarySearchTree {
     const { root } = this.state;
 
     this._aidedHandleBackOrderTraversal(root, callback);
+
+    return this;
   }
 
+  /**
+   * 获取节点高度, 入口
+   * @param value 节点值
+   */
   public handleGetHeight(
     value?: number,
   ): number {
     const { root } = this.state;
 
     return this._aidedHandleGetHeight(root, value);
+  }
+
+  /**
+   * 获取叶子节点, 入口
+   */
+  public handleGetLeaves(): TreeNode[] {
+    return this._aidedHandleGetLeaves();
   }
 
   public print(): void {
@@ -355,7 +382,7 @@ export class BinarySearchTree {
     // TODO: middleOrderTraversal √
     // TODO: backOrderTraversal √
     // TODO: hasValue √
-    // TODO: getLeaves
+    // TODO: getLeaves √
     console.log(this.state.root);
   }
 };
