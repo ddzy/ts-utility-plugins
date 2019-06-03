@@ -140,14 +140,7 @@ export class BinarySearchTree {
   ): number {
     if (utilityOthers.isUndefined(value)) {
       // TODO: 整棵树的深度
-      if (!node) {
-        return 0;
-      }
-
-      return Math.max(
-        (this._aidedHandleGetDepth(node.left, value)) + 1,
-        (this._aidedHandleGetDepth(node.right, value)) + 1,
-      );
+      return BinarySearchTree.$getNodeHeight(node);
     }
     else {
       // TODO: 指定节点的深度

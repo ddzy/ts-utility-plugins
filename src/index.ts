@@ -1,7 +1,7 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
 const bst = new utilityAlgorithm.BST({
-  nodes: [2, 5, 3, 8, 7, 4, 9, 12, 23, 10, 1, -1],
+  nodes: [2, 5, 3, 8, 7, 4, 9, 12, 23, 10, 1],
 });
 
 // bst.handleInsert(1).handleInsert(-5).handleInsert(-2);
@@ -12,11 +12,11 @@ const bst = new utilityAlgorithm.BST({
 // console.log(bst.handleGetDepth());
 // console.log(bst.handleGetDepth(4));
 
-// console.log(bst.handleGetDepth(23));
-// console.log(bst.handleGetDepth(9));
-// console.log(bst.handleGetDepth(7));
-// console.log(bst.handleGetDepth(2));
-// console.log(bst.handleGetDepth(-1));
+console.log(bst.handleGetDepth(23));
+console.log(bst.handleGetDepth(9));
+console.log(bst.handleGetDepth(7));
+console.log(bst.handleGetDepth(2));
+console.log(bst.handleGetDepth(-1));
 
 // console.log(bst.handleHasValue(23));
 // console.log(bst.handleHasValue(6));
@@ -38,7 +38,7 @@ const bst = new utilityAlgorithm.BST({
 
 // bst.print();
 
-console.log(bst.handleGetHeight(2));
-console.log(bst.handleGetHeight(9));
-console.log(bst.handleGetHeight(23));
-console.log(bst.handleGetHeight(7));
+// console.log(bst.handleGetHeight(2));
+// console.log(bst.handleGetHeight(9));
+// console.log(bst.handleGetHeight(23));
+// console.log(bst.handleGetHeight(7));
