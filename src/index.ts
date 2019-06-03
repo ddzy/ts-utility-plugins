@@ -1,7 +1,7 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
 const bst = new utilityAlgorithm.BST({
-  nodes: [2, 5, 3, 8, 7, 4, 9, 12, 23, 1, 6, 10],
+  nodes: [2, 5, 3, 8, 7, 4, 9, 12, 23, 10, 1, -1],
 });
 
 // bst.handleInsert(1).handleInsert(-5).handleInsert(-2);
@@ -24,14 +24,21 @@ const bst = new utilityAlgorithm.BST({
 // console.log(bst.handleHasValue(2));
 
 
-bst.handleFrontOrderTraversal((node) => {
-  console.log(node);
-});
-console.log('-----------------');
-bst.handleMiddleOrderTraversal((node) => {
-  console.log(node);
-});
-console.log('-----------------');
-bst.handlBackOrderTraversal((node) => {
-  console.log(node);
-});
+// bst.handleFrontOrderTraversal((node) => {
+//   console.log(node);
+// });
+// console.log('-----------------');
+// bst.handleMiddleOrderTraversal((node) => {
+//   console.log(node);
+// });
+// console.log('-----------------');
+// bst.handlBackOrderTraversal((node) => {
+//   console.log(node);
+// });
+
+// bst.print();
+
+console.log(bst.handleGetHeight(2));
+console.log(bst.handleGetHeight(9));
+console.log(bst.handleGetHeight(23));
+console.log(bst.handleGetHeight(7));
