@@ -81,9 +81,8 @@ export class DoubleLinkedCircularList<V> {
     if (!this.state.head) {
       this.state.head = node;
       this.state.tail = node;
-      node.next = this.state.tail;
-      node.prev = this.state.head;
-      this.state.tail.next = this.state.head;
+      node.next = this.state.head;
+      node.prev = this.state.tail;
     }
     else {
       let current: ListNode<V> | null = this.state.head;
@@ -99,6 +98,23 @@ export class DoubleLinkedCircularList<V> {
         this.state.tail = node;
         this.state.tail.next = this.state.head;
       }
+    }
+  }
+
+  private _aidedHandlePrepend(
+    node: ListNode<V>,
+  ): void {
+    if (!this.state.head) {
+      this.state.head = node;
+      this.state.tail = node;
+      node.prev = this.state.head;
+      node.next = this.state.head;
+    }
+    else {
+      node.next = this.state.head;
+      node.prev = this.state.tail;
+      this.state.head.prev = node;
+      this.state.head = node;
     }
   }
 
@@ -131,6 +147,24 @@ export class DoubleLinkedCircularList<V> {
     });
 
     this._aidedHandleAppend(node);
+
+    return this;
+  }
+
+  /**
+   * 首部追加节点, 入口
+   * @param value 节点值
+   */
+  public handlePrepend(
+    value: V
+  ): DoubleLinkedCircularList<V> {
+    const node = new ListNode<V>({
+      value,
+      next: null,
+      prev: null,
+    });
+
+    this._aidedHandlePrepend(node);
 
     return this;
   }
