@@ -20,6 +20,7 @@ export interface IDoubleLinkedCircularListState<V> {
  * TODO: traversalWithBackward -> 反向遍历
  * TODO: getHead -> 获取头节点
  * TODO: getTail -> 获取尾节点
+ * TODO: getLength -> 获取链表长度
  */
 
 export class DoubleLinkedCircularList<V> {
@@ -53,7 +54,7 @@ export class DoubleLinkedCircularList<V> {
         key as keyof typeof DoubleLinkedCircularList.defaultProps
       ] = props[
         key as keyof typeof DoubleLinkedCircularList.defaultProps
-      ]
+        ]
     }
   }
 
@@ -118,6 +119,82 @@ export class DoubleLinkedCircularList<V> {
     }
   }
 
+  private _aidedHandleInsertBefore(
+    target: V,
+    node: ListNode<V>,
+  ): void {
+    let current: ListNode<V> | null = this.state.head;
+
+    while (current && current !== this.state.tail) {
+      if (current.value === target) {
+        // ? 如果系头节点
+        if (current === this.state.head) {
+          this.handlePrepend(node.value);
+        }
+        else {
+          if (current.prev) {
+            current.prev.next = node;
+            node.prev = current.prev;
+            node.next = current;
+            current.prev = node;
+          }
+        }
+      }
+
+      current = current.next;
+    }
+
+    // ? 最后一个节点
+    if (current) {
+      if (current.value === target) {
+        if (current.prev) {
+          current.prev.next = node;
+          node.prev = current.prev;
+          node.next = current;
+          current.prev = node;
+        }
+      }
+    }
+  }
+
+  private _aidedHandleInsertAfter(
+    target: V,
+    node: ListNode<V>,
+  ): void {
+    let current: ListNode<V> | null = this.state.head;
+
+    while (current && current !== this.state.tail) {
+      if (current.value === target) {
+        // ? 如果系尾节点
+        if (current === this.state.tail) {
+          this.handleAppend(node.value);
+        }
+        else {
+          if (current.next) {
+            current.next.prev = node;
+            node.next = current.next;
+            node.prev = current;
+            current.next = node;
+          }
+        }
+      }
+
+      current = current.next;
+    }
+
+    // ? 最后一个节点
+    if (current) {
+      if (current.value === target) {
+        if (current.next) {
+          current.next.prev = node;
+          node.next = current.next;
+          node.prev = current;
+          current.next = node;
+        }
+      }
+    }
+  }
+
 
   /**
    * 获取头节点, 入口
@@ -165,6 +242,46 @@ export class DoubleLinkedCircularList<V> {
     });
 
     this._aidedHandlePrepend(node);
+
+    return this;
+  }
+
+  /**
+   * 将目标节点插入至源节点前, 入口
+   * @param target 源节点
+   * @param value 目标节点
+   */
+  public handleInsertBefore(
+    target: V,
+    value: V,
+  ): DoubleLinkedCircularList<V> {
+    const node = new ListNode<V>({
+      value,
+      next: null,
+      prev: null,
+    });
+
+    this._aidedHandleInsertBefore(target, node);
+
+    return this;
+  }
+
+  /**
+   * 将目标节点插入至源节点后, 入口
+   * @param target 源节点
+   * @param value 目标节点
+   */
+  public handleInsertAfter(
+    target: V,
+    value: V,
+  ): DoubleLinkedCircularList<V> {
+    const node = new ListNode<V>({
+      value,
+      next: null,
+      prev: null,
+    });
+
+    this._aidedHandleInsertAfter(target, node);
 
     return this;
   }
