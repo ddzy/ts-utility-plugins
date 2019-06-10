@@ -116,3 +116,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - 新增`utility/algorithm`区块, 记录数据结构与算法
   - 新增`binary-search-tree`工具组件
+
+## [2019-6-10]
+
+### Added
+
+- 新增`utility/algorithm/double-linked-circular-list`双向循环链表插件
