@@ -93,8 +93,8 @@ export class DoubleLinkedCircularList<V> {
     else {
       let current: ListNode<V> | null = this.state.head;
 
-      while (current !== this.state.tail) {
-        current = current ? current.next : null;
+      while (current && current !== this.state.tail) {
+        current = current.next;
       }
 
       // ? 找到最后一个节点
@@ -103,6 +103,7 @@ export class DoubleLinkedCircularList<V> {
         node.prev = current;
         this.state.tail = node;
         this.state.tail.next = this.state.head;
+        this.state.head.prev = this.state.tail;
 
         this.state.length += 1;
       }
@@ -244,6 +245,55 @@ export class DoubleLinkedCircularList<V> {
     return this.state.length;
   }
 
+  private _aidedHandleRemove(
+    value: V,
+  ): void {
+    let current: ListNode<V> | null = this.state.head;
+
+    while (current && current !== this.state.tail) {
+      if (current.value === value) {
+        // ? 头节点
+        if (current === this.state.head) {
+          this.state.head = current.next;
+
+          if (current.next) {
+            current.next.prev = this.state.tail;
+          }
+          if (this.state.tail) {
+            this.state.tail.next = this.state.head;
+          }
+        }
+        // ? 其它
+        else {
+          if (current.prev) {
+            current.prev.next = current.next;
+          }
+          if (current.next) {
+            current.next.prev = current.prev;
+          }
+        }
+
+        this.state.length -= 1;
+      }
+
+      current = current.next;
+    }
+
+    // ? 尾节点
+    if (current && current.value === value) {
+      this.state.tail = current.prev;
+
+      if (current.prev) {
+        current.prev.next = this.state.head;
+      }
+      if (this.state.head) {
+        this.state.head.prev = this.state.tail;
+      }
+
+      this.state.length -= 1;
+    }
+  }
+
 
   /**
    * 获取头节点, 入口
@@ -360,5 +410,13 @@ export class DoubleLinkedCircularList<V> {
    */
   public handleGetLength(): number {
     return this._aidedHandleGetLength();
+  }
+
+  public handleRemove(
+    value: V,
+  ): DoubleLinkedCircularList<V> {
+    this._aidedHandleRemove(value);
+
+    return this;
   }
 }
