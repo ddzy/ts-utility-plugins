@@ -3,14 +3,14 @@
  */
 export interface IListNodeProps<V> {
   value: V,
-  next: ListNode<V>,
-  prev: ListNode<V>,
+  next: ListNode<V> | null,
+  prev: ListNode<V> | null,
 };
 
 export class ListNode<V> {
   public value: V;
-  public next: ListNode<V>;
-  public prev: ListNode<V>;
+  public next: ListNode<V> | null;
+  public prev: ListNode<V> | null;
 
   public constructor(props: IListNodeProps<V>) {
     this.value = props.value;

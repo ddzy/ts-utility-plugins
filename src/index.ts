@@ -5,4 +5,8 @@ const dlcl = new utilityAlgorithm.DLCL<number>({
 });
 
 
-console.log(dlcl);
+// console.log(dlcl.handleGetHead());
+
+// console.log(dlcl.handleGetTail());
+// dlcl.handleAppend(-1).handleAppend(-2);
+// console.log(dlcl.handleGetTail());
