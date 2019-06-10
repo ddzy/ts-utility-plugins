@@ -1,52 +1,60 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
-const bst = new utilityAlgorithm.BST({
-  nodes: [2, 5, 3, 8, 7],
+const dlcl = new utilityAlgorithm.DLCL<number>({
+  nodes: [2, 5, 8, 3, 7, 19, 23, 14, 41],
 });
 
-// bst.handleInsert(1).handleInsert(-5).handleInsert(-2);
-// bst.handleRemove(8);
-// bst.print();
-// bst.handleRemove(23).handleInsert(23);
-// bst.print();
-// console.log(bst.handleGetDepth());
-// console.log(bst.handleGetDepth(4));
+// ? handleGetHead
+// console.log(dlcl.handleGetHead());
 
-// console.log(bst.handleGetDepth(23));
-// console.log(bst.handleGetDepth(9));
-// console.log(bst.handleGetDepth(7));
-// console.log(bst.handleGetDepth(2));
-// console.log(bst.handleGetDepth(-1));
+// ? handleGetTail
+// console.log(dlcl.handleGetTail());
 
-// console.log(bst.handleHasValue(23));
-// console.log(bst.handleHasValue(6));
-// console.log(bst.handleHasValue(7));
-// console.log(bst.handleHasValue(2));
+// ? handleAppend
+// console.log(dlcl.handleGetTail());
+// dlcl.handleAppend(-1).handleAppend(-2);
+// console.log(dlcl.handleGetTail());
 
+// ? handlePrepend
+// console.log(dlcl.handleGetHead());
+// dlcl.handlePrepend(-1).handlePrepend(-2);
+// console.log(dlcl.handleGetHead());
 
-// bst.handleFrontOrderTraversal((node) => {
+// ? handleInsertBefore
+// dlcl.handleInsertBefore(8, 100);
+// dlcl.handleInsertBefore(2, 100);
+// dlcl.handleInsertBefore(41, 100);
+// console.log(dlcl.handleGetHead());
+// console.log(dlcl.handleGetTail());
+
+// ? handleInsertAfter
+// dlcl.handleInsertAfter(41, 200);
+// console.log(dlcl.handleGetTail());
+// dlcl.handleInsertAfter(8, 200);
+// console.log(dlcl.handleGetHead());
+
+// ? handleTraversalWithForward
+// dlcl.handleTraversalWithForward((node) => {
 //   console.log(node);
 // });
-// console.log('-----------------');
-// bst.handleMiddleOrderTraversal((node) => {
-//   console.log(node);
-// });
-// console.log('-----------------');
-// bst.handlBackOrderTraversal((node) => {
+
+// ? handleTraversalWithBackward
+// dlcl.handleTraversalWithBackward((node) => {
 //   console.log(node);
 // });
 
-// bst.print();
+// ? handleGetLength
+// dlcl.handleAppend(100).handleAppend(200);
+// dlcl.handlePrepend(100).handlePrepend(200);
+// dlcl.handleInsertBefore(2, 100).handleInsertBefore(100, 200);
+// dlcl.handleInsertAfter(41, 100);
+// console.log(dlcl.handleGetLength());
 
-// console.log(bst.handleGetHeight(2));
-// console.log(bst.handleGetHeight(9));
-// console.log(bst.handleGetHeight(23));
-// console.log(bst.handleGetHeight(7));
-
-// console.log(bst.handleGetLeaves());
-
-// console.log(bst.handleGetRoot());
-
-console.log(bst.handleGetMinValue());
-
-console.log(bst.handleGetMaxValue());
+// ? handleRemove
+// dlcl.hanldeRemove(2);
+// dlcl.hanldeRemove(41);
+// dlcl.handleRemove(5);
+dlcl.handleRemove(5).handleAppend(5).handleRemove(5);
+console.log(dlcl.handleGetHead());
+// console.log(dlcl.handleGetTail());
+console.log(dlcl.handleGetLength());
