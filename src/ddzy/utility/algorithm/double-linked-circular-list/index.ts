@@ -8,6 +8,7 @@ export interface IDoubleLinkedCircularListProps<V> {
 export interface IDoubleLinkedCircularListState<V> {
   head: ListNode<V> | null;
   tail: ListNode<V> | null;
+  length: number;
 };
 
 
@@ -16,6 +17,7 @@ export interface IDoubleLinkedCircularListState<V> {
  * TODO: prepend -> 追加至首部
  * TODO: insertBefore -> 追加至某个节点前
  * TODO: insertAfter -> 追加至某个节点后
+ * TODO: remove -> 移除指定节点
  * TODO: traversalWithForward -> 正向遍历
  * TODO: traversalWithBackward -> 反向遍历
  * TODO: getHead -> 获取头节点
@@ -36,6 +38,7 @@ export class DoubleLinkedCircularList<V> {
   private readonly state: IDoubleLinkedCircularListState<V> = {
     head: null,
     tail: null,
+    length: 0,
   };
 
 
@@ -84,6 +87,8 @@ export class DoubleLinkedCircularList<V> {
       this.state.tail = node;
       node.next = this.state.head;
       node.prev = this.state.tail;
+
+      this.state.length += 1;
     }
     else {
       let current: ListNode<V> | null = this.state.head;
@@ -98,6 +103,8 @@ export class DoubleLinkedCircularList<V> {
         node.prev = current;
         this.state.tail = node;
         this.state.tail.next = this.state.head;
+
+        this.state.length += 1;
       }
     }
   }
@@ -117,6 +124,8 @@ export class DoubleLinkedCircularList<V> {
       this.state.head.prev = node;
       this.state.head = node;
     }
+
+    this.state.length += 1;
   }
 
   private _aidedHandleInsertBefore(
@@ -137,6 +146,8 @@ export class DoubleLinkedCircularList<V> {
             node.prev = current.prev;
             node.next = current;
             current.prev = node;
+
+            this.state.length++;
           }
         }
       }
@@ -152,6 +163,8 @@ export class DoubleLinkedCircularList<V> {
           node.prev = current.prev;
           node.next = current;
           current.prev = node;
+
+          this.state.length++;
         }
       }
     }
@@ -175,6 +188,8 @@ export class DoubleLinkedCircularList<V> {
             node.next = current.next;
             node.prev = current;
             current.next = node;
+
+            this.state.length += 1;
           }
         }
       }
@@ -190,6 +205,8 @@ export class DoubleLinkedCircularList<V> {
           node.next = current.next;
           node.prev = current;
           current.next = node;
+
+          this.state.length += 1;
         }
       }
     }
@@ -221,6 +238,10 @@ export class DoubleLinkedCircularList<V> {
     if (current) {
       callback(current);
     }
+  }
+
+  private _aidedHandleGetLength(): number {
+    return this.state.length;
   }
 
 
@@ -332,5 +353,12 @@ export class DoubleLinkedCircularList<V> {
     callback: (node: ListNode<V>) => void,
   ): void {
     this._aidedHandleTraversalWithBackward(callback);
+  }
+
+  /**
+   * 获取链表长度, 入口
+   */
+  public handleGetLength(): number {
+    return this._aidedHandleGetLength();
   }
 }

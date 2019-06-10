@@ -39,6 +39,13 @@ const dlcl = new utilityAlgorithm.DLCL<number>({
 // });
 
 // ? handleTraversalWithBackward
-dlcl.handleTraversalWithBackward((node) => {
-  console.log(node);
-});
+// dlcl.handleTraversalWithBackward((node) => {
+//   console.log(node);
+// });
+
+// ? handleGetLength
+// dlcl.handleAppend(100).handleAppend(200);
+// dlcl.handlePrepend(100).handlePrepend(200);
+// dlcl.handleInsertBefore(2, 100).handleInsertBefore(100, 200);
+dlcl.handleInsertAfter(41, 100);
+console.log(dlcl.handleGetLength());
