@@ -1,3 +1,10 @@
+/**
+ * @name 双向循环链表
+ * @description 插件
+ * @author ddzy
+ * @since 2019/6/10
+ */
+
 import {
   ListNode,
 } from './list-node/index';
@@ -10,20 +17,6 @@ export interface IDoubleLinkedCircularListState<V> {
   tail: ListNode<V> | null;
   length: number;
 };
-
-
-/**
- * TODO: append -> 追加至末尾
- * TODO: prepend -> 追加至首部
- * TODO: insertBefore -> 追加至某个节点前
- * TODO: insertAfter -> 追加至某个节点后
- * TODO: remove -> 移除指定节点
- * TODO: traversalWithForward -> 正向遍历
- * TODO: traversalWithBackward -> 反向遍历
- * TODO: getHead -> 获取头节点
- * TODO: getTail -> 获取尾节点
- * TODO: getLength -> 获取链表长度
- */
 
 export class DoubleLinkedCircularList<V> {
   public static readonly defaultProps: IDoubleLinkedCircularListProps<any> = {
