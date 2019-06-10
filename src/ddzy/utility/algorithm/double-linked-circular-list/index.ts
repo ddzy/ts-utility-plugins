@@ -195,6 +195,34 @@ export class DoubleLinkedCircularList<V> {
     }
   }
 
+  private _aidedHandleTraversalWithForward(
+    callback: (node: ListNode<V>) => void,
+  ): void {
+    let current: ListNode<V> | null = this.state.head;
+
+    while (current && current !== this.state.tail) {
+      callback(current);
+      current = current.next;
+    }
+    if (current) {
+      callback(current);
+    }
+  }
+
+  private _aidedHandleTraversalWithBackward(
+    callback: (node: ListNode<V>) => void,
+  ): void {
+    let current: ListNode<V> | null = this.state.tail;
+
+    while (current && current !== this.state.head) {
+      callback(current);
+      current = current.prev;
+    }
+    if (current) {
+      callback(current);
+    }
+  }
+
 
   /**
    * 获取头节点, 入口
@@ -284,5 +312,25 @@ export class DoubleLinkedCircularList<V> {
     this._aidedHandleInsertAfter(target, node);
 
     return this;
+  }
+
+  /**
+   * 正向遍历双向循环链表, 入口
+   * @param callback 回调
+   */
+  public handleTraversalWithForward(
+    callback: (node: ListNode<V>) => void,
+  ): void {
+    this._aidedHandleTraversalWithForward(callback);
+  }
+
+  /**
+   * 反向遍历双向循环链表, 入口
+   * @param callback 回调
+   */
+  public handleTraversalWithBackward(
+    callback: (node: ListNode<V>) => void,
+  ): void {
+    this._aidedHandleTraversalWithBackward(callback);
   }
 }
