@@ -43,10 +43,9 @@
 
 ## 贡献者列表
 
-| Bucket | Github                          | Project                                                                                    |
-| ------ | ------------------------------- | ------------------------------------------------------------------------------------------ |
-| ddzy   | [ddzy](https://github.com/ddzy) | [ts-utility-plugins/ddzy](https://github.com/ddzy/ts-utility-plugins/tree/master/src/ddzy) |
-| ...    | ...                             | ...                                                                                        |
+| Bucket | Github                          | Project                                                                                    | Docs                                                         |
+| ------ | ------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
+| ddzy   | [ddzy](https://github.com/ddzy) | [ts-utility-plugins/ddzy](https://github.com/ddzy/ts-utility-plugins/tree/master/src/ddzy) | [文档地址](https://ddzy.gitbook.io/ts-utility-plugins-docs/) |
 
 ## 如何贡献?
 
