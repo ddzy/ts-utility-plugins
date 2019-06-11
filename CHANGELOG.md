@@ -76,3 +76,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - 重构`package.json`
   - 更改了`repository`、`author`、`bugs`、`license`等一系列配置项
+
+## [2019-6-11]
+
+### Added
+
+- `贡献者列表`下新增`Docs`条目, 在线文档地址

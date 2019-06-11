@@ -172,29 +172,24 @@ export class DoubleLinkedCircularList<V> {
 
     while (current && current !== this.state.tail) {
       if (current.value === target) {
-        // ? 如果系尾节点
-        if (current === this.state.tail) {
-          this.handleAppend(node.value);
-        }
-        else {
-          if (current.next) {
-            current.next.prev = node;
-            node.next = current.next;
-            node.prev = current;
-            current.next = node;
+        if (current.next) {
+          current.next.prev = node;
+          node.next = current.next;
+          node.prev = current;
+          current.next = node;
 
-            this.state.length += 1;
-          }
+          this.state.length += 1;
         }
       }
 
       current = current.next;
     }
 
-    // ? 最后一个节点
+    // ? 尾节点
     if (current) {
       if (current.value === target) {
         if (current.next) {
+          this.state.tail = node;
           current.next.prev = node;
           node.next = current.next;
           node.prev = current;

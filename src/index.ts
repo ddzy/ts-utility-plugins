@@ -28,8 +28,11 @@ const dlcl = new utilityAlgorithm.DLCL<number>({
 // console.log(dlcl.handleGetTail());
 
 // ? handleInsertAfter
-// dlcl.handleInsertAfter(41, 200);
+dlcl.handleInsertAfter(41, 200);
 // console.log(dlcl.handleGetTail());
+dlcl.handleInsertAfter(41, 100);
+// console.log(dlcl.handleGetLength());
+console.log(dlcl.handleGetTail());
 // dlcl.handleInsertAfter(8, 200);
 // console.log(dlcl.handleGetHead());
 
@@ -54,7 +57,7 @@ const dlcl = new utilityAlgorithm.DLCL<number>({
 // dlcl.hanldeRemove(2);
 // dlcl.hanldeRemove(41);
 // dlcl.handleRemove(5);
-dlcl.handleRemove(5).handleAppend(5).handleRemove(5);
-console.log(dlcl.handleGetHead());
+// dlcl.handleRemove(5).handleAppend(5).handleRemove(5);
+// console.log(dlcl.handleGetHead());
 // console.log(dlcl.handleGetTail());
-console.log(dlcl.handleGetLength());
+// console.log(dlcl.handleGetLength());
