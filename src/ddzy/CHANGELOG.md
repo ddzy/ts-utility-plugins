@@ -122,3 +122,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 新增`utility/algorithm/double-linked-circular-list`双向循环链表插件
+
+## [2019-6-14]
+
+### Added
+
+- 新增`utility/algorithm/event-emitter`插件

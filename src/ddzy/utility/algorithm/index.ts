@@ -4,11 +4,15 @@ import {
 import {
   DoubleLinkedCircularList as DLCL
 } from './double-linked-circular-list/index';
+import {
+  EventEmitter,
+} from './event-emitter';
 
 
 export interface IUtilityAlgorithmProps {
   BST: typeof BST;
   DLCL: typeof DLCL;
+  EventEmitter: typeof EventEmitter;
 };
 
 const utilityAlgorithm: IUtilityAlgorithmProps = {
@@ -16,6 +20,8 @@ const utilityAlgorithm: IUtilityAlgorithmProps = {
   BST,
   // ? 双向循环链表
   DLCL,
+  // ? EventEmitter
+  EventEmitter,
 };
 
 
