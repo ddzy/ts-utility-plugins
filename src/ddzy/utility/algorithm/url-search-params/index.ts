@@ -16,7 +16,7 @@ import utilityOthers from "../../others";
  * @todo has() √
  * @todo set(key, value) √
  * @todo keys() √
- * @todo values()
+ * @todo values() √
  */
 
 export interface IURLSearchParamsProps {
@@ -152,10 +152,21 @@ export class URLSearchParams {
     this._aidedHandleSetParamsState(this.state.url);
   }
 
-  private _aidedHandleKeys(): string[] {
+  private _aidedHandleKeys(): IStaticParamsKey[] {
     const { params } = this.state;
 
     return Object.keys(params);
+  }
+
+  private _aidedHandleValues(): IStaticParamsValue[] {
+    const { params } = this.state;
+    const result: IStaticParamsValue[] = [];
+
+    for (const key in params) {
+      result.push(params[key]);
+    }
+
+    return result;
   }
 
   /**
@@ -230,7 +241,14 @@ export class URLSearchParams {
   /**
    * 获取键名数组, 入口
    */
-  public handleKeys(): string[] {
+  public handleKeys(): IStaticParamsKey[] {
     return this._aidedHandleKeys();
+  }
+
+  /**
+   * 获取键值数组, 入口
+   */
+  public handleValues(): IStaticParamsValue[] {
+    return this._aidedHandleValues();
   }
 }

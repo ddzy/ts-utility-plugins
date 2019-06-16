@@ -45,7 +45,14 @@ const usp = new utilityAlgorithm.URLSearchParams({});
 // usp.handleSet('age', 80);
 
 // ? handleKeys
-const u1 = usp.handleKeys();
+// const u1 = usp.handleKeys();
+// console.log(u1);
+
+// ? handleValues
+const u1 = usp.handleValues();
 console.log(u1);
+usp.handleAppend('skill', 'programmer');
+const u2 = usp.handleValues();
+console.log(u2);
 
 // console.log(usp.state);
