@@ -17,6 +17,7 @@ import utilityOthers from "../../others";
  * @todo set(key, value) √
  * @todo keys() √
  * @todo values() √
+ * @todo iterator
  */
 
 export interface IURLSearchParamsProps {
@@ -27,8 +28,8 @@ export interface IURLSearchParamsState {
   params: IStaticParams;
 };
 export type IStaticParams = Record<IStaticParamsKey, IStaticParamsValue>;
-export type IStaticParamsKey = string;
-export type IStaticParamsValue = string | number | boolean;
+export type IStaticParamsKey = string | symbol;
+export type IStaticParamsValue = string | number | boolean | Function;
 
 
 export class URLSearchParams {
@@ -52,6 +53,7 @@ export class URLSearchParams {
   ): void {
     this._initProps(props);
     this._initState();
+    this._initIterator();
   }
 
   private _initProps(
@@ -78,6 +80,17 @@ export class URLSearchParams {
     this._aidedHandleSetParamsState(this.state.url);
   }
 
+  private _initIterator(): void {
+    const { params } = this.state;
+
+    params[Symbol.iterator as any] = function *() {
+      for (const key in params) {
+        const value = params[key];
+        yield [key, value];
+      }
+    }
+  }
+
   private _aidedHandleSetURLState(
     url: string,
   ): void {
@@ -94,7 +107,7 @@ export class URLSearchParams {
     key: IStaticParamsKey,
     value: IStaticParamsValue,
   ): void {
-    const url: string = `${this.state.url}&${key}=${value}`;
+    const url: string = `${this.state.url}&${key as string}=${value}`;
 
     this._aidedHandleSetURLState(url);
     this._aidedHandleSetParamsState(this.state.url);
@@ -103,7 +116,7 @@ export class URLSearchParams {
   private _aidedHandleDelete(
     key: IStaticParamsKey,
   ): void {
-    const matchPair = new RegExp(`(${key}=\\w+[&?])|([&]${key}=\\w+)`, 'g');
+    const matchPair = new RegExp(`(${key as string}=\\w+[&?])|([&]${key as string}=\\w+)`, 'g');
     const url = this.state.url.replace(matchPair, '');
 
     this._aidedHandleSetURLState(url);
@@ -115,7 +128,7 @@ export class URLSearchParams {
   ): IStaticParamsValue | null {
     const { params } = this.state;
 
-    return params[key] ? params[key] : null;
+    return params[key as string] ? params[key as string] : null;
   }
 
   private _aidedHandleGetAll(): [IStaticParamsKey, IStaticParamsValue][] {
@@ -145,8 +158,8 @@ export class URLSearchParams {
     key: IStaticParamsKey,
     value: IStaticParamsValue,
   ): void {
-    const matchPair = new RegExp(`${key}=\\w+`, 'g');
-    const url = this.state.url.replace(matchPair, `${key}=${value}`);
+    const matchPair = new RegExp(`${key as string}=\\w+`, 'g');
+    const url = this.state.url.replace(matchPair, `${key as string}=${value}`);
 
     this._aidedHandleSetURLState(url);
     this._aidedHandleSetParamsState(this.state.url);

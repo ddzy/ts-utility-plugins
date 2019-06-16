@@ -49,10 +49,18 @@ const usp = new utilityAlgorithm.URLSearchParams({});
 // console.log(u1);
 
 // ? handleValues
-const u1 = usp.handleValues();
-console.log(u1);
-usp.handleAppend('skill', 'programmer');
-const u2 = usp.handleValues();
-console.log(u2);
+// const u1 = usp.handleValues();
+// console.log(u1);
+// usp.handleAppend('skill', 'programmer');
+// const u2 = usp.handleValues();
+// console.log(u2);
+
+// ? iterator
+// for (const v of (usp.state.params as any)) {
+//   console.log(v);
+// }
+// for (const [v, i] of (usp.state.params as any)) {
+//   console.log(v, i);
+// }
 
 // console.log(usp.state);
