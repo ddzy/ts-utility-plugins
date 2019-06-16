@@ -9,15 +9,14 @@ import utilityOthers from "../../others";
 
 /**
  * Symbol.iterator
- * @todo append(key, value)
- * @todo delete(key)
- * @todo get(key)
+ * @todo append(key, value) √
+ * @todo delete(key) √
+ * @todo get(key) √
  * @todo getAll()
  * @todo has()
  * @todo set(key, value)
  * @todo keys()
  * @todo values()
- * @todo
  */
 
 export interface IURLSearchParamsProps {
@@ -28,7 +27,7 @@ export interface IURLSearchParamsState {
   params: IStaticParams;
 };
 export type IStaticParams = Record<string, IStaticParamsValue>;
-export type IStaticParamsValue = string | number | boolean;
+export type IStaticParamsValue = string;
 
 
 export class URLSearchParams {
@@ -110,6 +109,14 @@ export class URLSearchParams {
     this._aidedHandleSetParamsState(this.state.url);
   }
 
+  private _aidedHandleGet(
+    key: string,
+  ): IStaticParamsValue | null {
+    const { params } = this.state;
+
+    return params[key] ? params[key] : null;
+  }
+
   /**
    * 追加新的键值对, 入口
    * @param key 需要追加的键
@@ -135,5 +142,15 @@ export class URLSearchParams {
     this._aidedHandleDelete(key);
 
     return this;
+  }
+
+  /**
+   * 获取指定的参数键值, 入口
+   * @param key 键名
+   */
+  public handleGet(
+    key: string,
+  ): IStaticParamsValue | null {
+    return this._aidedHandleGet(key);
   }
 }
