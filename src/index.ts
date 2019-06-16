@@ -23,4 +23,8 @@ const usp = new utilityAlgorithm.URLSearchParams({});
 //   u4,
 // });
 
+// ? handleGetAll
+const u1 = usp.handleGetAll();
+console.log(u1);
+
 // console.log(usp.state);

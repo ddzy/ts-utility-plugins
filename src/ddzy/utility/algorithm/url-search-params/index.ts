@@ -26,7 +26,8 @@ export interface IURLSearchParamsState {
   url: string;
   params: IStaticParams;
 };
-export type IStaticParams = Record<string, IStaticParamsValue>;
+export type IStaticParams = Record<IStaticParamsKey, IStaticParamsValue>;
+export type IStaticParamsKey = string;
 export type IStaticParamsValue = string;
 
 
@@ -90,7 +91,7 @@ export class URLSearchParams {
   }
 
   private _aidedHandleAppend(
-    key: string,
+    key: IStaticParamsKey,
     value: IStaticParamsValue,
   ): void {
     const url: string = `${this.state.url}&${key}=${value}`;
@@ -100,7 +101,7 @@ export class URLSearchParams {
   }
 
   private _aidedHandleDelete(
-    key: string,
+    key: IStaticParamsKey,
   ): void {
     const matchPair = new RegExp(`(${key}=\\w+[&?])|([&]${key}=\\w+)`, 'g');
     const url = this.state.url.replace(matchPair, '');
@@ -110,11 +111,26 @@ export class URLSearchParams {
   }
 
   private _aidedHandleGet(
-    key: string,
+    key: IStaticParamsKey,
   ): IStaticParamsValue | null {
     const { params } = this.state;
 
     return params[key] ? params[key] : null;
+  }
+
+  private _aidedHandleGetAll(): [IStaticParamsKey, IStaticParamsValue][] {
+    const { params } = this.state;
+    const result: [IStaticParamsKey, IStaticParamsValue][] = [];
+
+    for (const key in params) {
+      const temp: [IStaticParamsKey, IStaticParamsValue] = ['', ''];
+      const value = params[key];
+
+      [temp[0], temp[1]] = [key, value];
+      result.push(temp);
+    }
+
+    return result;
   }
 
   /**
@@ -124,7 +140,7 @@ export class URLSearchParams {
    * @returns {string} 返回新的url
    */
   public handleAppend(
-    key: string,
+    key: IStaticParamsKey,
     value: IStaticParamsValue,
   ): URLSearchParams {
     this._aidedHandleAppend(key, value);
@@ -137,7 +153,7 @@ export class URLSearchParams {
    * @param key 键名
    */
   public handleDelete(
-    key: string,
+    key: IStaticParamsKey,
   ): URLSearchParams {
     this._aidedHandleDelete(key);
 
@@ -149,8 +165,16 @@ export class URLSearchParams {
    * @param key 键名
    */
   public handleGet(
-    key: string,
+    key: IStaticParamsKey,
   ): IStaticParamsValue | null {
     return this._aidedHandleGet(key);
+  }
+
+  /**
+   * 获取所有的参数值
+   * @returns {[IStaticParamsKey, IStaticParamsValue][]}
+   */
+  public handleGetAll(): [IStaticParamsKey, IStaticParamsValue][] {
+    return this._aidedHandleGetAll();
   }
 }
