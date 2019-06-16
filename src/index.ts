@@ -28,13 +28,20 @@ const usp = new utilityAlgorithm.URLSearchParams({});
 // console.log(u1);
 
 // ? handleHas
-const u1 = usp.handleHas('name');
-const u2 = usp.handleHas('skill');
-const u3 = usp.handleHas('');
-console.log({
-  u1,
-  u2,
-  u3,
-});
+// const u1 = usp.handleHas('name');
+// const u2 = usp.handleHas('skill');
+// const u3 = usp.handleHas('');
+// console.log({
+//   u1,
+//   u2,
+//   u3,
+// });
 
-// console.log(usp.state);
+// ? handleSet
+// usp.handleSet('name', 'duanzhaoyang');
+usp.handleSet('age', 20);
+usp.handleSet('isSelf', false);
+usp.handleAppend('age', 30).handleAppend('age', 40);
+usp.handleSet('age', 80);
+
+console.log(usp.state);

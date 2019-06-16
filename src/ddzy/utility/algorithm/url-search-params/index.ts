@@ -14,7 +14,7 @@ import utilityOthers from "../../others";
  * @todo get(key) √
  * @todo getAll() √
  * @todo has() √
- * @todo set(key, value)
+ * @todo set(key, value) √
  * @todo keys()
  * @todo values()
  */
@@ -28,7 +28,7 @@ export interface IURLSearchParamsState {
 };
 export type IStaticParams = Record<IStaticParamsKey, IStaticParamsValue>;
 export type IStaticParamsKey = string;
-export type IStaticParamsValue = string;
+export type IStaticParamsValue = string | number | boolean;
 
 
 export class URLSearchParams {
@@ -141,6 +141,17 @@ export class URLSearchParams {
     return params.hasOwnProperty(key);
   }
 
+  private _aidedHandleSet(
+    key: IStaticParamsKey,
+    value: IStaticParamsValue,
+  ): void {
+    const matchPair = new RegExp(`${key}=\\w+`, 'g');
+    const url = this.state.url.replace(matchPair, `${key}=${value}`);
+
+    this._aidedHandleSetURLState(url);
+    this._aidedHandleSetParamsState(this.state.url);
+  }
+
   /**
    * 追加新的键值对, 入口
    * @param key 需要追加的键
@@ -187,12 +198,26 @@ export class URLSearchParams {
   }
 
   /**
-   * 判断是否存在指定键名
+   * 判断是否存在指定键名, 入口
    * @param key 键名
    */
   public handleHas(
     key: IStaticParamsKey,
   ): boolean {
     return this._aidedHandleHas(key);
+  }
+
+  /**
+   * 更新源url中的对应键值(但是params中的值是不变的), 入口
+   * @param key 键名
+   * @param value 键值
+   */
+  public handleSet(
+    key: IStaticParamsKey,
+    value: IStaticParamsValue,
+  ): URLSearchParams {
+    this._aidedHandleSet(key, value);
+
+    return this;
   }
 }
