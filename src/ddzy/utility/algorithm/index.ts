@@ -7,12 +7,16 @@ import {
 import {
   EventEmitter,
 } from './event-emitter';
+import {
+  URLSearchParams,
+} from './url-search-params';
 
 
 export interface IUtilityAlgorithmProps {
   BST: typeof BST;
   DLCL: typeof DLCL;
   EventEmitter: typeof EventEmitter;
+  URLSearchParams: typeof URLSearchParams;
 };
 
 const utilityAlgorithm: IUtilityAlgorithmProps = {
@@ -22,6 +26,7 @@ const utilityAlgorithm: IUtilityAlgorithmProps = {
   DLCL,
   // ? EventEmitter
   EventEmitter,
+  URLSearchParams,
 };
 
 

@@ -128,3 +128,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 新增`utility/algorithm/event-emitter`插件
+
+## [2019-6-16]
+
+### Added
+
+- 新增`utility/algorithm/url-search-params`工具插件
