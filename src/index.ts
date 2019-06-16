@@ -39,9 +39,13 @@ const usp = new utilityAlgorithm.URLSearchParams({});
 
 // ? handleSet
 // usp.handleSet('name', 'duanzhaoyang');
-usp.handleSet('age', 20);
-usp.handleSet('isSelf', false);
-usp.handleAppend('age', 30).handleAppend('age', 40);
-usp.handleSet('age', 80);
+// usp.handleSet('age', 20);
+// usp.handleSet('isSelf', false);
+// usp.handleAppend('age', 30).handleAppend('age', 40);
+// usp.handleSet('age', 80);
 
-console.log(usp.state);
+// ? handleKeys
+const u1 = usp.handleKeys();
+console.log(u1);
+
+// console.log(usp.state);

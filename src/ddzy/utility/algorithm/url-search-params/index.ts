@@ -15,7 +15,7 @@ import utilityOthers from "../../others";
  * @todo getAll() √
  * @todo has() √
  * @todo set(key, value) √
- * @todo keys()
+ * @todo keys() √
  * @todo values()
  */
 
@@ -152,6 +152,12 @@ export class URLSearchParams {
     this._aidedHandleSetParamsState(this.state.url);
   }
 
+  private _aidedHandleKeys(): string[] {
+    const { params } = this.state;
+
+    return Object.keys(params);
+  }
+
   /**
    * 追加新的键值对, 入口
    * @param key 需要追加的键
@@ -219,5 +225,12 @@ export class URLSearchParams {
     this._aidedHandleSet(key, value);
 
     return this;
+  }
+
+  /**
+   * 获取键名数组, 入口
+   */
+  public handleKeys(): string[] {
+    return this._aidedHandleKeys();
   }
 }
