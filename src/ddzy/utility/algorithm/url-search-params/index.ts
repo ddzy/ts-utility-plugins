@@ -12,8 +12,8 @@ import utilityOthers from "../../others";
  * @todo append(key, value) √
  * @todo delete(key) √
  * @todo get(key) √
- * @todo getAll()
- * @todo has()
+ * @todo getAll() √
+ * @todo has() √
  * @todo set(key, value)
  * @todo keys()
  * @todo values()
@@ -133,6 +133,14 @@ export class URLSearchParams {
     return result;
   }
 
+  private _aidedHandleHas(
+    key: IStaticParamsKey,
+  ): boolean {
+    const { params } = this.state;
+
+    return params.hasOwnProperty(key);
+  }
+
   /**
    * 追加新的键值对, 入口
    * @param key 需要追加的键
@@ -171,10 +179,20 @@ export class URLSearchParams {
   }
 
   /**
-   * 获取所有的参数值
+   * 获取所有的参数值, 入口
    * @returns {[IStaticParamsKey, IStaticParamsValue][]}
    */
   public handleGetAll(): [IStaticParamsKey, IStaticParamsValue][] {
     return this._aidedHandleGetAll();
+  }
+
+  /**
+   * 判断是否存在指定键名
+   * @param key 键名
+   */
+  public handleHas(
+    key: IStaticParamsKey,
+  ): boolean {
+    return this._aidedHandleHas(key);
   }
 }
