@@ -1,17 +1,14 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
-const event = new utilityAlgorithm.EventEmitter({});
+const usp = new utilityAlgorithm.URLSearchParams({});
 
-const r1 = event.handleOn('click', function () {
-  console.log('123');
-});
-const r2 = event.handleOn('click', function () {
-  console.log('456');
-});
+// ? handleAppend
+// usp.handleAppend('skill', 'programmer');
+// usp.handleAppend('name', 'duan');
 
-event.handleRemove(r1);
-event.handleRemove(r2);
+// ? handleDelete
+// usp.handleDelete('age');
+usp.handleDelete('name');
+// usp.handleDelete('isSelf');
 
-event.handleEmit('click');
-
-console.log(event.events);
+console.log(usp);
