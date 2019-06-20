@@ -67,6 +67,42 @@ const obj = {
 // console.log(p3);
 // console.log(obj);
 
+// ? reflect.getPrototypeOf
+// function Person1() { }
+// const p1 = reflect.construct(Person1, []);
+// const p2 = reflect.getPrototypeOf(obj);
+// const p3 = reflect.getPrototypeOf(p1);
+// const p4 = reflect.getPrototypeOf('');
+// const p5 = reflect.getPrototypeOf([]);
+// const p6 = reflect.getPrototypeOf(0);
+// const p7 = reflect.getPrototypeOf(null);
+// const p8 = reflect.getPrototypeOf(undefined);
+// console.log(p2);
+// console.log(p3);
+// console.log(p4);
+// console.log(p5);
+// console.log(p6);
+// console.log(p7);
+// console.log(p8);
+
+// ? reflect.setPrototypeOf
+// function Person1() { }
+// Person1.prototype = {
+//   say() {},
+// };
+// const p = new Person1();
+// const p1 = reflect.setPrototypeOf(Person1, null);
+// const p2 = reflect.setPrototypeOf(Person1, 0);
+// const p3 = reflect.setPrototypeOf(Person1, '');
+// const p4 = reflect.setPrototypeOf(Person1, {
+//   run() {},
+// });
+// console.log(p1);
+// console.log(p2);
+// console.log(p3);
+// console.log(p4);
+
+
 
 // ! -------------------------------------------
 
@@ -94,8 +130,8 @@ const obj = {
 // console.log(p2);
 
 // ? Reflect.setPrototypeOf
-// Object.setPrototypeOf(p2, function() {});
-// console.log(Object.getPrototypeOf(p2))
+// function Person1() {}
+// const p1 = Reflect.setPrototypeOf(Person1, null);
 // console.log(p1);
 
 // ? Reflect.set

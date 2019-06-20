@@ -41,7 +41,7 @@ export interface IReflectProps {
   construct: (targetFunc: Function, args: ArrayLike<any>) => any;
   deleteProperty: (target: TReflectStaticObject, key: TReflectStaticKey) => boolean;
   getPrototypeOf: (target: any) => any;
-  setPrototypeOf: (target: any, newProto: any) => void;
+  setPrototypeOf: (target: any, newProto: any) => boolean;
 };
 export type TReflectStaticKey = string | number;
 export type TReflectStaticValue = any;
@@ -70,9 +70,9 @@ export const _reflect: IReflectProps = {
       target[key] = value;
     } catch (error) {
       flag = false;
+    } finally {
+      return flag;
     }
-
-    return flag;
   },
 
   /**
@@ -133,6 +133,43 @@ export const _reflect: IReflectProps = {
 
     try {
       flag = (delete target[key]);
+    } catch (error) {
+      flag = false;
+    } finally {
+      return flag;
+    }
+  },
+
+  /**
+   * 获取指定实例的原型(等同于非标准属性`__proto__`)
+   * @param target 目标对象
+   */
+  getPrototypeOf(target) {
+    let result = null;
+
+    try {
+      result = Object.getPrototypeOf(target);
+    } catch (error) {
+      result = 'please enter a value not both `null` and `undefined`';
+      utilityOthers.invariant(
+        true,
+        result,
+      );
+    }
+
+    return result;
+  },
+
+  /**
+   * 设置目标实例的原型为指定的值
+   * @param target 目标实例对象
+   * @param newProto 新的原型
+   */
+  setPrototypeOf(target, newProto) {
+    let flag = true;
+
+    try {
+      Object.setPrototypeOf(target, newProto);
     } catch (error) {
       flag = false;
     } finally {
