@@ -1,20 +1,23 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
+
+const reflect = utilityAlgorithm.ES6Achieve._reflect;
 const obj = {
   name: 'ddzy',
-  age: 20,
+  age: 21,
 };
 
-function Person(_this: any) {
-}
-const Person2 = (...args: any[]) => {
-  console.log('Person2: ', args);
-};
-Person2.prototype = {
-  say() {
-    return 'person2';
-  }
-};
+// ? reflect
+// console.log(reflect);
+
+// ? reflect.get
+// const p1 = reflect.get(obj, 'name');
+// const p2 = reflect.get(obj, 'skill');
+// console.log(p1);
+// console.log(p2);
+
+
+// ! -------------------------------------------
 
 // ? Reflect.construct
 // const p1 = Reflect.construct(Person, []);
@@ -59,7 +62,7 @@ Person2.prototype = {
 // console.log(obj);
 
 // ? Reflect.apply
-const p1 = Reflect.apply(Person2, obj, ['test']);
-const p2 = Reflect.apply(Person2, null, ['test']);
-const p3 = Reflect.apply(Person2, undefined, document.querySelectorAll('div'));
-const p4 = Reflect.apply(Person2, window, ['test']);
+// const p1 = Reflect.apply(Person2, obj, ['test']);
+// const p2 = Reflect.apply(Person2, null, ['test']);
+// const p3 = Reflect.apply(Person2, undefined, document.querySelectorAll('div'));
+// const p4 = Reflect.apply(Person2, window, ['test']);

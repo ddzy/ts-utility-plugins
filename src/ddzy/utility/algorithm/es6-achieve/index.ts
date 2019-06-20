@@ -6,10 +6,9 @@
  */
 
 import { _const } from './const/index';
+import { _reflect } from './reflect/index';
 
-
-const ES6Achieve = {
+export const ES6Achieve = {
   _const,
+  _reflect,
 };
-
-export default ES6Achieve;
