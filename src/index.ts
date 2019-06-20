@@ -1,66 +1,155 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
-const usp = new utilityAlgorithm.URLSearchParams({});
 
-// ? handleAppend
-// usp.handleAppend('skill', 'programmer');
-// usp.handleAppend('name', 'duan');
+const reflect = utilityAlgorithm.ES6Achieve._reflect;
+const obj = {
+  name: 'ddzy',
+  age: 21,
+};
 
-// ? handleDelete
-// usp.handleDelete('age');
-// usp.handleDelete('name');
-// usp.handleDelete('isSelf');
+// ? reflect
+// console.log(reflect);
 
-// ? handleGet
-// const u1 = usp.handleGet('');
-// const u2 = usp.handleGet('name');
-// const u3 = usp.handleGet('skill');
-// const u4 = usp.handleGet('age');
-// console.log({
-//   u1,
-//   u2,
-//   u3,
-//   u4,
-// });
+// ? reflect.get
+// const p1 = reflect.get(obj, 'name');
+// const p2 = reflect.get(obj, 'skill');
+// console.log(p1);
+// console.log(p2);
 
-// ? handleGetAll
-// const u1 = usp.handleGetAll();
-// console.log(u1);
+// ? reflect.set
+// const p1 = reflect.set(obj, 'skill', 'program');
+// const p2 = reflect.set(obj, 'hobby', ['run', 'play-game']);
+// console.log(p1);
+// console.log(p2);
+// console.log(obj);
 
-// ? handleHas
-// const u1 = usp.handleHas('name');
-// const u2 = usp.handleHas('skill');
-// const u3 = usp.handleHas('');
-// console.log({
-//   u1,
-//   u2,
-//   u3,
-// });
+// ? reflect.has
+// obj.__proto__.hobby = ['run', 'watch'];
+// const p1 = reflect.has(obj, 'name');
+// const p2 = reflect.has(obj, 'skill');
+// const p3 = reflect.has(obj, 'hobby');
+// console.log(p1);
+// console.log(p2);
+// console.log(p3);
 
-// ? handleSet
-// usp.handleSet('name', 'duanzhaoyang');
-// usp.handleSet('age', 20);
-// usp.handleSet('isSelf', false);
-// usp.handleAppend('age', 30).handleAppend('age', 40);
-// usp.handleSet('age', 80);
-
-// ? handleKeys
-// const u1 = usp.handleKeys();
-// console.log(u1);
-
-// ? handleValues
-// const u1 = usp.handleValues();
-// console.log(u1);
-// usp.handleAppend('skill', 'programmer');
-// const u2 = usp.handleValues();
-// console.log(u2);
-
-// ? iterator
-// for (const v of (usp.state.params as any)) {
-//   console.log(v);
+// ? reflect.apply
+// function func1(...args: any[]) {
+//   return args;
 // }
-// for (const [v, i] of (usp.state.params as any)) {
-//   console.log(v, i);
+// function func2() {
+//   return this;
 // }
+// const p1 = reflect.apply(func1, obj, []);
+// const p2 = reflect.apply(func2, obj, []);
+// const p3 = func2();
+// console.log(p1);
+// console.log(p2);
+// console.log(p3); // undefined
+// console.log(func2()); // undefined
 
-// console.log(usp.state);
+// ? reflect.construct
+// function Person1() { }
+// const Person2 = () => { }
+// const Person3 = {};
+// const p1 = reflect.construct(Person1, []);
+// const p2 = reflect.construct(Person2, []);
+// const p3 = reflect.construct(Person3, []);
+// console.log(p1);
+// console.log(p2);
+// console.log(p3);
+
+// ? reflect.deleteProperty
+// const p1 = reflect.deleteProperty(obj, 'name');
+// const p2 = reflect.deleteProperty(obj, 'skill');
+// const p3 = reflect.deleteProperty(function() {}, 'name');
+// console.log(p1);
+// console.log(p2);
+// console.log(p3);
+// console.log(obj);
+
+// ? reflect.getPrototypeOf
+// function Person1() { }
+// const p1 = reflect.construct(Person1, []);
+// const p2 = reflect.getPrototypeOf(obj);
+// const p3 = reflect.getPrototypeOf(p1);
+// const p4 = reflect.getPrototypeOf('');
+// const p5 = reflect.getPrototypeOf([]);
+// const p6 = reflect.getPrototypeOf(0);
+// const p7 = reflect.getPrototypeOf(null);
+// const p8 = reflect.getPrototypeOf(undefined);
+// console.log(p2);
+// console.log(p3);
+// console.log(p4);
+// console.log(p5);
+// console.log(p6);
+// console.log(p7);
+// console.log(p8);
+
+// ? reflect.setPrototypeOf
+// function Person1() { }
+// Person1.prototype = {
+//   say() {},
+// };
+// const p = new Person1();
+// const p1 = reflect.setPrototypeOf(Person1, null);
+// const p2 = reflect.setPrototypeOf(Person1, 0);
+// const p3 = reflect.setPrototypeOf(Person1, '');
+// const p4 = reflect.setPrototypeOf(Person1, {
+//   run() {},
+// });
+// console.log(p1);
+// console.log(p2);
+// console.log(p3);
+// console.log(p4);
+
+
+
+// ! -------------------------------------------
+
+// ? Reflect.construct
+// const p1 = Reflect.construct(Person, []);
+// const p2 = Reflect.construct(Person2, []);
+// console.log(p1);
+// console.log(p2.say());
+
+// ? Reflect.get
+// const p1 = Reflect.get(obj, 'name');
+// const p2 = Reflect.get(obj, 'skill');
+// console.log(p1);
+// console.log(p2);
+
+// ? Reflect.has
+// const p1 = Reflect.has(obj, 'name');
+// const p2 = Reflect.has(obj, 'skill');
+// console.log(p1);
+// console.log(p2);
+
+// ? Reflect.getPrototypeOf, 获取隐式原型, 相当于__proto__
+// const p1 = Reflect.getPrototypeOf(obj);
+// const p2 = new Person();
+// console.log(p2);
+
+// ? Reflect.setPrototypeOf
+// function Person1() {}
+// const p1 = Reflect.setPrototypeOf(Person1, null);
+// console.log(p1);
+
+// ? Reflect.set
+// const p1 = Reflect.set(obj, 'skill', 'program');
+// const p2 = Reflect.set(obj, [], []);
+// console.log(p1);
+// console.log(p2);
+// console.log(obj);
+
+// ? Reflect.deleteProperty
+// const p1 = Reflect.deleteProperty(obj, 'age');
+// const p2 = Reflect.deleteProperty(obj, 'skill');
+// console.log(p1);
+// console.log(p2);
+// console.log(obj);
+
+// ? Reflect.apply
+// const p1 = Reflect.apply(Person2, obj, ['test']);
+// const p2 = Reflect.apply(Person2, null, ['test']);
+// const p3 = Reflect.apply(Person2, undefined, document.querySelectorAll('div'));
+// const p4 = Reflect.apply(Person2, window, ['test']);

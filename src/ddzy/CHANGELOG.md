@@ -134,3 +134,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 新增`utility/algorithm/url-search-params`工具插件
+
+## [2019-6-20]
+
+### Added
+
+- `utility/algorithm`下新增`ES6Achieve`工具插件
+
+### Changed
+
+- 将`ES6Achieve`工具插件由`business`搬运至`utility/algorithm`

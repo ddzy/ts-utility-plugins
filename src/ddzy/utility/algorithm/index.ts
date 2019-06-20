@@ -10,6 +10,9 @@ import {
 import {
   URLSearchParams,
 } from './url-search-params';
+import {
+  ES6Achieve,
+} from './es6-achieve/index';
 
 
 export interface IUtilityAlgorithmProps {
@@ -17,6 +20,7 @@ export interface IUtilityAlgorithmProps {
   DLCL: typeof DLCL;
   EventEmitter: typeof EventEmitter;
   URLSearchParams: typeof URLSearchParams;
+  ES6Achieve: typeof ES6Achieve;
 };
 
 const utilityAlgorithm: IUtilityAlgorithmProps = {
@@ -26,7 +30,10 @@ const utilityAlgorithm: IUtilityAlgorithmProps = {
   DLCL,
   // ? EventEmitter
   EventEmitter,
+  // ? URLSearchParams
   URLSearchParams,
+  // ? 模拟实现es6的API
+  ES6Achieve,
 };
 
 
