@@ -1,6 +1,8 @@
-import utilityOthers from "../../../utility/others";
+import utilityOthers from "../../../others";
+
 
 /**
+ * @name _const
  * @description const
  * @author ddzy
  * @since 2019/5/25

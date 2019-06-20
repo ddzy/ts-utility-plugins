@@ -1,4 +1,5 @@
 /**
+ * @name es6-archive
  * @description 简单实现es6的API
  * @author ddzy
  * @since 2019/5/25

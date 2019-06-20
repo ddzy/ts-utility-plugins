@@ -1,66 +1,65 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
-const usp = new utilityAlgorithm.URLSearchParams({});
+const obj = {
+  name: 'ddzy',
+  age: 20,
+};
 
-// ? handleAppend
-// usp.handleAppend('skill', 'programmer');
-// usp.handleAppend('name', 'duan');
+function Person(_this: any) {
+}
+const Person2 = (...args: any[]) => {
+  console.log('Person2: ', args);
+};
+Person2.prototype = {
+  say() {
+    return 'person2';
+  }
+};
 
-// ? handleDelete
-// usp.handleDelete('age');
-// usp.handleDelete('name');
-// usp.handleDelete('isSelf');
+// ? Reflect.construct
+// const p1 = Reflect.construct(Person, []);
+// const p2 = Reflect.construct(Person2, []);
+// console.log(p1);
+// console.log(p2.say());
 
-// ? handleGet
-// const u1 = usp.handleGet('');
-// const u2 = usp.handleGet('name');
-// const u3 = usp.handleGet('skill');
-// const u4 = usp.handleGet('age');
-// console.log({
-//   u1,
-//   u2,
-//   u3,
-//   u4,
-// });
+// ? Reflect.get
+// const p1 = Reflect.get(obj, 'name');
+// const p2 = Reflect.get(obj, 'skill');
+// console.log(p1);
+// console.log(p2);
 
-// ? handleGetAll
-// const u1 = usp.handleGetAll();
-// console.log(u1);
+// ? Reflect.has
+// const p1 = Reflect.has(obj, 'name');
+// const p2 = Reflect.has(obj, 'skill');
+// console.log(p1);
+// console.log(p2);
 
-// ? handleHas
-// const u1 = usp.handleHas('name');
-// const u2 = usp.handleHas('skill');
-// const u3 = usp.handleHas('');
-// console.log({
-//   u1,
-//   u2,
-//   u3,
-// });
+// ? Reflect.getPrototypeOf, 获取隐式原型, 相当于__proto__
+// const p1 = Reflect.getPrototypeOf(obj);
+// const p2 = new Person();
+// console.log(p2);
 
-// ? handleSet
-// usp.handleSet('name', 'duanzhaoyang');
-// usp.handleSet('age', 20);
-// usp.handleSet('isSelf', false);
-// usp.handleAppend('age', 30).handleAppend('age', 40);
-// usp.handleSet('age', 80);
+// ? Reflect.setPrototypeOf
+// Object.setPrototypeOf(p2, function() {});
+// console.log(Object.getPrototypeOf(p2))
+// console.log(p1);
 
-// ? handleKeys
-// const u1 = usp.handleKeys();
-// console.log(u1);
+// ? Reflect.set
+// const p1 = Reflect.set(obj, 'skill', 'program');
+// const p2 = Reflect.set(obj, [], []);
+// console.log(p1);
+// console.log(p2);
+// console.log(obj);
 
-// ? handleValues
-// const u1 = usp.handleValues();
-// console.log(u1);
-// usp.handleAppend('skill', 'programmer');
-// const u2 = usp.handleValues();
-// console.log(u2);
+// ? Reflect.deleteProperty
+// const p1 = Reflect.deleteProperty(obj, 'age');
+// const p2 = Reflect.deleteProperty(obj, 'skill');
+// console.log(p1);
+// console.log(p2);
+// console.log(obj);
 
-// ? iterator
-// for (const v of (usp.state.params as any)) {
-//   console.log(v);
-// }
-// for (const [v, i] of (usp.state.params as any)) {
-//   console.log(v, i);
-// }
-
-// console.log(usp.state);
+// ? Reflect.apply
+const p1 = Reflect.apply(Person2, obj, ['test']);
+const p2 = Reflect.apply(Person2, null, ['test']);
+const p3 = Reflect.apply(Person2, undefined, document.querySelectorAll('div'));
+const p4 = Reflect.apply(Person2, window, ['test']);
