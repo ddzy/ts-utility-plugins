@@ -58,6 +58,16 @@ const obj = {
 // console.log(p2);
 // console.log(p3);
 
+// ? reflect.deleteProperty
+// const p1 = reflect.deleteProperty(obj, 'name');
+// const p2 = reflect.deleteProperty(obj, 'skill');
+// const p3 = reflect.deleteProperty(function() {}, 'name');
+// console.log(p1);
+// console.log(p2);
+// console.log(p3);
+// console.log(obj);
+
+
 // ! -------------------------------------------
 
 // ? Reflect.construct

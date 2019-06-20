@@ -94,6 +94,11 @@ export const _reflect: IReflectProps = {
     return targetFunc.apply(targetObj, args);
   },
 
+  /**
+   * 实例化指定函数
+   * @param targetFunc 目标函数
+   * @param args 参数
+   */
   construct(targetFunc: any, args) {
     let instance = null;
 
@@ -116,5 +121,22 @@ export const _reflect: IReflectProps = {
     }
 
     return instance;
+  },
+
+  /**
+   * 删除目标对象的指定键名
+   * @param target 目标对象
+   * @param key 键名
+   */
+  deleteProperty(target, key) {
+    let flag = true;
+
+    try {
+      flag = (delete target[key]);
+    } catch (error) {
+      flag = false;
+    } finally {
+      return flag;
+    }
   },
 };
