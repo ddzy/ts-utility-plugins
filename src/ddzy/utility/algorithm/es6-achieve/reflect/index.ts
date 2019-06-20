@@ -1,3 +1,8 @@
+import utilityArray from "../../../array";
+import { FunctionDeclaration, FunctionExpression, tsTypeReference } from "@babel/types";
+import utilityFunction from "../../../function";
+import utilityOthers from "../../../others";
+
 /**
  * @name _reflect
  * @description 模拟实现`Reflect`API
@@ -87,5 +92,29 @@ export const _reflect: IReflectProps = {
    */
   apply(targetFunc, targetObj, args) {
     return targetFunc.apply(targetObj, args);
+  },
+
+  construct(targetFunc: any, args) {
+    let instance = null;
+
+    utilityOthers.invariant(
+      !utilityFunction.isFunction(targetFunc),
+      `
+        you must pass a function to construct...
+      `,
+    );
+
+    try {
+      instance = new targetFunc(args);
+    } catch (err) {
+      instance = 'can not being instanced, please check the parameter you have passed in...';
+
+      utilityOthers.invariant(
+        true,
+        instance,
+      );
+    }
+
+    return instance;
   },
 };

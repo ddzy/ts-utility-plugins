@@ -47,7 +47,16 @@ const obj = {
 // console.log(p3); // undefined
 // console.log(func2()); // undefined
 
-
+// ? reflect.construct
+// function Person1() { }
+// const Person2 = () => { }
+// const Person3 = {};
+// const p1 = reflect.construct(Person1, []);
+// const p2 = reflect.construct(Person2, []);
+// const p3 = reflect.construct(Person3, []);
+// console.log(p1);
+// console.log(p2);
+// console.log(p3);
 
 // ! -------------------------------------------
 
