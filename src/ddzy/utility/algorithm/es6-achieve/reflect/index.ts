@@ -43,7 +43,30 @@ export type TReflectStaticValue = any;
 export type TReflectStaticObject = Record<TReflectStaticKey, TReflectStaticValue>;
 
 export const _reflect: IReflectProps = {
+  /**
+   * 获取目标对象的指定键值
+   * @param target 目标对象
+   * @param key 键名
+   */
   get(target, key) {
     return target[key];
+  },
+
+  /**
+   * 设置目标对象的键值
+   * @param target 目标对象
+   * @param key 键名
+   * @param value 键值
+   */
+  set(target, key, value) {
+    let flag = true;
+
+    try {
+      target[key] = value;
+    } catch (error) {
+      flag = false;
+    }
+
+    return flag;
   },
 };

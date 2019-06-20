@@ -16,6 +16,15 @@ const obj = {
 // console.log(p1);
 // console.log(p2);
 
+// ? reflect.set
+// const p1 = reflect.set(obj, 'skill', 'program');
+// const p2 = reflect.set(obj, 'hobby', ['run', 'play-game']);
+// console.log(p1);
+// console.log(p2);
+// console.log(obj);
+
+
+
 
 // ! -------------------------------------------
 
