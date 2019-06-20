@@ -32,7 +32,7 @@ export interface IReflectProps {
     targetFunc: Function,
     targetObj: any,
     args: ArrayLike<any>,
-  ) => void;
+  ) => any;
   construct: (targetFunc: Function, args: ArrayLike<any>) => any;
   deleteProperty: (target: TReflectStaticObject, key: TReflectStaticKey) => boolean;
   getPrototypeOf: (target: any) => any;
@@ -77,5 +77,15 @@ export const _reflect: IReflectProps = {
    */
   has(target, key) {
     return (key in target);
+  },
+
+  /**
+   * 改变函数执行上下文(与apply相同)
+   * @param targetFunc 目标函数
+   * @param targetObj 目标对象
+   * @param args 传递的参数
+   */
+  apply(targetFunc, targetObj, args) {
+    return targetFunc.apply(targetObj, args);
   },
 };

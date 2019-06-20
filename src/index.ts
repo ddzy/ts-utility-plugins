@@ -32,6 +32,22 @@ const obj = {
 // console.log(p2);
 // console.log(p3);
 
+// ? reflect.apply
+// function func1(...args: any[]) {
+//   return args;
+// }
+// function func2() {
+//   return this;
+// }
+// const p1 = reflect.apply(func1, obj, []);
+// const p2 = reflect.apply(func2, obj, []);
+// const p3 = func2();
+// console.log(p1);
+// console.log(p2);
+// console.log(p3); // undefined
+// console.log(func2()); // undefined
+
+
 
 // ! -------------------------------------------
 
