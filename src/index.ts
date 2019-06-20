@@ -23,7 +23,14 @@ const obj = {
 // console.log(p2);
 // console.log(obj);
 
-
+// ? reflect.has
+// obj.__proto__.hobby = ['run', 'watch'];
+// const p1 = reflect.has(obj, 'name');
+// const p2 = reflect.has(obj, 'skill');
+// const p3 = reflect.has(obj, 'hobby');
+// console.log(p1);
+// console.log(p2);
+// console.log(p3);
 
 
 // ! -------------------------------------------

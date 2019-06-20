@@ -69,4 +69,13 @@ export const _reflect: IReflectProps = {
 
     return flag;
   },
+
+  /**
+   * 检查目标对象上是否存在对应的键(包括原型上)
+   * @param target 目标对象
+   * @param key 键名
+   */
+  has(target, key) {
+    return (key in target);
+  },
 };
