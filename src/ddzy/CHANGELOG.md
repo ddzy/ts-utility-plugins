@@ -144,3 +144,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 
 - 将`ES6Achieve`工具插件由`business`搬运至`utility/algorithm`
+
+## [2019-6-23]
+
+### Added
+
+- `utility/array`下新增`toStrictArray`工具方法
+
+### Changed
+
+- 更新`utility/array`下的`isStrictArray`, 对原`isArray`作兼容处理
