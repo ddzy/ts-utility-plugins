@@ -1,3 +1,11 @@
+import utilityOthers from "../others";
+
+/**
+ * @description 数组有关的工具函数
+ * @author ddzy
+ * @since 2019/6/23
+ */
+
 export interface IUtilityArrayProps {
   isStrictArray(origin: any): boolean;
   toFlatArrayOutPlace(origin: any[]): any[];
@@ -10,7 +18,22 @@ const utilityArray: IUtilityArrayProps = {
    * @param origin 目标值
    */
   isStrictArray(origin) {
-    return Array.isArray(origin);
+    if (Array.isArray(origin)) {
+      return Array.isArray(origin);
+    } else {
+      // basic value
+      if (utilityOthers.isBasicValue(origin)) {
+        return false;
+      } else if(typeof origin === 'object') {
+        if (origin.length) {
+          // array like
+          return Object.toString.call(() => origin) === '[object Array]';
+        } else {
+          return false;
+        }
+      }
+      return false;
+    }
   },
 
   /**
