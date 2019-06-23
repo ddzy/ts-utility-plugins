@@ -1,6 +1,16 @@
+/**
+ * @description 数组有关的工具函数
+ * @author ddzy
+ * @since 2019/6/23
+ */
+
+
+import utilityOthers from "../others";
+
 export interface IUtilityArrayProps {
   isStrictArray(origin: any): boolean;
   toFlatArrayOutPlace(origin: any[]): any[];
+  toStrictArray<T>(origin: ArrayLike<T>): T[];
 };
 
 
@@ -10,7 +20,22 @@ const utilityArray: IUtilityArrayProps = {
    * @param origin 目标值
    */
   isStrictArray(origin) {
-    return Array.isArray(origin);
+    if (Array.isArray(origin)) {
+      return Array.isArray(origin);
+    } else {
+      // basic value
+      if (utilityOthers.isBasicValue(origin)) {
+        return false;
+      } else if(typeof origin === 'object') {
+        if (origin.length) {
+          // array like
+          return Object.toString.call(() => origin) === '[object Array]';
+        } else {
+          return false;
+        }
+      }
+      return false;
+    }
   },
 
   /**
@@ -32,6 +57,24 @@ const utilityArray: IUtilityArrayProps = {
     }
 
     return _aidedToFlat(origin, target);
+  },
+
+  /**
+   * 将给定的类数组转化为严格的数组(非原地)
+   * @param origin 需要转化的类数组对象
+   */
+  toStrictArray<T>(origin: ArrayLike<T>): T[] {
+    const result: T[] = [];
+
+    if (utilityOthers.isBasicValue(origin)) {
+      return result;
+    } else {
+      for (let i = 0, every; every = origin[i++];) {
+        result.push(every);
+      }
+    }
+
+    return result;
   },
 };
 
