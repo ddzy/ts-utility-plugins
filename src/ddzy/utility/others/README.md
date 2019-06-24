@@ -1,8 +1,8 @@
-# ddzy/utility/dom
+# ddzy/utility/others
 
 ## 说明
 
-汇集有关`DOM`的工具方法.
+汇集其它有用的工具方法.
 
 ## 目录
 
