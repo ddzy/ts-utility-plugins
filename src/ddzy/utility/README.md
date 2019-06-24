@@ -1,4 +1,4 @@
-# utility
+# ddzy/utility
 
 详细罗列出所有的工具函数, 主文档参考[这里](../README.md)
 
