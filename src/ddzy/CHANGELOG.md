@@ -154,3 +154,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 
 - 更新`utility/array`下的`isStrictArray`, 对原`isArray`作兼容处理
+
+## [2019-6-24]
+
+### Added
+
+- `utility`下每个区块新增`README.md`, 便于查阅👍
+
+### Changed
+
+- 更新`utility`下`README.md`, 增加`目录`区块
