@@ -164,3 +164,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 
 - 更新`utility`下`README.md`, 增加`目录`区块
+
+## [2019-7-1]
+
+### Added
+
+- `utility/function`下新增`_new`方法
