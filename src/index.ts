@@ -1,43 +1,27 @@
-import utilityArray from "./ddzy/utility/array";
+import utilityFunction from "./ddzy/utility/function";
 
-// ? isStrictArray
-// const p1 = utilityArray.isStrictArray(0);
-// const p2 = utilityArray.isStrictArray('');
-// const p3 = utilityArray.isStrictArray('ddzy');
-// const p4 = utilityArray.isStrictArray(null);
-// const p5 = utilityArray.isStrictArray(undefined);
-// const p6 = utilityArray.isStrictArray(Symbol);
-// const p7 = utilityArray.isStrictArray({});
-// const p8 = utilityArray.isStrictArray({ length: 0 });
-// const p9 = utilityArray.isStrictArray(document.querySelectorAll('div'));
-// const p10 = utilityArray.isStrictArray([]);
-// const p11 = utilityArray.isStrictArray([1, 2, 3]);
-// console.log(p1);
-// console.log(p2);
-// console.log(p3);
-// console.log(p4);
-// console.log(p5);
-// console.log(p6);
-// console.log(p7);
-// console.log(p8);
-// console.log(p9);
-// console.log(p10);
-// console.log(p11);
 
-// ? toStrictArray
-const p1 = utilityArray.toStrictArray({ length: 0 });
-const p2 = utilityArray.toStrictArray<string | number>({
-  0: 'ddzy',
-  1: 20,
-  length: 2,
-});
-const p3 = utilityArray.toStrictArray<HTMLElement>(
-  document.querySelectorAll('div'),
-);
-const p4 = utilityArray.toStrictArray(
-  [1, 2, 3, 4]
-);
+function Person() {
+
+}
+Person.prototype = {
+  say() {
+    console.log('saying...');
+  },
+};
+const p1 = utilityFunction._new(Person);
 console.log(p1);
+
+function Person2(name: string) {
+  this.name = name;
+}
+Person2.prototype = {
+  say() {
+    return this.name;
+  },
+};
+const p2 = utilityFunction._new(Person2, 'duan');
 console.log(p2);
+
+const p3 = new Person();
 console.log(p3);
-console.log(p4);
