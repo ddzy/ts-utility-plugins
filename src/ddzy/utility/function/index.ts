@@ -1,10 +1,14 @@
 import utilityOthers from "../others";
+import {
+  _reflect,
+} from "../algorithm/es6-achieve/reflect";
 
 export interface IUtilityFunctionProps {
   isFunction(el: any): boolean;
 
   _call(context: any, ...args: any[]): void;
-  _bind(context: any): (args: any[]) => any;
+  _bind(context: any): (...args: any[]) => any;
+  _new<T extends Function>(constructor: T, ...args: any[]): keyof T;
 
   getParamNames(origin: Function): string[];
 }
@@ -19,6 +23,11 @@ const utilityFunction: IUtilityFunctionProps = {
     return typeof ele === 'function';
   },
 
+  /**
+   * 模拟实现`call`方法
+   * @param context this上下文
+   * @param args 所需参数
+   */
   _call(context, ...args) {
     // TODO: 使用`keyof typeof Function`来解决索引签名报错(`元素隐式具有 "any" 类型，因为类型“Function”没有索引签名`)的问题
     const funcName = this['name' as keyof typeof utilityFunction] as any;
@@ -36,6 +45,11 @@ const utilityFunction: IUtilityFunctionProps = {
     }
   },
 
+  /**
+   * 模拟实现`bind`方法
+   * @param context this上下文
+   * @returns {(...args: any[]) => void}
+   */
   _bind(context) {
     const that = this;
     Function.prototype['_call' as 'prototype'] = utilityFunction._call;
@@ -66,6 +80,23 @@ const utilityFunction: IUtilityFunctionProps = {
     }
 
     return final;
+  },
+
+  /**
+   * 模拟实现`new`操作符
+   * @param constructor 构造函数
+   * @param args 所需参数
+   */
+  _new(constructor, ...args) {
+    if (!utilityFunction.isFunction(constructor)) {
+      return null;
+    }
+
+    const instance = Object.create(null);
+    _reflect.setPrototypeOf(instance, constructor.prototype);
+    constructor.apply(instance, args);
+
+    return instance;
   },
 
 };
