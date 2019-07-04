@@ -82,3 +82,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - `贡献者列表`下新增`Docs`条目, 在线文档地址
+
+## [2019-7-4]
+
+### Added
+
+- 新的贡献者: [@qiqingfu](https://github.com/qiqingfu)
