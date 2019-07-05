@@ -2,14 +2,14 @@
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## [2019-4-28]
+## ✍ [2019-4-28]
 
 ### Changed
 
 - 重构完成`business/carousel`
 - 重构完成`business/tab`
 
-## [2019-4-29]
+## ✍ [2019-4-29]
 
 ### Added
 
@@ -19,43 +19,43 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - 重构完成`canvas/colorful-bubble`🐓
 
-## [2019-5-3]
+## ✍ [2019-5-3]
 
 ### Changed
 
 - 重构完成`canvas/jumping-characters`
 
-## [2019-5-6]
+## ✍ [2019-5-6]
 
 ### Changed
 
 - 重构完成`canvas/stars-line`
 
-## [2019-5-10]
+## ✍ [2019-5-10]
 
 ### Added
 
 - 测试`utility/`相关工具函数
 
-## [2019-5-13]
+## ✍ [2019-5-13]
 
 ### Added
 
 - 新增`business/draggable/SortDraggable`插件
 
-## [2019-5-17]
+## ✍ [2019-5-17]
 
 ### Added
 
 - 新增`utility/dom/_querySelector`工具函数
 
-## [2019-5-19]
+## ✍ [2019-5-19]
 
 ### Added
 
 - 新增`business/upload/DraggerUpload`插件
 
-## [2019-5-22]
+## ✍ [2019-5-22]
 
 ### Added
 
@@ -64,14 +64,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - 新增`utility/others/isBasicValue`工具函数
 - 新增`utility/others/deepClone`工具函数
 
-## [2019-5-24]
+## ✍ [2019-5-24]
 
 ### Added
 
 - 新增`utility/array/toFlatArrayOutPlace`数组扁平化工具方法
 - 新增`utility/dom/debounce`防抖工具方法
 
-## [2019-5-25]
+## ✍ [2019-5-25]
 
 ### Added
 
@@ -81,7 +81,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - 新增`utility/others/isUndefined`
 - 新增`business/es6_achieve`, 旨在用es5实现es6的相关方法
 
-## [2019-5-28]
+## ✍ [2019-5-28]
 
 ### Added
 
@@ -92,7 +92,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - 重构`README.md`
   - 移除旧的API相关说明, 文档已搬运至`Gitbook`, 添加[Gitbook在线站点](https://ddzy.gitbook.io/ts-utility-plugins-docs/)
 
-## [2019-5-31]
+## ✍ [2019-5-31]
 
 ### Added
 
@@ -102,7 +102,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - 更新[ts-utility-plugins-docs](https://ddzy.gitbook.io/ts-utility-plugins-docs/)API文档👌
 
-## [2019-6-1]
+## ✍ [2019-6-1]
 
 ### Added
 
@@ -110,32 +110,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - 新增`utility/string`区块, 实现一些常用的字符串工具函数
   - 新增`getRandomStr`方法
 
-## [2019-6-3]
+## ✍ [2019-6-3]
 
 ### Added
 
 - 新增`utility/algorithm`区块, 记录数据结构与算法
   - 新增`binary-search-tree`工具组件
 
-## [2019-6-10]
+## ✍ [2019-6-10]
 
 ### Added
 
 - 新增`utility/algorithm/double-linked-circular-list`双向循环链表插件
 
-## [2019-6-14]
+## ✍ [2019-6-14]
 
 ### Added
 
 - 新增`utility/algorithm/event-emitter`插件
 
-## [2019-6-16]
+## ✍ [2019-6-16]
 
 ### Added
 
 - 新增`utility/algorithm/url-search-params`工具插件
 
-## [2019-6-20]
+## ✍ [2019-6-20]
 
 ### Added
 
@@ -145,7 +145,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - 将`ES6Achieve`工具插件由`business`搬运至`utility/algorithm`
 
-## [2019-6-23]
+## ✍ [2019-6-23]
 
 ### Added
 
@@ -155,7 +155,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - 更新`utility/array`下的`isStrictArray`, 对原`isArray`作兼容处理
 
-## [2019-6-24]
+## ✍ [2019-6-24]
 
 ### Added
 
@@ -165,8 +165,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - 更新`utility`下`README.md`, 增加`目录`区块
 
-## [2019-7-1]
+## ✍ [2019-7-1]
 
 ### Added
 
 - `utility/function`下新增`_new`方法
+
+## ✍ [2019-7-5]
+
+### Added
+
+- `utility/algorithm/es6achieve`
+  - 新增`_map`
+
+### Changed
+
+- `changelog.md`
+  - 小标题增加`emoji`前缀

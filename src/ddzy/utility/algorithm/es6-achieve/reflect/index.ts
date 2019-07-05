@@ -36,6 +36,7 @@ export interface IReflectProps {
   apply: (
       targetFunc: Function,
       targetObj: any,
+      ...args: any[]
   ) => any;
   construct: (targetFunc: Function, args: ArrayLike<any>) => any;
   deleteProperty: (target: TReflectStaticObject, key: TReflectStaticKey) => boolean;
