@@ -1,4 +1,5 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
+import './qiqf/utility/test/test-array'
 
 const _map = utilityAlgorithm.ES6Achieve._map;
 
