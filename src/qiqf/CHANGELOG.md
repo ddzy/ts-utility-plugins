@@ -10,3 +10,6 @@
 ### 2019-07-04
 - 新增 CHANGELOG.md 变更记录、README.md 描述文档
 - 添加 `arrayChunk()`、`compact()` 工具函数
+
+### 2019-07-07
+- 新增数组 `countOccurrences`、`deepFlatten`、`difference`、`sameArray`、`distinctValuesOfArray`等五个工具方法
