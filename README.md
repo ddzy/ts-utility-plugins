@@ -1,4 +1,24 @@
-# <p align="center"><img src="./assets/images/logo.png" style="max-width: 100%; border: none" width="300"></p><p align="center"><a href="https://github.com/ddzy/ts-utility-plugins">![](https://img.shields.io/badge/coverage-85%25-green.svg)</a><a href="https://github.com/ddzy/ts-utility-plugins/blob/master/LICENSE"  style="display: inline-block; margin-left: 8px;">![](https://img.shields.io/aur/license/pac.svg)</a><a href="https://github.com/ddzy/ts-utility-plugins" style="display: inline-block; margin-left: 8px;">![](https://img.shields.io/badge/environment-dev-red.svg)</a></p>
+<p align="center">
+  <img src="./assets/images/logo.png" style="max-width: 100%; border: none" width="300">
+</p>
+
+<p align="center">
+  <a href="https://github.com/ddzy/ts-utility-plugins">
+    <img src="https://img.shields.io/badge/coverage-85%25-green.svg" style="max-width: 100%;">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/ddzy/ts-utility-plugins">
+    <img src="https://img.shields.io/badge/environment-dev-red.svg" style="max-width: 100%;">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/ddzy/ts-utility-plugins/blob/master/LICENSE">
+    <img src="https://img.shields.io/aur/license/pac.svg" style="max-width: 100%;">
+  </a>
+</p>
 
 ## 前言
 
