@@ -1,4 +1,6 @@
-# ts-utility-plugins
+# <p align="center"><img src="./assets/images/logo.png" style="max-width: 100%; border: none" width="300"></p><p align="center"><a href="https://github.com/ddzy/ts-utility-plugins">![](https://img.shields.io/badge/coverage-85%25-green.svg)</a><a href="https://github.com/ddzy/ts-utility-plugins/blob/master/LICENSE"  style="display: inline-block; margin-left: 8px;">![](https://img.shields.io/aur/license/pac.svg)</a><a href="https://github.com/ddzy/ts-utility-plugins" style="display: inline-block; margin-left: 8px;">![](https://img.shields.io/badge/environment-dev-red.svg)</a></p>
+
+## 前言
 
 框架流行的大背景下, 是否已经缺失了基本的原生`js/ts`能力? 没关系, 本项目就是你的舞台(`注: 本项目仅供学习`).
 
@@ -6,7 +8,7 @@
 
 详情参见HelloGithub: [第38期月报](https://hellogithub.com/periodical/volume/38/#ts-utility-plugins).
 
-## 前言
+## 说明
 
 好玩、有趣的插件库, 使用纯原生`ts`构建, 不参杂其它框架. 目前囊括特效(`canvas`)、业务(`business`)、工具(`utility`)三个大区块, 本项目仅供参考学习~
 
