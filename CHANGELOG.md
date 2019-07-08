@@ -88,3 +88,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - 新的贡献者: [@qiqingfu](https://github.com/qiqingfu)
+
+## [2019-7-8]
+
+### Added
+
+- 项目`README`增加
+  - logo
+  - `npm`徽章
