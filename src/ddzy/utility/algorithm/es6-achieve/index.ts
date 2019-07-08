@@ -8,10 +8,12 @@
 import { _const } from './const/index';
 import { _reflect } from './reflect/index';
 import { _map } from './map/index';
+import { _reduce } from './reduce';
 
 
 export const ES6Achieve = {
   _const,
   _reflect,
   _map,
+  _reduce,
 };
