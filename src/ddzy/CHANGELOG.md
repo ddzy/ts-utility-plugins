@@ -182,3 +182,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - `changelog.md`
   - 小标题增加`emoji`前缀
+
+## ✍ [2019-7-8]
+
+### Added
+
+- `utility/algorithm/es6achieve`
+  - 新增`_reduce`
