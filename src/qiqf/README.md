@@ -19,3 +19,6 @@
  - difference(): 两个数组不同值组成的新数组
  - sameArray(): 两个数组相同值组成的新数组
  - distinctValuesOfArray(): 数组去重
+ - dropElements(): 返回第一个符合条件元素的后面所有元素组成的集合
+ - everyNth(): 返回数组中每个第n个元素
+ - filterNonUnique(): 过滤出数组中只出现一次的元素组成的集合

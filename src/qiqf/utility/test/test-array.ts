@@ -1,4 +1,5 @@
 import * as arrayUtil from '../array'
+import * as InterfaceUtil from "../array/IArrayInterface";
 // const numberArrays = [1,2,3,4,5];
 
 // console.log(arrayUtil.arrayMax(numberArrays));   // 5
@@ -17,3 +18,9 @@ import * as arrayUtil from '../array'
 // console.log(arrayUtil.sameArray([1,2,3], [3,'4','1',5])); // [3]
 
 // console.log(arrayUtil.distinctValuesOfArray([1,2,1,3,4,2,3]));  // [1,2,3,4]
+
+// console.log(arrayUtil.dropElements([1,2,3,4], e => e === 3));  // [3,4]
+
+// console.log(arrayUtil.everyNth([1,2,3,4,5], 2));   [1,3,5]
+
+// console.log(arrayUtil.filterNonUnique([1,2,3,1,2,4,5,5,1]));  [3,4]

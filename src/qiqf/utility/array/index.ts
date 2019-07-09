@@ -71,6 +71,34 @@ export function distinctValuesOfArray(args: InterfaceUtil.IArrayAny): InterfaceU
     return [...new Set(args)];
 }
 
+/**
+ * 返回第一个符合条件元素的后面所有元素组成的集合
+ * @param args
+ * @param callback
+ */
+export function dropElements(args: InterfaceUtil.IArrayAny, callback: (arg: any) => boolean): InterfaceUtil.IArrayAny[] {
+    while (args.length && !callback(args[0])) args.shift()
+
+    return args
+}
+
+/**
+ * 返回数组中每个第n个元素
+ * @param args
+ * @param nth
+ */
+export const everyNth: InterfaceUtil.IEveryNth = (args: number[], nth: number): number[] => {
+    return args.filter((_arg, i) => i % nth === 0)
+};
+
+/**
+ * 筛选出数组中非唯一值
+ * @param args
+ */
+export function filterNonUnique(args: InterfaceUtil.IArrayAny): InterfaceUtil.IArrayAny[] {
+    return args.filter(arg => args.indexOf(arg) === args.lastIndexOf(arg))
+}
+
 
 
 
