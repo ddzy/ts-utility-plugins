@@ -1,64 +1,55 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
-const _filter = utilityAlgorithm.ES6Achieve._filter;
+const _every = utilityAlgorithm.ES6Achieve._every;
 
 
-// received(空数组) => expected(新的空数组)
-const s1: any[] = [];
-const p1 = _filter<any>(s1, (v) => {
-  return v && v;
+// ? 空数组 -> true
+const s1: number[] = [];
+const p1 = _every<number>(s1, (v) => {
+  return v > 0;
 });
 console.log(p1);
-s1.push('s1', 'ss1');
-console.log(p1);
 
+console.log('------------------------');
 
-console.log('-----------------------------');
-
-
-// received(数字数组) => expected(新的数组)
-const s2: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
-const p2 = _filter<number>(s2, (v) => {
-  return v % 2 === 0;
-});
+// ? 数字数组 -> true
+const s2: number[] = [1, 2, 3, 4, 5];
+const p2 = _every<number, null>(s2, (v) => {
+  return v > 0;
+})
 console.log(p2);
 
+console.log('------------------------');
 
-console.log('-----------------------------');
+// ? 对象数组 -> false
 
-
-// received(对象数组) => expected(新的数组)
-interface User {
-  name: string,
-  age: number,
+interface IPair {
+  name: string;
+  age: number;
 };
-const s3: User[] = [
-  { name: 'duan', age: 20 },
-  { name: 'zhao', age: 30 },
-  { name: 'yang', age: 40 },
+const s3: IPair[] = [
+  { name: 'duan', age: 21 },
+  { name: 'zhao', age: 31 },
+  { name: 'yang', age: 41 },
 ];
-const p3 = _filter<User>(s3, (v) => {
-  return v.age >= 30;
+const p3 = _every<IPair, null>(s3, (v) => {
+  return v.age < 0;
 });
 console.log(p3);
 
+console.log('-------------------------');
 
-console.log('----------------------------');
+// ? context
 
-
-// received(数字数组, this = obj) => expected(新的数组, obj)
-interface Obj {
-  secret: string,
-  say: (secret: string) => void,
-};
-const obj: Obj = {
-  secret: '980808',
-  say(secret) {
-    console.log(secret);
+const context = {
+  name: 'ddzy',
+  printName() {
+    return this.name;
   },
 };
-const s4: number[] = [-1, 1, -2, 2, -3, 3];
-const p4 = _filter<number, Obj>(s4, function (v) {
-  this.say(this.secret);
-  return v > 0;
-}, obj);
+const s4: number[] = [1, 2, 3, 4, 5];
+const p4 = _every<number, typeof context>(s4, function (v) {
+  console.log('context: ', this === context);
+  return v < 6;
+}, context);
+console.log(p4);
