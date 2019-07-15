@@ -1,46 +1,55 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
+const _every = utilityAlgorithm.ES6Achieve._every;
 
-const _reduce = utilityAlgorithm.ES6Achieve._reduce;
 
-const s1 = [1, 2, 3, 4, 5];
-const p1 = _reduce<number, number>(s1, (total, current) => {
-  return total + current;
+// ? 空数组 -> true
+const s1: number[] = [];
+const p1 = _every<number>(s1, (v) => {
+  return v > 0;
 });
 console.log(p1);
 
-console.log('--------------------------');
+console.log('------------------------');
 
-const s2 = [1, 2, 3, 4, 5];
-const p2 = _reduce<number, number>(s2, (total, current) => {
-  return total + current;
-}, 10);
+// ? 数字数组 -> true
+const s2: number[] = [1, 2, 3, 4, 5];
+const p2 = _every<number, null>(s2, (v) => {
+  return v > 0;
+})
 console.log(p2);
 
-console.log('--------------------------');
+console.log('------------------------');
 
-const s3 = [
-  { uuid: 1, name: 'duan', age: 10 },
-  { uuid: 2, name: 'duan', age: 20 },
-  { uuid: 3, name: 'duan', age: 30 },
+// ? 对象数组 -> false
+
+interface IPair {
+  name: string;
+  age: number;
+};
+const s3: IPair[] = [
+  { name: 'duan', age: 21 },
+  { name: 'zhao', age: 31 },
+  { name: 'yang', age: 41 },
 ];
-const p3 = _reduce<typeof s3[0], number>(s3, (total, current) => {
-  return total + current.age;
-}, 0);
+const p3 = _every<IPair, null>(s3, (v) => {
+  return v.age < 0;
+});
 console.log(p3);
 
-console.log('--------------------------');
+console.log('-------------------------');
 
-const s4 = [1, 2, 3, 4, 5];
-const p4 = _reduce<number, string>(s4, (total, current) => {
-  return total + current;
-}, '');
+// ? context
+
+const context = {
+  name: 'ddzy',
+  printName() {
+    return this.name;
+  },
+};
+const s4: number[] = [1, 2, 3, 4, 5];
+const p4 = _every<number, typeof context>(s4, function (v) {
+  console.log('context: ', this === context);
+  return v < 6;
+}, context);
 console.log(p4);
-
-console.log('--------------------------');
-
-const s5: any[] = [];
-const p5 = _reduce(s5, (total, current) => {
-  return total + current;
-})
-console.log(p5);

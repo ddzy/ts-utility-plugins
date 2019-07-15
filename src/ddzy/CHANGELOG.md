@@ -189,3 +189,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - `utility/algorithm/es6achieve`
   - 新增`_reduce`
+
+## ✍ [2019-7-11]
+
+### Added
+
+- `utility/algorithm/es6achieve`
+  - 新增`_filter`
+
+## ✍ [2019-7-14]
+
+### Added
+
+- utility/algorithm/es6achieve
+  - 新增`_every`
