@@ -22,3 +22,5 @@
  - dropElements(): 返回第一个符合条件元素的后面所有元素组成的集合
  - everyNth(): 返回数组中每个第n个元素
  - filterNonUnique(): 过滤出数组中只出现一次的元素组成的集合
+ - flatten(): 扁平化一层数组
+ - flattenDepth(): 指定扁平化数组的层数
