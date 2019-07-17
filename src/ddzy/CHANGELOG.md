@@ -203,3 +203,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm/es6achieve
   - 新增`_every`
+
+## ✍ [2019-7-17]
+
+### Added
+
+- utility/algorithm/es6achieve
+  - 新增`_find`
