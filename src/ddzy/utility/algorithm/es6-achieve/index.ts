@@ -8,9 +8,10 @@
 import { _const } from './const/index';
 import { _reflect } from './reflect/index';
 import { _map } from './map/index';
-import { _reduce } from './reduce';
-import { _filter } from './filter';
+import { _reduce } from './reduce/index';
+import { _filter } from './filter/index';
 import { _every } from './every/index';
+import { _find } from './find/index';
 
 
 export const ES6Achieve = {
@@ -20,4 +21,5 @@ export const ES6Achieve = {
   _reduce,
   _filter,
   _every,
+  _find,
 };

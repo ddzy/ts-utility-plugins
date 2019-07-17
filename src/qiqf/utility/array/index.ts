@@ -99,6 +99,26 @@ export function filterNonUnique(args: InterfaceUtil.IArrayAny): InterfaceUtil.IA
     return args.filter(arg => args.indexOf(arg) === args.lastIndexOf(arg))
 }
 
+/**
+ * 拼合数组
+ * @param args
+ */
+export function flatten(args: InterfaceUtil.IArrayAny): InterfaceUtil.IArrayAny {
+    return args.reduce((a, v) => a.concat(v) ,[])
+}
+
+/**
+ * 将数组向上拼合到指定深度。
+ * @param args
+ * @param depth
+ */
+export function flattenDepth(args: InterfaceUtil.IArrayAny, depth: number = 1): InterfaceUtil.IArrayAny[] {
+    if (depth < 1) throw new Error(`The second parameter minimum value cannot be less than 1`);
+    return depth != 1 ?
+        args.reduce((a, v) => a.concat(Array.isArray(v) ? flattenDepth(v, depth - 1) : v) ,[])
+        : flatten(args)
+}
+
 
 
 

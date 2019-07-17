@@ -16,3 +16,6 @@
 
 ### 2019-07-09
 - 新增数组 `dropElements`、`everyNth`、`filterNonUnique`三个工具方法
+
+### 2019-07-16
+- 新增数组 `flatten`、`flattenDepth`方法

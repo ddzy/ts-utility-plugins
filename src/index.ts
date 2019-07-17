@@ -1,55 +1,54 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
-const _every = utilityAlgorithm.ES6Achieve._every;
+const _find = utilityAlgorithm.ES6Achieve._find;
 
 
-// ? 空数组 -> true
+// ? 空数组
 const s1: number[] = [];
-const p1 = _every<number>(s1, (v) => {
+const p1 = _find<number>(s1, (v) => {
   return v > 0;
 });
 console.log(p1);
 
-console.log('------------------------');
+console.log('-------------------');
 
-// ? 数字数组 -> true
-const s2: number[] = [1, 2, 3, 4, 5];
-const p2 = _every<number, null>(s2, (v) => {
+// ? 数字数组
+const s2: number[] = [-1, -2, 1, 2, 3];
+const p2 = _find(s2, (v) => {
   return v > 0;
 })
 console.log(p2);
 
-console.log('------------------------');
+console.log('--------------------');
 
-// ? 对象数组 -> false
-
+// ? 对象数组
 interface IPair {
   name: string;
   age: number;
 };
 const s3: IPair[] = [
-  { name: 'duan', age: 21 },
-  { name: 'zhao', age: 31 },
-  { name: 'yang', age: 41 },
+  { name: 'duan', age: 20 },
+  { name: 'zhao', age: 30 },
+  { name: 'yang', age: 40 },
 ];
-const p3 = _every<IPair, null>(s3, (v) => {
-  return v.age < 0;
+const p3 = _find<IPair>(s3, (v) => {
+  return v.age >= 30;
 });
 console.log(p3);
 
-console.log('-------------------------');
+console.log('----------------------');
 
-// ? context
-
+// ? this上下文
 const context = {
-  name: 'ddzy',
-  printName() {
-    return this.name;
+  secret: 'duanzhaoyang',
+  printSecret() {
+    return this.secret;
   },
 };
-const s4: number[] = [1, 2, 3, 4, 5];
-const p4 = _every<number, typeof context>(s4, function (v) {
-  console.log('context: ', this === context);
-  return v < 6;
+const s4: number[] = [];
+const p4 = _find<number, typeof context>(s4, function (v) {
+  console.log('context: ', this);
+
+  return v > 0;
 }, context);
 console.log(p4);
