@@ -12,6 +12,7 @@ import { _reduce } from './reduce/index';
 import { _filter } from './filter/index';
 import { _every } from './every/index';
 import { _find } from './find/index';
+import { _startsWith } from './startsWith/index';
 
 
 export const ES6Achieve = {
@@ -22,4 +23,5 @@ export const ES6Achieve = {
   _filter,
   _every,
   _find,
+  _startsWith,
 };
