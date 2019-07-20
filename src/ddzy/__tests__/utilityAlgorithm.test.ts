@@ -1273,5 +1273,34 @@ describe('utilityAlgorithm tests', () => {
         expect(result).toBe(expected.result);
       });
     });
+
+    // ? _startsWith
+    describe('ES6Achieve._startsWith tests', () => {
+      const _startsWith = utilityAlgorithm.ES6Achieve._startsWith;
+
+      test('_startsWith should return whether the `origin` string is composed of `target`', () => {
+        const origin = 'ddzy';
+        const received = ['d', 'yang', 'ddzyy'];
+        const expected = [true, false, false];
+
+        for (const [i, v] of received.entries()) {
+          const result = _startsWith(origin, v);
+
+          expect(result).toBe(expected[i]);
+        }
+      });
+
+      test('_startsWith should return whether the `origin` string is composed of `target` at special `index`', () => {
+        const origin = 'ddzy';
+        const received = ['ddz', 'dzy'];
+        const expected = [false, false];
+
+        for (const [i, v] of received.entries()) {
+          const result = _startsWith(origin, v, 1);
+
+          expect(result).toBe(expected[i]);
+        }
+      });
+    });
   });
 });
