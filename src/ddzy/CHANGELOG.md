@@ -210,3 +210,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm/es6achieve
   - 新增`_find`
+
+## ✍ [2019-7-20]
+
+### Added
+
+- utility/algorithm/es6achieve
+  - 新增`_startsWith`
