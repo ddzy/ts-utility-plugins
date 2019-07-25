@@ -13,6 +13,7 @@ import { _filter } from './filter/index';
 import { _every } from './every/index';
 import { _find } from './find/index';
 import { _startsWith } from './startsWith/index';
+import { _some } from './some/index';
 
 
 export const ES6Achieve = {
@@ -24,4 +25,5 @@ export const ES6Achieve = {
   _every,
   _find,
   _startsWith,
+  _some,
 };
