@@ -1,42 +1,48 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
-const _some = utilityAlgorithm.ES6Achieve._some;
+const _includes = utilityAlgorithm.ES6Achieve._includes;
 
 
 // ? 空数组
 const s1: number[] = [];
-const p1 = _some(s1, (v) => {
-  return v > 0;
-});
+const p1 = _includes<number>(s1, 2);
 console.log(p1);
 
 console.log('------------------------');
 
-// ? 没有符合条件的数组
-const s2: number[] = [2, 8, 5, 6];
-const p2 = _some(s2, (v) => {
-  return v > 10;
-});
+// ? 数字数组, 不存在
+const s2: number[] = [1, 2, 3, 4, 5];
+const p2 = _includes<number>(s2, 6);
 console.log(p2);
 
-console.log('------------------------');
+console.log('--------------------------');
 
-// ? 有至少一个符合条件的数组
-const s3: number[] = [2, 8, -2, -88, 56];
-const p3 = _some(s3, (v) => {
-  return v < 0;
-});
+// ? 数字数组, 存在
+const s3: number[] = [1, 2, 3, 4, 5];
+const p3 = _includes<number>(s3, 3);
 console.log(p3);
 
+console.log('------------------');
+
+// ? 对象数组, 不存在
+interface IPair {
+  id: number;
+  name: string;
+};
+const s4: IPair[] = [
+  { id: 0, name: 'ddzy' },
+  { id: 1, name: 'duan' },
+  { id: 2, name: 'zhao' },
+];
+const p4 = _includes<IPair>(s4, {
+  id: 0,
+  name: 'ddzy',
+});
+console.log(p4);
+
 console.log('------------------------');
 
-// ? 自定义context
-const context = {
-  secret: 'ddzy',
-};
-const s4: number[] = [1, 2, 3, 4, 5];
-const p4 = _some<number, typeof context>(s4, function (v) {
-  console.log('context', this);
-  return v > 3;
-}, context);
-console.log(p4);
+// ? NaN
+const s5: number[] = [1, 2, NaN, 3, 4];
+const p5 = _includes(s5, NaN, 0);
+console.log(p5);
