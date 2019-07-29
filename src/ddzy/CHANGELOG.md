@@ -224,3 +224,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm/es6achieve
   - 新增`_some`
+
+## ✍ [2019-7-29]
+
+### Added
+
+- utility/algorithm/es6achieve
+  - 新增`_includes`polyfill
