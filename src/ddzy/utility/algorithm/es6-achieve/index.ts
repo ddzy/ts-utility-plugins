@@ -14,6 +14,7 @@ import { _every } from './every/index';
 import { _find } from './find/index';
 import { _startsWith } from './startsWith/index';
 import { _some } from './some/index';
+import { _includes } from './includes/index';
 
 
 export const ES6Achieve = {
@@ -26,4 +27,5 @@ export const ES6Achieve = {
   _find,
   _startsWith,
   _some,
+  _includes,
 };
