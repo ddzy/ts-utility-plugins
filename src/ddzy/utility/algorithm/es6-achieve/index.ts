@@ -15,6 +15,7 @@ import { _find } from './find/index';
 import { _startsWith } from './startsWith/index';
 import { _some } from './some/index';
 import { _includes } from './includes/index';
+import { _findIndex } from './findIndex/index';
 
 
 export const ES6Achieve = {
@@ -28,4 +29,5 @@ export const ES6Achieve = {
   _startsWith,
   _some,
   _includes,
+  _findIndex,
 };

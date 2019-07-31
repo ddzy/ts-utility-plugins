@@ -1,48 +1,43 @@
 import utilityAlgorithm from "./ddzy/utility/algorithm";
 
-const _includes = utilityAlgorithm.ES6Achieve._includes;
+const _findIndex = utilityAlgorithm.ES6Achieve._findIndex;
 
 
 // ? 空数组
 const s1: number[] = [];
-const p1 = _includes<number>(s1, 2);
+const p1 = _findIndex<number>(s1, (v) => {
+  return v > 0;
+});
 console.log(p1);
 
 console.log('------------------------');
 
-// ? 数字数组, 不存在
-const s2: number[] = [1, 2, 3, 4, 5];
-const p2 = _includes<number>(s2, 6);
+// ? 数字数组, 未找到
+const s2: number[] = [23, 4, 2, 545, -2];
+const p2 = _findIndex<number>(s2, (v) => {
+  return v > 600;
+});
 console.log(p2);
 
 console.log('--------------------------');
 
-// ? 数字数组, 存在
-const s3: number[] = [1, 2, 3, 4, 5];
-const p3 = _includes<number>(s3, 3);
+// ? 数字数组, 找到
+const s3: number[] = [1, 2, 3, -2, -4, 0];
+const p3 = _findIndex<number>(s3, (v) => {
+  return v < 0;
+});
 console.log(p3);
 
-console.log('------------------');
+console.log('---------------------------');
 
-// ? 对象数组, 不存在
-interface IPair {
-  id: number;
-  name: string;
+// ? 数字数组, this上下文
+const context = {
+  secret: 'ddzy',
 };
-const s4: IPair[] = [
-  { id: 0, name: 'ddzy' },
-  { id: 1, name: 'duan' },
-  { id: 2, name: 'zhao' },
-];
-const p4 = _includes<IPair>(s4, {
-  id: 0,
-  name: 'ddzy',
-});
+const s4: number[] = [1, 2, 3, 4, 5];
+const p4 = _findIndex<number, typeof context>(s4, function (v) {
+  console.log(this);
+
+  return v > 3;
+}, context);
 console.log(p4);
-
-console.log('------------------------');
-
-// ? NaN
-const s5: number[] = [1, 2, NaN, 3, 4];
-const p5 = _includes(s5, NaN, 0);
-console.log(p5);
