@@ -231,3 +231,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm/es6achieve
   - 新增`_includes`polyfill
+
+## ✍ [2019-7-31]
+
+### Added
+
+- utility/algorithm/es6achieve
+  - 新增`_findIndex`polyfill
