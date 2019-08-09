@@ -87,9 +87,13 @@ const utilityArray: IUtilityArrayProps = {
     const result: I[][] = [];
     let count = 0;
 
+    if (!origin.length) {
+      return result;
+    }
+
     do {
       result.push(origin.slice(count, count + size));
-    } while ((count += size) < origin.length - 1);
+    } while ((count += size) < origin.length);
 
     return result;
   },
