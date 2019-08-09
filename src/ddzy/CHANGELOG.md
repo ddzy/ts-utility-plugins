@@ -238,3 +238,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm/es6achieve
   - 新增`_findIndex`polyfill
+
+## ✍ [2019-8-9]
+
+- utility/array
+  - 新增`trunk`方法
