@@ -12,6 +12,7 @@ export interface IUtilityArrayProps {
   toFlatArrayOutPlace(origin: any[]): any[];
   toStrictArray<T>(origin: ArrayLike<T>): T[];
   trunk<I>(origin: I[], size?: number): I[][];
+  compact<I>(origin: I[]): I[];
 };
 
 
@@ -94,6 +95,21 @@ const utilityArray: IUtilityArrayProps = {
     do {
       result.push(origin.slice(count, count + size));
     } while ((count += size) < origin.length);
+
+    return result;
+  },
+
+  /**
+   * 过滤指定数组中的假值(0、''、false、null、undefined、NaN)
+   * @param origin 源数组
+   * @returns 新数组
+   */
+  compact<I>(origin: I[]) {
+    const result: I[] = [];
+
+    origin.forEach((v) => {
+      v && (result.push(v));
+    });
 
     return result;
   },
