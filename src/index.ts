@@ -1,29 +1,26 @@
 import utilityArray from "./ddzy/utility/array";
 
-const trunk = utilityArray.trunk;
+const compact = utilityArray.compact;
 
 
 // ? 空数组
-const s1: number[] = [];
-const p1 = trunk<number>(s1);
+const s1: any[] = [];
+const p1 = compact<any>(s1);
 console.log(p1);
 
-console.log('------------------------');
+console.log('---------------------');
 
-// ? 普通数字数组
-const s2: number[] = [1, 2, 3, 4, 5, 6, 7];
-const p2 = trunk<number>(s2);
+// ? 正常过滤假值
+const s2: any[] = [true, false, 0, '', undefined, NaN, null, 22];
+const p2 = compact<any>(s2);
 console.log(p2);
 
-console.log('-------------------------');
+console.log('--------------------');
 
-// ? 任意分片长度
-const s3: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const p3 = trunk<number>(s3, 2);
-const p4 = trunk<number>(s3, 5);
-const p5 = trunk<number>(s3, 7);
-const p6 = trunk<number>(s3, 10);
+// ? 不修改源数组
+const s3: number[] = [0, 1, 2, 3, 4];
+const p3 = compact<number>(s3);
 console.log(p3);
-console.log(p4);
-console.log(p5);
-console.log(p6);
+s3.push(5);
+console.log(p3);
+console.log(s3);
