@@ -13,3 +13,4 @@
 | _bind         | 模拟实现`bind`方法       | [源码](./index.ts) | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/_bind)         |
 | _new          | 模拟实现`new`操作符      | [源码](./index.ts) | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/_new)          |
 | getParamNames | 获取函数的`形参`名称数组 | [源码](./index.ts) | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/getparamnames) |
+| compose       | 从右往左执行处理器函数   | [源码](./index.ts) | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/compose)       |
