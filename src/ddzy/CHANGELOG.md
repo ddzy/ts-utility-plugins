@@ -248,3 +248,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增`compact`方法
+
+## ✍ [2019-8-13]
+
+- utility/function
+  - 新增`compose`方法

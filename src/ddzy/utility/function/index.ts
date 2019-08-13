@@ -11,6 +11,8 @@ export interface IUtilityFunctionProps {
   _new<T extends Function>(constructor: T, ...args: any[]): keyof T;
 
   getParamNames(origin: Function): string[];
+
+  compose(...callback: Function[]): any;
 }
 
 const utilityFunction: IUtilityFunctionProps = {
@@ -99,6 +101,15 @@ const utilityFunction: IUtilityFunctionProps = {
     return instance;
   },
 
+  /**
+   * 从右往左执行处理器函数
+   * @param callbacks 处理器
+   */
+  compose(...callbacks) {
+    return callbacks.reduceRight((total, current) => {
+      return current(total);
+    });
+  },
 };
 
 
