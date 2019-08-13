@@ -1,26 +1,32 @@
-import utilityArray from "./ddzy/utility/array";
+import utilityFunction from "./ddzy/utility/function";
 
-const compact = utilityArray.compact;
+const compose = utilityFunction.compose;
 
 
-// ? 空数组
-const s1: any[] = [];
-const p1 = compact<any>(s1);
+// ?
+function func1() {
+  return func2() * 2;
+}
+function func2() {
+  return func3() * 3;
+}
+function func3() {
+  return 4;
+}
+const p1 = compose(func1, func2, func3);
 console.log(p1);
-
-console.log('---------------------');
-
-// ? 正常过滤假值
-const s2: any[] = [true, false, 0, '', undefined, NaN, null, 22];
-const p2 = compact<any>(s2);
-console.log(p2);
 
 console.log('--------------------');
 
-// ? 不修改源数组
-const s3: number[] = [0, 1, 2, 3, 4];
-const p3 = compact<number>(s3);
-console.log(p3);
-s3.push(5);
-console.log(p3);
-console.log(s3);
+// ?
+function func4() {
+  return func5() + '*' + 'yang';
+}
+function func5() {
+  return func6() + '*' + 'zhao';
+}
+function func6() {
+  return 'duan';
+}
+const p2 = compose(func4, func5, func6);
+console.log(p2);
