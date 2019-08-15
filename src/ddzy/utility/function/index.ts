@@ -13,6 +13,7 @@ export interface IUtilityFunctionProps {
   getParamNames(origin: Function): string[];
 
   compose(...callback: Function[]): any;
+  pipe(...callback: Function[]): any;
 }
 
 const utilityFunction: IUtilityFunctionProps = {
@@ -107,6 +108,16 @@ const utilityFunction: IUtilityFunctionProps = {
    */
   compose(...callbacks) {
     return callbacks.reduceRight((total, current) => {
+      return current(total);
+    });
+  },
+
+  /**
+   * 从左往右依次执行处理器函数
+   * @param callbacks 处理器
+   */
+  pipe(...callbacks) {
+    return callbacks.reduce((total, current) => {
       return current(total);
     });
   },

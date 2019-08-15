@@ -253,3 +253,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/function
   - 新增`compose`方法
+
+## ✍ [2019-8-15]
+
+- utility/function
+  - 新增`pipe`方法
