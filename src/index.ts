@@ -1,32 +1,32 @@
 import utilityFunction from "./ddzy/utility/function";
 
-const compose = utilityFunction.compose;
+const pipe = utilityFunction.pipe;
 
 
 // ?
 function func1() {
-  return func2() * 2;
+  return 2;
 }
 function func2() {
-  return func3() * 3;
+  return func1() * 3;
 }
 function func3() {
-  return 4;
+  return func2() * 4;
 }
-const p1 = compose(func1, func2, func3);
-console.log(p1);
+const p1 = pipe(func1, func2, func3);
+console.log(p1); // 24
 
 console.log('--------------------');
 
 // ?
 function func4() {
-  return func5() + '*' + 'yang';
+  return 'duan'
 }
 function func5() {
-  return func6() + '*' + 'zhao';
+  return func4() + '*' + 'zhao';
 }
 function func6() {
-  return 'duan';
+  return func5() + '*' + 'yang';
 }
-const p2 = compose(func4, func5, func6);
-console.log(p2);
+const p2 = pipe(func4, func5, func6);
+console.log(p2); // yang*zhao*duan
