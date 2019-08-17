@@ -14,6 +14,7 @@ export interface IUtilityFunctionProps {
 
   compose(...callback: Function[]): any;
   pipe(...callback: Function[]): any;
+  delay(callback: (...args: any[]) => void, wait: number, ...args: any[]): number;
 }
 
 const utilityFunction: IUtilityFunctionProps = {
@@ -120,6 +121,16 @@ const utilityFunction: IUtilityFunctionProps = {
     return callbacks.reduce((total, current) => {
       return current(total);
     });
+  },
+
+  /**
+   * 延迟wait毫秒后执行处理器callback
+   * @param callback 处理器
+   * @param wait 等待延时
+   * @param args 传递的参数
+   */
+  delay(callback, wait, ...args) {
+    return window.setTimeout(callback, wait, ...args);
   },
 };
 
