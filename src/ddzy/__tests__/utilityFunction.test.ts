@@ -234,4 +234,33 @@ describe('utilityFunction', () => {
       expect(r2).toBe(expected.p2);
     });
   });
+
+  describe('delay', () => {
+    test('delay should fire the callback after wait ms', () => {
+      const received = function() {
+        expect(true).toBeTruthy();
+      }
+
+      utilityFunction.delay(received, 500);
+    });
+
+    test('delay should receive params that passed', () => {
+      const received = function(name: string, age: number) {
+        expect(name).toBe('ddzy');
+        expect(age).toBe(21);
+      }
+
+      utilityFunction.delay(received, 1000, 'ddzy', 21);
+    });
+
+    test('delay should return the timeout id', () => {
+      const received = function() {
+        expect(true).toBeTruthy();
+      }
+
+      const result = utilityFunction.delay(received, 1500);
+
+      expect(typeof result).toBe('number');
+    });
+  });
 });

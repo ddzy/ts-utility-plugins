@@ -1,32 +1,27 @@
 import utilityFunction from "./ddzy/utility/function";
 
-const pipe = utilityFunction.pipe;
+const delay = utilityFunction.delay
 
 
-// ?
-function func1() {
-  return 2;
+// ? wait毫秒后正常执行callback
+function s1() {
+  console.log('has been fired');
 }
-function func2() {
-  return func1() * 3;
-}
-function func3() {
-  return func2() * 4;
-}
-const p1 = pipe(func1, func2, func3);
-console.log(p1); // 24
+delay(s1, 500);
 
 console.log('--------------------');
 
-// ?
-function func4() {
-  return 'duan'
+// ? 正常接收所传递的参数
+function s2(name: string, age: number) {
+  console.log(`name: ${name}; age: ${age}`);
 }
-function func5() {
-  return func4() + '*' + 'zhao';
+delay(s2, 1000, 'ddzy', 21);
+
+console.log('--------------------------');
+
+// ? 正常返回延时器的id
+function s3() {
+  console.log('has been fired');
 }
-function func6() {
-  return func5() + '*' + 'yang';
-}
-const p2 = pipe(func4, func5, func6);
-console.log(p2); // yang*zhao*duan
+const p3 = delay(s3, 1500);
+console.log(p3);

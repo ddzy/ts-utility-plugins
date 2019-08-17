@@ -258,3 +258,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/function
   - 新增`pipe`方法
+
+## ✍ [2019-8-17]
+
+- utility/function
+  - 新增`delay`方法
