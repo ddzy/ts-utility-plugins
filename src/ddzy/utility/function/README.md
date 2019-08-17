@@ -15,3 +15,4 @@
 | getParamNames | 获取函数的`形参`名称数组                | [源码](./index.ts) | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/getparamnames) |
 | compose       | 从右往左执行处理器函数                  | [源码](./index.ts) | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/compose)       |
 | pipe          | 从左往右执行处理器函数, 与`compose`相反 | [源码](./index.ts) | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/pipe)          |
+| delay         | 延迟`wait`毫秒后执行处理器`callback`    | [源码](./index.ts) | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/delay)         |
