@@ -96,3 +96,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - 项目`README`增加
   - logo
   - `npm`徽章
+
+## [2019-8-19]
+
+### Marked
+
+- 发布[v1.0](https://github.com/ddzy/ts-utility-plugins/tree/branch/rel-1.0), 重构之前的最后一个版本
