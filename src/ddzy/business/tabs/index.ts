@@ -1,5 +1,9 @@
-import utilityDOM from '../../utility/dom/index';
-
+import { getEle } from "../../utility/dom/getEle";
+import { getAllEle } from "../../utility/dom/getAllEle";
+import { setCss } from "../../utility/dom/setCss";
+import { addClass } from "../../utility/dom/addClass";
+import { getAttr } from "../../utility/dom/getAttr";
+import { removeClass } from "../../utility/dom/removeClass";
 
 export interface ITabConfigProps {
   container?: string;
@@ -134,7 +138,7 @@ export class Tab {
     const {
       container,
     } = Tab.defaultConfig;
-    const oContainer = utilityDOM.getEle(container);
+    const oContainer = getEle(container);
 
     if (oContainer) {
       const oTempDiv = document.createElement('div');
@@ -156,15 +160,12 @@ export class Tab {
       tabBarLineStyle,
       container,
     } = Tab.defaultConfig;
-    const oIconBoxArr = utilityDOM
-      .getAllEle('.yyg-nav-item-icon') as any;
-    const oNavItem = utilityDOM
-      .getEle('.yyg-nav-item') as HTMLLIElement;
-    let oStyle = utilityDOM
-      .getEle('style');
+    const oIconBoxArr = getAllEle('.yyg-nav-item-icon') as any;
+    const oNavItem = getEle('.yyg-nav-item') as HTMLLIElement;
+    let oStyle = getEle('style');
 
     if (!oStyle) {
-      const oHead = utilityDOM.getEle('head') as HTMLHeadElement;
+      const oHead = getEle('head') as HTMLHeadElement;
       oStyle = document.createElement('style');
 
       oHead.appendChild(oStyle);
@@ -173,12 +174,12 @@ export class Tab {
     dataSource.forEach((item: ITabDataSource, index: number) => {
       if (item.tabPaneTitle.icon) {
         oIconBoxArr[index].innerHTML = item.tabPaneTitle.icon;
-        utilityDOM.setCss(oIconBoxArr[index], {
+        setCss(oIconBoxArr[index], {
           flex: .6,
           'text-align': 'right',
         });
       } else {
-        utilityDOM.setCss(oIconBoxArr[index], {
+        setCss(oIconBoxArr[index], {
           display: 'none',
         });
       }
@@ -298,15 +299,11 @@ export class Tab {
       onTabClick,
       onChange,
     } = Tab.defaultConfig;
-    const paneList = utilityDOM
-      .getEle('.yyg-tabpane-list') as HTMLUListElement;
+    const paneList = getEle('.yyg-tabpane-list') as HTMLUListElement;
     // TODO: 解决滚动距离bug, 使用`paneList`父级宽度
-    const paneListParent = utilityDOM
-      .getEle('.yyg-content-tabpane-container') as HTMLDivElement;
-    const barItems = utilityDOM
-      .getAllEle('.yyg-nav-item') as NodeListOf<HTMLLIElement>;
-    const lineBox = utilityDOM
-      .getEle('.yyg-nav-line-box');
+    const paneListParent = getEle('.yyg-content-tabpane-container') as HTMLDivElement;
+    const barItems = getAllEle('.yyg-nav-item') as NodeListOf<HTMLLIElement>;
+    const lineBox = getEle('.yyg-nav-line-box');
 
     // TODO: 判断不同type不同active样式
     const whichTypeActiveClass: string = type === 'line'
@@ -318,45 +315,43 @@ export class Tab {
       : 'yyg-tabpane-list-noanimated';
 
 
-    lineBox && utilityDOM.setCss(lineBox, {
+    lineBox && setCss(lineBox, {
       transform: `translateX(${
         lineBox.clientWidth * (defaultActiveKey - 1) + tabBarGap * (defaultActiveKey - 1)
-      }px)`,
+        }px)`,
     });
 
-    utilityDOM
-      .addClass(
-        barItems[defaultActiveKey - 1],
-        whichTypeActiveClass
-      )
-      .setCss(paneList, {
-        transform: `translateX(${-(defaultActiveKey - 1) * paneListParent.clientWidth}px)`,
-      })
-      .addClass(paneList, whichAnimatedClass);
+    addClass(
+      barItems[defaultActiveKey - 1],
+      whichTypeActiveClass
+    )
+    setCss(paneList, {
+      transform: `translateX(${-(defaultActiveKey - 1) * paneListParent.clientWidth}px)`,
+    })
+    addClass(paneList, whichAnimatedClass);
 
     barItems.forEach((item: HTMLLIElement, index: number) => {
       item.addEventListener(mouse, () => {
         // 钩子
         onTabClick && onTabClick();
         onChange && onChange(
-          utilityDOM.getAttr(item, 'data-id') as string,
+          getAttr(item, 'data-id') as string,
         );
 
         barItems.forEach((ite: HTMLLIElement) => {
-          utilityDOM.removeClass(ite, whichTypeActiveClass);
+          removeClass(ite, whichTypeActiveClass);
         })
 
-        lineBox && utilityDOM.setCss(lineBox, {
+        lineBox && setCss(lineBox, {
           transform: `translateX(${
             lineBox.clientWidth * index + tabBarGap * index
-          }px)`,
+            }px)`,
         });
 
-        utilityDOM
-          .addClass(item, whichTypeActiveClass)
-          .setCss(paneList, {
-            transform: `translateX(${-index * paneListParent.clientWidth}px)`,
-          });
+        addClass(item, whichTypeActiveClass)
+        setCss(paneList, {
+          transform: `translateX(${-index * paneListParent.clientWidth}px)`,
+        });
       });
     });
   }
@@ -373,7 +368,7 @@ export class Tab {
       dataSource.forEach((item: ITabDataSource, index: number) => {
         navStr += `
           <li class="yyg-nav-item ${
-            type === 'line' ? 'yyg-nav-item-line' : 'yyg-nav-item-card'
+          type === 'line' ? 'yyg-nav-item-line' : 'yyg-nav-item-card'
           }" data-id=${index + 1}>
             <div class="yyg-nav-item-icon">
               ${item.tabPaneTitle.icon}

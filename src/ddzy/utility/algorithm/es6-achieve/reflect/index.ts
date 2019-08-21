@@ -1,7 +1,6 @@
-import utilityArray from "../../../array";
 import { FunctionDeclaration, FunctionExpression, tsTypeReference } from "@babel/types";
-import utilityFunction from "../../../function";
-import utilityOthers from "../../../others";
+import { invariant } from "../../../others/invariant";
+import { isFunction } from "../../../function/isFunction";
 
 /**
  * @name _reflect
@@ -102,8 +101,8 @@ export const _reflect: IReflectProps = {
   construct(targetFunc: any, args) {
     let instance = null;
 
-    utilityOthers.invariant(
-      !utilityFunction.isFunction(targetFunc),
+    invariant(
+      !isFunction(targetFunc),
       `
         you must pass a function to construct...
       `,
@@ -114,7 +113,7 @@ export const _reflect: IReflectProps = {
     } catch (err) {
       instance = 'can not being instanced, please check the parameter you have passed in...';
 
-      utilityOthers.invariant(
+      invariant(
         true,
         instance,
       );
@@ -151,7 +150,7 @@ export const _reflect: IReflectProps = {
       result = Object.getPrototypeOf(target);
     } catch (error) {
       result = 'please enter a value not both `null` and `undefined`';
-      utilityOthers.invariant(
+      invariant(
         true,
         result,
       );

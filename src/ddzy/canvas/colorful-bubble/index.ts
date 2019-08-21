@@ -1,5 +1,7 @@
-import utilityDOM from '../../utility/dom/index';
 import { Bubble } from './bubble/bubble';
+import { getEle } from '../../utility/dom/getEle';
+import { setCss } from '../../utility/dom/setCss';
+import { setAttr } from '../../utility/dom/setAttr';
 
 
 export interface IColorfulBubbleConfigProps {
@@ -56,9 +58,9 @@ export class ColorfulBubble {
     x: number,
     y: number,
   } = {
-    x: ColorfulBubble.defaultConfig.cvsWidth && ColorfulBubble.defaultConfig.cvsWidth * 2,
-    y: ColorfulBubble.defaultConfig.cvsHeight && ColorfulBubble.defaultConfig.cvsHeight * 2,
-  };
+      x: ColorfulBubble.defaultConfig.cvsWidth && ColorfulBubble.defaultConfig.cvsWidth * 2,
+      y: ColorfulBubble.defaultConfig.cvsHeight && ColorfulBubble.defaultConfig.cvsHeight * 2,
+    };
 
   public constructor(
     config: IColorfulBubbleConfigProps,
@@ -96,10 +98,10 @@ export class ColorfulBubble {
       container,
     } = ColorfulBubble.defaultConfig;
 
-    if ( container ) {
-      let oContainer = utilityDOM.getEle(container);
+    if (container) {
+      let oContainer = getEle(container);
 
-      if ( oContainer && oContainer.nodeType === 1 && oContainer.localName === 'canvas' ) {
+      if (oContainer && oContainer.nodeType === 1 && oContainer.localName === 'canvas') {
         this.el = (oContainer as HTMLCanvasElement);
         this.pen = (
           this.el.getContext('2d') as CanvasRenderingContext2D
@@ -123,11 +125,11 @@ export class ColorfulBubble {
       cvsHeight,
     } = ColorfulBubble.defaultConfig;
 
-    utilityDOM.setCss(el, {
+    setCss(el, {
       display: 'block',
       'background-color': cvsBgColor,
     });
-    utilityDOM.setAttr(el, {
+    setAttr(el, {
       width: cvsWidth,
       height: cvsHeight,
     });
