@@ -12,13 +12,13 @@
 
 ## 目录
 
-| Name      | Description                                         | Link                |
-| --------- | --------------------------------------------------- | ------------------- |
-| algorithm | 汇集有关`算法`、`数据结构`、`模拟原生API`的工具插件 | [地址](./algorithm) |
-| array     | 汇集有关`数组`的工具方法                            | [地址](./array)     |
-| dom       | 汇集有关`DOM`的工具方法                             | [地址](./dom)       |
-| function  | 汇集有关`函数`的工具方法                            | [地址](./function)  |
-| number    | 汇集有关`数值`的工具方法                            | [地址](./number)    |
-| object    | 汇集有关`对象`的工具方法                            | [地址](./object)    |
-| string    | 汇集有关`字符串`的工具方法                          | [地址](./string)    |
-| others    | 汇集其它有用的工具方法                              | [地址](./others)    |
+| Name      | Description                                         | Link                          |
+| --------- | --------------------------------------------------- | ----------------------------- |
+| algorithm | 汇集有关`算法`、`数据结构`、`模拟原生API`的工具插件 | [地址](./algorithm/README.md) |
+| array     | 汇集有关`数组`的工具方法                            | [地址](./array/README.md)     |
+| dom       | 汇集有关`DOM`的工具方法                             | [地址](./dom/README.md)       |
+| function  | 汇集有关`函数`的工具方法                            | [地址](./function/README.md)  |
+| number    | 汇集有关`数值`的工具方法                            | [地址](./number/README.md)    |
+| object    | 汇集有关`对象`的工具方法                            | [地址](./object/README.md)    |
+| string    | 汇集有关`字符串`的工具方法                          | [地址](./string/README.md)    |
+| others    | 汇集其它有用的工具方法                              | [地址](./others/README.md)    |
