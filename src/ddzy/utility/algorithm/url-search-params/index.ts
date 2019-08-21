@@ -1,4 +1,4 @@
-import utilityOthers from "../../others";
+import { convertURLParameterToObject } from "../../others/convertURLParameterToObject";
 
 /**
  * @name URLSearchParams
@@ -83,7 +83,7 @@ export class URLSearchParams {
   private _initIterator(): void {
     const { params } = this.state;
 
-    params[Symbol.iterator as any] = function *() {
+    params[Symbol.iterator as any] = function* () {
       for (const key in params) {
         const value = params[key];
         yield [key, value];
@@ -100,7 +100,7 @@ export class URLSearchParams {
   private _aidedHandleSetParamsState(
     url: string,
   ): void {
-    this.state.params = utilityOthers.convertURLParameterToObject(url as string);
+    this.state.params = convertURLParameterToObject(url as string);
   }
 
   private _aidedHandleAppend(

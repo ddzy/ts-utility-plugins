@@ -1,5 +1,4 @@
-import utilityOthers from "../../../others";
-
+import { invariant } from "../../../others/invariant";
 
 /**
  * @name _const
@@ -26,7 +25,7 @@ export function _const(
 
   return Object.defineProperty(origin, variable, {
     set(newValue) {
-      utilityOthers.invariant(
+      invariant(
         newValue !== value,
         `Assignment to constant variable.`
       );

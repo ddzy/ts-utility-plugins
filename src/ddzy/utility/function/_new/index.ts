@@ -1,5 +1,5 @@
 import { _reflect } from "../../algorithm/es6-achieve/reflect";
-import { isFunction } from "../isFunction";
+import { isFunction } from "../isFunction/index";
 
 /**
  * 模拟实现`new`操作符
