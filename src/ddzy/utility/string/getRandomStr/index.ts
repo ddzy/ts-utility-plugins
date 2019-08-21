@@ -1,3 +1,5 @@
+import { getFullRandom } from "../../number/getFullRandom";
+
 /**
  * 获取随机的乱序字符串
  * @param origin 需要乱序的源字符串数组
@@ -32,7 +34,7 @@ export function getRandomStr(
 
   let i = 0;
   do {
-    result += OPTIONS.origin[utilityNumber.getFullRandom(0, OPTIONS.origin.length)];
+    result += OPTIONS.origin[getFullRandom(0, OPTIONS.origin.length)];
   } while ((i++) < OPTIONS.length - 1);
 
   return result;

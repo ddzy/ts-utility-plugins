@@ -1,3 +1,7 @@
+import { isPlainObject } from "../../object/isPlainObject";
+import { isStrictArray } from "../../array/isStrictArray";
+import { isBasicValue } from "../isBasicValue";
+
 /**
  * 深拷贝
  * @param origin 源对象
@@ -10,16 +14,16 @@ export function deepClone<T extends object>(origin: T): Partial<T> {
       const value = origin[key];
 
       // ? plain object
-      if (utilityObject.isPlainObject(value)) {
+      if (isPlainObject(value)) {
         target[key] = {};
         _aidedDeepClone(value, target[key]);
       }
       // ? array
-      else if (utilityArray.isStrictArray(value)) {
+      else if (isStrictArray(value)) {
         target[key] = [];
         for (let i = 0; i < value.length; i++) {
           // ? array that contains a plain object
-          if (utilityObject.isPlainObject(value[i])) {
+          if (isPlainObject(value[i])) {
             target[key][i] = {};
             _aidedDeepClone(value[i], target[key][i]);
           }
@@ -31,7 +35,7 @@ export function deepClone<T extends object>(origin: T): Partial<T> {
         }
       }
       // ? basic value
-      else if (utilityOthers.isBasicValue(value)) {
+      else if (isBasicValue(value)) {
         target[key] = value;
       }
 

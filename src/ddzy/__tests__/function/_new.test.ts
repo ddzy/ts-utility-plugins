@@ -21,7 +21,7 @@ describe('_new', () => {
     ];
 
     for (const [i, v] of received.entries()) {
-      const result: any = utilityFunction._new(v);
+      const result: any = _new(v);
 
       expect(result.constructor).toBe(expected[i]['constructor']);
       expect(result.say()).toBe(expected[i]['say']);

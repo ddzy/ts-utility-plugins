@@ -1,3 +1,5 @@
+import { isBasicValue } from "../../others/isBasicValue";
+
 /**
  * 判断是否严格的数组
  * @param origin 目标值
@@ -7,7 +9,7 @@ export function isStrictArray(origin: any): boolean {
     return Array.isArray(origin);
   } else {
     // basic value
-    if (utilityOthers.isBasicValue(origin)) {
+    if (isBasicValue(origin)) {
       return false;
     } else if (typeof origin === 'object') {
       if (origin.length) {
@@ -19,4 +21,4 @@ export function isStrictArray(origin: any): boolean {
     }
     return false;
   }
-},
+}

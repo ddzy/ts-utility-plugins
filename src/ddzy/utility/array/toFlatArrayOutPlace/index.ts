@@ -1,3 +1,5 @@
+import { isStrictArray } from "../isStrictArray";
+
 /**
  * 数组扁平化(非原地算法)
  * @param origin 源数组
@@ -8,7 +10,7 @@ export function toFlatArrayOutPlace(origin: any[]) {
 
   function _aidedToFlat(origin: any[], target: any[]) {
     for (const value of origin) {
-      utilityArray.isStrictArray(value)
+      isStrictArray(value)
         ? (_aidedToFlat(value, target))
         : (target.push(value));
     }

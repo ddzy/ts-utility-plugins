@@ -1,3 +1,5 @@
+import { isDOM } from "../isDOM";
+
 /**
  * DFS遍历指定DOM节点
  * @param container 遍历的DOM容器
@@ -7,7 +9,7 @@ export function traversalDOMWithDFS(
   container: HTMLElement,
   callback: (node: HTMLElement) => void,
 ) {
-  if (!this.isDOM(container)) {
+  if (!isDOM(container)) {
     throw new TypeError('Require a DOM element');
   }
 
