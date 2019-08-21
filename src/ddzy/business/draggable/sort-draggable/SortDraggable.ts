@@ -1,5 +1,10 @@
-import utilityDOM from '../../../utility/dom/index';
-
+import { getEle } from "../../../utility/dom/getEle";
+import { convertPairToCSSText } from "../../../utility/dom/convertPairToCSSText";
+import { getAllEle } from "../../../utility/dom/getAllEle";
+import { setCss } from "../../../utility/dom/setCss";
+import { addClass } from "../../../utility/dom/addClass";
+import { removeClass } from "../../../utility/dom/removeClass";
+import { setAttr } from "../../../utility/dom/setAttr";
 
 export interface ISortDraggableProps {
   container: string;
@@ -180,7 +185,7 @@ export class SortDraggable {
       container,
     } = SortDraggable.defaultProps;
 
-    const mountWrapper = utilityDOM.getEle(container);
+    const mountWrapper = getEle(container);
 
     if (mountWrapper) {
       mountWrapper.innerHTML += dom;
@@ -197,10 +202,10 @@ export class SortDraggable {
       dragTargetActiveStyle,
     } = SortDraggable.defaultProps;
 
-    const tempWrapperStyle = utilityDOM. convertPairToCSSText(dragWrapperStyle);
-    const tempOriginStyle = utilityDOM. convertPairToCSSText(dragOriginStyle);
-    const tempOriginActiveStyle = utilityDOM. convertPairToCSSText(dragOriginActiveStyle);
-    const tempTargetActiveStyle = utilityDOM. convertPairToCSSText(dragTargetActiveStyle);
+    const tempWrapperStyle =  convertPairToCSSText(dragWrapperStyle);
+    const tempOriginStyle =  convertPairToCSSText(dragOriginStyle);
+    const tempOriginActiveStyle =  convertPairToCSSText(dragOriginActiveStyle);
+    const tempTargetActiveStyle =  convertPairToCSSText(dragTargetActiveStyle);
 
     const style: string = `
       body, ul, li {
@@ -314,11 +319,11 @@ export class SortDraggable {
    * drag相关的变量提取, 考虑到后续可能会用到
    */
   private handleInitDragVarible(): void {
-    this.dragContainer = utilityDOM.getEle(
+    this.dragContainer = getEle(
       '.ddzy-drag-main-list'
     ) as HTMLUListElement;
     this.dragItems = Array.from(
-      utilityDOM.getAllEle(
+      getAllEle(
         '.ddzy-drag-list-item'
       ) as ArrayLike<HTMLLIElement>
     );
@@ -331,26 +336,26 @@ export class SortDraggable {
     const targetDiffDistance = this.position.targetAfterRect.top - this.position.targetBeforeRect.top;
 
     // ?: [animate] - 先置origin & target于原位(animate配置项必须)
-    utilityDOM.setCss(this.origin, {
+    setCss(this.origin, {
       transition: 'none',
       transform: `translateY(${-originDiffDistance}px)`,
     });
-    utilityDOM.setCss(target, {
+    setCss(target, {
       transition: 'none',
       transform: `translateY(${-targetDiffDistance}px)`,
     });
 
-    utilityDOM.addClass(target, 'ddzy-drag-target-active');
+    addClass(target, 'ddzy-drag-target-active');
 
     // ?: 由于origin移动到了新位置, 所以此处需更新其beforeRect
     this.position.originBeforeRect = this.position.originAfterRect;
 
     setTimeout(() => {
-      utilityDOM.setCss(this.origin, {
+      setCss(this.origin, {
         transition: `all .3s ease`,
         transform: `translateY(${0}px)`,
       });
-      utilityDOM.setCss(target, {
+      setCss(target, {
         transition: `all .3s ease`,
         transform: `translateY(${0}px)`,
       });
@@ -364,7 +369,7 @@ export class SortDraggable {
     this.origin = target;
     this.position.originBeforeRect = this.origin.getBoundingClientRect();
 
-    utilityDOM.addClass(this.origin, 'ddzy-drag-origin-active');
+    addClass(this.origin, 'ddzy-drag-origin-active');
   }
 
   private handleDragEnter(
@@ -400,7 +405,7 @@ export class SortDraggable {
   private handleDragLeave(
     target: HTMLElement,
   ): void {
-    utilityDOM.removeClass(target, 'ddzy-drag-target-active');
+    removeClass(target, 'ddzy-drag-target-active');
   }
 
   private handleDragOver(
@@ -410,8 +415,8 @@ export class SortDraggable {
   }
 
   private handleDrop(): void {
-    utilityDOM.removeClass(this.origin, 'ddzy-drag-origin-active');
-    utilityDOM.removeClass(this.origin, 'ddzy-drag-target-active');
+    removeClass(this.origin, 'ddzy-drag-origin-active');
+    removeClass(this.origin, 'ddzy-drag-target-active');
   }
 
   /**
@@ -431,7 +436,7 @@ export class SortDraggable {
     } = SortDraggable.defaultProps;
 
     dragItems.forEach((target) => {
-      utilityDOM.setAttr(target, {
+      setAttr(target, {
         draggable: 'true',
       });
 

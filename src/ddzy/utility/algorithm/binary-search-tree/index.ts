@@ -1,7 +1,7 @@
 import {
   TreeNode,
 } from './tree-node/index';
-import utilityOthers from '../../others';
+import { isUndefined } from '../../others/isUndefined';
 
 
 export interface IBinarySearchTreeProps {
@@ -138,7 +138,7 @@ export class BinarySearchTree {
     node: TreeNode | null,
     value?: number,
   ): number {
-    if (utilityOthers.isUndefined(value)) {
+    if (isUndefined(value)) {
       // TODO: 整棵树的深度
       return BinarySearchTree.$getNodeHeight(node);
     }
@@ -225,7 +225,7 @@ export class BinarySearchTree {
     node: TreeNode | null,
     value?: number,
   ): number {
-    if (utilityOthers.isUndefined(value)) {
+    if (isUndefined(value)) {
       // TODO: 整棵树的高度(Depth = Height)
       if (!node) {
         return 0;

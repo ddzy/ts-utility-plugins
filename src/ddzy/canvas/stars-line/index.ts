@@ -1,6 +1,8 @@
-import utilityDOM from '../../utility/dom/index';
 import { Ball } from './ball/Ball';
-import utilityNumber from '../../utility/number';
+import { getEle } from '../../utility/dom/getEle';
+import { setCss } from '../../utility/dom/setCss';
+import { setAttr } from '../../utility/dom/setAttr';
+import { getAnyRandom } from '../../utility/number/getAnyRandom';
 
 
 export interface IStarsLineProps {
@@ -95,7 +97,7 @@ export class StarsLine {
     } = StarsLine.defaultConfig;
 
     if (container) {
-      let oContainer = utilityDOM.getEle(container);
+      let oContainer = getEle(container);
 
       if (oContainer && oContainer.nodeType === 1 && oContainer.localName === 'canvas') {
         this.el = (oContainer as HTMLCanvasElement);
@@ -118,11 +120,11 @@ export class StarsLine {
       cvsHeight,
     } = StarsLine.defaultConfig;
 
-    utilityDOM.setCss(el, {
+    setCss(el, {
       display: 'block',
       'background-color': cvsBgColor,
     });
-    utilityDOM.setAttr(el, {
+    setAttr(el, {
       width: cvsWidth,
       height: cvsHeight,
     });
@@ -148,8 +150,8 @@ export class StarsLine {
       pen,
       color: ballColor
         ? ballColor
-        : `rgba(24,144,255, ${utilityNumber.getAnyRandom(0, 1)})`,
-      radius: utilityNumber.getAnyRandom(
+        : `rgba(24,144,255, ${getAnyRandom(0, 1)})`,
+      radius: getAnyRandom(
         ballRadius.min,
         ballRadius.max,
       ),
@@ -160,11 +162,11 @@ export class StarsLine {
       safeDistance,
       lineColor: lineColor
         ? lineColor
-        : `rgba(238, 238, 238, ${utilityNumber.getAnyRandom(0, 1)})`,
+        : `rgba(238, 238, 238, ${getAnyRandom(0, 1)})`,
       lineWidth,
       centerPoint: {
-        x: utilityNumber.getAnyRandom(0, cvsWidth),
-        y: utilityNumber.getAnyRandom(0, cvsHeight),
+        x: getAnyRandom(0, cvsWidth),
+        y: getAnyRandom(0, cvsHeight),
       },
     });
 

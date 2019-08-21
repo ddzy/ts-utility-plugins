@@ -263,3 +263,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/function
   - 新增`delay`方法
+
+## ✍ [2019-8-21]
+
+- 重构项目
+  - 拆分各工具方法为单个模块, 更明朗的结构
+  - 重构之前的版本移至: [https://github.com/ddzy/ts-utility-plugins/tree/branch/rel-1.0](https://github.com/ddzy/ts-utility-plugins/tree/branch/rel-1.0)

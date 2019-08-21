@@ -1,6 +1,6 @@
-import utilityDOM from "../../../utility/dom";
-import utilityNumber from "../../../utility/number";
 import { Line } from '../line/Line';
+import { getAnyRandom } from '../../../utility/number/getAnyRandom';
+import { getRadian } from '../../../utility/number/getRadian';
 
 
 export interface IBallProps {
@@ -70,8 +70,8 @@ export class Ball {
     this.lineWidth = lineWidth;
     this.lineColor = lineColor;
     this.distance = {
-      x: utilityNumber.getAnyRandom(-this.speed, this.speed),
-      y: utilityNumber.getAnyRandom(-this.speed, this.speed),
+      x: getAnyRandom(-this.speed, this.speed),
+      y: getAnyRandom(-this.speed, this.speed),
     };
     this.cvsWidth = cvsWidth;
     this.cvsHeight = cvsHeight;
@@ -95,7 +95,7 @@ export class Ball {
       centerPoint.y,
       radius,
       0,
-      utilityNumber.getRadian(360)
+      getRadian(360)
     );
     pen.fill();
     pen.closePath();
@@ -118,7 +118,7 @@ export class Ball {
       || centerPoint.x < 0)
       ? -distance.x
       : distance.x;
-      distance.y = (centerPoint.y > cvsHeight
+    distance.y = (centerPoint.y > cvsHeight
       || centerPoint.y < 0)
       ? -distance.y
       : distance.y;
@@ -137,13 +137,13 @@ export class Ball {
 
     if (outerItem) {
       for (const innerItem of ballArr) {
-        if(
+        if (
           outerItem !== innerItem && Math.sqrt(
             Math.pow((
               outerItem.centerPoint.x - innerItem.centerPoint.x),
               2) + Math.pow((
                 outerItem.centerPoint.y - innerItem.centerPoint.y),
-              2)
+                2)
           ) < safeDistance
         ) {
           new Line({

@@ -1,4 +1,8 @@
-import utilityDOM from "../../../utility/dom";
+import { getEle } from "../../../utility/dom/getEle";
+import { addClass } from "../../../utility/dom/addClass";
+import { removeClass } from "../../../utility/dom/removeClass";
+import { getAllEle } from "../../../utility/dom/getAllEle";
+import { getAttr } from "../../../utility/dom/getAttr";
 
 /**
  * BUG1: 无法在ondrop内部直接使用`e.dataTransfer.files`获取文件列表, 需要自定义数组, 再遍历一遍;
@@ -81,10 +85,10 @@ export class DraggerUpload {
    * 初始化一些常用的变量
    */
   private _initCommonEle(): void {
-    const oContainer = utilityDOM.getEle('.ddzy-upload-drag-container') as HTMLDivElement;
-    const oLabel = utilityDOM.getEle('.ddzy-upload-drag-main-content') as HTMLLabelElement;
-    const oInput = utilityDOM.getEle('.ddzy-upload-drag-main-input') as HTMLInputElement;
-    const oShowList = utilityDOM.getEle('.ddzy-upload-show-list') as HTMLUListElement;
+    const oContainer = getEle('.ddzy-upload-drag-container') as HTMLDivElement;
+    const oLabel = getEle('.ddzy-upload-drag-main-content') as HTMLLabelElement;
+    const oInput = getEle('.ddzy-upload-drag-main-input') as HTMLInputElement;
+    const oShowList = getEle('.ddzy-upload-show-list') as HTMLUListElement;
 
     this.state.oContainer = oContainer;
     this.state.oLabel = oLabel;
@@ -136,7 +140,7 @@ export class DraggerUpload {
       container,
     } = DraggerUpload.defaultProps;
 
-    const mountWrapper = utilityDOM.getEle(container as string);
+    const mountWrapper = getEle(container as string);
 
     if (mountWrapper) {
       mountWrapper.innerHTML += text;
@@ -331,7 +335,7 @@ export class DraggerUpload {
       oContainer,
     } = this.state;
 
-    utilityDOM.addClass(oContainer, 'ddzy-upload-drag-container-active');
+    addClass(oContainer, 'ddzy-upload-drag-container-active');
   }
 
   private handleDragLeave(): void {
@@ -339,7 +343,7 @@ export class DraggerUpload {
       oContainer,
     } = this.state;
 
-    utilityDOM.removeClass(oContainer, 'ddzy-upload-drag-container-active');
+    removeClass(oContainer, 'ddzy-upload-drag-container-active');
   }
 
 
@@ -347,18 +351,18 @@ export class DraggerUpload {
    * 处理单项列表进场动画
    */
   private handleLocalItemAnimateIn(): void {
-    const oShowItems = utilityDOM.getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+    const oShowItems = getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
     const oShowItem = oShowItems[oShowItems.length - 1];
 
     // ! [Bug-fix] 解决多文件上传至本地时, 只显示最后一个文件的问题
     Array.from(oShowItems).forEach((v) => {
       v === oShowItem
-        ? (utilityDOM.addClass(v, 'ddzy-upload-show-item-in-animate'))
-        : (utilityDOM.removeClass(v, 'ddzy-upload-show-item-in-animate'));
+        ? (addClass(v, 'ddzy-upload-show-item-in-animate'))
+        : (removeClass(v, 'ddzy-upload-show-item-in-animate'));
     });
 
     setTimeout(() => {
-      utilityDOM.removeClass(oShowItem, 'ddzy-upload-show-item-in-animate');
+      removeClass(oShowItem, 'ddzy-upload-show-item-in-animate');
     }, 0);
   }
 
@@ -370,7 +374,7 @@ export class DraggerUpload {
   ): void {
     const { oShowList } = this.state;
 
-    utilityDOM.addClass(currentItem, 'ddzy-upload-show-item-out-animate');
+    addClass(currentItem, 'ddzy-upload-show-item-out-animate');
 
     setTimeout(() => {
       oShowList.removeChild(currentItem);
@@ -381,8 +385,7 @@ export class DraggerUpload {
    * 处理本地列表项移除
    */
   private handleLocalItemRemove(): void {
-    const oShowItems = utilityDOM
-      .getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+    const oShowItems = getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
     const {
       onRemoveClickHook,
     } = DraggerUpload.defaultProps;
@@ -396,7 +399,7 @@ export class DraggerUpload {
         .firstElementChild as SVGAElement;
 
       oShowItemCloseBtn.addEventListener('click', () => {
-        const index: number = Number(utilityDOM.getAttr(li, 'data-index'));
+        const index: number = Number(getAttr(li, 'data-index'));
         const file: File = files[index];
 
         // ? 执行移除钩子
@@ -410,8 +413,7 @@ export class DraggerUpload {
    * 处理本地列表项预览
    */
   private handleLocalItemPreview(): void {
-    const oShowItems = utilityDOM
-      .getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+    const oShowItems = getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
     const { files } = this.state;
     const { onPreviewClickHook } = DraggerUpload.defaultProps;
 
@@ -421,7 +423,7 @@ export class DraggerUpload {
 
       oShowItemPreviewBtn.addEventListener('click', () => {
         // ? 根据当前点击的li的下标找到对应的file
-        const index: number = Number(utilityDOM.getAttr(li, 'data-index'));
+        const index: number = Number(getAttr(li, 'data-index'));
         const file: File = files[index];
 
         // ? 执行预览钩子
@@ -445,8 +447,7 @@ export class DraggerUpload {
       .getElementsByClassName('ddzy-upload-show-action-loading')[0] as HTMLSpanElement;
 
     // ? 处理成功上传至服务器时的loading状态
-    utilityDOM
-      .addClass(oShowItemLoadingBtn, 'ddzy-upload-show-action-loading-success');
+    addClass(oShowItemLoadingBtn, 'ddzy-upload-show-action-loading-success');
 
     // ? 执行成功上传至服务器的钩子
     onUploadClickSuccessHook && onUploadClickSuccessHook(file, fileList);
@@ -467,8 +468,7 @@ export class DraggerUpload {
       .getElementsByClassName('ddzy-upload-show-action-loading')[0] as HTMLSpanElement;
 
     // ? 处理上传至服务器失败时的loading状态
-    utilityDOM
-      .addClass(oShowItemLoadingBtn, 'ddzy-upload-show-action-loading-faild');
+    addClass(oShowItemLoadingBtn, 'ddzy-upload-show-action-loading-faild');
 
     // ? 执行上传至服务器失败的钩子
     onUploadClickFailHook && onUploadClickFailHook(file, fileList);
@@ -478,8 +478,7 @@ export class DraggerUpload {
    * 处理本地列表项上传至服务器
    */
   private handleLocalItemSend(): void {
-    const oShowItems = utilityDOM
-      .getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
+    const oShowItems = getAllEle('.ddzy-upload-show-item') as ArrayLike<HTMLLIElement>;
     const { files } = this.state;
     const { onUploadClickHook } = DraggerUpload.defaultProps;
 
@@ -491,18 +490,17 @@ export class DraggerUpload {
         .getElementsByClassName('ddzy-upload-show-action-loading')[0] as HTMLSpanElement;
 
       oShowItemSendBtn.addEventListener('click', () => {
-        const index: number = Number(utilityDOM.getAttr(li, 'data-index'));
+        const index: number = Number(getAttr(li, 'data-index'));
         const file: File = files[index];
 
         // ? 处理上传时的loading状态
-        utilityDOM
-          .addClass(oShowItemLoadingBtn, 'ddzy-upload-show-action-loading-active');
+        addClass(oShowItemLoadingBtn, 'ddzy-upload-show-action-loading-active');
 
         // ? 执行上传钩子
         if (onUploadClickHook) {
           const result = onUploadClickHook(file, files);
 
-          if ( result instanceof Promise ) {
+          if (result instanceof Promise) {
             result
               .then(() => {
                 // ? 成功上传至远程服务器
@@ -513,7 +511,7 @@ export class DraggerUpload {
                 this.handleLocalItemSendFaild(li, file, files);
               })
           } else {
-            if ( result ) {
+            if (result) {
               this.handleLocalItemSendSuccess(li, file, files);
             } else {
               this.handleLocalItemSendFaild(li, file, files);
@@ -642,7 +640,7 @@ export class DraggerUpload {
     // ? 执行文件更改钩子
     onChangeHook && onChangeHook(e);
 
-    utilityDOM.removeClass(oContainer, 'ddzy-upload-drag-container-active');
+    removeClass(oContainer, 'ddzy-upload-drag-container-active');
 
     Array.from(dataTransfer.files).forEach((file) => {
       this.handleBeforeUploadHook(file, dataTransfer.files);
