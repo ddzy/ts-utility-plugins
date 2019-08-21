@@ -2,9 +2,13 @@
  * 淡入轮播
  */
 
-import utilityDOM from '../../../utility/dom/index';
-
 import { ICarouselConfigProps } from '..';
+import { getEle } from '../../../utility/dom/getEle';
+import { getAllEle } from '../../../utility/dom/getAllEle';
+import { setCss } from '../../../utility/dom/setCss';
+import { addClass } from '../../../utility/dom/addClass';
+import { removeClass } from '../../../utility/dom/removeClass';
+import { getAttr } from '../../../utility/dom/getAttr';
 
 
 export class Fade {
@@ -94,7 +98,7 @@ export class Fade {
       showDots,
       autoPlay
     } = Fade.defaultConfig;
-    const oContainer = utilityDOM.getEle(container);
+    const oContainer = getEle(container);
 
     if (oContainer) {
       const temp = document.createElement('div');
@@ -173,8 +177,7 @@ export class Fade {
   }
 
   public createStyle(): void {
-    let oStyle: HTMLElement | null = utilityDOM
-      .getEle('style');
+    let oStyle: HTMLElement | null = getEle('style');
     const {
       dataSource,
       container,
@@ -183,8 +186,7 @@ export class Fade {
     // style标签不存在
     if (!oStyle) {
       oStyle = document.createElement('style');
-      const oHead = utilityDOM
-        .getEle('head') as HTMLHeadElement;
+      const oHead = getEle('head') as HTMLHeadElement;
 
       oHead.appendChild(oStyle);
     }
@@ -300,11 +302,11 @@ export class Fade {
   }
 
   public initCommonEle(): void {
-    this.oContentItem = utilityDOM.getAllEle('.yyg-content-item');
-    this.oDotsItem = utilityDOM.getAllEle('.yyg-dot-item');
-    this.oArrowWrapper = utilityDOM.getAllEle('.yyg-arrow-wrapper');
-    this.oPrevWrapper = utilityDOM.getEle('.yyg-arrow-prev-wrapper');
-    this.oNextWrapper = utilityDOM.getEle('.yyg-arrow-next-wrapper');
+    this.oContentItem = getAllEle('.yyg-content-item');
+    this.oDotsItem = getAllEle('.yyg-dot-item');
+    this.oArrowWrapper = getAllEle('.yyg-arrow-wrapper');
+    this.oPrevWrapper = getEle('.yyg-arrow-prev-wrapper');
+    this.oNextWrapper = getEle('.yyg-arrow-next-wrapper');
     this.oContentItemLength = this.oContentItem.length;
   }
 
@@ -325,7 +327,7 @@ export class Fade {
 
       oContentItem.forEach((item: any, index: number) => {
         if (index === this.count) {
-          utilityDOM.setCss(item, {
+          setCss(item, {
             transition: `all ${
               duringTime
               }s ${
@@ -338,11 +340,11 @@ export class Fade {
           // dot栏样式改变
           oDotsItem.forEach((item: any, inx: number) => {
             inx === this.count
-              ? utilityDOM.addClass(item, 'yyg-dot-item-active')
-              : utilityDOM.removeClass(item, 'yyg-dot-item-active');
+              ? addClass(item, 'yyg-dot-item-active')
+              : removeClass(item, 'yyg-dot-item-active');
           });
         } else {
-          utilityDOM.setCss(item, {
+          setCss(item, {
             transition: `all ${
               duringTime
               }s ${
@@ -394,7 +396,7 @@ export class Fade {
     const oDotsItem = this.oDotsItem;
 
     showDots && oDotsItem.forEach((item: any) => {
-      const oSignId: number = Number(utilityDOM.getAttr(
+      const oSignId: number = Number(getAttr(
         item,
         'data-id',
       ));
@@ -424,14 +426,13 @@ export class Fade {
 
     // 箭头hover(处理bug)
     oArrowWrapper.forEach((item: any) => {
-      utilityDOM.setCss(item, {
+      setCss(item, {
         display: 'block',
       });
 
       item.addEventListener('mouseenter', () => {
-        utilityDOM
-          .addClass(oPrevArrow, 'yyg-prev-wrapper-active')
-          .addClass(oNextArrow, 'yyg-next-wrapper-active');
+        addClass(oPrevArrow, 'yyg-prev-wrapper-active')
+        addClass(oNextArrow, 'yyg-next-wrapper-active');
       }, false);
     });
 
@@ -439,15 +440,13 @@ export class Fade {
       item.addEventListener('mouseenter', () => {
         clearInterval(this.timer);
 
-        utilityDOM
-          .addClass(oPrevArrow, 'yyg-prev-wrapper-active')
-          .addClass(oNextArrow, 'yyg-next-wrapper-active');
+        addClass(oPrevArrow, 'yyg-prev-wrapper-active')
+        addClass(oNextArrow, 'yyg-next-wrapper-active');
       }, false);
 
       item.addEventListener('mouseleave', () => {
-        utilityDOM
-          .removeClass(oPrevArrow, 'yyg-prev-wrapper-active')
-          .removeClass(oNextArrow, 'yyg-next-wrapper-active');
+        removeClass(oPrevArrow, 'yyg-prev-wrapper-active')
+        removeClass(oNextArrow, 'yyg-next-wrapper-active');
 
         this.handleAutoPlay();
       }, false);
@@ -502,24 +501,24 @@ export class Fade {
     const oDotsItem = this.oDotsItem;
 
     oContentItem.forEach((item: any, index: number) => {
-      sign === index
-        ? utilityDOM
-          .setCss(item, {
-            transition: `all ${duringTime}s ${easing}`,
-            opacity: 1,
-            'z-index': index,
-          })
-          .addClass(oDotsItem[index], 'yyg-dot-item-active')
-        : utilityDOM
-          .setCss(item, {
-            transition: `all ${duringTime}s ${easing}`,
-            opacity: 0,
-            'z-index': 0,
-          })
-          .removeClass(
-            oDotsItem[index],
-            'yyg-dot-item-active'
-          )
+      if (sign === index) {
+        setCss(item, {
+          transition: `all ${duringTime}s ${easing}`,
+          opacity: 1,
+          'z-index': index,
+        })
+        addClass(oDotsItem[index], 'yyg-dot-item-active')
+      } else {
+        setCss(item, {
+          transition: `all ${duringTime}s ${easing}`,
+          opacity: 0,
+          'z-index': 0,
+        })
+        removeClass(
+          oDotsItem[index],
+          'yyg-dot-item-active'
+        )
+      }
     })
   }
 }

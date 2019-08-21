@@ -1,6 +1,8 @@
-import utilityDOM from '../../utility/dom/index';
-import utilityNumber from '../../utility/number/index';
 import { Character } from './character/Character';
+import { getEle } from '../../utility/dom/getEle';
+import { setCss } from '../../utility/dom/setCss';
+import { setAttr } from '../../utility/dom/setAttr';
+import { getFullRandom } from '../../utility/number/getFullRandom';
 
 
 export interface IJumpingCharactersProps {
@@ -56,9 +58,9 @@ export class JumpingCharacters {
     x: number,
     y: number,
   } = {
-    x: 0,
-    y: 0,
-  };
+      x: 0,
+      y: 0,
+    };
   private readonly saveCharactersArr: Character[] = [];
 
   private timer: any = 0;
@@ -100,10 +102,10 @@ export class JumpingCharacters {
       container,
     } = JumpingCharacters.defaultConfig;
 
-    if ( container ) {
-      let oContainer = utilityDOM.getEle(container);
+    if (container) {
+      let oContainer = getEle(container);
 
-      if ( oContainer && oContainer.nodeType === 1 && oContainer.localName === 'canvas' ) {
+      if (oContainer && oContainer.nodeType === 1 && oContainer.localName === 'canvas') {
         this.el = (oContainer as HTMLCanvasElement);
         this.pen = (
           this.el.getContext('2d') as CanvasRenderingContext2D
@@ -124,11 +126,11 @@ export class JumpingCharacters {
       cvsHeight,
     } = JumpingCharacters.defaultConfig;
 
-    utilityDOM.setCss(el, {
+    setCss(el, {
       display: 'block',
       'background-color': cvsBgColor,
     });
-    utilityDOM.setAttr(el, {
+    setAttr(el, {
       width: cvsWidth,
       height: cvsHeight,
     });
@@ -168,11 +170,11 @@ export class JumpingCharacters {
 
     const character = new Character({
       ...defaultConfig,
-      text: text[utilityNumber.getFullRandom(
+      text: text[getFullRandom(
         0,
         text.length,
       )],
-      textColor: textColor[utilityNumber.getFullRandom(
+      textColor: textColor[getFullRandom(
         0,
         textColor.length,
       )],
@@ -191,7 +193,7 @@ export class JumpingCharacters {
 
     this.timer = setInterval(() => {
       this.aidedHandleTick();
-    }, 1000/60);
+    }, 1000 / 60);
   }
 
   private render(): void {

@@ -1,5 +1,6 @@
-import utilityNumber from '../../../utility/number/index';
-
+import { getAnyRandom } from "../../../utility/number/getAnyRandom";
+import { getFullRandom } from "../../../utility/number/getFullRandom";
+import { getRadian } from "../../../utility/number/getRadian";
 
 export interface IBubbleProps {
   pen: CanvasRenderingContext2D,
@@ -73,23 +74,23 @@ export class Bubble {
     this.cvsHeight = cvsHeight;
 
     this.centerPoint = {
-      x: utilityNumber.getAnyRandom(
+      x: getAnyRandom(
         0,
         cvsWidth,
       ),
-      y: utilityNumber.getAnyRandom(
+      y: getAnyRandom(
         0,
         cvsHeight,
       ),
     };
     this.distance = {
-      x: utilityNumber.getAnyRandom(-bubbleSpeed, bubbleSpeed),
-      y: utilityNumber.getAnyRandom(-bubbleSpeed, bubbleSpeed),
+      x: getAnyRandom(-bubbleSpeed, bubbleSpeed),
+      y: getAnyRandom(-bubbleSpeed, bubbleSpeed),
     };
     this.color = bubbleColorArr[
-      utilityNumber.getFullRandom(0, bubbleColorArr.length)
+      getFullRandom(0, bubbleColorArr.length)
     ];
-    this.radius = utilityNumber.getAnyRandom(
+    this.radius = getAnyRandom(
       bubbleScaleRange && bubbleScaleRange.min,
       bubbleScaleRange && bubbleScaleRange.max,
     );
@@ -117,7 +118,7 @@ export class Bubble {
       centerPoint.y,
       radius,
       0,
-      utilityNumber.getRadian(360),
+      getRadian(360),
     );
     pen.fill();
     pen.closePath();

@@ -2,9 +2,14 @@
  * 滑动轮播
  */
 
-import utilityDOM from '../../../utility/dom/index';
-
 import { ICarouselConfigProps } from '..';
+import { setCss } from '../../../utility/dom/setCss';
+import { removeClass } from '../../../utility/dom/removeClass';
+import { addClass } from '../../../utility/dom/addClass';
+import { getEle } from '../../../utility/dom/getEle';
+import { getAllEle } from '../../../utility/dom/getAllEle';
+import { getAttr } from '../../../utility/dom/getAttr';
+import { throttle } from '../../../utility/dom/throttle';
 
 
 export class Scroll {
@@ -65,7 +70,7 @@ export class Scroll {
     oListWidth: number,
     oItemLength: number,
   ): void {
-    utilityDOM.setCss(oList, {
+    setCss(oList, {
       transition: `all ${Scroll.defaultConfig.duringTime}s ${Scroll.defaultConfig.easing}; `,
       transform: `translateX(-${oListWidth / (oItemLength) * (count + 1)}px)`,
     });
@@ -82,18 +87,18 @@ export class Scroll {
   ): void {
 
     for (let i = 0, outer; outer = oDotsItem[i++];) {
-      utilityDOM.removeClass(outer, 'yyg-dot-item-active');
+      removeClass(outer, 'yyg-dot-item-active');
     }
 
     if (count === oItemLength - 1) {
-      utilityDOM.addClass(oDotsItem[0], 'yyg-dot-item-active');
+      addClass(oDotsItem[0], 'yyg-dot-item-active');
     } else if (++count === 1) {
-      utilityDOM.addClass(
+      addClass(
         oDotsItem[oItemLength - 3],
         'yyg-dot-item-active',
       );
     } else {
-      utilityDOM.addClass(
+      addClass(
         oDotsItem[count - 2],
         'yyg-dot-item-active',
       );
@@ -131,7 +136,7 @@ export class Scroll {
   }
 
   public initDOM(): void {
-    const container = utilityDOM.getEle(Scroll.defaultConfig.container);
+    const container = getEle(Scroll.defaultConfig.container);
 
     if (container) {
       // 初始化DOM结构
@@ -163,13 +168,12 @@ export class Scroll {
    * 初始化通用对象
    */
   public initCommonEle(): void {
-    this.oList = utilityDOM
-      .getEle('.yyg-content-list') as HTMLUListElement;
+    this.oList = getEle('.yyg-content-list') as HTMLUListElement;
     this.oListWidth = this.oList.offsetWidth;
-    this.oDotsItem = utilityDOM.getAllEle('.yyg-dot-item');
-    this.oListItem = utilityDOM.getAllEle('.yyg-content-item');
-    this.oPrevArrow = utilityDOM.getEle('.yyg-arrow-prev-wrapper');
-    this.oNextArrow = utilityDOM.getEle('.yyg-arrow-next-wrapper');
+    this.oDotsItem = getAllEle('.yyg-dot-item');
+    this.oListItem = getAllEle('.yyg-content-item');
+    this.oPrevArrow = getEle('.yyg-arrow-prev-wrapper');
+    this.oNextArrow = getEle('.yyg-arrow-next-wrapper');
     this.oItemLength = this.oListItem.length;
     this.oItemWidth = this.oListWidth / this.oItemLength;
   }
@@ -260,8 +264,7 @@ export class Scroll {
   }
 
   public createStyle(): void {
-    let oStyle: HTMLElement | null = utilityDOM
-      .getEle('style');
+    let oStyle: HTMLElement | null = getEle('style');
     const {
       dataSource,
       container,
@@ -270,8 +273,7 @@ export class Scroll {
     // style标签不存在
     if (!oStyle) {
       oStyle = document.createElement('style');
-      const oHead = utilityDOM
-        .getEle('head') as HTMLHeadElement;
+      const oHead = getEle('head') as HTMLHeadElement;
 
       oHead.appendChild(oStyle);
     }
@@ -427,7 +429,7 @@ export class Scroll {
       if (this.count > oItemLength) {
         this.count = 2;
 
-        utilityDOM.setCss(oList, {
+        setCss(oList, {
           transition: null,
           transform: `translateX(${
             -(this.count) * oItemWidth
@@ -471,10 +473,9 @@ export class Scroll {
     const oList = this.oList;
     const oItemWidth = this.oItemWidth;
     const oDotsItem = this.oDotsItem;
-    const oDotsWrapper = utilityDOM
-      .getEle('.yyg-dots-wrapper') as HTMLDivElement;
+    const oDotsWrapper = getEle('.yyg-dots-wrapper') as HTMLDivElement;
 
-    utilityDOM.setCss(oDotsWrapper, {
+    setCss(oDotsWrapper, {
       display: 'block',
     });
 
@@ -482,8 +483,7 @@ export class Scroll {
 
       outer.addEventListener('mouseenter', () => {
 
-        const signId = utilityDOM
-          .getAttr(outer, 'data-id') as string;
+        const signId = getAttr(outer, 'data-id') as string;
 
         // 清除定时器
         clearInterval(this.timer);
@@ -493,12 +493,12 @@ export class Scroll {
 
         // dot栏样式改变
         for (let j = 0, inner; inner = oDotsItem[j++];) {
-          utilityDOM.removeClass(inner, 'yyg-dot-item-active');
+          removeClass(inner, 'yyg-dot-item-active');
         }
-        utilityDOM.addClass(outer, 'yyg-dot-item-active');
+        addClass(outer, 'yyg-dot-item-active');
 
         // 同步轮播
-        utilityDOM.setCss(oList, {
+        setCss(oList, {
           transition: `all ${Scroll.defaultConfig.duringTime}s ${Scroll.defaultConfig.easing}; `,
           transform: `translateX(${-(this.count) * oItemWidth}px)`,
         });
@@ -541,7 +541,7 @@ export class Scroll {
         this.count = 1;
       }
 
-      utilityDOM.setCss(oList, {
+      setCss(oList, {
         transition: `null`,
         transform: `translateX(${
           -(this.count) * oItemWidth
@@ -582,7 +582,7 @@ export class Scroll {
     clearInterval(this.timer);
 
     // 节流处理
-    utilityDOM.throttle(Scroll.MIN_CLICK_DELAY_TIME, () => {
+    throttle(Scroll.MIN_CLICK_DELAY_TIME, () => {
 
       switch (whichArrow) {
         case 'left':
@@ -595,7 +595,7 @@ export class Scroll {
           break;
       }
 
-      utilityDOM.setCss(oList, {
+      setCss(oList, {
         transition: `all ${
           Scroll.defaultConfig.duringTime
           }s ${Scroll.defaultConfig.easing}`,
@@ -625,20 +625,20 @@ export class Scroll {
     const oNextArrow = this.oNextArrow;
 
     if (show) {
-      utilityDOM.addClass(
+      addClass(
         oPrevArrow,
         'yyg-prev-wrapper-active'
       );
-      utilityDOM.addClass(
+      addClass(
         oNextArrow,
         'yyg-next-wrapper-active'
       );
     } else {
-      utilityDOM.removeClass(
+      removeClass(
         oPrevArrow,
         'yyg-prev-wrapper-active'
       );
-      utilityDOM.removeClass(
+      removeClass(
         oNextArrow,
         'yyg-next-wrapper-active',
       );
