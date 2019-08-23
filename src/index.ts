@@ -1,27 +1,31 @@
-import utilityFunction from "./ddzy/utility/function";
+import { castArray } from "./ddzy/utility/array/castArray";
 
-const delay = utilityFunction.delay
+const p1 = castArray<number>(1);
+console.log(p1);
 
+console.log('-------------');
 
-// ? wait毫秒后正常执行callback
-function s1() {
-  console.log('has been fired');
-}
-delay(s1, 500);
+interface IP2Params {
+  a: number,
+};
+const p2 = castArray<IP2Params>({
+  a: 1,
+});
+console.log(p2);
 
-console.log('--------------------');
+console.log('-------------');
 
-// ? 正常接收所传递的参数
-function s2(name: string, age: number) {
-  console.log(`name: ${name}; age: ${age}`);
-}
-delay(s2, 1000, 'ddzy', 21);
-
-console.log('--------------------------');
-
-// ? 正常返回延时器的id
-function s3() {
-  console.log('has been fired');
-}
-const p3 = delay(s3, 1500);
+const p3 = castArray<null>(null);
 console.log(p3);
+
+console.log('------------------');
+
+const p4 = castArray<undefined>(undefined);
+console.log(p4);
+
+console.log('-----------------');
+
+const origin: number[] = [];
+const p5 = castArray<typeof origin>(origin);
+console.log(p5);
+console.log(p5 === origin);
