@@ -21,4 +21,5 @@
 | number    | 汇集有关`数值`的工具方法                            | [地址](./number/README.md)    |
 | object    | 汇集有关`对象`的工具方法                            | [地址](./object/README.md)    |
 | string    | 汇集有关`字符串`的工具方法                          | [地址](./string/README.md)    |
+| date      | 汇集有关`日期`的工具方法                            | [地址](./date/README.md)      |
 | others    | 汇集其它有用的工具方法                              | [地址](./others/README.md)    |
