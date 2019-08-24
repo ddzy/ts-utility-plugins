@@ -1,31 +1,33 @@
-import { castArray } from "./ddzy/utility/array/castArray";
+import { after } from "./ddzy/utility/function/after";
 
-const p1 = castArray<number>(1);
-console.log(p1);
+// ? 不传递任何参数
+function doingWorkAsync(props: { type: string, sign: (...args: any[]) => void }) {
+  setTimeout(() => {
+    props.sign();
+  }, 0);
+}
 
-console.log('-------------');
-
-interface IP2Params {
-  a: number,
-};
-const p2 = castArray<IP2Params>({
-  a: 1,
+const employees = ['jack', 'rose', 'riven'];
+const fragment = after(employees.length, () => {
+  console.log('Work completed!');
 });
-console.log(p2);
 
-console.log('-------------');
+for (const employee of employees) {
+  doingWorkAsync({ type: employee, sign: fragment });
+}
 
-const p3 = castArray<null>(null);
-console.log(p3);
+// ? 传递任意参数
+function doingWorkAsyncWithParams(props: { type: string, sign: (...args: any[]) => void }) {
+  setTimeout(() => {
+    props.sign(props.type);
+  }, 0);
+}
 
-console.log('------------------');
+const employees2 = ['jack', 'rose', 'riven'];
+const fragment2 = after(employees.length, (type) => {
+  console.log(type);
+});
 
-const p4 = castArray<undefined>(undefined);
-console.log(p4);
-
-console.log('-----------------');
-
-const origin: number[] = [];
-const p5 = castArray<typeof origin>(origin);
-console.log(p5);
-console.log(p5 === origin);
+for (const employee of employees2) {
+  doingWorkAsyncWithParams({ type: employee, sign: fragment2 });
+}
