@@ -279,3 +279,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
   - 新增`now`方法
 - utility/array
   - 新增`castArray`方法
+
+## ✍ [2019-8-24]
+
+### Added
+
+- utility/function
+  - 新增`after`工具
