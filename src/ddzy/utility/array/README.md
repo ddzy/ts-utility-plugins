@@ -14,3 +14,4 @@
 | trunk               | 将源数组根据指定大小`分片`                                           | [源码](./trunk/index.ts)               | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-array/trunk)               |
 | compact             | 过滤指定数组中的假值(`0`、`''`、`false`、`null`、`undefined`、`NaN`) | [源码](./compact/index.ts)             | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-array/compact)             |
 | castArray           | 将给定的值强制转成数组                                               | [源码](./castArray/index.ts)           | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-array/castarray)           |
+| _concat             | 将给定的任意数量的值追加至源数组                                     | [源码](./_concat/index.ts)             | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-array/_concat)             |
