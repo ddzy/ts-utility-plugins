@@ -1,33 +1,17 @@
-import { after } from "./ddzy/utility/function/after";
+import { _concat } from "./ddzy/utility/array/_concat";
 
-// ? 不传递任何参数
-function doingWorkAsync(props: { type: string, sign: (...args: any[]) => void }) {
-  setTimeout(() => {
-    props.sign();
-  }, 0);
-}
+// ? 纯数字数组
+const s1 = [1, 2, 3, 4, 5];
+const p1 = _concat<number>(s1, 6, 7, 8);
+console.log(p1);
+s1.push(6);
+console.log(s1);
 
-const employees = ['jack', 'rose', 'riven'];
-const fragment = after(employees.length, () => {
-  console.log('Work completed!');
-});
+console.log('------------------');
 
-for (const employee of employees) {
-  doingWorkAsync({ type: employee, sign: fragment });
-}
+// ? 任意值数组
+const s2: any[] = [1, 0, '', undefined, null, [[100]], { name: 'ddzy' }];
+const p2 = _concat<any>(s2, [[200], [300]], { age: 21 });
+console.log(p2);
 
-// ? 传递任意参数
-function doingWorkAsyncWithParams(props: { type: string, sign: (...args: any[]) => void }) {
-  setTimeout(() => {
-    props.sign(props.type);
-  }, 0);
-}
-
-const employees2 = ['jack', 'rose', 'riven'];
-const fragment2 = after(employees.length, (type) => {
-  console.log(type);
-});
-
-for (const employee of employees2) {
-  doingWorkAsyncWithParams({ type: employee, sign: fragment2 });
-}
+console.log('-------------------');
