@@ -286,3 +286,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/function
   - 新增`after`工具
+
+## ✍ [2019-8-27]
+
+### Added
+
+- utility/array
+  - 新增`_concat`polyfill
