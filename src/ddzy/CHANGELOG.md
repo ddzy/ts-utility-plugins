@@ -293,3 +293,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增`_concat`polyfill
+
+## ✍ [2019-8-29]
+
+### Added
+
+- utility/array
+  - 新增`difference`工具
