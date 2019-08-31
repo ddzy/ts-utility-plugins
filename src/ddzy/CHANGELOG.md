@@ -300,3 +300,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增`difference`工具
+
+## ✍ [2019-8-31]
+
+### Added
+
+- utility/string
+  - 新增`trim`polyfill方法

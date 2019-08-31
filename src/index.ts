@@ -1,24 +1,23 @@
-import { difference } from "./ddzy/utility/array/difference";
+import { trim } from "./ddzy/utility/string/trim";
 
-// ? 纯数字数组
-const s1 = [1, 2, 3, 4, 5];
-const p1 = difference(s1, 1, 4);
+// ? 空字符串
+const s1 = '';
+const p1 = trim(s1);
 console.log(p1);
 
-console.log('--------------');
+console.log('---------------');
 
-// ? 不应该改变源数组
-const s2 = [100, 200, 300, 300, 500];
-const p2 = difference<number>(s2, 300);
-console.log(p2);
-s2.push(800);
+// ? 字符串 + 首尾空格 + 默认字符
+const s2 = '  ddzy   ';
+const p2 = trim(s2);
 console.log(p2);
 
-console.log('-----------------');
+console.log('----------------');
 
-// ? 任意值数组
-const s3: any[] = [null, undefined, NaN, '', 0, false, function () { }, {}, []];
-const p3 = difference(s3, function () { }, [], null);
+// ? 字符串 + 指定字符
+const s3 = 'wow, i like program!';
+const s4 = 'wow, i love you, wow';
+const p3 = trim(s3, 'wow');
+const p4 = trim(s4, 'wow');
 console.log(p3);
-
-console.log('----------');
+console.log(p4);
