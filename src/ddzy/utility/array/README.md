@@ -16,3 +16,4 @@
 | castArray           | 将给定的值强制转成数组                                               | [源码](./castArray/index.ts)           | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-array/castarray)           |
 | _concat             | 将给定的任意数量的值追加至源数组                                     | [源码](./_concat/index.ts)             | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-array/_concat)             |
 | difference          | 创建一个具有唯一`array`值的数组，每个值不包含在其他给定的数组中      | [源码](./difference/index.ts)          | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-array/difference)          |
+| drop                | 创建一个切片数组, 去除`array`前面的`n`个元素                         | [源码](./drop.index.ts)                | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-array/drop)                |
