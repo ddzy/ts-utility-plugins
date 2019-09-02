@@ -307,3 +307,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/string
   - 新增`trim`polyfill方法
+
+## ✍ [2019-9-2]
+
+### Added
+
+- utility/array
+  - 新增`drop`工具
