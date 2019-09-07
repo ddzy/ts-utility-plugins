@@ -314,3 +314,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增`drop`工具
+
+## ✍ [2019-9-7]
+
+- utility/array
+  - 新增`head`方法
