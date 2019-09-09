@@ -14,3 +14,4 @@
 | invariant           | 自定义的异常处理机制(`用于本仓库使用`) | [源码](./invariant/index.ts)           | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/invariant)           |
 | convertHumpToHyphen | `驼峰`字符串转`连字符`                 | [源码](./convertHumpToHyphen/index.ts) | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/converthumptohyphen) |
 | deepClone           | 深拷贝                                 | [源码](./deepClone/index.ts)           | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/deepclone)           |
+| eq                  | 比较两个值是否全等(`NaN`为`true`)      | [源码](./eq/index.ts)                  | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/eq)                  |
