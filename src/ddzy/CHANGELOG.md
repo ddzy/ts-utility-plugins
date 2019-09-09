@@ -319,3 +319,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增`head`方法
+
+## ✍ [2019-9-9]
+
+- utility/others
+  - 新增`eq`方法
