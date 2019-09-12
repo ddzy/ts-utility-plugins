@@ -324,3 +324,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/others
   - 新增`eq`方法
+
+## ✍ [2019-9-12]
+
+- utility/others
+  - 新增`gt`方法
