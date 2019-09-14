@@ -329,3 +329,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/others
   - 新增`gt`方法
+
+## ✍ [2019-9-14]
+
+- utility/string
+  - 新增`capitalize`
