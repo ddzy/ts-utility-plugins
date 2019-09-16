@@ -334,3 +334,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/string
   - 新增`capitalize`
+
+## ✍ [2019-9-16]
+
+- utility/string
+  - 新增`endsWith`polyfill
