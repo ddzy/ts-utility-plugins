@@ -1,32 +1,34 @@
-import { capitalize } from "./ddzy/utility/string/capitalize";
+import { endsWith } from "./ddzy/utility/string/endsWith";
 
 // ?
-const s1 = '';
-const p1 = capitalize(s1);
+const s1 = {
+  text: 'duanzhaoyang',
+  target: 'a',
+};
+const p1 = endsWith(s1.text, s1.target, 3);
 console.log(p1);
-
-console.log('-------------------');
-
-// ?
-const s2 = 'ZHAO';
-const p2 = capitalize(s2);
-console.log(p2);
-
-console.log('-------------------');
-
-// ?
-const s3 = 'duan';
-const p3 = capitalize(s3);
-console.log(p3);
 
 console.log('----------------------');
 
-// ?
-const s4 = '_DDZY';
-const p4 = capitalize(s4);
-console.log(p4);
+const s2 = {
+  text: 'duanzhaoyang',
+  target: 'ao',
+};
+const p2 = endsWith(s2.text, s2.target);
+console.log(p2);
 
-// ?
-const s5 = '  ___&*duanzhaoyang';
-const p5 = capitalize(s5);
-console.log(p5);
+console.log('-----------------------');
+
+const s3 = {
+  text: 'ddzy',
+  target: 'y',
+};
+const p3 = endsWith(s3.text, s3.target);
+console.log(p3);
+
+const s4 = {
+  text: 'duan',
+  target: 'd',
+  position: 4,
+};
+console.log(s4);
