@@ -24,7 +24,7 @@ export function endsWith(
     const foundIndex = matchedStrArr['index'];
 
     if (position === text.length) {
-      if (foundIndex === position - 1) {
+      if (foundIndex === position - 1 || foundIndex === text.length - position) {
         return true;
       }
     } else {

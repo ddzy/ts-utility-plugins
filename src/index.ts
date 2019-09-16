@@ -31,4 +31,5 @@ const s4 = {
   target: 'd',
   position: 4,
 };
-console.log(s4);
+const p4 = endsWith(s4.text, s4.target, s4.position);
+console.log(p4);
