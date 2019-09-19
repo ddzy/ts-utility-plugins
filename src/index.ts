@@ -1,35 +1,18 @@
-import { endsWith } from "./ddzy/utility/string/endsWith";
+import { dropRight } from "./ddzy/utility/array/dropRight";
 
-// ?
-const s1 = {
-  text: 'duanzhaoyang',
-  target: 'a',
-};
-const p1 = endsWith(s1.text, s1.target, 3);
+// ? 空数组
+const s1: number[] = [];
+const p1 = dropRight<number>(s1);
 console.log(p1);
 
-console.log('----------------------');
-
-const s2 = {
-  text: 'duanzhaoyang',
-  target: 'ao',
-};
-const p2 = endsWith(s2.text, s2.target);
+// ? 数字数组
+const s2: number[] = [1, 2, 3, 4, 5];
+const p2 = dropRight<number>(s2, 2);
 console.log(p2);
 
-console.log('-----------------------');
-
-const s3 = {
-  text: 'ddzy',
-  target: 'y',
-};
-const p3 = endsWith(s3.text, s3.target);
+// ? 不改变源数组
+const s3: number[] = [1, 2, 3, 4, 5, 6];
+const p3 = dropRight<number>(s3);
 console.log(p3);
-
-const s4 = {
-  text: 'duan',
-  target: 'd',
-  position: 4,
-};
-const p4 = endsWith(s4.text, s4.target, s4.position);
-console.log(p4);
+p3.push(100);
+console.log(s3);
