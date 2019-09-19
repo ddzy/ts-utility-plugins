@@ -339,3 +339,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/string
   - 新增`endsWith`polyfill
+
+## ✍ [2019-9-19]
+
+- utility/array
+  - 新增`dropRight`方法
