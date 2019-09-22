@@ -1,18 +1,27 @@
-import { dropRight } from "./ddzy/utility/array/dropRight";
+import { lowerCase } from "./ddzy/utility/string/lowerCase";
 
-// ? 空数组
-const s1: number[] = [];
-const p1 = dropRight<number>(s1);
+// ? 空字符串
+const s1 = '';
+const p1 = lowerCase(s1);
 console.log(p1);
 
-// ? 数字数组
-const s2: number[] = [1, 2, 3, 4, 5];
-const p2 = dropRight<number>(s2, 2);
+console.log('----------------------');
+
+// ?
+const s2 = '--Duan-Zhao--';
+const p2 = lowerCase(s2);
 console.log(p2);
 
-// ? 不改变源数组
-const s3: number[] = [1, 2, 3, 4, 5, 6];
-const p3 = dropRight<number>(s3);
+console.log('-----------------------');
+
+// ?
+const s3 = 'alioeDuan';
+const p3 = lowerCase(s3);
 console.log(p3);
-p3.push(100);
-console.log(s3);
+
+console.log('-------------------------');
+
+// ?
+const s4 = '__DUAN_ZHAO_YANG__';
+const p4 = lowerCase(s4);
+console.log(p4);
