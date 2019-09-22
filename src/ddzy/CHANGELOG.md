@@ -344,3 +344,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增`dropRight`方法
+
+## ✍ [2019-9-22]
+
+- utility/string
+  - 新增`lowerCase`工具函数
