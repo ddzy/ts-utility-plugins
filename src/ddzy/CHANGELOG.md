@@ -349,3 +349,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/string
   - 新增`lowerCase`工具函数
+
+## ✍ [2019-9-24]
+
+- utility/other
+  - 新增`_instanceOf`, 模拟原生的`instanceOf`API
