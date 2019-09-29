@@ -354,3 +354,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/other
   - 新增`_instanceOf`, 模拟原生的`instanceOf`API
+
+## ✍ [2019-9-29]
+
+- utility/array
+  - 新增`dropRightWhile`方法
