@@ -1,46 +1,30 @@
-import { _instanceOf } from "./ddzy/utility/others/_instanceOf";
+import { dropRightWhile } from "./ddzy/utility/array/dropRightWhile";
 
-// ? true
-const s1 = [{}, Object];
-const p1 = _instanceOf((s1[0]), s1[1]);
+// ? 空数组
+const s1: number[] = [];
+const p1 = dropRightWhile<number>(s1, function (v) {
+  return !!v;
+});
 console.log(p1);
 
-// ? true
-const s2 = [[], Array];
-const p2 = _instanceOf(s2[0], s2[1]);
+// ? 普通数字数组
+const s2: number[] = [23, 34, -1, -5, 54, 22, 0];
+const p2 = dropRightWhile<number>(s2, function (v) {
+  return v < 0;
+});
 console.log(p2);
 
-// ? true
-const s3 = [[], Object];
-const p3 = _instanceOf(s3[0], s3[1]);
+// ? 普通键值对对象数组
+interface IS3Params {
+  name: string;
+  age: number;
+};
+const s3: IS3Params[] = [
+  { name: 'duan', age: 20 },
+  { name: 'zhao', age: 30 },
+  { name: 'yang', age: 40 },
+];
+const p3 = dropRightWhile<IS3Params>(s3, function (v) {
+  return v.age === 30;
+});
 console.log(p3);
-
-// ? false
-const s4 = [2, 8];
-const p4 = _instanceOf(s4[0], s4[1]);
-console.log(p4);
-
-// ? false
-const s5 = ['ddzy', {}];
-const p5 = _instanceOf(s5[0], s5[1]);
-console.log(p5);
-
-// ? false
-const s6 = [{}, null];
-const p6 = _instanceOf(s6[0], s6[1]);
-console.log(p6);
-
-// ? true
-interface PersonConstructor {
-  new (): PersonInterface;
-};
-interface PersonInterface {
-};
-
-class Person implements PersonInterface {
-  constructor() {
-  }
-}
-const s7 = [new Person(), Person];
-const p7 = _instanceOf(s7[0], s7[1]);
-console.log(p7);
