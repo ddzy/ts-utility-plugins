@@ -17,3 +17,4 @@
 | eq                  | 比较两个值是否全等(`NaN`为`true`)      | [源码](./eq/index.ts)                  | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/eq)                  |
 | gt                  | 检查`x`是否大于`y`                     | [源码](./gt/index.ts)                  | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/gt)                  |
 | _instanceOf         | 模拟实现原生的`instanceOf`             | [源码](./_instanceOf/index.ts)         | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/_instanceOf)         |
+| size                | 返回任意值的长度                       | [源码](./size/index.ts)                | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/sizes)               |
