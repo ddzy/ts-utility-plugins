@@ -1,30 +1,35 @@
-import { dropRightWhile } from "./ddzy/utility/array/dropRightWhile";
+import { size } from "./ddzy/utility/others/sizse";
 
-// ? 空数组
-const s1: number[] = [];
-const p1 = dropRightWhile<number>(s1, function (v) {
-  return !!v;
+// ? 特殊值
+const s0 = [0, 100, undefined, null, Symbol('ddzy'), function () { }];
+const p0 = s0.map((v) => {
+  return size(v);
 });
-console.log(p1);
+console.log(p0);  // [0, 0, 0, 0, 0, 0]
 
-// ? 普通数字数组
-const s2: number[] = [23, 34, -1, -5, 54, 22, 0];
-const p2 = dropRightWhile<number>(s2, function (v) {
-  return v < 0;
-});
-console.log(p2);
+console.log('------------------------');
 
-// ? 普通键值对对象数组
-interface IS3Params {
-  name: string;
-  age: number;
-};
-const s3: IS3Params[] = [
-  { name: 'duan', age: 20 },
-  { name: 'zhao', age: 30 },
-  { name: 'yang', age: 40 },
-];
-const p3 = dropRightWhile<IS3Params>(s3, function (v) {
-  return v.age === 30;
+// ? 字符串
+const s1 = ['', 'ddzy'];
+const p1 = s1.map((v) => {
+  return size(v);
 });
-console.log(p3);
+console.log(p1);  // [0, 4]
+
+console.log('-----------------------');
+
+// ? 数组
+const s2 = [[], [0, 1, 2, 3, 4, 5]];
+const p2 = s2.map((v) => {
+  return size(v);
+});
+console.log(p2);  // [0, 6]
+
+console.log('------------------------');
+
+// ? 普通对象
+const s3 = [{}, { name: 'duanzhaoyang', age: 21 }];
+const p3 = s3.map((v) => {
+  return size(v);
+});
+console.log(p3);  // [0, 2]

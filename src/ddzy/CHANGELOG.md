@@ -359,3 +359,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增`dropRightWhile`方法
+
+## ✍ [2019-10-2]
+
+- utility/others
+  - 新增`size`工具
