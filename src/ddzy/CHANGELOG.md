@@ -364,3 +364,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/others
   - 新增`size`工具
+
+## ✍ [2019-10-4]
+
+- utility/object
+  - 新增`get`工具方法
