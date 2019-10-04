@@ -1,35 +1,55 @@
-import { size } from "./ddzy/utility/others/sizse";
+import { get } from "./ddzy/utility/object/get";
 
-// ? 特殊值
-const s0 = [0, 100, undefined, null, Symbol('ddzy'), function () { }];
-const p0 = s0.map((v) => {
-  return size(v);
-});
-console.log(p0);  // [0, 0, 0, 0, 0, 0]
-
-console.log('------------------------');
-
-// ? 字符串
-const s1 = ['', 'ddzy'];
-const p1 = s1.map((v) => {
-  return size(v);
-});
-console.log(p1);  // [0, 4]
+// ? 空对象
+const s1 = {
+  origin: {},
+  path: 'a.b.c',
+};
+const p1 = get(s1.origin, s1.path);
+console.log(p1);
 
 console.log('-----------------------');
 
-// ? 数组
-const s2 = [[], [0, 1, 2, 3, 4, 5]];
-const p2 = s2.map((v) => {
-  return size(v);
-});
-console.log(p2);  // [0, 6]
+// ? 空对象 + 默认值
+const s2 = {
+  origin: {},
+  path: 'a[0].b[1].c',
+};
+const p2 = get(s2.origin, s2.path, 'default');
+console.log(p2);
 
-console.log('------------------------');
+console.log('------------------------------');
 
-// ? 普通对象
-const s3 = [{}, { name: 'duanzhaoyang', age: 21 }];
-const p3 = s3.map((v) => {
-  return size(v);
-});
-console.log(p3);  // [0, 2]
+// ? path为字符串
+const s3 = {
+  origin: {
+    a: [
+      {
+        b: {
+          c: 3
+        }
+      }
+    ]
+  },
+  path: 'a[0].b.c',
+};
+const p3 = get(s3.origin, s3.path);
+console.log(p3);
+
+console.log('------------------------------');
+
+// ? path为数组
+const s4 = {
+  origin: [
+    {
+      a: [
+        {
+          b: 1998,
+        },
+      ],
+    },
+  ],
+  path: ['0', 'a', '0', 'b'],
+};
+const p4 = get(s4.origin, s4.path);
+console.log(p4);
