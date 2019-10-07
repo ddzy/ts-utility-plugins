@@ -369,3 +369,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/object
   - 新增`get`工具方法
+
+## ✍ [2019-10-7]
+
+- utility/object
+  - 新增`forIn`辅助方法
