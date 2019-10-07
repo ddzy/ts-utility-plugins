@@ -1,55 +1,63 @@
-import { get } from "./ddzy/utility/object/get";
+import { forIn } from "./ddzy/utility/object/forIn";
 
 // ? 空对象
+interface IS1Props {
+};
 const s1 = {
-  origin: {},
-  path: 'a.b.c',
 };
-const p1 = get(s1.origin, s1.path);
-console.log(p1);
+forIn<IS1Props>(s1, (v, i, self) => {
+  console.log(v, i, self);
+});
 
-console.log('-----------------------');
+console.log('------------------------');
 
-// ? 空对象 + 默认值
-const s2 = {
-  origin: {},
-  path: 'a[0].b[1].c',
+// ? 不应该提前退出
+interface IS2Props {
+  name: string,
+  age: number,
+  skill: string,
 };
-const p2 = get(s2.origin, s2.path, 'default');
-console.log(p2);
+const s2: IS2Props = {
+  name: 'duanzhaoyang',
+  age: 21,
+  skill: 'program',
+};
+forIn(s2, (v) => {
+  console.log(v);
+});
 
 console.log('------------------------------');
 
-// ? path为字符串
-const s3 = {
-  origin: {
-    a: [
-      {
-        b: {
-          c: 3
-        }
-      }
-    ]
+// ? 提前退出
+interface IS3Props {
+  city: string[];
+  position: {
+    x: number,
+    y: number,
+  };
+  continue: boolean;
+  nextOne: number;
+  nextTwo: number;
+};
+const s3: IS3Props = {
+  city: ['Dongguan', 'Foshan', 'Guangzhou'],
+  position: {
+    x: 100,
+    y: 200,
   },
-  path: 'a[0].b.c',
+  continue: false,
+  nextOne: 1,
+  nextTwo: 2,
 };
-const p3 = get(s3.origin, s3.path);
-console.log(p3);
+forIn<IS3Props>(s3, function (v, i, origin) {
+  console.log({
+    this: this,
+    thisIsEqual: this === origin,
+    v,
+    i,
+  });
 
-console.log('------------------------------');
-
-// ? path为数组
-const s4 = {
-  origin: [
-    {
-      a: [
-        {
-          b: 1998,
-        },
-      ],
-    },
-  ],
-  path: ['0', 'a', '0', 'b'],
-};
-const p4 = get(s4.origin, s4.path);
-console.log(p4);
+  if (i === 'continue') {
+    return false;
+  }
+});
