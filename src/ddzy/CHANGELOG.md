@@ -374,3 +374,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/object
   - 新增`forIn`辅助方法
+
+## ✍ [2019-10-9]
+
+- utility/array
+  - 新增`fill`方法
