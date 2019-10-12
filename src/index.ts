@@ -1,22 +1,31 @@
-import { fill } from "./ddzy/utility/array/fill";
+import { inRange } from "./ddzy/utility/number/inRange";
 
 
-// ? 空数组
-const s1: number[] = [];
-const p1 = fill<number>(s1, 100);
-console.log(p1);
+// ?
+const s1 = [
+  {
+    value: 0,
+    start: 100,
+    end: 200,
+  },
+  {
+    value: 45,
+    start: -11,
+    end: 98,
+  },
+  {
+    value: 34,
+    start: 34,
+    end: 34,
+  },
+  {
+    value: 0,
+    start: -344,
+    end: 0,
+  },
+];
+s1.forEach((v) => {
+  const result = inRange(v.value, v.start, v.end);
 
-console.log('---------------------');
-
-// ? 非空数组
-const s2: number[] = [1, 2, 3, 4, 5];
-const p2 = fill<number>(s2, 200, 2, 8);
-console.log(p2);
-
-console.log('-----------------------');
-
-// ? 原地操作
-const s3: any[] = [false, 0, '', NaN, true, function () { }];
-const p3 = fill<any>(s3, 'duanzhaoyang', 0);
-console.log(p3);
-console.log(p3 === s3);
+  console.log(result);
+});
