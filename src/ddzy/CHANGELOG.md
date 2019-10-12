@@ -379,3 +379,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增`fill`方法
+
+## ✍ [2019-10-12]
+
+- utility/number
+  - 新增`inRange`工具方法
