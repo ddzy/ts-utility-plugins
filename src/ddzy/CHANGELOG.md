@@ -384,3 +384,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/number
   - 新增`inRange`工具方法
+
+## ✍ [2019-10-16]
+
+- utility/number
+  - 新增`divideByThousand`千位分隔工具方法
