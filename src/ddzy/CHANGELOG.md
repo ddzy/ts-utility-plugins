@@ -389,3 +389,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/number
   - 新增`divideByThousand`千位分隔工具方法
+
+## ✍ [2019-11-3]
+
+- utility/algorithm
+  - `ES6Achieve`下新增`Dictionary`字典, 模拟`Map`
