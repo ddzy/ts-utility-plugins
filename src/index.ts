@@ -1,47 +1,41 @@
-import { divideByThousand } from "./ddzy/utility/number/divideByThousand";
+import { Dictionary } from "./ddzy/utility/algorithm/es6-achieve/dictionary";
 
 
-// ? 小于千位的数字
-const s1 = 11;
-const p1 = divideByThousand(s1);
-console.log(p1);
+const map = new Dictionary();
 
-console.log('--------------------------');
+const arr1 = [1, 2, 3];
+const obj1 = {};
+const func1 = function () { };
 
-// ? 刚好等于千位的数字
-const s2 = 110;
-const p2 = divideByThousand(s2);
-console.log(p2);
+// ! 添加
+map.set(arr1, 123);
+map.set(obj1, '123323');
+map.set(arr1, 456);
+map.set(obj1, '23235235235');
+map.set({ name: 'duan', age: 21 }, []);
+map.set(func1, func1);
+map.set(func1, 'it is function');
+map.set(1, 2);
+map.set({ name: 'duan', age: 21 }, []);
 
-console.log('-------------------------');
+// ! 获取
+// console.log(map.get(arr1));
+// console.log(map.get(obj1));
+// console.log(map.get({ name: 'duan', age: 21 }));
+// console.log(map.get(func1));
+// console.log(map.get(1));
 
-// ? 大于千位的数字
-const s3 = 1100;
-const s4 = 3456687;
-const p3 = divideByThousand(s3);
-const p4 = divideByThousand(s4);
-console.log(p3);
-console.log(p4);
+// ! 移除
+// console.log(map.delete(arr1));
+// console.log(map.delete(obj1));
+// console.log(map.delete({ name: 'duan', age: 21 }));
+// console.log(map.delete(1));
+// console.log(map);
 
-console.log('-------------------------');
+// ! 元素个数
+// console.log(map.size());
 
-// ? 负数
-const s5 = -11;
-const s6 = -110;
-const s7 = -1100;
-const s8 = -3456687;
-const p5 = divideByThousand(s5);
-const p6 = divideByThousand(s6);
-const p7 = divideByThousand(s7);
-const p8 = divideByThousand(s8);
-console.log(p5);
-console.log(p6);
-console.log(p7);
-console.log(p8);
-
-console.log('--------------------------');
-
-// ? 自定义分隔符
-const s9 = 1325234523642364;
-const p9 = divideByThousand(s9, '_');
-console.log(p9);
+// ! 遍历
+// map.traversal(function(value, key) {
+//   console.log({ key, value });
+// });
