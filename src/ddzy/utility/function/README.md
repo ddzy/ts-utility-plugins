@@ -17,3 +17,4 @@
 | pipe          | 从左往右执行处理器函数, 与`compose`相反                | [源码](./pipe/index.ts)          | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/pipe)          |
 | delay         | 延迟`wait`毫秒后执行处理器`callback`                   | [源码](./delay/index.ts)         | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/delay)         |
 | after         | 创建并返回一个函数, 等待函数运行指定`次数`后执行处理器 | [源码](./after/index.ts)         | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/after)         |
+| curry         | 函数柯里化                                             | [源码](./curry/index.ts)         | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-function/curry)         |
