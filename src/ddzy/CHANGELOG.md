@@ -394,3 +394,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm
   - `ES6Achieve`下新增`Dictionary`字典, 模拟`Map`
+
+## ✍ [2019-11-10]
+
+- utility/function
+  - 新增`curry`柯里化函数
