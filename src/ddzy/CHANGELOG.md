@@ -399,3 +399,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/function
   - 新增`curry`柯里化函数
+
+## ✍ [2019-11-24]
+
+- utility/array
+  - 新增 `pullAll` 工具方法
