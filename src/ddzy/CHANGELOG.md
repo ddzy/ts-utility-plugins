@@ -404,3 +404,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增 `pullAll` 工具方法
+
+## ✍ [2019-12-12]
+
+- utility/object
+  - 新增 `forOwn` 工具方法, 遍历对象自身具有的属性
