@@ -1,55 +1,25 @@
-import { pullAll } from "./ddzy/utility/array/pullAll";
+import { forOwn } from "./ddzy/utility/object/forOwn";
 
-// ? 普通数字数组
-const s1 = [1, 2, 3, 1, 2, 3];
-const selector1 = [2, 3];
-const result1 = pullAll<number>(s1, selector1);
-console.log(result1 === s1);
-console.log(result1);
 
-console.log('--------------------------');
+// ? 普通键值对对象
+const s1 = {
+  name: 'duanzhaoyang',
+  age: 21,
+  address: 'Dongguan',
+};
+forOwn<typeof s1>(s1, (i, v, o) => {
+  console.log({ i, v, o });
+});
 
-// ? 对象数组
-const s2 = [
-  {
-    name: 'duan',
-    age: 21,
-  },
-  {
-    name: 'zhao',
-    age: 22,
-  },
-  {
-    name: 'duan',
-    age: 21,
-  },
-];
-const selector2 = [
-  {
-    name: 'duan',
-    age: 21,
-  },
-];
-const result2 = pullAll(s2, selector2);
-console.log(result2 === s2);
-console.log(result2);
+console.log('----------------------分割线------------------------');
 
-console.log('--------------------------');
+// ? 具有继承属性
+class S2 {
+  public name: string = '';
+  public age: number = 0;
+}
+S2.prototype.isCorrect = false;
 
-// ? 混合数组
-const s3 = [
-  0,
-  19980808,
-  'duanzhaoyang',
-  false,
-  null,
-  undefined,
-  Symbol('a'),
-  function () { },
-  {},
-  [],
-];
-const selector3 = [false, undefined, 19980808, []];
-const result3 = pullAll<any>(s3, selector3);
-console.log(result3 === s3);
-console.log(result3);
+forOwn(new S2(), (i, v, o) => {
+  console.log({ i, v, o });
+});
