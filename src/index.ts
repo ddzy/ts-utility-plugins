@@ -1,25 +1,15 @@
-import { forOwn } from "./ddzy/utility/object/forOwn";
+import { zip } from "./ddzy/utility/array/zip";
 
+// ? 数字数组
+const s1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9, 10, 11]];
+const p1 = zip<number>(...s1);
+console.log(p1);
 
-// ? 普通键值对对象
-const s1 = {
-  name: 'duanzhaoyang',
-  age: 21,
-  address: 'Dongguan',
-};
-forOwn<typeof s1>(s1, (i, v, o) => {
-  console.log({ i, v, o });
-});
-
-console.log('----------------------分割线------------------------');
-
-// ? 具有继承属性
-class S2 {
-  public name: string = '';
-  public age: number = 0;
-}
-S2.prototype.isCorrect = false;
-
-forOwn(new S2(), (i, v, o) => {
-  console.log({ i, v, o });
-});
+// ? 混合数组
+const s2 = [
+  [100, 200, 300],
+  [false, true],
+  [[], { name: 'duanzhaoyang', age: 21 }],
+];
+const p2 = zip<any>(...s2);
+console.log(p2);

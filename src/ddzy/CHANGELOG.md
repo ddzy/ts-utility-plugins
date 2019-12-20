@@ -409,3 +409,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/object
   - 新增 `forOwn` 工具方法, 遍历对象自身具有的属性
+
+## ✍ [2019-12-20]
+
+- utility/array
+  - 新增 `zip` 方法, 打包二维数组
