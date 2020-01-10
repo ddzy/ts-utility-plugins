@@ -414,3 +414,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增 `zip` 方法, 打包二维数组
+
+## ✍ [2020-1-10]
+
+- utility/date
+  - 新增 `dateFormat` 工具函数, 格式化日期

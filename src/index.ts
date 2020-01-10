@@ -1,15 +1,44 @@
-import { zip } from "./ddzy/utility/array/zip";
+import dateFormat from "./ddzy/utility/date/dateFormat";
+import { now } from "./ddzy/utility/date/now";
 
-// ? 数字数组
-const s1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9, 10, 11]];
-const p1 = zip<number>(...s1);
+// ? 年月日
+const p1 = dateFormat('yyyy-MM-dd', now(), {});
 console.log(p1);
 
-// ? 混合数组
-const s2 = [
-  [100, 200, 300],
-  [false, true],
-  [[], { name: 'duanzhaoyang', age: 21 }],
-];
-const p2 = zip<any>(...s2);
+// ? 年月
+const p2 = dateFormat('yyyy-MM', now(), {});
 console.log(p2);
+
+// ? 月日
+const p3 = dateFormat('MM-dd', now(), {})
+console.log(p3);
+
+// ? 自定义日期分隔符
+const p4 = dateFormat('yyyy-MM-dd', now(), {
+  dateConnector: '/',
+});
+console.log(p4);
+
+// ? 日期 + 时间
+const p5 = dateFormat('yyyy-MM-dd HH:mm:ss', now(), {});
+console.log(p5);
+
+// ? 时间
+const p6 = dateFormat('HH:mm:ss', now(), {});
+console.log(p6);
+
+// ? 自定义时间分隔符
+const p7 = dateFormat('HH:mm:ss', now(), {
+  timeConnector: '_',
+});
+console.log(p7);
+
+// ? 自定义日期 + 时间分隔符
+const p8 = dateFormat('yyyy-MM-dd HH:mm:ss', now(), {
+  gap: '~~~',
+});
+console.log(p8);
+
+// ? 错误字符
+const p9 = dateFormat('test stra', now(), {});
+console.log(p9);
