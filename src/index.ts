@@ -1,55 +1,17 @@
-import { pullAll } from "./ddzy/utility/array/pullAll";
+import { _join } from "./ddzy/utility/array/_join";
 
-// ? 普通数字数组
-const s1 = [1, 2, 3, 1, 2, 3];
-const selector1 = [2, 3];
-const result1 = pullAll<number>(s1, selector1);
-console.log(result1 === s1);
-console.log(result1);
 
-console.log('--------------------------');
+// ? 空数组
+const s1: number[] = [];
+const p1 = _join(s1, '')
+console.log(p1);
 
-// ? 对象数组
-const s2 = [
-  {
-    name: 'duan',
-    age: 21,
-  },
-  {
-    name: 'zhao',
-    age: 22,
-  },
-  {
-    name: 'duan',
-    age: 21,
-  },
-];
-const selector2 = [
-  {
-    name: 'duan',
-    age: 21,
-  },
-];
-const result2 = pullAll(s2, selector2);
-console.log(result2 === s2);
-console.log(result2);
+// ? 数字数组
+const s2: number[] = [1, 2, 3, 4, 5];
+const p2 = _join<number>(s2, '');
+console.log(p2);
 
-console.log('--------------------------');
-
-// ? 混合数组
-const s3 = [
-  0,
-  19980808,
-  'duanzhaoyang',
-  false,
-  null,
-  undefined,
-  Symbol('a'),
-  function () { },
-  {},
-  [],
-];
-const selector3 = [false, undefined, 19980808, []];
-const result3 = pullAll<any>(s3, selector3);
-console.log(result3 === s3);
-console.log(result3);
+// ? 自定义分隔符
+const s3: string[] = ['a', 'b', 'c', 'd', 'e'];
+const p3 = _join<string>(s3, '-');
+console.log(p3);

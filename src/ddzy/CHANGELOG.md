@@ -404,3 +404,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增 `pullAll` 工具方法
+
+## ✍ [2019-12-12]
+
+- utility/object
+  - 新增 `forOwn` 工具方法, 遍历对象自身具有的属性
+
+## ✍ [2019-12-20]
+
+- utility/array
+  - 新增 `zip` 方法, 打包二维数组
+
+## ✍ [2020-1-10]
+
+- utility/date
+  - 新增 `dateFormat` 工具函数, 格式化日期
+
+## ✍ [2020-2-10]
+
+- utility/array
+  - 新增 `_join` 方法

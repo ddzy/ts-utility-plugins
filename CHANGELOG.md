@@ -101,4 +101,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Marked
 
-- 发布[v1.0](https://github.com/ddzy/ts-utility-plugins/tree/branch/rel-1.0), 重构之前的最后一个版本
+- 发布[v1.0](https://github.com/ddzy/ts-utility-plugins/tree/v1.0), 重构之前的最后一个版本
+
+## [2019-12-20]
+
+### Marked
+
+- 发布[v1.1](https://github.com/ddzy/ts-utility-plugins/tree/v1.1)
+
+### Changed
+
+- 更改 [2019-8-19](#2019-8-19) 的标签链接
