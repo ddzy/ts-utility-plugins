@@ -419,3 +419,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/date
   - 新增 `dateFormat` 工具函数, 格式化日期
+
+## ✍ [2020-2-10]
+
+- utility/array
+  - 新增 `_join` 方法
