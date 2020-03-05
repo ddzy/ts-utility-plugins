@@ -1,17 +1,16 @@
-import { _join } from "./ddzy/utility/array/_join";
+import { words } from "./ddzy/utility/string/words";
 
-
-// ? 空数组
-const s1: number[] = [];
-const p1 = _join(s1, '')
+// 默认模式
+const s1 = 'duan zhao _*$*$  y & ang a p     g';
+const p1 = words(s1, /\W+/);
 console.log(p1);
 
-// ? 数字数组
-const s2: number[] = [1, 2, 3, 4, 5];
-const p2 = _join<number>(s2, '');
+// 自定义模式
+const s2 = 'duan  zhao    yang';
+const p2 = words(s2, /\s+/g);
 console.log(p2);
 
-// ? 自定义分隔符
-const s3: string[] = ['a', 'b', 'c', 'd', 'e'];
-const p3 = _join<string>(s3, '-');
+// 自定义模式
+const s3 = 'duan ### zhaoyang |%# s d h   dan';
+const p3 = words(s3, /#+/g);
 console.log(p3);
