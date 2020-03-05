@@ -5,7 +5,7 @@
  */
 export function words(
   text: string,
-  pattern: RegExp
+  pattern?: RegExp
 ): string[] {
   const defaultPattern = pattern || /\s+/g;
 
