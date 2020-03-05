@@ -424,3 +424,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增 `_join` 方法
+
+## ✍ [2020-3-5]
+
+- utility/string
+  - 新增 `words` 方法
