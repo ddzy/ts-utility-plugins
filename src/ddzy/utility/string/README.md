@@ -13,3 +13,4 @@
 | capitalize   | 将指定的字符串的`首字母`大写, 剩下为小写           | [源码](./capitalize/index.ts)   | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-string-1/capitalize)   |
 | endsWith     | 检查字符串`text`是否以给定的`target`字符串结尾     | [源码](./endsWith/index.ts)     | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-string-1/endswith)     |
 | lowerCase    | 转换字符串`string`以空格分开单词, 并转换为`小写`   | [源码](./lowerCase/index.ts)    | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-string-1/lowercase)    |
+| words        | 按照指定模式, 拆分字符串 `string` 中的词为数组     | [源码](./words/index.ts)        | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-string-1/words)        |
