@@ -13,3 +13,4 @@
 | EventEmitter                     | 模拟实现简单的`EventEmitter`    | [源码](./event-emitter/index.ts)               | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-algorithm/eventemitter)    |
 | URLSearchParams                  | 模拟实现简单的`URLSearchParams` | [源码](./url-search-params/index.ts)           | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-algorithm/urlsearchparams) |
 | ES6Achieve                       | 旨在模拟实现`ES6`的API          | [源码](./es6-achieve/index.ts)                 | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-algorithm/es6achieve)      |
+| MiniRedux                        | 模拟`redux`核心实现             | [源码](./mini-redux/index.ts)                  | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-algorithm/miniredux)       |
