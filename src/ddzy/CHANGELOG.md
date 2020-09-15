@@ -429,3 +429,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/string
   - 新增 `words` 方法
+
+## ✍ [2020-9-15]
+
+- utility/algorithm
+  - 新增 `mini-redux` 实现
