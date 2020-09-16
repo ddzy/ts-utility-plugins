@@ -434,3 +434,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm
   - 新增 `mini-redux` 实现
+
+## ✍ [2020-9-16]
+
+- utility/others
+  - 补充之前遗漏的方法链接
