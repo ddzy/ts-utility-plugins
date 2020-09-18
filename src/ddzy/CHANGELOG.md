@@ -439,3 +439,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/others
   - 补充之前遗漏的方法链接
+
+## ✍ [2020-9-18]
+
+- utility/array
+  - 新增 `take` 方法
