@@ -1,6 +1,6 @@
 import bubbleSort from "./ddzy/utility/algorithm/sort/bubble-sort";
 
-const s1 = [29, 45, 51, 68, 72, 97];
+const s1 = [29, 51, 72, 68, 45, 97];
 const p1 = bubbleSort(s1);
 console.log(p1);
 
