@@ -5,7 +5,9 @@
  * @since 2020/10/19
  */
 import bubbleSort from './bubble-sort/index';
+import selectSort from './select-sort/index';
 
 export const Sort = {
   bubbleSort,
+  selectSort,
 };
