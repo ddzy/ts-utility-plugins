@@ -444,3 +444,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/array
   - 新增 `take` 方法
+
+## ✍ [2020-10-19]
+
+- utility/algorithm
+  - 新增排序算法集锦部分(`sort`)
+
+## ✍ [2020-10-20]
+
+- utility/algorithm/sort
+  - 新增选择排序算法(`selectSort`)
+
+## ✍ [2020-10-21]
+
+- utility/algorithm/sort
+  - 新增插入排序算法(`insertSort`)
