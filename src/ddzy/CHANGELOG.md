@@ -459,3 +459,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm/sort
   - 新增插入排序算法(`insertSort`)
+
+## ✍ [2020-10-22]
+
+- utility/algorithm/sort
+  - 新增希尔排序(`shellSort`)
