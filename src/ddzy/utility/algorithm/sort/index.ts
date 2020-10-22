@@ -7,9 +7,11 @@
 import bubbleSort from './bubble-sort/index';
 import insertSort from './insert-sort';
 import selectSort from './select-sort/index';
+import shellSort from './shell-sort';
 
 export const Sort = {
   bubbleSort,
   selectSort,
   insertSort,
+  shellSort,
 };
