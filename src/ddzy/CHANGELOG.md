@@ -464,3 +464,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm/sort
   - 新增希尔排序(`shellSort`)
+
+## ✍ [2020-10-24]
+
+- utility/algorithm/sort
+  - 新增快速排序(`quickSort`)
