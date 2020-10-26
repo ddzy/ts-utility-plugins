@@ -469,3 +469,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm/sort
   - 新增快速排序(`quickSort`)
+
+## ✍ [2020-10-26]
+
+- utility/object
+  - 新增 `create`, 模拟实现 `Object.create()`
