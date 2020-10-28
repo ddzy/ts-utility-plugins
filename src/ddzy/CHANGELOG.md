@@ -474,3 +474,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/object
   - 新增 `create`, 模拟实现 `Object.create()`
+
+## ✍ [2020-10-28]
+
+- utility/others
+  - 重构 `deepClone` 方法, 优化算法

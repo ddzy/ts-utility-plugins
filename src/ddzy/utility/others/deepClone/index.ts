@@ -1,49 +1,25 @@
-import { isPlainObject } from "../../object/isPlainObject";
 import { isStrictArray } from "../../array/isStrictArray";
 import { isBasicValue } from "../isBasicValue";
 
 /**
  * 深拷贝
- * @param origin 源对象
+ * @param origin 需要拷贝的目标对象
  */
-export function deepClone<T extends object>(origin: T): Partial<T> {
-  const target = {};
+export default function deepClone(origin: any[] | object) {
+  const target = isStrictArray(origin)
+    ? []
+    : {} as { [key: string]: any };
 
-  function _aidedDeepClone(origin: any, target: any): object {
-    for (const key in origin) {
-      const value = origin[key];
-
-      // ? plain object
-      if (isPlainObject(value)) {
-        target[key] = {};
-        _aidedDeepClone(value, target[key]);
-      }
-      // ? array
-      else if (isStrictArray(value)) {
-        target[key] = [];
-        for (let i = 0; i < value.length; i++) {
-          // ? array that contains a plain object
-          if (isPlainObject(value[i])) {
-            target[key][i] = {};
-            _aidedDeepClone(value[i], target[key][i]);
-          }
-          // TODO: ignore the array that contains more that one nest
-          // ? array that contains the basic value;
-          else {
-            target[key][i] = value[i];
-          }
-        }
-      }
-      // ? basic value
-      else if (isBasicValue(value)) {
-        target[key] = value;
-      }
-
-      // TODO: function...
+  for (const [key, value] of Object.entries(origin)) {
+    // 普通对象或数组
+    if (typeof value === 'object') {
+      target[key] = deepClone(value);
     }
-
-    return target;
+    // 基本值
+    else if (isBasicValue(value)) {
+      target[key] = value;
+    }
   }
 
-  return _aidedDeepClone(origin, target);
+  return target;
 }
