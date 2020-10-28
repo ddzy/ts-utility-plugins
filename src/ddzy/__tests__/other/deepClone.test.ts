@@ -1,60 +1,36 @@
-import { deepClone } from "../../utility/others/deepClone";
+import deepClone from "../../utility/others/deepClone";
 
 describe('deepClone', () => {
   test('deepClone should copy the whole object and return', () => {
     const received = {
-      name: 'duan',
-      age: 20,
-      skills: ['run', 'programm', 'read'],
-      friends: [
-        {
-          name: 'jack',
-          age: 21,
-        },
-        {
-          name: 'lucy',
-          age: 22,
-        },
-      ],
-      program: {
-        deepth: 40,
-        related: {
-          website: [
-            {
-              name: 'juejin',
-              address: 'https://juejin.io/timeline',
-            },
-            {
-              name: 'zhihu',
-              address: 'https://zhihu.com'
-            },
-          ],
-        },
+      a: 1,
+      b: [1, 2, 3, 4],
+      c: {
+        d: 1,
+        e: 2,
+        f: [
+          {
+            g: 1,
+            h: 2,
+          },
+          {
+            i: 1,
+            j: 2,
+          },
+        ],
       },
-      focus: true,
     };
 
-    expect(deepClone(received).name).toBe('duan');
-    expect(
-      (deepClone(received).skills as string[])[0]
-    ).toBe('run');
-    expect(
-      (deepClone(received).friends as {
-        name: string,
-        age: number,
-      }[])[0].name
-    ).toBe('jack');
-    expect(
-      (deepClone(received).program as any).deepth
-    ).toBe(40);
-    expect(
-      (deepClone(received) as any).program.related.website[0].name
-    ).toBe('juejin');
+    const result = deepClone(received);
 
-    received.name = 'received';
-    received.skills[0] = 'received';
-    received.friends[0].name = 'received';
-    received.program.deepth = 20;
-    received.program.related.website[0].name = 'received';
+    expect(result === received).toBeFalsy();
+
+    result.b.push(5);
+    result.c.d = 2;
+
+    expect(result.b.length).toBe(5);
+    expect(result.c.d).toBe(2);
+    expect(received.b.length).toBe(4);
+    expect(received.c.d).toBe(1);
   });
 });
