@@ -17,6 +17,7 @@ import { _some } from './some/index';
 import { _includes } from './includes/index';
 import { _findIndex } from './findIndex/index';
 import { Dictionary } from './dictionary/index';
+import _Promise from './promise';
 
 
 export const ES6Achieve = {
@@ -32,4 +33,5 @@ export const ES6Achieve = {
   _includes,
   _findIndex,
   Dictionary,
+  _Promise,
 };

@@ -479,3 +479,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/others
   - 重构 `deepClone` 方法, 优化算法
+
+## ✍ [2020-10-31]
+
+- utility/algorithm/es6-achieve
+  - 新增模拟实现 `Promise`
