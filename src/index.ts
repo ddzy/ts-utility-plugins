@@ -1,30 +1,26 @@
-import deepClone from "./ddzy/utility/others/deepClone";
+import { ES6Achieve } from "./ddzy/utility/algorithm/es6-achieve/index";
 
-const origin = {
-  a: 1,
-  b: [1, 2, 3, 4],
-  c: {
-    d: 1,
-    e: 2,
-    f: [
-      {
-        g: 1,
-        h: 2,
-      },
-      {
-        i: 1,
-        j: 2,
-      },
-    ],
-  },
-};
+const _Promise = ES6Achieve._Promise;
 
-const target = deepClone(origin);
 
-console.log(origin, target);
-console.log(origin === target);
+const p1 = new _Promise((resolve) => {
+  setTimeout(() => {
+    resolve(1);
+  }, 0);
+});
+p1.then((value) => {
+  console.log(value);
 
-target.b.push(5);
-target.c.d = 2;
+  return value + 1;
+}).then((value) => {
+  console.log(value);
+});
 
-console.log(origin, target);
+const p2 = new _Promise((resolve) => {
+  resolve(100);
+});
+p2.then((value) => {
+  return value / 5;
+}).then((value) => {
+  console.log(value);
+});
