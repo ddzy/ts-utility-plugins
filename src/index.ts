@@ -1,26 +1,10 @@
-import { ES6Achieve } from "./ddzy/utility/algorithm/es6-achieve/index";
+import { Sort } from "./ddzy/utility/algorithm/sort";
+import binarySearch from "./ddzy/utility/others/binarySearch";
 
-const _Promise = ES6Achieve._Promise;
+const arr = [10, 867, 4, 34, 9, 98, 45, 67];
+const sortedArr = Sort.quickSort(arr);
 
-
-const p1 = new _Promise((resolve) => {
-  setTimeout(() => {
-    resolve(1);
-  }, 0);
-});
-p1.then((value) => {
-  console.log(value);
-
-  return value + 1;
-}).then((value) => {
-  console.log(value);
-});
-
-const p2 = new _Promise((resolve) => {
-  resolve(100);
-});
-p2.then((value) => {
-  return value / 5;
-}).then((value) => {
-  console.log(value);
-});
+const p1 = binarySearch(sortedArr, 34);
+console.log(p1);
+const p2 = binarySearch(sortedArr, 99);
+console.log(p2);

@@ -19,3 +19,4 @@
 | _instanceOf                 | 模拟实现原生的`instanceOf`             | [源码](./_instanceOf/index.ts)                 | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/_instanceOf)                 |
 | size                        | 返回任意值的长度                       | [源码](./size/index.ts)                        | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/sizes)                       |
 | convertURLParameterToObject | 提取 `URL` 中的 `GET` 请求参数         | [源码](./convertURLParameterToObject/index.ts) | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/convertURLParameterToObject) |
+| binarySearch                | 二分查找                               | [源码](./binarySearch/index.ts)                | [文档](https://ddzy.gitbook.io/ts-utility-plugins-docs/utility/utility-others/binarySearch)                |
