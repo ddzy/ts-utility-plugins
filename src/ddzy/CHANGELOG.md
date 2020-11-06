@@ -484,3 +484,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/algorithm/es6-achieve
   - 新增模拟实现 `Promise`
+
+## ✍ [2020-11-6]
+
+- utility/others
+  - 新增二分查找算法
