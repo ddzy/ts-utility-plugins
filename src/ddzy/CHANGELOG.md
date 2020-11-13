@@ -489,3 +489,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/others
   - 新增二分查找算法
+
+## ✍ [2020-11-13]
+
+- utility/others
+  - 新增 `listToTree`, 将一个列表数据转化为树形结构
