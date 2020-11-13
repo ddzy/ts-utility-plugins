@@ -1,10 +1,46 @@
-import { Sort } from "./ddzy/utility/algorithm/sort";
-import binarySearch from "./ddzy/utility/others/binarySearch";
+import listToTree from "./ddzy/utility/others/listToTree";
 
-const arr = [10, 867, 4, 34, 9, 98, 45, 67];
-const sortedArr = Sort.quickSort(arr);
-
-const p1 = binarySearch(sortedArr, 34);
+const s1 = [
+  {
+    id: 2,
+    value: 2,
+    parent: 1,
+  },
+  {
+    id: 3,
+    value: 3,
+    parent: 0,
+  },
+  {
+    id: 4,
+    value: 4,
+    parent: 3,
+  },
+  {
+    id: 5,
+    value: 5,
+    parent: 3,
+  },
+  {
+    id: 1,
+    value: 1,
+    parent: 0,
+  },
+  {
+    id: 6,
+    value: 6,
+    parent: 4,
+  },
+  {
+    id: 7,
+    value: 7,
+    parent: 4,
+  },
+  {
+    id: 8,
+    value: 8,
+    parent: 7,
+  },
+];
+const p1 = listToTree(s1);
 console.log(p1);
-const p2 = binarySearch(sortedArr, 99);
-console.log(p2);
