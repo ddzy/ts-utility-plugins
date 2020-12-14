@@ -1,7 +1,7 @@
 import * as path from 'path';
 
 import htmlWebpackPlugin from 'html-webpack-plugin';
-import cleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 
 export default {
@@ -41,7 +41,7 @@ export default {
       title: 'ts插件库测试',
       template: './assets/template/index.ejs',
     }),
-    new cleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
   ],
   devtool: 'inline-source-map',
 };
