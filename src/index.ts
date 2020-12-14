@@ -1,46 +1,79 @@
-import listToTree from "./ddzy/utility/others/listToTree";
+import sameValueZero from "./ddzy/utility/others/sameValueZero";
 
-const s1 = [
+let a = Symbol('a');
+let b = Symbol('b');
+let c = [1, 2, 3];
+let d = { a, b, c };
+
+const received = [
   {
-    id: 2,
-    value: 2,
-    parent: 1,
+    a: 10,
+    b: 'duan',
   },
   {
-    id: 3,
-    value: 3,
-    parent: 0,
+    a: undefined,
+    b: undefined,
   },
   {
-    id: 4,
-    value: 4,
-    parent: 3,
+    a: null,
+    b: null,
   },
   {
-    id: 5,
-    value: 5,
-    parent: 3,
+    a: NaN,
+    b: NaN,
   },
   {
-    id: 1,
-    value: 1,
-    parent: 0,
+    a: +0,
+    b: -0,
   },
   {
-    id: 6,
-    value: 6,
-    parent: 4,
+    a: -0,
+    b: +0,
   },
   {
-    id: 7,
-    value: 7,
-    parent: 4,
+    a: 999,
+    b: 999,
   },
   {
-    id: 8,
-    value: 8,
-    parent: 7,
+    a: 99999,
+    b: 11111,
+  },
+  {
+    a: 'duan',
+    b: 'duan',
+  },
+  {
+    a: 'duan',
+    b: 'duanzhaoyang',
+  },
+  {
+    a: true,
+    b: true,
+  },
+  {
+    a: true,
+    b: false,
+  },
+  {
+    a: a,
+    b: b,
+  },
+  {
+    a: a,
+    b: a,
+  },
+  {
+    a: c,
+    b: d,
+  },
+  {
+    a: c,
+    b: c,
   },
 ];
-const p1 = listToTree(s1);
-console.log(p1);
+
+const expected = received.map((v) => {
+  return sameValueZero(v.a, v.b);
+});
+
+console.log(expected);
