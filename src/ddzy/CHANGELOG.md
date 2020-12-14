@@ -494,3 +494,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 - utility/others
   - 新增 `listToTree`, 将一个列表数据转化为树形结构
+
+## ✍ [2020-12-14]
+
+### Added
+
+- utility/others
+  - 新增 `isNumber`、`isSymbol`、`isBoolean`、`isString`、`isNaN`、`sameValueZero`
+### Changed
+
+- 使用 yarn 代替 npm
+- 更新 clean-webpack-plugin 版本(`2.0.1 - 3.0.0`)
