@@ -1,4 +1,4 @@
-import { isUndefined } from "util";
+import { isUndefined } from "../isUndefined";
 
 /**
  * 判断是否为null
